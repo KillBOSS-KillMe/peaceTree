@@ -1,4 +1,45 @@
 <style lang="less">
+@font-face {
+  font-family: 'iconfont';  /* project id 1136432 */
+  src: url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.eot');
+  src: url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size: 50rpx;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-sousuo:before { content: "\e635"; } // 搜索
+.icon-dianhua4:before { content: "\e600"; } // 电话
+.icon-dianhua:before { content: "\e613"; } // 电话2
+.icon-shoucang1:before { content: "\e612"; } // 空心
+.icon-shoucang:before { content: "\e601"; } // 实心
+.icon-danxuanxuanzhong-copy:before { content: "\e602"; } // 圆圈
+.icon-xuanzhong:before { content: "\e621"; } // 选中
+.icon-ic_join_dialing_norm:before { content: "\e641"; } // 加号
+.icon-erweima:before { content: "\e6de"; } // 二维码
+.icon-dingweiweizhi:before { content: "\e60c"; } // 定位-地址
+.icon-dingweisvg-:before { content: "\e607"; } // 定位
+.icon-bianji:before { content: "\e632"; } // 编辑
+.icon-guanbi:before { content: "\e61c"; } // 叉号
+.icon-jiantou_shang:before { content: "\e634"; } // 向上
+.icon-jiantou-xia:before { content: "\e609"; } // 向下
+.icon-fanhui1-copy-copy:before { content: "\e603"; } // 箭头-左
+.icon-jiantou-you:before { content: "\e60a"; } // 箭头-右
+.icon-cujiantou1:before { content: "\e60d"; } // 箭头-右-加粗
+.icon-wode:before { content: "\e604"; } // 导航-用户
+.icon-shouye:before { content: "\e605"; } // 导航-房子
+.icon-kehu:before { content: "\e606"; } // 导航-
+.icon-shijian:before { content: "\e655"; } // 时间
 
 </style>
 
@@ -25,26 +66,26 @@ export default class extends wepy.app {
   }
 
   constructor () {
-    // super()
-    // this.use('requestfix')
+    super()
+    this.use('requestfix')
   }
 
   onLaunch() {
-    // this.testAsync()
+    this.testAsync()
   }
 
-  // sleep (s) {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve('promise resolved')
-  //     }, s * 1000)
-  //   })
-  // }
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
 
-  // async testAsync () {
-  //   const data = await this.sleep(3)
-  //   console.log(data)
-  // }
+  async testAsync () {
+    const data = await this.sleep(3)
+    console.log(data)
+  }
 
   getUserInfo(cb) {
     const that = this

@@ -16,14 +16,32 @@
   .search .selAddress{
     width: 145rpx;
   }
+  .search .selAddress .iconfont{
+    font-size: 30rpx;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .search .address{
-    width: 85rpx;
+    width: 100rpx;
+    text-align: right;
+    color: #7bb312;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
   .searchCon{
     width: 440rpx;
     height: 80rpx;
     background-color: #f7f7f7;
     border-radius: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .searchCon .iconfont{
+    color: #d2d2d2;
   }
   .swiper {
     width: 690rpx;
@@ -84,6 +102,7 @@
     width: 690rpx;
     height: auto;
     padding: 20rpx 30rpx;
+    margin-bottom: 120rpx;
   }
   .item{
     width: 690rpx;
@@ -92,17 +111,54 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1rpx solid #e6e6e6;
+  }
+  .listPrompt{
+    height: 78rpx;
+    line-height: 78rpx;
+    font-size: 26rpx;
+    color: #e6e6e6;
+    border-bottom: 1rpx solid #e6e6e6;
+    text-align: center;
   }
   .item image{
     width: 240rpx;
     height: 152rpx;
     border-radius: 20rpx;
   }
+  .item .con{
+    width: 430rpx;
+    height: 152rpx;
+  }
   .item .title{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    // font-size: 
+    font-size: 35rpx;
+  }
+  .item .title text{
+    font-size: 35rpx;
+  }
+  .item .title view{
+    font-size: 25rpx;
+    border: 1rpx solid;
+    border-radius: 10rpx;
+    padding: 5rpx 10rpx;
+  }
+  .item .address,
+  .item .iconfont,
+  .item .price{
+    font-size: 25rpx;
+    color: #cbcbcb;
+  }
+  .item .address,
+  .item .address .iconfont{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .item .price{
+    margin-top: 45rpx;
   }
 </style>
 <template>
@@ -110,23 +166,23 @@
     <view class="search">
       <view class="selAddress">
         西安
-        <icon>1</icon>
+        <icon class="iconfont icon-jiantou-xia"></icon>
       </view>
       <view class="searchCon">
-        <icon>1</icon>
-        <input type="text" />
+        <icon class="iconfont icon-sousuo"></icon>
+        <input type="text" placeholder="请输入楼盘名称或区域" />
       </view>
-      <view class="address"></view>
+      <icon class="address iconfont icon-dingweisvg-"></icon>
     </view>
     <swiper class='swiper' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <swiper-item>
-        <image data-id="" src="{{img}}" />
+        <image data-id="" src="/img/test.jpg" />
       </swiper-item>
       <swiper-item>
-        <image data-id="" src="{{img}}" />
+        <image data-id="" src="/img/test.jpg" />
       </swiper-item>
       <swiper-item>
-        <image data-id="" src="{{img}}" />
+        <image data-id="" src="/img/test.jpg" />
       </swiper-item>
       <!-- <repeat for="{{bannerImgList}}" item="item">
         <swiper-item>
@@ -136,21 +192,21 @@
     </swiper>
     <view class="sort">
       <view class="sel">
-        <image class='header-bg' src="{{img}}" />
+        <image class='header-bg' src="/img/test.jpg" />
         <view class="con">
           <text>本地楼盘</text>
           <view></view>
         </view>
       </view>
       <view class="sel">
-        <image class='header-bg' src="{{img}}" />
+        <image class='header-bg' src="/img/test.jpg" />
         <view class="con">
           <text>本地楼盘</text>
           <view></view>
         </view>
       </view>
       <view class="sel">
-        <image class='header-bg' src="{{img}}" />
+        <image class='header-bg' src="/img/test.jpg" />
         <view class="con">
           <text>本地楼盘</text>
           <view></view>
@@ -161,18 +217,47 @@
     <view class="list">
       <view class="item">
         <image data-id="" src="{{img}}" />
-        <view>
+        <view class="con">
           <view class="title">
             <text>大明宫院子</text>
             <view>热推</view>
           </view>
-          <view>
-            <icon>1</icon>
+          <view class="address">
+            <icon class="iconfont icon-dingweiweizhi"></icon>
             浐灞区城东
           </view>
-          <view>10000元/m</view>
+          <view class="price">10000元/m</view>
         </view>
       </view>
+      <view class="item">
+        <image data-id="" src="{{img}}" />
+        <view class="con">
+          <view class="title">
+            <text>大明宫院子大明宫院子</text>
+            <view>热推</view>
+          </view>
+          <view class="address">
+            <icon class="iconfont icon-dingweiweizhi"></icon>
+            浐灞区城东
+          </view>
+          <view class="price">10000元/m</view>
+        </view>
+      </view>
+      <view class="item">
+        <image data-id="" src="{{img}}" />
+        <view class="con">
+          <view class="title">
+            <text>大明宫院子</text>
+            <view>热推</view>
+          </view>
+          <view class="address">
+            <icon class="iconfont icon-dingweiweizhi"></icon>
+            浐灞区城东
+          </view>
+          <view class="price">10000元/m</view>
+        </view>
+      </view>
+      <view class="listPrompt">共有2个项目，已无更多内容</view>
     </view>
   </view>
 </template>
@@ -190,15 +275,32 @@
     mixins = []
 
     data = {
-      img: 'https://avatars2.githubusercontent.com/u/48942249?s=460&v=4'
+      img: '/img/test.jpg',
+      test: '',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
     }
 
     computed = {
-      
+
     }
 
     methods = {
-
+      goDiningRoomInfo(e) {
+        // // 进入餐厅详情
+        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
+        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+      },
+      goReservationList(e) {
+        // 进入预约列表
+        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      },
+      goMall() {
+        // 进入积分商城
+        this.$parent.globalData.navAction = ['noAction', 'action', 'noAction', 'noAction']
+        this.$redirect(`/pages/mall`)
+      }
     }
 
     events = {
@@ -206,7 +308,38 @@
     }
 
     onLoad() {
-      
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
     }
   }
 </script>

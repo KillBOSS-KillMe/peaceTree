@@ -36,9 +36,9 @@
 .icon-fanhui1-copy-copy:before { content: "\e603"; } // 箭头-左
 .icon-jiantou-you:before { content: "\e60a"; } // 箭头-右
 .icon-cujiantou1:before { content: "\e60d"; } // 箭头-右-加粗
-.icon-wode:before { content: "\e604"; } // 导航-用户
-.icon-shouye:before { content: "\e605"; } // 导航-房子
-.icon-kehu:before { content: "\e606"; } // 导航-
+.icon-wode:before { content: "\e604"; } // 导航-我的
+.icon-shouye:before { content: "\e605"; } // 导航-客户
+.icon-kehu:before { content: "\e606"; } // 导航-首页
 .icon-shijian:before { content: "\e655"; } // 时间
 
 </style>

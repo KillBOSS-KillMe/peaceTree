@@ -259,17 +259,19 @@
       </view>
       <view class="listPrompt">共有2个项目，已无更多内容</view>
     </view>
+    <nav @childFn.user="goPage" />
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import nav from '../components/nav' // 底部导航
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '平安树'
     }
     components = {
-
+      nav: nav
     }
 
     mixins = []
@@ -287,6 +289,11 @@
     }
 
     methods = {
+      // 底部导航跳转
+      goPage (url, evt) {
+        // 销毁当前页{跳转}
+        this.$redirect(url)
+      },
       goDiningRoomInfo(e) {
         // // 进入餐厅详情
         // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
@@ -295,11 +302,6 @@
       goReservationList(e) {
         // 进入预约列表
         this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
-      },
-      goMall() {
-        // 进入积分商城
-        this.$parent.globalData.navAction = ['noAction', 'action', 'noAction', 'noAction']
-        this.$redirect(`/pages/mall`)
       }
     }
 

@@ -1,0 +1,272 @@
+<style lang="less">
+  page{
+    background-color: #f7f7f7;
+  }
+  .userInfo{
+    width: 690rpx;
+    height: 205rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30rpx;
+    font-size: 37rpx;
+    border-bottom: 1rpx solid #f2f2f2;
+    background-color: #fff;
+  }
+  .userInfo image{
+    width: 125rpx;
+    height: 125rpx;
+    border-radius: 125rpx;
+    margin-right: 20rpx;
+  }
+  .userInfo .info{
+    width: 425rpx;
+    height: 205rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 37rpx;
+    color: #333;
+  }
+  .userInfo .info view{
+    width: 88rpx;
+    height: 44rpx;
+    line-height: 44rpx;
+    text-align: center;
+    background-color: #ffad01;
+    color: #fff;
+    border-radius: 10rpx;
+    font-size: 20rpx;
+    margin-left: 10rpx;
+  }
+  .userInfo .edit{
+    height: 205rpx;
+    color: #979797;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .userInfo .edit .iconfont{
+    font-size: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .userData{
+    width: 750rpx;
+    height: 150rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+  }
+  .userDataBorder{
+    width: 0rpx;
+    height: 45rpx;
+    border:1px solid #c6c6c6;
+  }
+  .dataCon{
+    width: 374rpx;
+    height: 150rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+  }
+  .dataCon view:nth-child(1){
+    font-size: 35rpx;
+    color: #333;
+    font-weight: 600;
+  }
+  .dataCon view:nth-child(2){
+    font-size: 25rpx;
+    color: #979797;
+  }
+  .message{
+    width: 690rpx;
+    height: 118rpx;
+    padding: 0 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    margin: 20rpx 0;
+    font-size: 30rpx;
+    color: #333;
+  }
+  .message .iconfont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25rpx;
+    color: #9a9a9a;
+  }
+  .invite{
+    width: 690rpx;
+    height: 235rpx;
+    padding: 0 30rpx;
+    background-color: #fd654e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .invite .con{
+    width: 225rpx;
+    height: 235rpx;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction:column
+  }
+  .invite image{
+    width: 355rpx;
+    height: 235rpx;
+  }
+  .invite .con view:nth-child(1){
+    font-size: 35rpx;
+    color: #fff;
+  }
+  .invite .con view:nth-child(2){
+    font-size: 38rpx;
+    color: #eee63e;
+    font-weight: 600;
+  }
+  .invite .con view:nth-child(3){
+    width: 145rpx;
+    height: 43rpx;
+    line-height: 43rpx;
+    text-align: center;
+    font-size: 25rpx;
+    color: #eee63e;
+    border: 2rpx solid #eee63e;
+    border-radius: 43rpx;
+    margin-top: 10rpx;
+  }
+</style>
+<template>
+  <view>
+    <view class="userInfo">
+      <image data-id="" src="{{img}}" />
+      <view class="info">
+        二狗子
+        <view>经纪人</view>
+      </view>
+      <view class="edit">
+        <icon class="iconfont icon-bianji"></icon>
+        编辑
+      </view>
+    </view>
+    <view class="userData">
+      <view class="dataCon">
+        <view>2</view>
+        <view>报备纪录</view>
+      </view>
+      <view class="userDataBorder"></view>
+      <view class="dataCon">
+        <view>0</view>
+        <view>我的收藏</view>
+      </view>
+    </view>
+    <!-- Message -->
+    <view class="message">
+      <view>我的消息</view>
+      <icon class="iconfont icon-cujiantou1"></icon>
+    </view>
+    <view class="invite">
+      <view class="con">
+        <view>邀请同事加入</view>
+        <view>一起赚佣金</view>
+        <view>点击邀请</view>
+      </view>
+      <image data-id="" src="{{img}}" />
+    </view>
+    <view class="message">
+      <view>所属部门</view>
+      <icon class="iconfont icon-cujiantou1"></icon>
+    </view>
+    <nav @childFn.user="goPage" />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import nav from '../components/nav' // 底部导航
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '个人中心'
+    }
+    components = {
+      nav: nav
+    }
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      // 底部导航跳转
+      goPage (url, evt) {
+        // 销毁当前页{跳转}
+        this.$redirect(url)
+      },
+      goDiningRoomInfo(e) {
+        // // 进入餐厅详情
+        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
+        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+      },
+      goReservationList(e) {
+        // 进入预约列表
+        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

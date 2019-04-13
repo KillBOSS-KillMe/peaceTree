@@ -1,0 +1,15 @@
+{
+	"description": "平安树",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wxd3ec190013a23daa",
+	"projectname": "peacetree",
+	"miniprogramRoot": "dist/",
+	"condition": {}
+}

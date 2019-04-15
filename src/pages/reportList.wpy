@@ -17,7 +17,7 @@
     line-height: 95rpx;
     color: #343434;
   }
-  .action{
+  .title .action{
     color: #7bb312 !important;
     border-bottom: 1rpx solid #7bb312;
   }
@@ -48,6 +48,11 @@
     padding: 20rpx 30rpx;
     background-color: #fff;
   }
+  .seleteType .action{
+    color: #7bb312 !important;
+    border: 1rpx solid #f1ffd8;
+    background-color: #f1ffd8;
+  }
   .seleteType view{
     padding: 10rpx 20rpx;
     font-size: 24rpx;
@@ -60,13 +65,13 @@
   .list{
     width: 750rpx;
     height: auto;
+    background-color: #fff;
   }
   .item{
     width: 690rpx;
     padding: 0 30rpx;
     height: 230rpx;
     border: 1rpx solid #f2f2f2;
-    background-color: #fff;
   }
   .info{
     display: flex;
@@ -99,6 +104,17 @@
   .time .iconfont{
     font-size: 30rpx !important;
   }
+  .prompt{
+    width: 750rpx;
+    height: 95rpx;
+    line-height: 95rpx;
+    font-size: 25rpx;
+    color: #a5a5a5;
+    text-align: center;
+  }
+  .status-fail{
+    color: #fa5454
+  }
 </style>
 <template>
   <view>
@@ -111,7 +127,7 @@
       </view>
     </view>
     <view class="seleteType">
-      <view>全全部全部(3)</view>
+      <view class="action">全全部全部(3)</view>
       <view>全部(3)</view>
       <view>全部(3)</view>
       <view>全部(3)</view>
@@ -139,7 +155,7 @@
             <icon class="iconfont icon-shijian"></icon>
             2019/04/09
           </view>
-          <view>报备有效</view>
+          <view class="status-fail">报备无效</view>
         </view>
       </view>
       <view class="item">
@@ -182,6 +198,7 @@
           <view>报备有效</view>
         </view>
       </view>
+      <view class="prompt">共有三条纪录，已无更多内容</view>
     </view>
   </view>
 </template>

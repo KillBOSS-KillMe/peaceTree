@@ -1,0 +1,145 @@
+<style lang="less">
+  page{
+      background-color: #f7f7f7;
+  }
+  image{
+    width: 85rpx;
+    height: 85rpx;
+    border-radius: 85rpx;
+  }
+  icon{
+    font-size: 26rpx !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #979797;
+    margin-left: 20rpx;
+  }
+  .tiem{
+    width: 690rpx;
+    height: 133.3rpx;
+    padding: 0 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+  }
+  .tiem view {
+    font-size: 34rpx;
+    color: #343434;
+  }
+  .con{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  input{
+    font-size: 33rpx;
+    color: #979797;
+    text-align: right;
+  }
+  .interval{
+    margin-top: 20rpx;
+  }
+  .sub{
+    width: 670rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    text-align: center;
+    border-radius: 20rpx;
+    background-color: #7bb312;
+    color: #fff;
+    font-size: 33rpx;
+    margin: auto;
+    margin-top: 100rpx;
+  }
+</style>
+<template>
+  <view>
+      <view class="list">
+        <view class="tiem">
+          <view>头像</view>
+          <view class="con">
+            <image data-id="" src="{{img}}" />
+            <icon class="iconfont icon-cujiantou1"></icon>
+          </view>
+        </view>
+        <view class="tiem">
+          <view>姓名</view>
+          <view class="con">
+            <input type="text" value="二狗子" />
+            <icon class="iconfont icon-cujiantou1"></icon>
+          </view>
+        </view>
+        <view class="tiem">
+          <view>手机号</view>
+          <view class="con">
+            <input type="text" value="18888888888" />
+            <icon class="iconfont icon-cujiantou1"></icon>
+          </view>
+        </view>
+        <view class="tiem interval">
+          <view>所属门店</view>
+          <view class="con">
+            <input type="text" value="二狗子" />
+            <icon class="iconfont icon-cujiantou1"></icon>
+          </view>
+        </view>
+        <view class="tiem">
+          <view>工作地址</view>
+          <view class="con">
+            <input type="text" value="二狗子" />
+          </view>
+        </view>
+        <view class="tiem">
+          <view>我的职位</view>
+          <view class="con">
+            <input type="text" value="经纪人" />
+          </view>
+        </view>
+        <view class="tiem">
+          <view>所属公司</view>
+          <view class="con">
+            <input type="text" value="暂无" />
+          </view>
+        </view>
+      </view>
+      <view class="sub">保存</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import nav from '../components/nav' // 底部导航
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '编辑信息'
+    }
+    components = {
+      nav: nav
+    }
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      userInfo: null
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+    }
+  }
+</script>

@@ -1,0 +1,223 @@
+<style lang="less">
+  page{
+    background-color: #f7f7f7;
+  }
+  .title{
+    width: 690rpx;
+    padding: 0 30rpx;
+    height: 95rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+  }
+  .title .name {
+    font-size: 30rpx;
+    height: 95rpx;
+    line-height: 95rpx;
+    color: #343434;
+  }
+  .action{
+    color: #7bb312 !important;
+    border-bottom: 1rpx solid #7bb312;
+  }
+  .input{
+    width: 290rpx;
+    height: 70rpx;
+    border-radius: 70rpx;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .input icon{
+    width: 100rpx;
+    font-size: 32rpx;
+    color: #d2d2d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .input input{
+    font-size: 32rpx;
+    color: #d2d2d2;
+  }
+  .seleteType{
+    width: 690rpx;
+    height: auto;
+    padding: 20rpx 30rpx;
+    background-color: #fff;
+  }
+  .seleteType view{
+    padding: 10rpx 20rpx;
+    font-size: 24rpx;
+    color: #979797;
+    border: 1rpx solid #979797;
+    border-radius: 10rpx;
+    display: inline-block;
+    margin: 10rpx;
+  }
+  .list{
+    width: 750rpx;
+    height: auto;
+  }
+  .item{
+    width: 690rpx;
+    padding: 0 30rpx;
+    height: 230rpx;
+    border: 1rpx solid #f2f2f2;
+    background-color: #fff;
+  }
+  .info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #9f9f9f;
+  }
+  .item .name{
+    font-size: 30rpx;
+    font-weight: 600;
+  }
+  .item .reservation{
+    font-size: 24rpx;
+    color: #9f9f9f;
+  }
+  .item .address{
+    font-size: 30rpx;
+    color: #343434;
+  }
+  .con view{
+    margin: 10rpx 0;
+  }
+  .time{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #9f9f9f;
+    font-size: 25rpx;
+  }
+  .time .iconfont{
+    font-size: 30rpx !important;
+  }
+</style>
+<template>
+  <view>
+    <view class="title">
+      <view class="name action">报备客户</view>
+      <view class="name">报备楼盘</view>
+      <view class="input">
+        <icon class="iconfont icon-sousuo"></icon>
+        <input type="text" value="二狗子" />
+      </view>
+    </view>
+    <view class="seleteType">
+      <view>全全部全部(3)</view>
+      <view>全部(3)</view>
+      <view>全部(3)</view>
+      <view>全部(3)</view>
+      <view>全部(3)</view>
+      <view>全部(3)</view>
+      <view>全全部(3)</view>
+      <view>全部(3)</view>
+      <view>全部(3)</view>
+    </view>
+    <view class="list">
+      <view class="item">
+        <view class="info">
+          <view class="con">
+            <view>
+              <text class="name">二狗子</text>
+              <text class="reservation">18888888888</text>
+            </view>
+            <view class="address">软件新城·A9</view>
+            <view class="reservation">预计到访时间：2019/04/08 11：30</view>
+          </view>
+          <icon class="iconfont icon-erweima"></icon>
+        </view>
+        <view class="time">
+          <view>
+            <icon class="iconfont icon-shijian"></icon>
+            2019/04/09
+          </view>
+          <view>报备有效</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="info">
+          <view class="con">
+            <view>
+              <text class="name">二狗子</text>
+              <text class="reservation">18888888888</text>
+            </view>
+            <view class="address">软件新城·A9</view>
+            <view class="reservation">预计到访时间：2019/04/08 11：30</view>
+          </view>
+          <icon class="iconfont icon-erweima"></icon>
+        </view>
+        <view class="time">
+          <view>
+            <icon class="iconfont icon-shijian"></icon>
+            2019/04/09
+          </view>
+          <view>报备有效</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="info">
+          <view class="con">
+            <view>
+              <text class="name">二狗子</text>
+              <text class="reservation">18888888888</text>
+            </view>
+            <view class="address">软件新城·A9</view>
+            <view class="reservation">预计到访时间：2019/04/08 11：30</view>
+          </view>
+          <icon class="iconfont icon-erweima"></icon>
+        </view>
+        <view class="time">
+          <view>
+            <icon class="iconfont icon-shijian"></icon>
+            2019/04/09
+          </view>
+          <view>报备有效</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import nav from '../components/nav' // 底部导航
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '报备列表'
+    }
+    components = {
+      nav: nav
+    }
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      userInfo: null
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+    }
+  }
+</script>

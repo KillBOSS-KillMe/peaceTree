@@ -152,7 +152,7 @@
         二狗子
         <view>经纪人</view>
       </view>
-      <view class="edit">
+      <view class="edit" @tap="modifyUserInfo">
         <icon class="iconfont icon-bianji"></icon>
         编辑
       </view>
@@ -169,7 +169,7 @@
       </view>
     </view>
     <!-- Message -->
-    <view class="message">
+    <view class="message" @tap="goMessageList">
       <view>我的消息</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
@@ -219,10 +219,13 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
-      goDiningRoomInfo(e) {
+      modifyUserInfo() {
+        this.$navigate(`/pages/modifyUserInfo`)
+      },
+      goMessageList(e) {
         // // 进入餐厅详情
         // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
-        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+        this.$navigate(`/pages/messageList?id=${e.currentTarget.dataset.id}`)
       },
       goReservationList(e) {
         // 进入预约列表

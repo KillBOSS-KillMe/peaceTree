@@ -62,47 +62,51 @@
     display: inline-block;
     margin: 10rpx;
   }
-  .list{
+  .listClient{
     width: 750rpx;
     height: auto;
     background-color: #fff;
   }
-  .item{
+  .listClient .item{
     width: 690rpx;
     padding: 0 30rpx;
     height: 230rpx;
     border: 1rpx solid #f2f2f2;
   }
-  .info{
+  .listClient .info{
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: #9f9f9f;
   }
-  .item .name{
+  .listClient .item .name{
+    color: #333;
     font-size: 30rpx;
     font-weight: 600;
   }
-  .item .reservation{
+  .listClient .item .reservation{
     font-size: 24rpx;
     color: #9f9f9f;
   }
-  .item .address{
+  .listClient .item .address{
     font-size: 30rpx;
     color: #343434;
   }
-  .con view{
+  .listClient .con view{
     margin: 10rpx 0;
   }
-  .time{
+  .listClient .time{
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: #9f9f9f;
     font-size: 25rpx;
   }
-  .time .iconfont{
+  .listClient .time .iconfont{
     font-size: 30rpx !important;
+  }
+  .status-fail{
+    color: #fa5454
   }
   .prompt{
     width: 750rpx;
@@ -112,8 +116,53 @@
     color: #a5a5a5;
     text-align: center;
   }
-  .status-fail{
-    color: #fa5454
+  .listProperty{
+    width: 750rpx;
+    height: auto;
+    background-color: #fff;
+    margin-top: 20rpx;
+  }
+  .listProperty .item{
+    width: 690rpx;
+    padding: 0 30rpx;
+    height: auto;
+    border-bottom: 1rpx solid #f2f2f2;
+  }
+  .propertyInfo{
+    border-bottom: 1rpx solid #f2f2f2;
+    padding: 30rpx 0;
+  }
+  .propertyName{
+    font-size: 33rpx;
+    font-weight: 600;
+    color: #343434;
+  }
+  .listProperty .address,
+  .listProperty .address icon{
+    font-size: 25rpx !important;
+    color: #cbcbcb;
+  }
+  .reservation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30rpx 0;
+  }
+  .userInfo view{
+    padding: 10rpx 0;
+  }
+  .listProperty .time,
+  .listProperty .time icon{
+    font-size: 23rpx !important;
+    color: #979797;
+  }
+  .listProperty .info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: #979797;
+    font-size: 28rpx;
   }
 </style>
 <template>
@@ -137,7 +186,7 @@
       <view>全部(3)</view>
       <view>全部(3)</view>
     </view>
-    <view class="list">
+    <view class="listClient" wx:if="{{false}}">
       <view class="item">
         <view class="info">
           <view class="con">
@@ -196,6 +245,65 @@
             2019/04/09
           </view>
           <view>报备有效</view>
+        </view>
+      </view>
+      <view class="prompt">共有三条纪录，已无更多内容</view>
+    </view>
+    <view class="listProperty" wx:if="{{true}}">
+      <view class="item">
+        <view class="propertyInfo">
+          <view class="con">
+            <view class="name">二狗子楼盘</view>
+            <view class="address">
+              <icon class="iconfont icon-erweima"></icon>
+              软件新城·A9
+            </view>
+          </view>
+        </view>
+        <view class="reservation">
+          <view class="userInfo">
+            <view>
+              <text class="name">二狗子</text>
+              <text class="time">18888888888</text>
+            </view>
+            <view class="time">预计到访时间：2019/04/09 11:30</view>
+            <view class="time">
+              <icon class="iconfont icon-shijian"></icon>
+              2019/04/09
+            </view>
+          </view>
+          <view class="info">
+            <view class="iconfont icon-erweima"></view>
+            <view class="status-fail">报备无效</view>
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="propertyInfo">
+          <view class="con">
+            <view class="name">二狗子楼盘</view>
+            <view class="address">
+              <icon class="iconfont icon-erweima"></icon>
+              软件新城·A9
+            </view>
+          </view>
+        </view>
+        <view class="reservation">
+          <view class="userInfo">
+            <view>
+              <text class="name">二狗子</text>
+              <text class="time">18888888888</text>
+            </view>
+            <view class="time">预计到访时间：2019/04/09 11:30</view>
+            <view class="time">
+              <icon class="iconfont icon-shijian"></icon>
+              2019/04/09
+            </view>
+          </view>
+          <view class="info">
+            <view class="iconfont icon-erweima"></view>
+            <view class="">报备无效</view>
+          </view>
         </view>
       </view>
       <view class="prompt">共有三条纪录，已无更多内容</view>

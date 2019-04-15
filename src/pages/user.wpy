@@ -158,7 +158,7 @@
       </view>
     </view>
     <view class="userData">
-      <view class="dataCon">
+      <view class="dataCon" @tap="goReportList">
         <view>2</view>
         <view>报备纪录</view>
       </view>
@@ -221,6 +221,9 @@
       },
       modifyUserInfo() {
         this.$navigate(`/pages/modifyUserInfo`)
+      },
+      goReportList() {
+        this.$navigate(`/pages/reportList`)
       },
       goMessageList(e) {
         // // 进入餐厅详情

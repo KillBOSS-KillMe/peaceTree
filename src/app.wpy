@@ -51,8 +51,9 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/reportList', // 报备列表
       'pages/user', // 个人中心
+      'pages/reportList', // 报备列表
+      
       'pages/modifyUserInfo', // 修改用户信息
       
       'pages/messageList', // 消息列表

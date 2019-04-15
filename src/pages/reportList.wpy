@@ -142,7 +142,7 @@
     font-size: 25rpx !important;
     color: #cbcbcb;
   }
-  .reservation{
+  .listProperty .reservation{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,8 +168,8 @@
 <template>
   <view>
     <view class="title">
-      <view class="name action">报备客户</view>
-      <view class="name">报备楼盘</view>
+      <view data-showtype="listClient" class="name {{listShowType=='listClient'?'action':''}}" @tap="listSelShow">报备客户</view>
+      <view data-showtype="listProperty" class="name {{listShowType=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
       <view class="input">
         <icon class="iconfont icon-sousuo"></icon>
         <input type="text" value="二狗子" />
@@ -186,7 +186,7 @@
       <view>全部(3)</view>
       <view>全部(3)</view>
     </view>
-    <view class="listClient" wx:if="{{false}}">
+    <view class="listClient" wx:if="{{listShowType=='listClient'}}">
       <view class="item">
         <view class="info">
           <view class="con">
@@ -249,7 +249,7 @@
       </view>
       <view class="prompt">共有三条纪录，已无更多内容</view>
     </view>
-    <view class="listProperty" wx:if="{{true}}">
+    <view class="listProperty" wx:if="{{listShowType=='listProperty'}}">
       <view class="item">
         <view class="propertyInfo">
           <view class="con">
@@ -326,7 +326,8 @@
 
     data = {
       img: '/img/test.jpg',
-      userInfo: null
+      userInfo: null,
+      listShowType: 'listClient'
     }
 
     computed = {
@@ -334,7 +335,11 @@
     }
 
     methods = {
-      
+      listSelShow(e) {
+      //   <view class="name {{thisListShow=='listClient'?'action':''}}" @tap="listSelShow">报备客户</view>
+      // <view class="name {{thisListShow=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
+        this.listShowType = e.currentTarget.dataset.showtype
+      }
     }
 
     events = {

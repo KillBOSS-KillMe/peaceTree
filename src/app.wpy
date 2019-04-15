@@ -51,6 +51,7 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/collectionList', // 收藏列表
       'pages/user', // 个人中心
       'pages/reportList', // 报备列表
       

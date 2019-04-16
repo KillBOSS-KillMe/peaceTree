@@ -55,6 +55,18 @@
   .item .price{
     margin-top: 45rpx;
   }
+  // 热度
+  .heat{
+    background-color: #ffefed;
+    color: #fa5454;
+    border-color: #f9dadd;
+  }
+  // 新建
+  .new{
+    background-color: #f5ffe1;
+    color: #7bb312;
+    border-color: #dff3b9;
+  }
 </style>
 <template>
 <view>
@@ -63,6 +75,8 @@
     <view class="con">
       <view class="title">
         <text>大明宫院子</text>
+        <!-- heat 热度 -->
+        <!-- new 新建 -->
         <view>热推</view>
       </view>
       <view class="address">

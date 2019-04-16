@@ -192,7 +192,7 @@
 <script>
   import wepy from 'wepy'
   import nav from '../components/nav' // 底部导航
-  export default class Index extends wepy.page {
+  export default class User extends wepy.page {
     config = {
       navigationBarTitleText: '个人中心'
     }

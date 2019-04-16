@@ -38,11 +38,38 @@
     width: 240rpx;
     height: 153rpx;
     border-radius: 20rpx;
+    margin-right: 20rpx;
   }
   .name{
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  .name .con{
+    font-size: 34rpx;
+    color: #222;
+    font-weight: 600;
+    width: 330rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .name .label{
+    font-size: 20rpx;
+    color: #222;
+    color: #979797;
+    background-color: #f5f5f5;
+    padding: 10rpx;
+  }
+  .address,
+  .address icon,
+  .price{
+    font-size: 23rpx !important;
+    color: #979797;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 </style>
 <template>
@@ -56,8 +83,8 @@
         <image data-id="" src="/img/test.jpg" />
         <view>
           <view class="name">
-            远洋合能·枫丹唐悦
-            <view>取消收藏</view>
+            <view class="con">远洋合能·枫丹唐悦</view>
+            <view class="label">取消收藏</view>
           </view>
           <view class="address">
             <icon class="iconfont icon-sousuo"></icon>
@@ -65,7 +92,34 @@
           </view>
           <view class="price">12834元/㎡</view>
         </view>
-        <!-- <input type="text" placeholder="请输入楼盘名称或区域" /> -->
+      </view>
+      <view class="item">
+        <image data-id="" src="/img/test.jpg" />
+        <view>
+          <view class="name">
+            <view class="con">远洋合能·枫丹唐悦</view>
+            <view class="label">取消收藏</view>
+          </view>
+          <view class="address">
+            <icon class="iconfont icon-sousuo"></icon>
+            浐灞区城东
+          </view>
+          <view class="price">12834元/㎡</view>
+        </view>
+      </view>
+      <view class="item">
+        <image data-id="" src="/img/test.jpg" />
+        <view>
+          <view class="name">
+            <view class="con">远洋合能·枫丹唐悦</view>
+            <view class="label">取消收藏</view>
+          </view>
+          <view class="address">
+            <icon class="iconfont icon-sousuo"></icon>
+            浐灞区城东
+          </view>
+          <view class="price">12834元/㎡</view>
+        </view>
       </view>
     </view>
   </view>

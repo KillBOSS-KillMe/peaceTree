@@ -1,0 +1,99 @@
+<style lang="less">
+ .item{
+    width: 690rpx;
+    height: 152rpx;
+    padding: 20rpx 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1rpx solid #e6e6e6;
+  }
+  .listPrompt{
+    height: 78rpx;
+    line-height: 78rpx;
+    font-size: 26rpx;
+    color: #e6e6e6;
+    border-bottom: 1rpx solid #e6e6e6;
+    text-align: center;
+  }
+  .item image{
+    width: 240rpx;
+    height: 152rpx;
+    border-radius: 20rpx;
+  }
+  .item .con{
+    width: 430rpx;
+    height: 152rpx;
+  }
+  .item .title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 35rpx;
+  }
+  .item .title text{
+    font-size: 35rpx;
+  }
+  .item .title view{
+    font-size: 25rpx;
+    border: 1rpx solid;
+    border-radius: 10rpx;
+    padding: 5rpx 10rpx;
+  }
+  .item .address,
+  .item .iconfont,
+  .item .price{
+    font-size: 25rpx;
+    color: #cbcbcb;
+  }
+  .item .address,
+  .item .address .iconfont{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .item .price{
+    margin-top: 45rpx;
+  }
+</style>
+<template>
+<view>
+  <view class="item">
+    <image data-id="" src="{{img}}" />
+    <view class="con">
+      <view class="title">
+        <text>大明宫院子</text>
+        <view>热推</view>
+      </view>
+      <view class="address">
+        <icon class="iconfont icon-dingweiweizhi"></icon>
+        浐灞区城东
+      </view>
+      <view class="price">10000元/m</view>
+    </view>
+  </view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+// 校验封装
+// import check from '../mixins/check'
+export default class ProductItem extends wepy.component {
+  // mixins = [check]
+  data = {
+    img: '/img/test.jpg',
+  };
+  props = {};
+  methods = {
+    // 首页
+    goIndex() {
+      this.$parent.$parent.globalData.navAction = ['action', 'noAction', 'noAction']
+      this.$emit('childFn', '/pages/index')
+    },
+  };
+  onLoad() {
+    this.navAction = this.$parent.$parent.globalData.navAction
+    this.$apply()
+  };
+}
+</script>

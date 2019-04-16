@@ -41,6 +41,11 @@
 .icon-kehu:before { content: "\e606"; } // 导航-首页
 .icon-shijian:before { content: "\e655"; } // 时间
 
+.list{
+  width: 690rpx;
+  height: auto;
+  padding: 0 30rpx;
+}
 </style>
 
 <script>

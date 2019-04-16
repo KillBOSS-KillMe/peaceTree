@@ -1,0 +1,83 @@
+<style lang="less">
+.addressSearch{
+  width:690rpx;
+  height:83rpx;
+  padding:0 30rpx;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.selAddress,
+.selAddress icon{
+  width: 200rpx;
+  font-size: 30rpx !important;
+  color: #333;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+.selAddress icon{
+  width: 30rpx;
+}
+.search {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background-color:#f7f7f7;
+  width:520rpx;
+  height:83rpx;
+  
+  border-radius:83rpx;
+  margin:auto;
+}
+.search icon {
+  width: 70rpx;
+  font-size:40rpx !important;
+  color:#a4a4a4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.search input {
+  width:550rpx;
+  color:#555;
+}
+</style>
+<template>
+<view>
+  <view class="addressSearch">
+    <view class="selAddress">
+      西安
+      <icon class="iconfont icon-jiantou-xia"></icon>
+    </view>
+    <view class="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      <input type="text" placeholder="输入搜索内容" />
+    </view>
+  </view>
+  
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+// 校验封装
+// import check from '../mixins/check'
+export default class addressSearch extends wepy.component {
+  // mixins = [check]
+  data = {
+    
+  };
+  props = {};
+  methods = {
+    // 选择城市
+    goSelCity() {
+      this.$parent.$parent.globalData.navAction = ['action', 'noAction', 'noAction']
+      this.$emit('childFn', '/pages/index')
+    },
+  };
+  onLoad() {
+    this.navAction = this.$parent.$parent.globalData.navAction
+    this.$apply()
+  };
+}
+</script>

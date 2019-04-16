@@ -65,6 +65,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       
+      'pages/localInfo', // 项目详情（楼盘详情）
       'pages/citySel', // 城市选择
       'pages/cultureLocal', // 文旅地产
       'pages/surroundingLocal', // 周边楼盘

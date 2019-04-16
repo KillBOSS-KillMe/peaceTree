@@ -1,0 +1,466 @@
+<style lang="less">
+page{
+  background-color: #f7f7f7;
+}
+.price,
+.localName,
+.label,
+.rule,
+.localInfo,
+.reportData,
+.houseType,
+.feature{
+  background-color: #fff;
+}
+.banner{
+  width: 100vw;
+  height: 440rpx;
+}
+.price{
+  width: 670rpx;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price text{
+  font-size: 40rpx;
+  color: #7bb312;
+  font-weight: 600;
+}
+.price view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+  color: #fa5454;
+  font-size: 34rpx !important;
+}
+.price view view{
+  font-size: 20rpx !important;
+}
+.localName{
+  width: 670rpx;
+  padding: 0 40rpx;
+  font-size: 38rpx;
+  color: #343434;
+  font-weight: 600;
+}
+.label{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 670rpx;
+  padding: 30rpx 40rpx;
+}
+.label view:nth-child(1){
+  font-size: 20rpx;
+  color: #9e9e9e;
+  background-color: #f2f2f2;
+  padding: 10rpx 20rpx;
+}
+.label view:nth-child(2),
+.label icon{
+  font-size: 30rpx !important;
+  font-weight: 600;
+  color: #343434;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+.localInfo{
+  width: 670rpx;
+  height: auto;
+  padding: 35rpx 40rpx;
+  margin-top: 20rpx;
+}
+.localInfo .localitem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+.localInfo .localitem view:nth-child(1){
+  width: 160rpx;
+  font-size: 27rpx;
+  color: #979797;
+}
+.localInfo .localitem view:nth-child(2){
+  width: 480rpx;
+  font-size: 27rpx;
+  color: #343434;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.localInfo .localitem view:nth-child(3){
+  width: 30rpx;
+}
+.localInfo .localitem icon{
+  width: 30rpx !important;
+  font-size: 27rpx;
+  color: #979797;
+}
+.rule{
+  width: 670rpx;
+  padding: 40rpx;
+  margin-top: 20rpx;
+}
+.ruleList{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ruleList text{
+  font-size: 35rpx;
+  color: #343434;
+  font-weight: 600;
+}
+.ruleList view,
+.ruleList icon{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 27rpx !important;
+  color: #979797;
+}
+.rule .description{
+  font-size: 28rpx;
+  color: #343434;
+  font-weight: 600;
+  margin-top: 15rpx;
+  padding: 44rpx 0;
+}
+.reportData{
+  width: 750rpx;
+  height: 150rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-top: 1rpx solid #f2f2f2;
+}
+.reportDataBorder{
+  width: 0rpx;
+  height: 45rpx;
+  border:1px solid #c6c6c6;
+}
+.dataCon{
+  width: 374rpx;
+  height: 150rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+}
+.dataCon view:nth-child(2){
+  font-size: 35rpx;
+  color: #333;
+  font-weight: 600;
+}
+.dataCon view:nth-child(1){
+  font-size: 25rpx;
+  color: #979797;
+}
+.houseType{
+  width: 670rpx;
+  padding: 40rpx;
+  white-space: nowrap;
+  overflow:hidden;
+}
+.houseTypeItem{
+  display: inline-block;
+  width: 260rpx;
+  margin-right: 30rpx;
+}
+.houseTypeItem image{
+  width: 260rpx;
+  height: 150rpx;
+  border-radius: 20rpx;
+}
+
+.houseTypeItem view{
+  padding: 5rpx 0;
+}
+.houseTypeItem view:nth-child(2){
+  font-size: 30rpx;
+  color: #343434;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.houseTypeItem view:nth-child(3){
+  font-size: 20rpx;
+  color: #979797;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.houseTypeItem view:nth-child(4){
+  font-size: 25rpx;
+  color: #7bb312;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.feature{
+  width: 670rpx;
+  padding: 40rpx;
+}
+.featureItem{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #f0f0f0;
+  padding: 20rpx 0;
+}
+.featureItem view:nth-child(1){
+  width: 170rpx;
+  font-size: 30rpx;
+  color: #979797;
+}
+.featureItem view:nth-child(2){
+  width: 500rpx;
+  font-size: 30rpx;
+  color: #343434;
+  line-height: 50rpx;
+}
+</style>
+<template>
+  <view>
+    <image class="banner" src="/img/test.jpg" />
+    <view class="price">
+      <text>12344元/㎡</text>
+      <view>
+        <!-- 实心 -->
+        <!-- <icon class="iconfont icon-shoucang"></icon> -->
+        <!-- 空心 -->
+        <icon class="iconfont icon-shoucang1"></icon>
+        <view>已收藏</view>
+      </view>
+    </view>
+    <view class="localName">远洋合能枫丹唐悦</view>
+    <view class="label">
+      <view>品牌开发商</view>
+      <view>
+        更多信息
+        <icon class="iconfont icon-jiantou-you"></icon>
+      </view>
+    </view>
+    <view class="localInfo">
+      <view class="localitem">
+        <view>开盘时间</view>
+        <view>2019/04/20</view>
+        <view></view>
+      </view>
+      <view class="localitem">
+        <view>合作周期</view>
+        <view>2019年1月14日-2019年4月14日</view>
+        <view></view>
+      </view>
+      <view class="localitem">
+        <view>开盘时间</view>
+        <view>未央区北辰路与欧亚二路交汇口向南</view>
+        <view>
+          <icon class="iconfont icon-jiantou-you"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="rule">
+      <view class="ruleList">
+        <text>导客规则</text>
+        <view>
+          查看全部
+          <icon class="iconfont icon-jiantou-you"></icon>
+        </view>
+      </view>
+      <view class="description">提前报备1小时</view>
+    </view>
+    <view class="reportData">
+      <view class="dataCon" @tap="goReportList">
+        <view>报备有效期</view>
+        <view>24小时</view>
+      </view>
+      <view class="reportDataBorder"></view>
+      <view class="dataCon" @tap="goCollectionList">
+        <view>带看保护期</view>
+        <view>15天</view>
+      </view>
+    </view>
+    <scroll-view scroll-x="true" class="houseType">
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+        <view>296万</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+        <view>296万</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+        <view>296万</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+        <view>296万</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+        <view>296万</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+        <view>296万</view>
+      </view>
+
+    </scroll-view>
+    <view class="localName">远洋合能枫丹唐悦</view>
+    <view class="feature">
+      <view class="featureItem">
+        <view class="featureName">教育</view>
+        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+      </view>
+      <view class="featureItem">
+        <view class="featureName">教育</view>
+        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+      </view>
+      <view class="featureItem">
+        <view class="featureName">教育</view>
+        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+      </view>
+      <view class="featureItem">
+        <view class="featureName">教育</view>
+        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+      </view>
+      <view class="featureItem">
+        <view class="featureName">教育</view>
+        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+      </view>
+      <view class="featureItem">
+        <view class="featureName">教育</view>
+        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+      </view>
+    </view>
+    <view class="localName">远洋合能枫丹唐悦</view>
+    <scroll-view scroll-x="true" class="houseType">
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+      </view><view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+      </view>
+      <view class="houseTypeItem">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class CultureLocal extends wepy.page {
+    config = {
+      navigationBarTitleText: '项目详情'
+    }
+    components = {
+
+    }
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      test: '',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      // 底部导航跳转
+      goPage (url, evt) {
+        // 销毁当前页{跳转}
+        this.$redirect(url)
+      },
+      goDiningRoomInfo(e) {
+        // // 进入餐厅详情
+        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+      },
+      goReservationList(e) {
+        // 进入预约列表
+        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1rpx solid #e6e6e6;
+    position: relative;
   }
   .listPrompt{
     height: 78rpx;
@@ -55,6 +56,21 @@
   .item .price{
     margin-top: 45rpx;
   }
+  .pad{
+    position: absolute;
+    top: 20rpx;
+    left: 0;
+    color: #fff;
+    width: 70rpx;
+    height: 40rpx;
+    border-radius: 20rpx 0 20rpx 0;
+    text-align: center;
+    line-height: 40rpx;
+    font-size: 20rpx;
+    background-color: #feb400;
+    z-index: 20;
+
+  }
   // 热度
   .heat{
     background-color: #ffefed;
@@ -71,6 +87,7 @@
 <template>
 <view>
   <view class="item">
+    <view class="pad">垫拥</view>
     <image data-id="" src="{{img}}" />
     <view class="con">
       <view class="title">

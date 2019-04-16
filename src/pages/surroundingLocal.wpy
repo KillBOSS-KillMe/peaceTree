@@ -45,50 +45,101 @@
 // text-overflow:ellipsis;
 // white-space:nowrap;
 <style lang="less">
-  .typeSel{
+  .listName{
     width: 690rpx;
-    height: 90rpx;
-    padding: 0 30rpx;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    padding: 20rpx 30rpx;
+    font-size: 40rpx;
+    font-weight: 600;
+    margin-top: 20rpx;
   }
-  .typeSel view,
-  .typeSel icon{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    font-size: 30rpx !important;
-    color: #a4a4a4;
+  .sort{
+    width: 690rpx;
+    padding: 0 30rpx;
+  }
+  .sort .sel{
+    width: 165rpx;
+    height: 87rpx;
+    position: relative;
+    border-radius: 20rpx;
+    font-size: 30rpx;
+    color: #fff;
+    display: inline-block;
+    margin-right: 67.5rpx;
+    margin-top: 50rpx;
+  }
+  .sort .sel .con{
+    width: 160rpx;
+    height: 87rpx;
+    padding: 20rpx;
+  }
+  // .sort .sel .con view{
+  //   width: 33rpx;
+  //   border-top: 2rpx solid #fff;
+  // }
+  .con{
+    font-size: 28rpx;
+  }
+  .con .name{
+    font-size: 30rpx;
+  }
+  .header-bg{
+    width: 205rpx;
+    height: 127rpx;
+    position: absolute;
+    top: 0;
+    z-index: -10;
+    border-radius: 20rpx;
   }
 </style>
 <template>
   <view>
     <addressSearch></addressSearch>
-    <view class="typeSel">
-      <view>
-        区域
-        <icon class="iconfont icon-jiantou-xia"></icon>
+    <view class="sort">
+      <view class="sel">
+        <image class='header-bg' src="/img/test.jpg" />
+        <view class="con">
+          <text>本地楼盘</text>
+          <text>本地楼盘</text>
+          <!-- <view></view> -->
+        </view>
       </view>
-      <view>
-        总价
-        <icon class="iconfont icon-jiantou-xia"></icon>
+      <view class="sel">
+        <image class='header-bg' src="/img/test.jpg" />
+        <view class="con">
+          <text>本地楼盘</text>
+          <text>本地楼盘</text>
+        </view>
       </view>
-      <view>
-        垫拥
-        <icon class="iconfont icon-jiantou-xia"></icon>
+      <view class="sel">
+        <image class='header-bg' src="/img/test.jpg" />
+        <view class="con">
+          <text class="name">本地楼盘</text>
+          <text>本地楼盘</text>
+        </view>
       </view>
-      <view>
-        更多
-        <icon class="iconfont icon-jiantou-xia"></icon>
+      <view class="sel">
+        <image class='header-bg' src="/img/test.jpg" />
+        <view class="con">
+          <text class="name">本地楼盘</text>
+          <text>本地楼盘</text>
+        </view>
+      </view>
+      <view class="sel">
+        <image class='header-bg' src="/img/test.jpg" />
+        <view class="con">
+          <text class="name">本地楼盘</text>
+          <text>本地楼盘</text>
+        </view>
       </view>
     </view>
+    <view class="listName">热门楼盘</view>
     <view class="list">
       <productItem></productItem>
       <productItem></productItem>
       <productItem></productItem>
       <productItem></productItem>
       <productItem></productItem>
+      <view class="listPrompt">共有2个项目，已无更多内容</view>
     </view>
   </view>
   
@@ -98,9 +149,9 @@
   import wepy from 'wepy'
   import addressSearch from '../components/addressSearch' // 顶部搜索
   import productItem from '../components/productItem' // 列表内容组件
-  export default class PropertyLocal extends wepy.page {
+  export default class SurroundingLocal extends wepy.page {
     config = {
-      navigationBarTitleText: '平安树'
+      navigationBarTitleText: '周边楼盘'
     }
     components = {
       addressSearch: addressSearch,

@@ -46,6 +46,14 @@
   height: auto;
   padding: 0 30rpx;
 }
+.listPrompt{
+  height: 78rpx;
+  line-height: 78rpx;
+  font-size: 26rpx;
+  color: #e6e6e6;
+  border-bottom: 1rpx solid #e6e6e6;
+  text-align: center;
+}
 </style>
 
 <script>
@@ -57,6 +65,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       
+      'pages/surroundingLocal', // 周边楼盘
       'pages/propertyLocal', // 本地楼盘
       'pages/user', // 个人中心
       'pages/collectionList', // 收藏列表

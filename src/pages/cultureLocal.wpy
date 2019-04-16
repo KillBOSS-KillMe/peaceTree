@@ -45,44 +45,11 @@
 // text-overflow:ellipsis;
 // white-space:nowrap;
 <style lang="less">
-  .typeSel{
-    width: 690rpx;
-    height: 90rpx;
-    padding: 0 30rpx;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .typeSel view,
-  .typeSel icon{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    font-size: 30rpx !important;
-    color: #a4a4a4;
-  }
+
 </style>
 <template>
   <view>
     <addressSearch></addressSearch>
-    <view class="typeSel">
-      <view>
-        区域
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-      <view>
-        总价
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-      <view>
-        垫拥
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-      <view>
-        更多
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-    </view>
     <view class="list">
       <productItem></productItem>
       <productItem></productItem>
@@ -99,9 +66,9 @@
   import wepy from 'wepy'
   import addressSearch from '../components/addressSearch' // 顶部搜索
   import productItem from '../components/productItem' // 列表内容组件
-  export default class PropertyLocal extends wepy.page {
+  export default class CultureLocal extends wepy.page {
     config = {
-      navigationBarTitleText: '平安树'
+      navigationBarTitleText: '文旅地产'
     }
     components = {
       addressSearch: addressSearch,

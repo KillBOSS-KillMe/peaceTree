@@ -163,7 +163,7 @@
         <view>报备纪录</view>
       </view>
       <view class="userDataBorder"></view>
-      <view class="dataCon">
+      <view class="dataCon" @tap="goCollectionList">
         <view>0</view>
         <view>我的收藏</view>
       </view>
@@ -221,6 +221,9 @@
       },
       modifyUserInfo() {
         this.$navigate(`/pages/modifyUserInfo`)
+      },
+      goCollectionList() {
+        this.$navigate(`/pages/collectionList`)
       },
       goReportList() {
         this.$navigate(`/pages/reportList`)

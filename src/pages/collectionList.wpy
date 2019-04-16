@@ -1,26 +1,4 @@
 <style lang="less">
-  .search{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f7f7f7;
-    width: 640rpx;
-    height: 83rpx;
-    padding: 0 20rpx;
-    border-radius: 83rpx;
-    margin: auto;
-  }
-  .search input{
-    width: 600rpx;
-    color: #333;
-  }
-  .search icon{
-    font-size: 40rpx !important;
-    color: #a4a4a4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .list{
     width: 750rpx;
   }
@@ -74,10 +52,8 @@
 </style>
 <template>
   <view>
-    <view class="search">
-      <icon class="iconfont icon-sousuo"></icon>
-      <input type="text" placeholder="二狗子" />
-    </view>
+    <!-- 搜索组件 -->
+    <search></search>
     <view class="list">
       <view class="item">
         <image data-id="" src="/img/test.jpg" />
@@ -127,13 +103,13 @@
 
 <script>
   import wepy from 'wepy'
-  import nav from '../components/nav' // 底部导航
+  import search from '../components/search' // 底部导航
   export default class CollectionList extends wepy.page {
     config = {
       navigationBarTitleText: '收藏列表'
     }
     components = {
-      nav: nav
+      search: search
     }
 
     mixins = []

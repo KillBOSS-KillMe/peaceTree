@@ -1,0 +1,56 @@
+<style lang="less">
+.search {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background-color:#f7f7f7;
+  width:640rpx;
+  height:83rpx;
+  padding:0 20rpx;
+  border-radius:83rpx;
+  margin:auto;
+}
+.search icon {
+  width: 70rpx;
+  font-size:40rpx !important;
+  color:#a4a4a4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.search input {
+  width:550rpx;
+  color:#555;
+}
+</style>
+<template>
+<view>
+  <view class="search">
+    <icon class="iconfont icon-sousuo"></icon>
+    <input type="text" placeholder="输入搜索内容" />
+  </view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+// 校验封装
+// import check from '../mixins/check'
+export default class Search extends wepy.component {
+  // mixins = [check]
+  data = {
+    
+  };
+  props = {};
+  methods = {
+    // 首页
+    goIndex() {
+      this.$parent.$parent.globalData.navAction = ['action', 'noAction', 'noAction']
+      this.$emit('childFn', '/pages/index')
+    },
+  };
+  onLoad() {
+    this.navAction = this.$parent.$parent.globalData.navAction
+    this.$apply()
+  };
+}
+</script>

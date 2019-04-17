@@ -226,6 +226,48 @@ page{
   color: #343434;
   line-height: 50rpx;
 }
+.nav{
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 750rpx;
+  height: 150rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.nav view:nth-child(2),
+.nav view:nth-child(3){
+  width: 248rpx;
+  height: 95rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  border-radius: 20rpx;
+}
+.nav view:nth-child(1){
+  width: 95rpx;
+  height: 95rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 20rpx;
+  color: #343434;
+}
+.nav view:nth-child(1) icon{
+  font-size: 40rpx !important;
+  color: #343434;
+}
+.nav view:nth-child(2){
+  background-color: #f5ffe1;
+  color: #7bb312;
+}
+.nav view:nth-child(3){
+  background-color: #7bb312;
+  color: #fff;
+}
 </style>
 <template>
   <view>
@@ -381,6 +423,14 @@ page{
         <view>141.02㎡</view>
       </view>
     </scroll-view>
+    <view class="nav">
+      <view>
+        <icon class="iconfont icon-dianhua"></icon>
+        <text>联系项目</text>
+      </view>
+      <view>分享楼盘</view>
+      <view>报备客户</view>
+    </view>
   </view>
 </template>
 

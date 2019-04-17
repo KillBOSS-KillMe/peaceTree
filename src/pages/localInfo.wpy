@@ -268,6 +268,9 @@ page{
   background-color: #7bb312;
   color: #fff;
 }
+.marginNav{
+  margin-bottom: 170rpx;
+}
 </style>
 <template>
   <view>
@@ -397,7 +400,7 @@ page{
       </view>
     </view>
     <view class="localName">远洋合能枫丹唐悦</view>
-    <scroll-view scroll-x="true" class="houseType">
+    <scroll-view scroll-x="true" class="houseType marginNav">
       <view class="houseTypeItem">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>

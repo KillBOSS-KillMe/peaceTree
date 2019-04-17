@@ -1,0 +1,170 @@
+<style lang="less">
+.listName{
+  width: 690rpx;
+  padding: 30rpx;
+  font-size: 30rpx;
+  color: #343434;
+  font-weight: 600;
+}
+.listName .listNameInfo{
+  font-size: 20rpx;
+  color: #979797;
+  font-weight: 400;
+}
+.poperItem{
+  width: 660rpx;
+  height: 82rpx;
+  padding: 25rpx 20rpx;
+  background-color: #f7f7f7;
+  border-radius: 20rpx;
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+.poperItem .info,
+.poperItem icon{
+  font-size: 30rpx !important;
+  color: #343434;
+}
+.poperItem text{
+  font-size: 25rpx;
+  color: #979797;
+}
+.new{
+  font-size: 50rpx;
+  color: #979797;
+  align-items: center;
+  justify-content: center !important;
+}
+.listButton{
+  margin-bottom: 170rpx;
+}
+.reportButton{
+  width: 750rpx;
+  height: 150rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1rpx solid #979797;
+}
+.reportButton view{
+  width: 673rpx;
+  height: 94rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7bb312;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  color: #fff;
+}
+</style>
+<template>
+  <view>
+    <view class="listName">报备楼盘</view>
+    <view class="list">
+      <productItem></productItem>
+    </view>
+    <view class="listName">
+      待报备客户
+      <view class="listNameInfo">该项目为全号报备项目，仅支持报备电话为全号的客户</view>
+    </view>
+    
+    <view class="list listButton">
+      <view class="poperItem">
+        <view class="info">
+          <view>
+            二狗子
+            <text>先生</text>
+          </view>
+          <text>18888888888</text>
+        </view>
+        <icon class="iconfont icon-shoucang1"></icon>
+      </view>
+      <view class="poperItem new">+</view>
+    </view>
+    <view class="reportButton">
+      <view>报备</view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import productItem from '../components/productItem' // 列表内容组件
+  export default class ReportLocal extends wepy.page {
+    config = {
+      navigationBarTitleText: '报备楼盘'
+    }
+    components = {
+      productItem: productItem
+    }
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      test: '',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      goLocalMoreInfo(e) {
+        // 产看楼盘的更多信息
+        this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      goRuleInfo(e) {
+        // 进入预约列表
+        this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

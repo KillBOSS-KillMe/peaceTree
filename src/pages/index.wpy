@@ -210,7 +210,7 @@
 <template>
   <view>
     <view class="search">
-      <view class="selAddress">
+      <view class="selAddress" @tap="goSelCity">
         西安
         <icon class="iconfont icon-jiantou-xia"></icon>
       </view>
@@ -340,25 +340,28 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
-      goDiningRoomInfo(e) {
-        // // 进入餐厅详情
-        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
-        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+      goSelCity() {
+        // 城市选择
+        this.$navigate(`/pages/citySel`)
       },
-      goReservationList(e) {
-        // 进入预约列表
-        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
-      },
+      // goReservationList(e) {
+      //   // 进入预约列表
+      //   this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      // },
       goPropertyLocal() {
+        // 本地楼盘
         this.$navigate(`/pages/propertyLocal`)
       },
       goSurroundingLocal() {
+        // 周边楼盘
         this.$navigate(`/pages/surroundingLocal`)
       },
       goCultureLocal() {
+        // 文旅地产
         this.$navigate(`/pages/cultureLocal`)
       },
       goLocalInfo(e) {
+        // 进入楼盘详情
         this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}`)
       }
     }

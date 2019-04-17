@@ -22,10 +22,13 @@
   justify-content: space-between;
   margin-top: 20rpx;
 }
-.poperItem .info,
-.poperItem icon{
+.poperItem .info{
   font-size: 30rpx !important;
   color: #343434;
+}
+.poperItem icon{
+  font-size: 30rpx !important;
+  color: #979797;
 }
 .poperItem text{
   font-size: 25rpx;
@@ -94,6 +97,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  // position: relative;
 }
 .setTime .setData label{
   font-size: 30rpx;
@@ -102,7 +106,16 @@
 .setTime .setData view{
   width: 374rpx;
   height: 55rpx;
+  line-height: 55rpx;
   border: 1rpx solid #979797;
+  color: #979797;
+  font-size: 30rpx;
+  text-align: center;
+}
+.setTime .iconfont{
+  float: right;
+  font-size: 30rpx !important;
+  color: #979797;
 }
 .setTime .button{
   display: flex;
@@ -149,20 +162,24 @@
           </view>
           <text>18888888888</text>
         </view>
-        <icon class="iconfont icon-shoucang1"></icon>
+        <icon class="iconfont icon-guanbi"></icon>
       </view>
       <view class="poperItem new">+</view>
     </view>
     <view class="reportButton">
-      <view @tap="">报备</view>
+      <view @tap="reportButton">报备</view>
     </view>
-    <view class="mask">
+    <view class="mask" wx:if="{{reportDom}}">
       <view class="setTime">
+        <icon class="iconfont icon-guanbi" @tap="reportButton"></icon>
         <view class="setTimeName">客户预约到访时间</view>
         <view class="setTimeName2">选择客户预计到访时间，方便驻场人员提前准备</view>
         <view class="setData">
           <label>预计到访时间</label>
-          <view></view>
+          <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+            <!-- <input disabled value='{{time}}' placeholder='选择时间'/> -->
+            <view>{{time}}</view>
+          </picker>
         </view>
         <view class="button">
           <view>确认到访时间并报备</view>
@@ -174,6 +191,44 @@
 </template>
 
 <script>
+const date = new Date()
+const years = []
+const months = []
+const days = []
+const hours = []
+const minutes = []
+// 获取年
+for (let i = date.getFullYear(); i <= date.getFullYear() + 1; i++) {
+  years.push('' + i)
+}
+// 获取月份
+for (let i = 1; i <= 12; i++) {
+  if (i < 10) {
+    i = '0' + i
+  }
+  months.push('' + i)
+}
+// 获取日期
+for (let i = 1; i <= 31; i++) {
+  if (i < 10) {
+    i = '0' + i
+  }
+  days.push('' + i)
+}
+// 获取小时
+for (let i = 0; i < 24; i++) {
+  if (i < 10) {
+    i = '0' + i
+  }
+  hours.push('' + i)
+}
+// 获取分钟
+for (let i = 0; i < 60; i++) {
+  if (i < 10) {
+    i = '0' + i
+  }
+  minutes.push('' + i)
+}
   import wepy from 'wepy'
   import productItem from '../components/productItem' // 列表内容组件
   export default class ReportLocal extends wepy.page {
@@ -191,7 +246,11 @@
       test: '',
       userInfo: null,
       requestImgUrl: '',
-      diningRoom: []
+      diningRoom: [],
+      reportDom: false,
+      time: '',
+      multiIndex: [0, 9, 16, 10, 17],
+      multiArray: [years, months, days, hours, minutes],
     }
 
     computed = {
@@ -206,6 +265,80 @@
       goRuleInfo(e) {
         // 进入预约列表
         this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      // 获取时间日期
+      bindMultiPickerChange(e) {
+        this.multiIndex = e.detail.value
+        const index = this.multiIndex
+        const year = this.multiArray[0][index[0]]
+        const month = this.multiArray[1][index[1]]
+        const day = this.multiArray[2][index[2]]
+        const hour = this.multiArray[3][index[3]]
+        const minute = this.multiArray[4][index[4]]
+        this.time = year + '/' + month + '/' + day + ' ' + hour + ':' + minute
+      },
+      reportButton() {
+        if (this.reportDom) {
+          this.reportDom = false
+        } else {
+          this.reportDom = true
+        }
+      },
+      // 监听picker的滚动事件
+      bindMultiPickerColumnChange(e) {
+        // 获取年份
+        if (e.detail.column === 0) {
+          let chooseYear = this.multiArray[e.detail.column][e.detail.value]
+        }
+        if (e.detail.column === 1) {
+          let num = parseInt(this.multiArray[e.detail.column][e.detail.value])
+          let temp = []
+          if (num === 1 || num === 3 || num === 5 || num === 7 || num === 8 || num === 10 || num === 12) {
+            // 判断31天的月份
+            for (let i = 1; i <= 31; i++) {
+              if (i < 10) {
+                i = '0' + i
+              }
+              temp.push('' + i)
+            }
+            this.multiArray[2] = temp
+          } else if (num === 4 || num === 6 || num === 9 || num === 11) {
+            // 判断30天的月份
+            for (let i = 1; i <= 30; i++) {
+              if (i < 10) {
+                i = '0' + i
+              }
+              temp.push('' + i)
+            }
+            this.multiArray[2] = temp
+          } else if (num === 2) {
+            // 判断2月份天数
+            let year = parseInt(this.chooseYear)
+            if (((year % 400 === 0) || (year % 100 !== 0)) && (year % 4 === 0)) {
+              for (let i = 1; i <= 29; i++) {
+                if (i < 10) {
+                  i = '0' + i
+                }
+                temp.push('' + i)
+              }
+              this.multiArray[2] = temp
+            } else {
+              for (let i = 1; i <= 28; i++) {
+                if (i < 10) {
+                  i = '0' + i
+                }
+                temp.push('' + i)
+              }
+              this.multiArray[2] = temp
+            }
+          }
+        }
+        var data = {
+          multiArray: this.multiArray,
+          multiIndex: this.multiIndex
+        }
+        data.multiIndex[e.detail.column] = e.detail.value
+        this.setData(data)
       }
     }
 

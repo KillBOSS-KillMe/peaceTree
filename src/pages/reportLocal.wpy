@@ -61,6 +61,74 @@
   font-size: 30rpx;
   color: #fff;
 }
+.mask{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.setTime{
+  width: 640rpx;
+  // height: 300rpx;
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+}
+.setTimeName{
+  font-size: 34rpx;
+  font: #343434;
+  text-align: center;
+}
+.setTimeName2{
+  font-size: 22rpx;
+  color: #979797;
+  text-align: center;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.setTime .setData{
+  width: 640rpx;
+  height: 102rpx;
+  border: solid #f2f2f2;
+  border-width: 1rpx 0 1rpx 0;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.setTime .setData label{
+  font-size: 30rpx;
+  color: #343434;
+}
+.setTime .setData view{
+  width: 374rpx;
+  height: 55rpx;
+  border: 1rpx solid #979797;
+}
+.setTime .button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.setTime .button view{
+  width: 584rpx;
+  height: 114rpx;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx 0;
+  border: 1rpx solid #7bb312;
+}
+.setTime .button view:nth-child(1){
+  background-color: #7bb312;
+  color: #fff;
+}
+.setTime .button view:nth-child(2){
+  background-color: #fff;
+  color: #7bb312;
+}
 </style>
 <template>
   <view>
@@ -72,7 +140,6 @@
       待报备客户
       <view class="listNameInfo">该项目为全号报备项目，仅支持报备电话为全号的客户</view>
     </view>
-    
     <view class="list listButton">
       <view class="poperItem">
         <view class="info">
@@ -87,7 +154,21 @@
       <view class="poperItem new">+</view>
     </view>
     <view class="reportButton">
-      <view>报备</view>
+      <view @tap="">报备</view>
+    </view>
+    <view class="mask">
+      <view class="setTime">
+        <view class="setTimeName">客户预约到访时间</view>
+        <view class="setTimeName2">选择客户预计到访时间，方便驻场人员提前准备</view>
+        <view class="setData">
+          <label>预计到访时间</label>
+          <view></view>
+        </view>
+        <view class="button">
+          <view>确认到访时间并报备</view>
+          <view>跳过并直接报备</view>
+        </view>
+      </view>
     </view>
   </view>
 </template>

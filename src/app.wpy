@@ -54,6 +54,15 @@
   border-bottom: 1rpx solid #e6e6e6;
   text-align: center;
 }
+.mask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color:rgba(0,0,0,.4);
+}
 </style>
 
 <script>

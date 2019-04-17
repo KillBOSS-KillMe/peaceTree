@@ -104,7 +104,7 @@
       </view>
     </view>
     <view class="ft_item {{navAction[1]}}">
-      <view @tap="goSlient">
+      <view @tap="goUserList">
         <view class="iconfont icon-shouye"></view>
         <text class="text">客户</text>
       </view>
@@ -140,10 +140,10 @@ export default class Nav extends wepy.component {
       this.$emit('childFn', '/pages/index')
     },
     // 客户
-    goSlient() {
+    goUserList() {
       // 顶部导航状态初始化
       this.$parent.$parent.globalData.navAction = ['noAction', 'action', 'noAction']
-      this.$emit('childFn', '/pages/slient')
+      this.$emit('childFn', '/pages/userList')
     },
     // 我的
     goUser() {

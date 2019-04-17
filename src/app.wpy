@@ -64,7 +64,7 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      
+      'pages/index', // 首页
       'pages/localInfo', // 项目详情（楼盘详情）
       'pages/citySel', // 城市选择
       'pages/cultureLocal', // 文旅地产
@@ -75,7 +75,7 @@ export default class extends wepy.app {
       'pages/reportList', // 报备列表
       'pages/modifyUserInfo', // 修改用户信息
       'pages/messageList', // 消息列表
-      'pages/index' // 首页
+      
     ],
     window: {
       backgroundTextStyle: 'light',

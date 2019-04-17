@@ -237,31 +237,31 @@
       </repeat> -->
     </swiper>
     <view class="sort">
-      <view class="sel">
+      <view class="sel" @tap="goPropertyLocal">
         <image class='header-bg' src="/img/test.jpg" />
         <view class="con">
           <text>本地楼盘</text>
           <view></view>
         </view>
       </view>
-      <view class="sel">
+      <view class="sel" @tap="goSurroundingLocal">
         <image class='header-bg' src="/img/test.jpg" />
         <view class="con">
-          <text>本地楼盘</text>
+          <text>周边楼盘</text>
           <view></view>
         </view>
       </view>
-      <view class="sel">
+      <view class="sel" @tap="goCultureLocal">
         <image class='header-bg' src="/img/test.jpg" />
         <view class="con">
-          <text>本地楼盘</text>
+          <text>文旅楼盘</text>
           <view></view>
         </view>
       </view>
     </view>
     <view class="listTitle">热推楼盘</view>
     <view class="list">
-      <view class="item">
+      <view class="item" @tap="goLocalInfo">
         <image data-id="" src="{{img}}" />
         <view class="con">
           <view class="title">
@@ -275,7 +275,7 @@
           <view class="price">10000元/m</view>
         </view>
       </view>
-      <view class="item">
+      <view class="item" @tap="goLocalInfo">
         <image data-id="" src="{{img}}" />
         <view class="con">
           <view class="title">
@@ -289,7 +289,7 @@
           <view class="price">10000元/m</view>
         </view>
       </view>
-      <view class="item">
+      <view class="item" @tap="goLocalInfo">
         <image data-id="" src="{{img}}" />
         <view class="con">
           <view class="title">
@@ -348,6 +348,18 @@
       goReservationList(e) {
         // 进入预约列表
         this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      },
+      goPropertyLocal() {
+        this.$navigate(`/pages/propertyLocal`)
+      },
+      goSurroundingLocal() {
+        this.$navigate(`/pages/surroundingLocal`)
+      },
+      goCultureLocal() {
+        this.$navigate(`/pages/cultureLocal`)
+      },
+      goLocalInfo(e) {
+        this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}`)
       }
     }
 

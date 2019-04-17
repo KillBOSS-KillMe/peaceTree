@@ -241,7 +241,7 @@ page{
       </view>
     </view>
     <view class="localName">远洋合能枫丹唐悦</view>
-    <view class="label">
+    <view class="label" @tap="goLocalMoreInfo">
       <view>品牌开发商</view>
       <view>
         更多信息
@@ -409,14 +409,9 @@ page{
     }
 
     methods = {
-      // 底部导航跳转
-      goPage (url, evt) {
-        // 销毁当前页{跳转}
-        this.$redirect(url)
-      },
-      goDiningRoomInfo(e) {
-        // // 进入餐厅详情
-        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+      goLocalMoreInfo(e) {
+        // 产看楼盘的更多信息
+        this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
       },
       goReservationList(e) {
         // 进入预约列表

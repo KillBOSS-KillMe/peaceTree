@@ -1,0 +1,186 @@
+<style lang="less">
+page{
+  background-color: #f7f7f7;
+}
+.listName{
+  width: 690rpx;
+  padding: 30rpx;
+  background-color: #fff;
+  color: #343434;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+.localMoreInfo{
+  width: 750rpx;
+  height: auto;
+}
+.item{
+  width: 690rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.item label,
+.item view{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size: 30rpx;
+}
+.item label{
+  width: 200rpx;
+  color: #979797;
+}
+.item view{
+  width: 490rpx;
+  color: #343434;
+  font-size: 600;
+}
+.module{
+  margin-top: 20rpx;
+}
+</style>
+<template>
+  <view>
+    <view class="listName">更多信息</view>
+    <view class="localMoreInfo">
+      <view class="item">
+        <label>交房时间</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>产权年限</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>物业公司</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item module">
+        <label>开发商</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>开发商品牌</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item module">
+        <label>建筑面积</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>容积率</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>绿化率</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item module">
+        <label>总户数</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>车位数</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>车位比</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item module">
+        <label>均价</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>得房率</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>物业费</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>物业类型</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>建筑类型</label>
+        <view>2012年8月31日</view>
+      </view>
+      <view class="item">
+        <label>装修状况</label>
+        <view>2012年8月31日</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class LocalMoreInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '更多信息'
+    }
+    components = {}
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      test: '',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

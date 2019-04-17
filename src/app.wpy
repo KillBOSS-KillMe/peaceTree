@@ -73,6 +73,8 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      
+      'pages/setClient', // 客户录入
       'pages/reportLocal', // 报备楼盘
       'pages/localInfo', // 项目详情（楼盘详情）
       'pages/index', // 首页

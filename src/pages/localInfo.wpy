@@ -270,7 +270,7 @@ page{
     <view class="rule">
       <view class="ruleList">
         <text>导客规则</text>
-        <view>
+        <view @tap="goRuleInfo">
           查看全部
           <icon class="iconfont icon-jiantou-you"></icon>
         </view>
@@ -413,9 +413,9 @@ page{
         // 产看楼盘的更多信息
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
       },
-      goReservationList(e) {
+      goRuleInfo(e) {
         // 进入预约列表
-        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+        this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
       }
     }
 

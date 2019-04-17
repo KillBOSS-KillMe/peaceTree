@@ -1,0 +1,128 @@
+<style lang="less">
+page{
+  background-color: #f7f7f7;
+}
+
+.ruleInfoList{
+  width: 750rpx;
+  height: auto;
+}
+.item{
+  width: 690rpx;
+  padding: 30rpx;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.item view{
+  font-size: 30rpx;
+  padding: 20rpx 0;
+}
+.item view:nth-child(1){
+  color: #333;
+  font-weight: 600;
+}
+.item view:nth-child(2){
+  color: #7bb312;
+}
+.item view:nth-child(3){
+  color: #979797;
+  border-top: 1rpx solid #979797;
+  line-height: 50rpx;
+}
+</style>
+<template>
+  <view>
+    <view class="ruleInfoList">
+      <view class="item">
+        <view>报备规则</view>
+        <view>提前1小时全号报备</view>
+        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+      </view>
+      <view class="item">
+        <view>报备规则</view>
+        <view>提前1小时全号报备</view>
+        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+      </view>
+      <view class="item">
+        <view>报备规则</view>
+        <view>提前1小时全号报备</view>
+        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+      </view>
+      <view class="item">
+        <view>报备规则</view>
+        <view>提前1小时全号报备</view>
+        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class RuleInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '规则信息'
+    }
+    components = {}
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      test: '',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

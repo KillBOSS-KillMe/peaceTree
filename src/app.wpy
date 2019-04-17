@@ -64,9 +64,9 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      
-      'pages/ruleInfo', // 规则信息
       'pages/index', // 首页
+      'pages/ruleInfo', // 规则信息
+      
       'pages/localMoreInfo', // 楼盘更多信息
       
       'pages/localInfo', // 项目详情（楼盘详情）

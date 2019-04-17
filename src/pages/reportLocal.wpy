@@ -148,6 +148,7 @@
     <view class="listName">报备楼盘</view>
     <view class="list">
       <productItem></productItem>
+      <view class="poperItem new">+</view>
     </view>
     <view class="listName">
       待报备客户

@@ -57,6 +57,125 @@ page{
   color: #343434;
   margin-top: 20rpx;
 }
+.reportList{
+  margin-bottom: 170rpx;
+}
+.reportButton{
+  width: 750rpx;
+  height: 150rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1rpx solid #979797;
+}
+.reportButton view{
+  width: 673rpx;
+  height: 94rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7bb312;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  color: #fff;
+}
+.report{
+  width: 750rpx;
+}
+.reportItem{
+  width: 690rpx;
+  padding: 30rpx;
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+.property, .result{
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+}
+.reportItem .name{
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #343434;
+}
+.reportItem .name2,
+.reportItem .name2 icon{
+  font-size: 23rpx !important;
+  color: #979797;
+}
+.QRCode{
+  font-size: 40rpx !important;
+  color: #979797;
+}
+.result{
+  margin-top: 40rpx;
+}
+.result view:nth-child(1){
+
+}
+.expand,
+.expand icon{
+  font-size: 25rpx !important;
+  color: #979797;
+}
+.expand{
+  margin-top: -20rpx
+}
+.status{
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+}
+.mark{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.mark view:nth-child(1){
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 20rpx;
+  // background-color: #fe5454;
+}
+.mark view:nth-child(2){
+  width: 0rpx;
+  height: 50rpx;
+  border: 1rpx solid #979797
+}
+.mark view:nth-child(3){
+  width: 18rpx;
+  height: 18rpx;
+  border: 1rpx solid #979797;
+  border-radius: 18rpx;
+}
+.markInfo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 20rpx;
+}
+.markInfo .failure{
+  font-size: 25rpx;
+  color: #fa3c48;
+}
+.markInfo .success{
+  font-size: 25rpx;
+  color: #7bb312;
+}
+.markInfo view:nth-child(2){
+  font-size: 25rpx;
+  color: #979797;
+}
+.mark .failure{
+  background-color: #fa3c48;
+}
+.mark .success{
+  background-color: #7bb312;
+}
 </style>
 <template>
   <view>
@@ -75,6 +194,104 @@ page{
       </view>
     </view>
     <view class="reportNum">已报备的楼盘(2)</view>
+    <view class="reportList">
+      <view class="reportItem">
+        <view class="property">
+          <view>
+            <view class="name">福星惠誉美术城</view>
+            <view class="name2">
+              <icon class="iconfont icon-dingweiweizhi"></icon>
+              福星惠誉美术城
+            </view>
+          </view>
+          <icon class="QRCode iconfont icon-erweima"></icon>
+        </view>
+        <view class="result">
+          <view class="status">
+            <view class="mark">
+              <!-- <view class="failure"></view> -->
+              <view class="success"></view>
+              <view></view>
+              <view></view>
+            </view>
+            <view class="markInfo">
+              <view class="success">报备无效  201/04/08</view>
+              <!-- <view class="failure">报备无效  201/04/08</view> -->
+              <view>报备无效  201/04/08</view>
+            </view>
+          </view>
+          <view class="expand">
+            <icon class="iconfont icon-jiantou-xia"></icon>
+            展开
+          </view>
+        </view>
+      </view>
+      <view class="reportItem">
+        <view class="property">
+          <view>
+            <view class="name">福星惠誉美术城</view>
+            <view class="name2">
+              <icon class="iconfont icon-dingweiweizhi"></icon>
+              福星惠誉美术城
+            </view>
+          </view>
+          <icon class="QRCode iconfont icon-erweima"></icon>
+        </view>
+        <view class="result">
+          <view class="status">
+            <view class="mark">
+              <!-- <view class="failure"></view> -->
+              <view class="success"></view>
+              <view></view>
+              <view></view>
+            </view>
+            <view class="markInfo">
+              <view class="success">报备无效  201/04/08</view>
+              <!-- <view class="failure">报备无效  201/04/08</view> -->
+              <view>报备无效  201/04/08</view>
+            </view>
+          </view>
+          <view class="expand">
+            <icon class="iconfont icon-jiantou-xia"></icon>
+            展开
+          </view>
+        </view>
+      </view>
+      <view class="reportItem">
+        <view class="property">
+          <view>
+            <view class="name">福星惠誉美术城</view>
+            <view class="name2">
+              <icon class="iconfont icon-dingweiweizhi"></icon>
+              福星惠誉美术城
+            </view>
+          </view>
+          <icon class="QRCode iconfont icon-erweima"></icon>
+        </view>
+        <view class="result">
+          <view class="status">
+            <view class="mark">
+              <!-- <view class="failure"></view> -->
+              <view class="success"></view>
+              <view></view>
+              <view></view>
+            </view>
+            <view class="markInfo">
+              <view class="success">报备无效  201/04/08</view>
+              <!-- <view class="failure">报备无效  201/04/08</view> -->
+              <view>报备无效  201/04/08</view>
+            </view>
+          </view>
+          <view class="expand">
+            <icon class="iconfont icon-jiantou-xia"></icon>
+            展开
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="reportButton">
+      <view @tap="reportButton">报备楼盘</view>
+    </view>
   </view>
 </template>
 

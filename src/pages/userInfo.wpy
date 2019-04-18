@@ -1,0 +1,147 @@
+<style lang="less">
+page{
+  background-color: #f7f7f7;
+}
+.userInfo,
+.reportNum{
+  background-color: #fff;
+}
+.userInfo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 690rpx;
+  padding: 20rpx 30rpx;
+}
+.userInfo .info{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.userInfo .info view:nth-child(1){
+
+}
+.userInfo .info view:nth-child(2){
+  width: 80rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 20rpx;
+  border-radius: 10rpx;
+  margin-left: 20rpx;
+}
+.men{
+  color: #788FFF;
+  background-color: #EAF0FE;
+}
+.ms{
+  color: #fa3c48;
+  background-color: #ffe6e7;
+}
+.phone{
+  font-size: 25rpx;
+  color: #343434;
+  padding-top: 20rpx;
+}
+.edit{
+  color: #979797;
+  font-size: 25rpx;
+}
+.edit icon{
+  font-size: 35rpx !important;
+}
+.reportNum{
+  width: 690rpx;
+  padding: 30rpx;
+  font-size: 30rpx;
+  color: #343434;
+  margin-top: 20rpx;
+}
+</style>
+<template>
+  <view>
+    <view class="userInfo">
+      <view>
+        <view class="info">
+          <view>二狗子</view>
+          <view class="ms">女士</view>
+          <view class="men">男士</view>
+        </view>
+        <view class="phone">18888888888</view>
+      </view>
+      <view class="edit">
+        <icon class="iconfont icon-bianji"></icon>
+        编辑
+      </view>
+    </view>
+    <view class="reportNum">已报备的楼盘(2)</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class UserInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '客户详情'
+    }
+    components = {
+      
+    }
+
+    mixins = []
+
+    data = {
+      
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      goLocalMoreInfo(e) {
+        // 产看楼盘的更多信息
+        this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

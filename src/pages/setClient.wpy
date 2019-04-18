@@ -56,9 +56,9 @@
   background-color: #eaf0fe;
 }
 .info view:nth-child(2){
-  color: #979797;
-  border-color: #979797;
-  background-color: #fff;
+  color: #fa3c48;
+  background-color: #ffe6e7;
+  border-color: #ffe6e7;
 }
 .lable{
   width: 200rpx;

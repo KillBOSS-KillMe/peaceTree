@@ -107,6 +107,31 @@
   height: 100vh;
   background-color:rgba(0,0,0,.4);
 }
+
+
+
+// 多选框样式
+checkbox .wx-checkbox-input{
+  border-radius: 50%;/* 圆角 */
+  width: 40rpx; /* 背景的宽 */
+  height: 40rpx; /* 背景的高 */
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+  border: none;
+  background: #fc6800;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+  border-radius: 50%;/* 圆角 */
+  width: 40rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 40rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 40rpx;
+  text-align: center;
+  font-size:30rpx; /* 对勾大小 30rpx */
+  color:#fff; /* 对勾颜色 白色 */
+  background: transparent;
+  transform:translate(-50%, -50%) scale(1);
+  -webkit-transform:translate(-50%, -50%) scale(1);
+}
 </style>
 
 <script>
@@ -118,6 +143,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       
+      'pages/userSel', // 用户选择
       'pages/userInfo', // 客户详情
       'pages/reportLocal', // 报备楼盘
       'pages/userList', // 客户列表

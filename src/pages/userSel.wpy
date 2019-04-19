@@ -1,0 +1,148 @@
+<style lang="less">
+.userList{
+  width: 750rpx;
+  margin-bottom: 150rpx;
+}
+.userList .type{
+  width: 690rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 30rpx;
+  background-color: #f8f8f8;
+  color: #979797;
+  font-size: 25rpx;
+}
+.userList .item{
+  width: 690rpx;
+  height: 90rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.userList .item view{
+  font-size: 30rpx;
+  color: #343434;
+  font-weight: 600;
+}
+</style>
+<template>
+  <view>
+    <search></search>
+    <checkbox-group bindchange="selCommodity" data-index="{{index}}" data-checks="{{item.checks}}">
+      <view class="userList">
+        <view class="type">A</view>
+        <view class="item">
+          <view>
+            <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
+            二狗子
+          </view>
+          <view>
+            18888888888
+          </view>
+        </view>
+        <view class="item">
+          <view>
+            <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
+            二狗子
+          </view>
+          <view>
+            18888888888
+          </view>
+        </view>
+        <view class="item">
+          <view>
+            <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
+            二狗子
+          </view>
+          <view>
+            18888888888
+          </view>
+        </view>
+
+      </view>
+    </checkbox-group>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import search from '../components/search' // 底部导航
+  export default class UserSel extends wepy.page {
+    config = {
+      navigationBarTitleText: '录入新客'
+    }
+    components = {
+      search: search
+    }
+
+    mixins = []
+
+    data = {
+      img: '/img/test.jpg',
+      test: '',
+      userInfo: null,
+      requestImgUrl: '',
+      diningRoom: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      // 底部导航跳转
+      goPage (url, evt) {
+        // 销毁当前页{跳转}
+        this.$redirect(url)
+      },
+      goLocalMoreInfo(e) {
+        // 产看楼盘的更多信息
+        this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      goRuleInfo(e) {
+        // 进入预约列表
+        this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getFoodList()
+    }
+    getFoodList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'GET',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.diningRoom = data.data.data
+            let i = 0
+            var reg = /\\|\//g
+            for (i in this.diningRoom) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+  }
+</script>

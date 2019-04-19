@@ -142,10 +142,10 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      
+      'pages/userInfo', // 客户详情
       'pages/localSel', // 楼盘选择
       'pages/userSel', // 用户选择
-      'pages/userInfo', // 客户详情
+      
       'pages/reportLocal', // 报备楼盘
       'pages/userList', // 客户列表
       'pages/setClient', // 客户录入

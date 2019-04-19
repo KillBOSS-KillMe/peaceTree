@@ -176,6 +176,60 @@ page{
 .mark .success{
   background-color: #7bb312;
 }
+.mask{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.setInfo{
+  width: 640rpx;
+  // height: 300rpx;
+  background-color: #fff;
+  padding-top: 30rpx;
+  border-radius: 20rpx;
+}
+.setInfoName{
+  text-align: center;
+}
+.formSet{
+  width: 580rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+}
+.formSet label{
+  width: 150rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #343434;
+}
+.formSet input{
+  width: 450rpx;
+  font-size: 30rpx;
+  color: #343434;
+  border: 1rpx solid #979797;
+}
+.setInfo .but{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.setInfo .but view{
+  width: 330rpx;
+  height: 87rpx;
+  font-size: 35rpx;
+  font-weight: 600;
+  color: #343434;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1rpx solid #f2f2f2;
+}
+.setInfo .but view:nth-child(2){
+  color: #7bb312;
+  border-left: 1rpx solid #f2f2f2;
+}
 </style>
 <template>
   <view>
@@ -188,7 +242,7 @@ page{
         </view>
         <view class="phone">18888888888</view>
       </view>
-      <view class="edit">
+      <view class="edit" @tap="edit">
         <icon class="iconfont icon-bianji"></icon>
         编辑
       </view>
@@ -292,6 +346,27 @@ page{
     <view class="reportButton">
       <view @tap="reportButton">报备楼盘</view>
     </view>
+    <view class="mask">
+      <view class="setInfo">
+        <view class="setInfoName">客户修改</view>
+        <view class="formSet">
+          <label>姓名:</label>
+          <input type="text" placeholder="请输入姓名" value="{{addressInfo.name}}" bindinput="getName" />
+        </view>
+        <view class="formSet">
+          <label>手机号:</label>
+          <input type="text" placeholder="请输入手机号" value="{{addressInfo.name}}" bindinput="getName" />
+        </view>
+        <view class="formSet">
+          <label>备注:</label>
+          <input type="text" placeholder="请输入备注" value="{{addressInfo.name}}" bindinput="getName" />
+        </view>
+        <view class="but">
+          <view>取消</view>
+          <view>提交</view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -316,6 +391,9 @@ page{
     }
 
     methods = {
+      getName(e) {
+        this.addressInfo['name'] = e.detail.value
+      },
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)

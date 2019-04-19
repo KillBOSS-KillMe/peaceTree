@@ -165,7 +165,7 @@
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
       },
       goRuleInfo(e) {
-        // 进入预约列表
+        // 查看规则
         this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
       }
     }

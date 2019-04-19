@@ -351,19 +351,19 @@ page{
         <view class="setInfoName">客户修改</view>
         <view class="formSet">
           <label>姓名:</label>
-          <input type="text" placeholder="请输入姓名" value="{{addressInfo.name}}" bindinput="getName" />
+          <input type="text" placeholder="请输入姓名" value="" bindinput="getName" />
         </view>
         <view class="formSet">
           <label>手机号:</label>
-          <input type="text" placeholder="请输入手机号" value="{{addressInfo.name}}" bindinput="getName" />
+          <input type="text" placeholder="请输入手机号" value="" bindinput="getMobile" />
         </view>
         <view class="formSet">
           <label>备注:</label>
-          <input type="text" placeholder="请输入备注" value="{{addressInfo.name}}" bindinput="getName" />
+          <input type="text" placeholder="请输入备注" value="" bindinput="getRemarks" />
         </view>
         <view class="but">
           <view @tap="edit">取消</view>
-          <view>提交</view>
+          <view @tap="submint">提交</view>
         </view>
       </view>
     </view>
@@ -372,6 +372,7 @@ page{
 
 <script>
   import wepy from 'wepy'
+  import check from '../mixins/check'
   export default class UserInfo extends wepy.page {
     config = {
       navigationBarTitleText: '客户详情'
@@ -380,10 +381,13 @@ page{
       
     }
 
-    mixins = []
+    mixins = [check]
 
     data = {
-      formIsShow: false
+      formIsShow: false,
+      name: '', // 输入的用户名
+      mobile: '', // 输入的电话
+      remarks: '', // 备注信息
     }
 
     computed = {
@@ -391,16 +395,27 @@ page{
     }
 
     methods = {
+      getName(e) {
+        // 获取名称
+        console.log(this.name)
+        this.name = e.detail.value
+        
+      },
+      getMobile(e) {
+        // 获取电话
+        this.mobile = e.detail.value
+      },
+      getRemarks(e) {
+        // 获取备注
+        this.remarks = e.detail.value
+      },
+      
       edit() {
         if (this.formIsShow) {
           this.formIsShow = false
         } else {
           this.formIsShow = true
         }
-        
-      },
-      getName(e) {
-        this.addressInfo['name'] = e.detail.value
       },
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
@@ -445,6 +460,32 @@ page{
           }
         }
       })
+    }
+    submint() {
+      console.log(this.name)
+      console.log(this.mobile)
+      console.log(this.remarks)
+      if (this.check.isNull(this.name)) {
+        wx.showModal({
+          title: '',
+          content: '请输入名称'
+        })
+        return ''
+      }
+      if (this.check.isPhone(this.mobile)) {
+        wx.showModal({
+          title: '',
+          content: '请输入正确的手机号'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.name)) {
+        wx.showModal({
+          title: '',
+          content: '请输入备注'
+        })
+        return ''
+      }
     }
   }
 </script>

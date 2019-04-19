@@ -99,13 +99,13 @@
   <view class="footer">
     <view class="ft_item {{navAction[0]}}">
       <view @tap="goIndex">
-        <view class="iconfont icon-kehu"></view>
+        <view class="iconfont icon-shouye"></view>
         <text class="text">首页</text>
       </view>
     </view>
     <view class="ft_item {{navAction[1]}}">
       <view @tap="goUserList">
-        <view class="iconfont icon-shouye"></view>
+        <view class="iconfont icon-kehu"></view>
         <text class="text">客户</text>
       </view>
     </view>

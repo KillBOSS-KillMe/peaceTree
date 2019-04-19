@@ -432,7 +432,7 @@ page{
         <text>联系项目</text>
       </view>
       <view>分享楼盘</view>
-      <view>报备客户</view>
+      <view @tap="goReportUser">报备客户</view>
     </view>
   </view>
 </template>
@@ -462,6 +462,10 @@ page{
     }
 
     methods = {
+      goReportUser(e) {
+        // 进入报备用户页
+        this.$navigate(`/pages/reportLocal?id=${e.currentTarget.dataset.id}`)
+      },
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)

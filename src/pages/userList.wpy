@@ -61,12 +61,12 @@
   <view>
     <search></search>
     <view class="goLocalOrNewUser">
-      <view>报备楼盘</view>
-      <view>录入新客</view>
+      <view @tap="goReportLocal">报备楼盘</view>
+      <view @tap="goNewUser">录入新客</view>
     </view>
     <view class="userList">
       <view class="type">A</view>
-      <view class="item">
+      <view class="item" @tap="goUserInfo">
         <view>二狗子</view>
         <view>
           18888888888
@@ -143,6 +143,18 @@
     }
 
     methods = {
+      goUserInfo(e) {
+        // 查看用户信息
+        this.$navigate(`/pages/userInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      goReportLocal() {
+        // 进入报备楼盘页
+        this.$navigate(`/pages/reportLocal`)
+      },
+      goNewUser() {
+        // 进入录入客户页
+        this.$navigate(`/pages/setClient`)
+      },
       // 底部导航跳转
       goPage (url, evt) {
         // 销毁当前页{跳转}

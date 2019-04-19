@@ -2,6 +2,11 @@
   page{
       background-color: #f7f7f7;
   }
+  
+  .list{
+    width: 750rpx;
+    padding: 0;
+  }
   image{
     width: 85rpx;
     height: 85rpx;

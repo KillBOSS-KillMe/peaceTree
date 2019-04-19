@@ -148,7 +148,7 @@
     <view class="listName">报备楼盘</view>
     <view class="list">
       <productItem></productItem>
-      <view class="poperItem new">+</view>
+      <view class="poperItem new" @tap="goLocalSel">+</view>
     </view>
     <view class="listName">
       待报备客户
@@ -165,7 +165,7 @@
         </view>
         <icon class="iconfont icon-guanbi"></icon>
       </view>
-      <view class="poperItem new">+</view>
+      <view class="poperItem new" @tap="goUserSel">+</view>
     </view>
     <view class="reportButton">
       <view @tap="reportButton">报备</view>
@@ -259,6 +259,14 @@ for (let i = 0; i < 60; i++) {
     }
 
     methods = {
+      goLocalSel() {
+        // 产看楼盘的更多信息
+        this.$navigate(`/pages/localSel`)
+      },
+      goUserSel() {
+        // 产看楼盘的更多信息
+        this.$navigate(`/pages/userSel`)
+      },
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)

@@ -72,63 +72,70 @@
         <view class="tiem">
           <view>姓名</view>
           <view class="con">
-            <input type="text" value="二狗子" />
+            <input type="text" placeholder="输入姓名" value="" bindinput="getName"/>
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem">
           <view>手机号</view>
           <view class="con">
-            <input type="text" value="18888888888" />
+            <input type="text" placeholder="输入手机号" value="" bindinput="getMobile" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem interval">
           <view>所属门店</view>
           <view class="con">
-            <input type="text" value="二狗子" />
+            <input type="text" placeholder="输入门店" value="" bindinput="getStore" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem">
           <view>工作地址</view>
           <view class="con">
-            <input type="text" value="二狗子" />
+            <input type="text" placeholder="输入工作地址" value="" bindinput="getAddress" />
           </view>
         </view>
         <view class="tiem">
           <view>我的职位</view>
           <view class="con">
-            <input type="text" value="经纪人" />
+            <input type="text" placeholder="输入职位" value="" bindinput="getPosition" />
           </view>
         </view>
         <view class="tiem">
           <view>所属公司</view>
           <view class="con">
-            <input type="text" value="暂无" />
+            <input type="text" placeholder="输入公司" value="" bindinput="getCompany" />
           </view>
         </view>
       </view>
-      <view class="sub">保存</view>
+      <view class="sub" @tap="submit">保存</view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-  import nav from '../components/nav' // 底部导航
+  import check from '../mixins/check'
   export default class ModifyUserInfo extends wepy.page {
     config = {
       navigationBarTitleText: '编辑信息'
     }
     components = {
-      nav: nav
+      
     }
 
-    mixins = []
+    mixins = [check]
 
     data = {
       img: '/img/test.jpg',
-      userInfo: null
+      userInfo: new Object(),
+      name: '',
+      mobile: '',
+      store: '',
+      address: '',
+      position: '',
+      company: ''
+
     }
 
     computed = {
@@ -136,7 +143,30 @@
     }
 
     methods = {
-      
+      getName(e) {
+        // 获取名称
+        this.name = e.detail.value
+      },
+      getMobile(e) {
+        // 获取电话
+        this.mobile = e.detail.value
+      },
+      getStore(e) {
+        // 获取门店
+        this.store = e.detail.value
+      },
+      getAddress(e) {
+        // 获取工作地址
+        this.address = e.detail.value
+      },
+      getPosition(e) {
+        // 获取职位
+        this.position = e.detail.value
+      },
+      getCompany(e) {
+        // 获取公司
+        this.company = e.detail.value
+      },
     }
 
     events = {
@@ -145,6 +175,56 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+    }
+    submit() {
+      console.log(this.name)
+      console.log(this.mobile)
+      console.log(this.store)
+      console.log(this.address)
+      console.log(this.position)
+      console.log(this.company)
+      if (this.check.isNull(this.name)) {
+        wx.showModal({
+          title: '',
+          content: '请输入名称'
+        })
+        return ''
+      }
+      if (this.check.isPhone(this.mobile)) {
+        wx.showModal({
+          title: '',
+          content: '请输入正确的手机号'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.store)) {
+        wx.showModal({
+          title: '',
+          content: '请输入门店'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.address)) {
+        wx.showModal({
+          title: '',
+          content: '请输入工作地址'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.position)) {
+        wx.showModal({
+          title: '',
+          content: '请输入职位'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.company)) {
+        wx.showModal({
+          title: '',
+          content: '请输入公司'
+        })
+        return ''
+      }
     }
   }
 </script>

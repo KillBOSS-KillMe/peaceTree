@@ -346,7 +346,7 @@ page{
     <view class="reportButton">
       <view @tap="reportButton">报备楼盘</view>
     </view>
-    <view class="mask">
+    <view class="mask" wx:if="{{formIsShow}}">
       <view class="setInfo">
         <view class="setInfoName">客户修改</view>
         <view class="formSet">
@@ -362,7 +362,7 @@ page{
           <input type="text" placeholder="请输入备注" value="{{addressInfo.name}}" bindinput="getName" />
         </view>
         <view class="but">
-          <view>取消</view>
+          <view @tap="edit">取消</view>
           <view>提交</view>
         </view>
       </view>
@@ -383,7 +383,7 @@ page{
     mixins = []
 
     data = {
-      
+      formIsShow: false
     }
 
     computed = {
@@ -391,6 +391,14 @@ page{
     }
 
     methods = {
+      edit() {
+        if (this.formIsShow) {
+          this.formIsShow = false
+        } else {
+          this.formIsShow = true
+        }
+        
+      },
       getName(e) {
         this.addressInfo['name'] = e.detail.value
       },

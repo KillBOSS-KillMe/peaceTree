@@ -25,6 +25,27 @@
   color: #343434;
   font-weight: 600;
 }
+.reportButton{
+  width: 750rpx;
+  height: 150rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1rpx solid #979797;
+}
+.reportButton view{
+  width: 673rpx;
+  height: 94rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7bb312;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  color: #fff;
+}
 </style>
 <template>
   <view>
@@ -62,6 +83,9 @@
 
       </view>
     </checkbox-group>
+    <view class="reportButton">
+      <view @tap="reportButton">确定(1)</view>
+    </view>
   </view>
 </template>
 

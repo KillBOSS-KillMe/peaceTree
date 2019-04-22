@@ -53,7 +53,11 @@
 <template>
   <view>
     <!-- 搜索组件 -->
-    <search></search>
+    <!-- <search></search> -->
+    <view class="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
+    </view>
     <view class="list">
       <view class="item">
         <image data-id="" src="/img/test.jpg" />
@@ -145,6 +149,11 @@
       goReservationList(e) {
         // 进入预约列表
         this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      },
+      searchRun(e) {
+        // 搜索执行
+        // 获取搜索内容
+        console.log(e.detail.value)
       }
     }
 

@@ -20,11 +20,29 @@
     margin: 10rpx;
     border-radius: 90rpx;
   }
+  .searchList{
+    margin-top: 30rpx;
+  }
 </style>
 <template>
   <view>
-    <search></search>
+    <!-- <search></search> -->
+    <view class="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
+    </view>
+    <view class="cityList searchList" wx:if="{{searchList.length > 0}}">
+      <view class="name">搜索结果</view>
+      <view class="cityName">
+        <repeat for="{{searchList}}" item="item">
+          <view class="cityItem" data-id="{{item.id}}">{{item.cityName}}</view>
+        </repeat>
+      </view>
+    </view>
     <view class="cityList">
+      <repeat for="{{item.cityList}}" item="sonItem">
+        <view class="cityItem" data-id="{{sonItem.id}}">{{sonItem.cityName}}</view>
+      </repeat>
       <repeat for="{{cityNode}}" item="item">
         <view class="item">
           <view class="name">{{item.name}}</view>
@@ -54,7 +72,8 @@
 
     data = {
       userInfo: null,
-      cityNode: null
+      cityNode: null,
+      searchList: []
     }
 
     computed = {
@@ -75,6 +94,11 @@
       goReservationList(e) {
         // 进入预约列表
         this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      },
+      searchRun(e) {
+        // 搜索执行
+        // 获取搜索内容
+        console.log(e.detail.value)
       }
     }
 
@@ -86,6 +110,15 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getFoodList()
+      this.searchList = [
+            {'id': '1', 'cityName': '西安'},
+            {'id': '1', 'cityName': '西安'},
+            {'id': '1', 'cityName': '西安'},
+            {'id': '1', 'cityName': '西安'},
+            {'id': '1', 'cityName': '西安'},
+            {'id': '1', 'cityName': '西安'},
+            {'id': '1', 'cityName': '西安'}
+          ]
     }
     getFoodList() {
       let list = [

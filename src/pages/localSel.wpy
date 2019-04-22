@@ -113,7 +113,11 @@
 </style>
 <template>
   <view>
-    <search></search>
+    <!-- <search></search> -->
+    <view class="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
+    </view>
     <checkbox-group bindchange="selCommodity" data-index="{{index}}" data-checks="{{item.checks}}">
       <view class="localList">
         <view class="item">
@@ -222,6 +226,11 @@ export default class LocalSel extends wepy.page {
     goRuleInfo(e) {
       // 进入预约列表
       this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`);
+    },
+    searchRun(e) {
+      // 搜索执行
+      // 获取搜索内容
+      console.log(e.detail.value)
     }
   };
 

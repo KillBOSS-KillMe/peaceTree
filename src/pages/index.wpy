@@ -363,15 +363,6 @@
         // 搜索执行
         // 获取搜索内容
         console.log(e.detail.value)
-          this.searchList = [
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '1'},
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '1'},
-          {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '2'}
-        ]
       }
     }
 

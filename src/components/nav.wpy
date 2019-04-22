@@ -6,7 +6,7 @@
   background: #fff;
   border-top: 1rpx solid #f3f1f1;
   // padding-bottom: -120rpx;
-  z-index: 5;
+  z-index: 30;
 }
 
 .footer .ft_item {

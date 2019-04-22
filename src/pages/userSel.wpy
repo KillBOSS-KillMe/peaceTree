@@ -50,12 +50,12 @@
 <template>
   <view>
     <search></search>
-    <checkbox-group bindchange="selCommodity" data-index="{{index}}" data-checks="{{item.checks}}">
+    <checkbox-group bindchange="selUser" data-index="{{index}}" data-checks="{{item.checks}}">
       <view class="userList">
         <view class="type">A</view>
         <view class="item">
           <view>
-            <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
+            <checkbox data-index="{{1}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
             二狗子
           </view>
           <view>
@@ -127,6 +127,10 @@
       goRuleInfo(e) {
         // 进入预约列表
         this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      selUser(e) {
+        console.log(e.detail.value)
+        this.cartIndex = e.detail.value
       }
     }
 

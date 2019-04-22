@@ -132,6 +132,37 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   // transform:translate(-50%, -50%) scale(1);
   // -webkit-transform:translate(-50%, -50%) scale(1);
 }
+
+.item{
+  position:relative;
+}
+// 垫付标记
+.pad{
+  position:absolute;
+  top:20rpx;
+  left:0;
+  color:#fff;
+  width:70rpx;
+  height:40rpx;
+  border-radius:20rpx 0 20rpx 0;
+  text-align:center;
+  line-height:40rpx;
+  font-size:20rpx;
+  background-color:#feb400;
+  z-index:20;
+}
+// 热卖楼盘
+.heatLocal{
+  color: #FA5454;
+  border-color: #F9DADD;
+  background-color: #FFEFED;
+}
+// 新建楼盘
+.newLocal{
+  color: #7BB312;
+  border-color: #DFF3B9;
+  background-color: #F5FFE1;
+}
 </style>
 
 <script>

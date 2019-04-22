@@ -99,17 +99,28 @@
   text-align: center;
 }
 .mask{
-  position: absolute;
+  position: fixed;
   left: 0;
+  bottom: 0;
   top: 0;
   z-index: 9999;
   width: 100vw;
   height: 100vh;
   background-color:rgba(0,0,0,.4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 
 
+
+button::after{
+  border: 0;
+}
+button{
+  background-color: none;
+}
 // 多选框样式
 checkbox .wx-checkbox-input{
   border-radius: 50%;/* 圆角 */

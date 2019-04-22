@@ -271,24 +271,59 @@ page{
 .marginNav{
   margin-bottom: 170rpx;
 }
+.mobile{
+  width:640rpx;
+  background-color:#fff;
+  padding:30rpx 0;
+  border-radius:20rpx;
+}
+.selMobile{
+  width:580rpx;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20rpx 30rpx;
+  font-size: 27rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.mobileClose{
+  width: 200rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  background-color: #7bb312;
+  margin: 20rpx auto;
+  color: #fff;
+  font-size: 30rpx;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+button{
+  width: 100%;
+  height: 100%;
+  background-color: #f5ffe1;
+  color:#7bb312;
+}
 </style>
 <template>
   <view>
     <image class="banner" src="/img/test.jpg" />
     <view class="price">
       <text>12344元/㎡</text>
-      <view>
+      <view @tap="collection">
         <!-- 实心 -->
-        <!-- <icon class="iconfont icon-shoucang"></icon> -->
+        <!-- <icon class="iconfont icon-shoucang" @tap="collection"></icon> -->
         <!-- 空心 -->
-        <icon class="iconfont icon-shoucang1"></icon>
+        <icon class="iconfont icon-shoucang1" @tap="collection"></icon>
         <view>已收藏</view>
       </view>
     </view>
     <view class="localName">远洋合能枫丹唐悦</view>
-    <view class="label" @tap="goLocalMoreInfo">
+    <view class="label">
       <view>品牌开发商</view>
-      <view>
+      <view @tap="goLocalMoreInfo">
         更多信息
         <icon class="iconfont icon-jiantou-you"></icon>
       </view>
@@ -304,8 +339,8 @@ page{
         <view>2019年1月14日-2019年4月14日</view>
         <view></view>
       </view>
-      <view class="localitem">
-        <view>开盘时间</view>
+      <view class="localitem" @tap="showAddress">
+        <view>楼盘地址</view>
         <view>未央区北辰路与欧亚二路交汇口向南</view>
         <view>
           <icon class="iconfont icon-jiantou-you"></icon>
@@ -334,37 +369,37 @@ page{
       </view>
     </view>
     <scroll-view scroll-x="true" class="houseType">
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
         <view>296万</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
         <view>296万</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
         <view>296万</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
         <view>296万</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
         <view>296万</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
@@ -401,38 +436,50 @@ page{
     </view>
     <view class="localName">远洋合能枫丹唐悦</view>
     <scroll-view scroll-x="true" class="houseType marginNav">
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
       </view>
-      <view class="houseTypeItem">
-        <image class="banner" src="/img/test.jpg" />
-        <view>名著</view>
-        <view>141.02㎡</view>
-      </view><view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
       </view>
-      <view class="houseTypeItem">
+      <view class="houseTypeItem" @tap="updataLocal">
+        <image class="banner" src="/img/test.jpg" />
+        <view>名著</view>
+        <view>141.02㎡</view>
+      </view>
+      <view class="houseTypeItem" @tap="updataLocal">
         <image class="banner" src="/img/test.jpg" />
         <view>名著</view>
         <view>141.02㎡</view>
       </view>
     </scroll-view>
     <view class="nav">
-      <view>
+      <view @tap="mobileShow">
         <icon class="iconfont icon-dianhua"></icon>
         <text>联系项目</text>
       </view>
-      <view>分享楼盘</view>
+      <view>
+        <button open-type='share'>分享</button>
+      </view>
+      <!-- <view>分享楼盘</view> -->
       <view @tap="goReportUser">报备客户</view>
+    </view>
+    <view class="mask" wx:if="{{selMobileShow}}">
+      <view class="mobile">
+        <view class="selMobile" data-phone="18888888888" @tap="tel">项目驻场二狗子：18888888888</view>
+        <view class="selMobile" data-phone="18888888888" @tap="tel">项目驻场二狗子：18888888888</view>
+        <view class="selMobile" data-phone="18888888888" @tap="tel">项目驻场二狗子：18888888888</view>
+        <view class="mobileClose" @tap="mobileShow">关闭</view>
+      </view>
     </view>
   </view>
 </template>
@@ -454,6 +501,7 @@ page{
       test: '',
       userInfo: null,
       requestImgUrl: '',
+      selMobileShow: false,
       diningRoom: []
     }
 
@@ -462,6 +510,45 @@ page{
     }
 
     methods = {
+      updataLocal(e) {
+        // 根据点击的楼盘切换到当前页的数据
+      },
+      tel(e) {
+        // 拨打电话
+        wx.makePhoneCall({
+          phoneNumber: e.currentTarget.dataset.phone,
+        })
+      },
+      showAddress() {
+        // 显示楼盘地址导航，地图
+        
+        wx.getLocation({
+          type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+          success: function(res) {
+            var latitude = res.latitude
+            var longitude = res.longitude
+            wx.openLocation({
+              latitude: 33.42,
+              longitude: 107.40,
+              name: '艾泽拉斯',
+              address: '艾泽拉斯艾泽拉斯艾泽拉斯',
+              scale: 28
+            })
+          }
+        })
+      },
+      collection() {
+        // 收藏或取消收藏
+
+      },
+      mobileShow() {
+        // 显示联系方式
+        if (this.selMobileShow) {
+          this.selMobileShow = false
+        } else {
+          this.selMobileShow = true
+        }
+      },
       goReportUser(e) {
         // 进入报备用户页
         this.$navigate(`/pages/reportLocal?id=${e.currentTarget.dataset.id}`)
@@ -485,6 +572,15 @@ page{
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getFoodList()
     }
+    onShareAppMessage() {
+      let url = `pages/localInfo?id=${this.userInfo.id}`
+      return {
+        title: '弹出分享时显示的分享标题',
+        desc: '分享页面的内容',
+        imageUrl: '/img/logo.png',
+        path: url
+      }
+    }
     getFoodList() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/index`,

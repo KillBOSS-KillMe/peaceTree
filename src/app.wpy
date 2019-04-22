@@ -192,7 +192,6 @@ export default class extends wepy.app {
       'pages/cultureLocal', // 文旅地产
       'pages/surroundingLocal', // 周边楼盘
       'pages/propertyLocal', // 本地楼盘
-      
       'pages/ruleInfo', // 规则信息
       'pages/citySel', // 城市选择
       'pages/user', // 个人中心

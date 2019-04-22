@@ -79,14 +79,14 @@
         <view class="tiem">
           <view>手机号</view>
           <view class="con">
-            <input type="text" placeholder="输入手机号" value="" bindinput="getMobile" />
+            <input type="number" placeholder="输入手机号" value="" bindinput="getMobile" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem interval">
           <view>所属门店</view>
           <view class="con">
-            <input type="text" placeholder="输入门店" value="" bindinput="getStore" />
+            <input type="text" placeholder="输入门店邀请码" value="" bindinput="getStore" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>

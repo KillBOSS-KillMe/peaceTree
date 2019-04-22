@@ -143,6 +143,20 @@
     border-radius: 43rpx;
     margin-top: 10rpx;
   }
+  button{
+    width:145rpx;
+    height:43rpx;
+    line-height:43rpx;
+    text-align:center;
+    font-size:25rpx;
+    color:#eee63e;
+    border:2rpx solid #eee63e;
+    border-radius:43rpx;
+    margin-top:10rpx;
+    padding: 0;
+    margin: 0;
+    background-color: #fd654e;
+  }
 </style>
 <template>
   <view>
@@ -177,12 +191,13 @@
       <view class="con">
         <view>邀请同事加入</view>
         <view>一起赚佣金</view>
-        <view>点击邀请</view>
+        <!-- <view>点击邀请</view> -->
+        <button open-type='share'>点击邀请</button>
       </view>
       <image data-id="" src="{{img}}" />
     </view>
     <view class="message">
-      <view>所属部门</view>
+      <view @tap="modifyUserInfo">所属部门</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
     <nav @childFn.user="goPage" />

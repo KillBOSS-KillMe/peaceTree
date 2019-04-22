@@ -69,6 +69,7 @@ page{
   align-items: center;
   justify-content: center;
   border-top: 1rpx solid #979797;
+  background-color: #fff;
 }
 .reportButton view{
   width: 673rpx;
@@ -240,7 +241,7 @@ page{
           <view class="ms">女士</view>
           <view class="men">男士</view>
         </view>
-        <view class="phone">18888888888</view>
+        <view class="phone" data-phone="18888888888" @tap="tal">18888888888</view>
       </view>
       <view class="edit" @tap="edit">
         <icon class="iconfont icon-bianji"></icon>
@@ -265,13 +266,13 @@ page{
             <view class="mark">
               <!-- <view class="failure"></view> -->
               <view class="success"></view>
-              <view></view>
-              <view></view>
+              <view wx:if="{{1}}"></view>
+              <view wx:if="{{1}}"></view>
             </view>
             <view class="markInfo">
               <view class="success">报备无效  201/04/08</view>
               <!-- <view class="failure">报备无效  201/04/08</view> -->
-              <view>报备无效  201/04/08</view>
+              <view wx:if="{{1}}">报备无效  201/04/08</view>
             </view>
           </view>
           <view class="expand">
@@ -397,9 +398,7 @@ page{
     methods = {
       getName(e) {
         // 获取名称
-        console.log(this.name)
         this.name = e.detail.value
-        
       },
       getMobile(e) {
         // 获取电话
@@ -409,7 +408,12 @@ page{
         // 获取备注
         this.remarks = e.detail.value
       },
-      
+      tal(e) {
+        // 拨打电话
+        wx.makePhoneCall({
+          phoneNumber: e.currentTarget.dataset.phone
+        })
+      },
       edit() {
         if (this.formIsShow) {
           this.formIsShow = false

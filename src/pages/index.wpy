@@ -231,7 +231,7 @@
     <swiper class='swiper' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <repeat for="{{swiperList}}" item="item">
         <swiper-item>
-          <image src="{{ item }}" />
+          <image src="{{ requestImgUrl + item.img }}" />
         </swiper-item>
       </repeat>
     </swiper>
@@ -263,18 +263,18 @@
       <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
           <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view>
-          <image src="{{item.img}}" />
+          <image src="{{requestImgUrl + item.img}}" />
           <view class="con">
             <view class="title">
               <text>{{item.name}}</text>
-              <view class="heatLocal" wx:if="{{item.status == '1'}}">热推</view>
-              <view class="newLocal" wx:if="{{item.status == '2'}}">新盘</view>
+              <view class="heatLocal" wx:if="{{item.status == '2'}}">热推</view>
+              <view class="newLocal" wx:if="{{item.status == '1'}}">新盘</view>
             </view>
             <view class="address">
               <icon class="iconfont icon-dingweiweizhi"></icon>
-              {{item.address}}
+              {{item.floor_address}}
             </view>
-            <view class="price">{{item.price}}元/㎡</view>
+            <view class="price">{{item.money}}元/㎡</view>
           </view>
         </view>
       </repeat>
@@ -285,18 +285,18 @@
       <repeat for="{{localList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
           <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view>
-          <image src="{{item.img}}" />
+          <image src="{{requestImgUrl + item.img}}" />
           <view class="con">
             <view class="title">
               <text>{{item.name}}</text>
-              <view class="heatLocal" wx:if="{{item.status == '1'}}">热推</view>
-              <view class="newLocal" wx:if="{{item.status == '2'}}">新盘</view>
+              <view class="heatLocal" wx:if="{{item.status == '2'}}">热推</view>
+              <view class="newLocal" wx:if="{{item.status == '1'}}">新盘</view>
             </view>
             <view class="address">
               <icon class="iconfont icon-dingweiweizhi"></icon>
-              {{item.address}}
+              {{item.floor_address}}
             </view>
-            <view class="price">{{item.price}}元/㎡</view>
+            <view class="price">{{item.money}}元/㎡</view>
           </view>
         </view>
       </repeat>
@@ -379,42 +379,44 @@
       this.getLocalList()
     }
     getSwiperList() {
-      this.swiperList = [
-        '/img/test.jpg',
-        '/img/test.jpg',
-        '/img/test.jpg'
-      ]
+      // this.swiperList = [
+      //   '/img/test.jpg',
+      //   '/img/test.jpg',
+      //   '/img/test.jpg'
+      // ]
     }
     getLocalList() {
-      this.localList = [
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '1'},
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '1'},
-        {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '2'}
-      ]
-      this.$apply()
-      return ''
+      // this.localList = [
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '1'},
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '1'},
+      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '2'}
+      // ]
+      // this.$apply()
+      // return ''
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/index`,
         method: 'GET',
-        data: {
-          mobile: this.userName,
-          password: this.userPaw
-        },
+        // data: {
+        //   mobile: this.userName,
+        //   password: this.userPaw
+        // },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
+            data = data.data.data
+            this.swiperList = data.banner
+            this.localList = data.floor
+            // let i = 0
+            // var reg = /\\|\//g
+            // for (i in this.diningRoom) {
+            //   // 替换反斜杠正则
+            //   // replace(reg,"/")
+            //   this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+            //   this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            // }
             this.$apply()
           } else {
             wx.showModal({

@@ -309,9 +309,17 @@ button{
 </style>
 <template>
   <view>
-    <image class="banner" src="/img/test.jpg" />
+    <!-- swiperList -->
+    <swiper class='banner' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
+      <repeat for="{{swiperList}}" item="item">
+        <swiper-item>
+          <image class="banner" src="{{ requestImgUrl + item.img }}" />
+        </swiper-item>
+      </repeat>
+    </swiper>
+    <!-- <image class="banner" src="/img/test.jpg" /> -->
     <view class="price">
-      <text>12344元/㎡</text>
+      <text>{{localList.money}}元/㎡</text>
       <view @tap="collection">
         <!-- 实心 -->
         <!-- <icon class="iconfont icon-shoucang" @tap="collection"></icon> -->
@@ -320,9 +328,9 @@ button{
         <view>已收藏</view>
       </view>
     </view>
-    <view class="localName">远洋合能枫丹唐悦</view>
+    <view class="localName">{{localList.name}}</view>
     <view class="label">
-      <view>品牌开发商</view>
+      <view>开发商:{{localList.developer}}</view>
       <view @tap="goLocalMoreInfo">
         更多信息
         <icon class="iconfont icon-jiantou-you"></icon>
@@ -331,17 +339,17 @@ button{
     <view class="localInfo">
       <view class="localitem">
         <view>开盘时间</view>
-        <view>2019/04/20</view>
+        <view>{{localList.opening_time}}</view>
         <view></view>
       </view>
       <view class="localitem">
         <view>合作周期</view>
-        <view>2019年1月14日-2019年4月14日</view>
+        <view>{{localList.cooperate_time}}</view>
         <view></view>
       </view>
       <view class="localitem" @tap="showAddress">
         <view>楼盘地址</view>
-        <view>未央区北辰路与欧亚二路交汇口向南</view>
+        <view>{{localList.floor_address}}</view>
         <view>
           <icon class="iconfont icon-jiantou-you"></icon>
         </view>
@@ -502,7 +510,8 @@ button{
       userInfo: null,
       requestImgUrl: '',
       selMobileShow: false,
-      diningRoom: []
+      swiperList: [],
+      localList: null
     }
 
     computed = {
@@ -567,7 +576,8 @@ button{
 
     }
 
-    onLoad() {
+    onLoad(options) {
+      this.id = options.id
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getFoodList()
@@ -586,20 +596,26 @@ button{
         url: `${this.$parent.globalData.requestUrl}/index`,
         method: 'GET',
         data: {
-          mobile: this.userName,
-          password: this.userPaw
+          id: this.id
         },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
+            // this.diningRoom = data.data.data
+            data = data.data.data
+            this.swiperList = data.banner
+            this.localList = data.floor[0]
+            
+            this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
+            this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)
+            console.log(this.localList)
+            // let i = 0
+            // var reg = /\\|\//g
+            // for (i in this.diningRoom) {
+            //   // 替换反斜杠正则
+            //   // replace(reg,"/")
+            //   this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+            //   this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            // }
             this.$apply()
           } else {
             wx.showModal({

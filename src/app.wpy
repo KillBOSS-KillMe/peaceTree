@@ -213,7 +213,9 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    requestUrl: 'http://192.168.1.106/api',
+    requestImgUrl: 'http://192.168.1.106',
   }
 
   constructor () {
@@ -249,6 +251,10 @@ export default class extends wepy.app {
         cb && cb(res.userInfo)
       }
     })
+  }
+  // 时间戳转时间
+  getLocalTime(nS) {     
+    return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
   }
 }
 </script>

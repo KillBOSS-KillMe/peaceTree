@@ -40,9 +40,6 @@
       </view>
     </view>
     <view class="cityList">
-      <repeat for="{{item.cityList}}" item="sonItem">
-        <view class="cityItem" data-id="{{sonItem.id}}">{{sonItem.cityName}}</view>
-      </repeat>
       <repeat for="{{cityNode}}" item="item">
         <view class="item">
           <view class="name">{{item.name}}</view>
@@ -86,14 +83,9 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
-      goDiningRoomInfo(e) {
-        // // 进入餐厅详情
-        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
-        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
-      },
-      goReservationList(e) {
-        // 进入预约列表
-        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+      cityClick(e) {
+        // 点击城市
+        // this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
       },
       searchRun(e) {
         // 搜索执行
@@ -110,86 +102,154 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getFoodList()
-      this.searchList = [
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'}
-          ]
     }
     getFoodList() {
-      let list = [
-        {
-          'name': 'A',
-          'cityList': [
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-          ]
-        },
-        {
-          'name': 'A',
-          'cityList': [
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-          ]
-        },
-        {
-          'name': 'A',
-          'cityList': [
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-          ]
-        },
-        {
-          'name': 'A',
-          'cityList': [
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-            {'id': '1', 'cityName': '西安'},
-          ]
-        }
-      ]
-      this.cityNode = list
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
+        url: `${this.$parent.globalData.requestUrl}/city`,
         method: 'GET',
-        data: {
-          mobile: this.userName,
-          password: this.userPaw
-        },
+        data: {},
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
+            var cityList = data.data.data
+            var ACity = {'name': 'A', 'cityList': []}
+            var BCity = {'name': 'B', 'cityList': []}
+            var CCity = {'name': 'C', 'cityList': []}
+            var DCity = {'name': 'D', 'cityList': []}
+            var ECity = {'name': 'E', 'cityList': []}
+            var FCity = {'name': 'F', 'cityList': []}
+            var GCity = {'name': 'G', 'cityList': []}
+            var HCity = {'name': 'H', 'cityList': []}
+            var ICity = {'name': 'I', 'cityList': []}
+            var JCity = {'name': 'J', 'cityList': []}
+            var KCity = {'name': 'K', 'cityList': []}
+            var LCity = {'name': 'L', 'cityList': []}
+            var MCity = {'name': 'M', 'cityList': []}
+            var NCity = {'name': 'N', 'cityList': []}
+            var OCity = {'name': 'O', 'cityList': []}
+            var PCity = {'name': 'P', 'cityList': []}
+            var QCity = {'name': 'Q', 'cityList': []}
+            var RCity = {'name': 'R', 'cityList': []}
+            var SCity = {'name': 'S', 'cityList': []}
+            var TCity = {'name': 'T', 'cityList': []}
+            var UCity = {'name': 'U', 'cityList': []}
+            var VCity = {'name': 'V', 'cityList': []}
+            var WCity = {'name': 'W', 'cityList': []}
+            var XCity = {'name': 'X', 'cityList': []}
+            var YCity = {'name': 'Y', 'cityList': []}
+            var ZCity = {'name': 'Z', 'cityList': []}
             let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
+            for (i in cityList) {
+              switch (cityList[i].s_letter) {
+                case 'A':
+                  ACity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'B':
+                  BCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'C':
+                  CCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'D':
+                  DCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'E':
+                  ECity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'F':
+                  FCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'G':
+                  GCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'H':
+                  HCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'I':
+                  ICity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'J':
+                  JCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'K':
+                  KCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'L':
+                  LCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'M':
+                  MCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'N':
+                  NCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'O':
+                  OCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'P':
+                  PCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'Q':
+                  QCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'R':
+                  QCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'S':
+                  SCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'T':
+                  TCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'U':
+                  UCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'V':
+                  VCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'W':
+                  WCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'X':
+                  XCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'Y':
+                  YCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                case 'Z':
+                  ZCity['cityList'].push({'cityName': cityList[i].name, 'id': cityList[i].id})
+                  break;
+                default:
+                  break;
+              }
             }
+            var cityListData = []
+            cityListData.push(ACity)
+            cityListData.push(BCity)
+            cityListData.push(CCity)
+            cityListData.push(DCity)
+            cityListData.push(ECity)
+            cityListData.push(FCity)
+            cityListData.push(GCity)
+            cityListData.push(HCity)
+            cityListData.push(ICity)
+            cityListData.push(JCity)
+            cityListData.push(KCity)
+            cityListData.push(LCity)
+            cityListData.push(MCity)
+            cityListData.push(NCity)
+            cityListData.push(OCity)
+            cityListData.push(PCity)
+            cityListData.push(QCity)
+            cityListData.push(RCity)
+            cityListData.push(SCity)
+            cityListData.push(TCity)
+            cityListData.push(UCity)
+            cityListData.push(VCity)
+            cityListData.push(WCity)
+            cityListData.push(XCity)
+            cityListData.push(YCity)
+            cityListData.push(ZCity)
+            this.cityNode = cityListData
             this.$apply()
           } else {
             wx.showModal({

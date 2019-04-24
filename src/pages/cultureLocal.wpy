@@ -67,27 +67,19 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
+      this.getLocalList()
     }
-    getFoodList() {
+    getLocalList() {
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
+        url: `${this.$parent.globalData.requestUrl}/culture_floor`,
+        method: 'POST',
         data: {
-          mobile: this.userName,
-          password: this.userPaw
+          city_id: this.cityNode.id
         },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
+            this.localList = data.data.data
+            
             this.$apply()
           } else {
             wx.showModal({

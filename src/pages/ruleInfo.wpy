@@ -38,23 +38,23 @@ page{
     <view class="ruleInfoList">
       <view class="item">
         <view>报备规则</view>
-        <view>提前1小时全号报备</view>
-        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+        <view>{{showNode.bbgz}}</view>
+        <view>{{showNode.bbgzcon}}</view>
       </view>
       <view class="item">
-        <view>报备规则</view>
-        <view>提前1小时全号报备</view>
-        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+        <view>带看规则</view>
+        <view>{{showNode.dkgz}}</view>
+        <view>{{showNode.dkgzcon}}</view>
       </view>
       <view class="item">
-        <view>报备规则</view>
-        <view>提前1小时全号报备</view>
-        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+        <view>结佣规则</view>
+        <view>{{showNode.jygz}}</view>
+        <view>{{showNode.jygzcon}}</view>
       </view>
       <view class="item">
-        <view>报备规则</view>
-        <view>提前1小时全号报备</view>
-        <view>报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。报备没有保护期，提前1小时报备，报备不查看。</view>
+        <view>售盘知道</view>
+        <view>{{showNode.spzd}}</view>
+        <view>{{showNode.spzdcon}}</view>
       </view>
     </view>
   </view>
@@ -71,11 +71,7 @@ page{
     mixins = []
 
     data = {
-      img: '/img/test.jpg',
-      test: '',
-      userInfo: null,
-      requestImgUrl: '',
-      diningRoom: []
+      showNode: null
     }
 
     computed = {
@@ -90,39 +86,16 @@ page{
 
     }
 
-    onLoad() {
-      this.userInfo = this.$parent.globalData.userInfo
-      this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
-    }
-    getFoodList() {
-      wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
-        data: {
-          mobile: this.userName,
-          password: this.userPaw
-        },
-        success: data => {
-          if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
-            this.$apply()
-          } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
-          }
-        }
-      })
+    onLoad(options) {
+      // bbgz 报备规则
+      // bbgzcon 报备规则内容
+      // dkgz 带看规则
+      // dkgzcon 带看规则内容
+      // jygz 结佣规则
+      // jygzcon 结佣规则内容
+      // spzd 售盘知道
+      // spzdcon 售盘知道内容
+      this.showNode = options
     }
   }
 </script>

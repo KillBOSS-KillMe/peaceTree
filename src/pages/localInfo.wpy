@@ -587,7 +587,18 @@ button{
       },
       goRuleInfo(e) {
         // 进入预约列表
-        this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
+
+        // bbgz 报备规则
+        // bbgzcon 报备规则内容
+        // dkgz 带看规则
+        // dkgzcon 带看规则内容
+        // jygz 结佣规则
+        // jygzcon 结佣规则内容
+        // spzd 售盘知道
+        // spzdcon 售盘知道内容
+        let setData = this.localList
+        let urldata = `bbgz=${setData.reporting_rule}&bbgzcon=${setData.reporting_rule_count}&dkgz=${setData.look_rule}&dkgzcon=${setData.look_rule_count}&jygz=${setData.set_up_rule}&jygzcon=${setData.set_up_rule_count}&spzd=${setData.sale_know}&spzdcon=${setData.sale_know_count}`
+        this.$navigate(`/pages/ruleInfo?${urldata}`)
       }
     }
 

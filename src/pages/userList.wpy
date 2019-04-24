@@ -66,50 +66,18 @@
     </view>
     <view class="userList">
       <view class="type">A</view>
-      <view class="item" @tap="goUserInfo">
-        <view>二狗子</view>
-        <view>
-          18888888888
-          <icon class="iconfont icon-dianhua4"></icon>
+      <!-- userList -->
+      <repeat for="{{userList}}" item="item">
+        <view class="item" data-id="{{item.id}}" @tap="goUserInfo">
+          <view>{{item.name}}</view>
+          <view>
+            {{item.mobile}}
+            <icon class="iconfont icon-dianhua4"></icon>
+          </view>
         </view>
-      </view>
-      <view class="item">
-        <view>二狗子</view>
-        <view>
-          18888888888
-          <icon class="iconfont icon-dianhua4"></icon>
-        </view>
-      </view>
-      <view class="item">
-        <view>二狗子</view>
-        <view>
-          18888888888
-          <icon class="iconfont icon-dianhua4"></icon>
-        </view>
-      </view>
+      </repeat>
+      
 
-      <view class="type">A</view>
-      <view class="item">
-        <view>二狗子</view>
-        <view>
-          18888888888
-          <icon class="iconfont icon-dianhua4"></icon>
-        </view>
-      </view>
-      <view class="item">
-        <view>二狗子</view>
-        <view>
-          18888888888
-          <icon class="iconfont icon-dianhua4"></icon>
-        </view>
-      </view>
-      <view class="item">
-        <view>二狗子</view>
-        <view>
-          18888888888
-          <icon class="iconfont icon-dianhua4"></icon>
-        </view>
-      </view>
     </view>
     <nav @childFn.user="goPage" />
   </view>
@@ -133,9 +101,9 @@
     data = {
       img: '/img/test.jpg',
       test: '',
-      userInfo: null,
+      userInfo: {},
       requestImgUrl: '',
-      diningRoom: []
+      userList: []
     }
 
     computed = {
@@ -160,14 +128,6 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
-      goLocalMoreInfo(e) {
-        // 产看楼盘的更多信息
-        this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
-      },
-      goRuleInfo(e) {
-        // 查看规则
-        this.$navigate(`/pages/ruleInfo?id=${e.currentTarget.dataset.id}`)
-      }
     }
 
     events = {
@@ -177,27 +137,19 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
+      this.getUserList()
     }
-    getFoodList() {
+    getUserList() {
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
+        url: `${this.$parent.globalData.requestUrl}/client_list`,
+        method: 'POST',
         data: {
-          mobile: this.userName,
-          password: this.userPaw
+          // uid: this.userInfo.id
+          uid: 3
         },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
+            this.userList = data.data.data
             this.$apply()
           } else {
             wx.showModal({

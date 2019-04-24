@@ -248,7 +248,7 @@ page{
         编辑
       </view>
     </view>
-    <view class="reportNum">已报备的楼盘(2)</view>
+    <view class="reportNum">已报备的楼盘({{clinetInfo.floor_count}})</view>
     <view class="reportList">
       <view class="reportItem">
         <view class="property">
@@ -386,6 +386,8 @@ page{
 
     data = {
       formIsShow: false,
+      userInfo: {},
+      clinetInfo: {},
       name: '', // 输入的用户名
       mobile: '', // 输入的电话
       remarks: '', // 备注信息
@@ -431,30 +433,22 @@ page{
 
     }
 
-    onLoad() {
+    onLoad(options) {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
+      this.getclientInfo(options)
     }
-    getFoodList() {
+    getclientInfo(options) {
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
+        url: `${this.$parent.globalData.requestUrl}/client`,
+        method: 'POST',
         data: {
-          mobile: this.userName,
-          password: this.userPaw
+          uid: this.userInfo.id,
+          clinet_id: options.id
         },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
+            this.clinetInfo = data.data.data
             this.$apply()
           } else {
             wx.showModal({
@@ -465,6 +459,7 @@ page{
         }
       })
     }
+
     submint() {
       console.log(this.name)
       console.log(this.mobile)

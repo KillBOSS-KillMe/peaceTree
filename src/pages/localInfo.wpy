@@ -311,11 +311,11 @@ button{
   <view>
     <!-- swiperList -->
     <swiper class='banner' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
-      <repeat for="{{swiperList}}" item="item">
+      <!-- <repeat for="{{localList}}" item="item"> -->
         <swiper-item>
-          <image class="banner" src="{{ requestImgUrl + item.img }}" />
+          <image class="banner" src="{{ requestImgUrl + localList.img }}" />
         </swiper-item>
-      </repeat>
+      <!-- </repeat> -->
     </swiper>
     <!-- <image class="banner" src="/img/test.jpg" /> -->
     <view class="price">
@@ -510,7 +510,6 @@ button{
       userInfo: null,
       requestImgUrl: '',
       selMobileShow: false,
-      swiperList: [],
       localList: null
     }
 
@@ -564,7 +563,27 @@ button{
       },
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
-        this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
+        // jfsj 交房时间
+        // cqnx 产权年限
+        // wygs 物业公司
+        // kfs 开发商
+        // kfspp 开发商品牌
+        // jzmj 建筑面积
+        // rjl 容积率
+        // lhl 绿化率
+        // zhs 总户数
+        // cws 车位数
+        // cwb 车位比
+        // jj 均价
+        // dfl 得房率
+        // wyf 物业费
+        // wylx 物业类型
+        // jzlx 建筑类型
+        // zxzk 装修状况
+        let setData = this.localList
+        let urldata = `jfsj=${setData.delivery_time}&cqnx=${setData.delivery_time}&wygs=${setData.property}&kfs=${setData.developer}&kfspp=${setData.brand_developer}&jzmj=${setData.construction_area}&rjl=${setData.volume_rate}&lhl=${setData.green_rate}&zhs=${setData.total_houses}&cws=${setData.car_number}&cwb=${setData.car_scale}&jj=${setData.average_price}&dfl=${setData.room_rate}&wyf=${setData.property_costs}&wylx=${setData.property_type}&jzlx=${setData.building_type}&zxzk=${setData.decoration_status}`
+        console.log(`/pages/localMoreInfo?${urldata}`)
+        this.$navigate(`/pages/localMoreInfo?${urldata}`)
       },
       goRuleInfo(e) {
         // 进入预约列表
@@ -593,17 +612,18 @@ button{
     }
     getFoodList() {
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
+        url: `${this.$parent.globalData.requestUrl}/floor`,
+        method: 'POST',
         data: {
-          id: this.id
+          id: this.id,
+          // uid: this.userInfo.id
         },
         success: data => {
           if (data.data.code == 1) {
             // this.diningRoom = data.data.data
-            data = data.data.data
-            this.swiperList = data.banner
-            this.localList = data.floor[0]
+            this.localList = data.data.data
+            // this.swiperList = data.banner
+            // this.localList = data.floor[0]
             
             this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
             this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)

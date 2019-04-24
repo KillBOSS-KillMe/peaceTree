@@ -370,13 +370,17 @@
 
     }
 
-    onLoad() {
+    onLoad(options) {
+      console.log(options)
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       // 获取顶部轮播图
       this.getSwiperList()
       // 获取楼盘列表
       this.getLocalList()
+    }
+    onShow(options) {
+      console.log(options)
     }
     getSwiperList() {
       // this.swiperList = [

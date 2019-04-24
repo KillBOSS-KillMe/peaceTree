@@ -35,7 +35,7 @@
       <view class="name">搜索结果</view>
       <view class="cityName">
         <repeat for="{{searchList}}" item="item">
-          <view class="cityItem" data-id="{{item.id}}">{{item.cityName}}</view>
+          <view class="cityItem" data-id="{{item.id}}" data-cityname="{{item.cityName}}" @tap="cityClick">{{item.cityName}}</view>
         </repeat>
       </view>
     </view>
@@ -45,7 +45,7 @@
           <view class="name">{{item.name}}</view>
           <view class="cityName">
             <repeat for="{{item.cityList}}" item="sonItem">
-              <view class="cityItem" data-id="{{sonItem.id}}">{{sonItem.cityName}}</view>
+              <view class="cityItem" data-id="{{sonItem.id}}" data-cityname="{{sonItem.cityName}}" @tap="cityClick">{{sonItem.cityName}}</view>
             </repeat>
           </view>
         </view>
@@ -85,7 +85,12 @@
       },
       cityClick(e) {
         // 点击城市
-        // this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
+        console.log(e.currentTarget.dataset.id)
+        console.log(e.currentTarget.dataset.cityname)
+        wx.navigateBack({
+          cityid: e.currentTarget.dataset.id,
+          cityname: e.currentTarget.dataset.cityname 
+        })
       },
       searchRun(e) {
         // 搜索执行

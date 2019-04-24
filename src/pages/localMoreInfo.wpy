@@ -48,71 +48,71 @@ page{
     <view class="localMoreInfo">
       <view class="item">
         <label>交房时间</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.jfsj}}</view>
       </view>
       <view class="item">
         <label>产权年限</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.cqnx}}</view>
       </view>
       <view class="item">
         <label>物业公司</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.wygs}}</view>
       </view>
       <view class="item module">
         <label>开发商</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.kfs}}</view>
       </view>
       <view class="item">
         <label>开发商品牌</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.kfspp}}</view>
       </view>
       <view class="item module">
         <label>建筑面积</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.jzmj}}</view>
       </view>
       <view class="item">
         <label>容积率</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.rjl}}</view>
       </view>
       <view class="item">
         <label>绿化率</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.lhl}}</view>
       </view>
       <view class="item module">
         <label>总户数</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.zhs}}</view>
       </view>
       <view class="item">
         <label>车位数</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.cws}}</view>
       </view>
       <view class="item">
         <label>车位比</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.cwb}}</view>
       </view>
       <view class="item module">
         <label>均价</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.jj}}</view>
       </view>
       <view class="item">
         <label>得房率</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.dfl}}</view>
       </view>
       <view class="item">
         <label>物业费</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.wyf}}</view>
       </view>
       <view class="item">
         <label>物业类型</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.wylx}}</view>
       </view>
       <view class="item">
         <label>建筑类型</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.jzlx}}</view>
       </view>
       <view class="item">
         <label>装修状况</label>
-        <view>2012年8月31日</view>
+        <view>{{showNode.zxzk}}</view>
       </view>
     </view>
   </view>
@@ -129,11 +129,7 @@ page{
     mixins = []
 
     data = {
-      img: '/img/test.jpg',
-      test: '',
-      userInfo: null,
-      requestImgUrl: '',
-      diningRoom: []
+      showNode: null
     }
 
     computed = {
@@ -148,39 +144,25 @@ page{
 
     }
 
-    onLoad() {
-      this.userInfo = this.$parent.globalData.userInfo
-      this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
-    }
-    getFoodList() {
-      wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
-        data: {
-          mobile: this.userName,
-          password: this.userPaw
-        },
-        success: data => {
-          if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
-            this.$apply()
-          } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
-          }
-        }
-      })
+    onLoad(options) {
+      this.showNode = options
+      // jfsj 交房时间
+      // cqnx 产权年限
+      // wygs 物业公司
+      // kfs 开发商
+      // kfspp 开发商品牌
+      // jzmj 建筑面积
+      // rjl 容积率
+      // lhl 绿化率
+      // zhs 总户数
+      // cws 车位数
+      // cwb 车位比
+      // jj 均价
+      // dfl 得房率
+      // wyf 物业费
+      // wylx 物业类型
+      // jzlx 建筑类型
+      // zxzk 装修状况
     }
   }
 </script>

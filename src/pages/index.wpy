@@ -219,7 +219,7 @@
   <view>
     <view class="search">
       <view class="selAddress" @tap="goSelCity">
-        西安
+        {{cityNode.name}}
         <icon class="iconfont icon-jiantou-xia"></icon>
       </view>
       <view class="searchCon">
@@ -302,6 +302,7 @@
       </repeat>
       <view class="listPrompt">共有{{localList.length}}}个项目，已无更多内容</view>
     </view>
+    <button open-type="getUserInfo" id='getUserInfo' wx:if="{{userInfoButtonShow}}" lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
     <nav @childFn.user="goPage" />
   </view>
 </template>
@@ -321,8 +322,9 @@
 
     data = {
       img: '/img/test.jpg',
-      test: '',
+      userInfoButtonShow: true,
       userInfo: null,
+      cityNode: null,
       requestImgUrl: '',
       searchList: [], // 搜索内容列表
       localList: [], // 楼盘列表
@@ -371,36 +373,20 @@
     }
 
     onLoad(options) {
+      // 获取用户信息
+      this.onGetUserInfo()
       console.log(options)
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      // 获取顶部轮播图
-      this.getSwiperList()
       // 获取楼盘列表
       this.getLocalList()
+      // 加载城市列表
+      this.getLocation()
     }
     onShow(options) {
       console.log(options)
     }
-    getSwiperList() {
-      // this.swiperList = [
-      //   '/img/test.jpg',
-      //   '/img/test.jpg',
-      //   '/img/test.jpg'
-      // ]
-    }
     getLocalList() {
-      // this.localList = [
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '1'},
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '2'},
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '0'},
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '0', 'status': '1'},
-      //   {'id': '1', 'name': '故宫', 'img': '/img/test.jpg', 'address': '紫禁城', 'price': '10000', 'pad': '1', 'status': '2'}
-      // ]
-      // this.$apply()
-      // return ''
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/index`,
         method: 'GET',
@@ -411,22 +397,139 @@
         success: data => {
           if (data.data.code == 1) {
             data = data.data.data
+            // 获取顶部轮播图
             this.swiperList = data.banner
+            // 获取楼盘列表
             this.localList = data.floor
-            // let i = 0
-            // var reg = /\\|\//g
-            // for (i in this.diningRoom) {
-            //   // 替换反斜杠正则
-            //   // replace(reg,"/")
-            //   this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-            //   this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            // }
             this.$apply()
           } else {
             wx.showModal({
               title: '',
               content: data.data.msg
             })
+          }
+        }
+      })
+    }
+    getLocation() {
+      var page = this
+      wx.getLocation({
+        type: 'wgs84',   //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标 
+        success: function (res) { 
+          var longitude = res.longitude
+          var latitude = res.latitude
+          page.loadCity(longitude, latitude)
+        }
+      })
+    }
+    loadCity(longitude, latitude) {
+      var page = this
+      wx.request({
+        url: 'https://api.map.baidu.com/geocoder/v2/?ak=FMn3zXubg5BmfZZSsFVP28XjMqdPxmee&location=' + latitude + ',' + longitude + '&output=json',
+        data: {},
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: res=> {
+          var city = res.data.result.addressComponent.city;
+          this.getCityId(city)
+        }
+      })
+    }
+    getCityId(cityName) {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/city`,
+        method: 'GET',
+        success: data => {
+          if (data.data.code == 1) {
+            var cityList = data.data.data
+            var i = 0
+            for (i in cityList) {
+              if (cityName == cityList[i].name) {
+                this.cityNode = {'name': cityList[i].name, 'id': cityList[i].id}
+                this.$parent.globalData.cityNode ={'name': cityList[i].name, 'id': cityList[i].id}
+                this.$apply()
+                // return cityNode
+                break
+              }
+            }
+          }
+        }
+      })
+    }
+
+
+     // 获取用户信息
+    onGetUserInfo() {
+      // 查看是否授权
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            this.userInfoButtonShow = false
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: res => {
+                this.userInfo = res.userInfo
+                this.$parent.globalData.userInfo = this.userInfo
+                this.$parent.globalData.userInfo.id = '3'
+                console.log(this.userInfo)
+                if (this.userInfo) {
+                  this.authorizationButton = false
+                  this.avatarUrl = this.userInfo.avatarUrl
+                  this.nickName = this.userInfo.nickName
+                  // 数据生效
+                  this.$apply()
+                  // 提交用户信息
+                  this.setUserInfo(this.userInfo)
+                  // 登陆
+                  // this.userLogin(this.userInfo)
+                  this.$parent.globalData.userInfo = this.userInfo
+                  this.$apply()
+                }
+              }
+            })
+          } else {
+            // this.clickWeekBangs()
+          }
+        }
+      })
+    }
+    // 提交用户信息
+    setUserInfo(userInfo) {
+      wepy.login({
+        success: res => {
+          if (res.code) {
+            console.log(res.code)
+            this.code = res.code
+            wx.request({
+              url: `${this.$parent.globalData.requestUrl}/api/addOrUpdateUser`,
+              method: 'POST',
+              data: {
+                code: res.code,
+                nick_name: this.userInfo.nickName,
+                profile: this.userInfo.avatarUrl
+              },
+              success: data => {
+                console.log(data)
+                if (data.data.success) {
+                  // 获取用户信息,及openID  并存入全局
+                  this.userInfo = data.data.user
+                  this.openId = this.userInfo.open_id
+                  this.$parent.globalData.userInfo = this.userInfo
+                  this.$parent.globalData.openId = this.openId
+                  // 用户收藏的书籍
+                  this.myStore()
+                  this.$apply()
+                } else {
+                  wx.showModal({
+                    title: '',
+                    content: data.data.errmsg
+                  })
+                }
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
           }
         }
       })

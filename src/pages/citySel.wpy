@@ -106,9 +106,9 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
+      this.getCityList()
     }
-    getFoodList() {
+    getCityList() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/city`,
         method: 'GET',

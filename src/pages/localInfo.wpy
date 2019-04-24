@@ -415,31 +415,27 @@ button{
       </view>
 
     </scroll-view>
-    <view class="localName">远洋合能枫丹唐悦</view>
+    <view class="localName">{{localList.name}}</view>
     <view class="feature">
       <view class="featureItem">
-        <view class="featureName">教育</view>
-        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+        <view class="featureName">交通配套</view>
+        <view class="featureCon">{{localList.traffic}}</view>
       </view>
       <view class="featureItem">
-        <view class="featureName">教育</view>
-        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+        <view class="featureName">教育资源</view>
+        <view class="featureCon">{{localList.education}}</view>
       </view>
       <view class="featureItem">
-        <view class="featureName">教育</view>
-        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+        <view class="featureName">医疗健康</view>
+        <view class="featureCon">{{localList.medical}}</view>
       </view>
       <view class="featureItem">
-        <view class="featureName">教育</view>
-        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+        <view class="featureName">商场购物</view>
+        <view class="featureCon">{{localList.shopping}}</view>
       </view>
       <view class="featureItem">
-        <view class="featureName">教育</view>
-        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-      </view>
-      <view class="featureItem">
-        <view class="featureName">教育</view>
-        <view class="featureCon">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+        <view class="featureName">生活娱乐</view>
+        <view class="featureCon">{{localList.recreation}}</view>
       </view>
     </view>
     <view class="localName">远洋合能枫丹唐悦</view>
@@ -587,7 +583,6 @@ button{
       },
       goRuleInfo(e) {
         // 进入预约列表
-
         // bbgz 报备规则
         // bbgzcon 报备规则内容
         // dkgz 带看规则

@@ -91,14 +91,13 @@
     }
 
     methods = {
-      // 底部导航跳转
-      goPage (url, evt) {
-        // 销毁当前页{跳转}
-        this.$redirect(url)
-      },
       goLocalInfo(e) {
         // 进入楼盘详情
         this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      goSelCity() {
+        // 城市选择
+        this.$navigate(`/pages/citySel`)
       },
     }
 
@@ -109,6 +108,8 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
+    }
+    onShow() {
       this.cityNode = this.$parent.globalData.cityNode
       this.getLocalList()
     }

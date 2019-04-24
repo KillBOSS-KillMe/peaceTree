@@ -5,12 +5,25 @@
   <view>
     <addressSearch></addressSearch>
     <view class="list">
-      <productItem></productItem>
-      <productItem></productItem>
-      <productItem></productItem>
-      <productItem></productItem>
-      <productItem></productItem>
-      <view class="listPrompt">共有2个项目，已无更多内容</view>
+      <repeat for="{{localList}}" item="item">
+        <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
+          <view class="pad">垫拥</view>
+          <image data-id="" src="{{requestImgUrl + item.img}}" />
+          <view class="con">
+            <view class="title">
+              <text>{{item.name}}</text>
+              <view class="heatLocal" wx:if="{{item.state == '2'}}">热推</view>
+              <view class="newLocal" wx:if="{{item.state == '1'}}">新盘</view>
+            </view>
+            <view class="address">
+              <icon class="iconfont icon-dingweiweizhi"></icon>
+              {{item.floor_address}}
+            </view>
+            <view class="price">{{item.money}}元/m</view>
+          </view>
+        </view>
+      </repeat>
+      <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
     </view>
   </view>
   
@@ -33,10 +46,10 @@
 
     data = {
       img: '/img/test.jpg',
-      test: '',
-      userInfo: null,
+      cityNode: {},
+      userInfo: {},
       requestImgUrl: '',
-      diningRoom: []
+      localList: []
     }
 
     computed = {
@@ -44,20 +57,14 @@
     }
 
     methods = {
-      // 底部导航跳转
-      goPage (url, evt) {
-        // 销毁当前页{跳转}
-        this.$redirect(url)
+      goLocalInfo(e) {
+        // 进入楼盘详情
+        this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}`)
       },
-      goDiningRoomInfo(e) {
-        // // 进入餐厅详情
-        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
-        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
+      goSelCity() {
+        // 城市选择
+        this.$navigate(`/pages/citySel`)
       },
-      goReservationList(e) {
-        // 进入预约列表
-        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
-      }
     }
 
     events = {
@@ -67,6 +74,9 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
+    }
+    onShow() {
+      this.cityNode = this.$parent.globalData.cityNode
       this.getLocalList()
     }
     getLocalList() {

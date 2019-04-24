@@ -85,11 +85,9 @@
       },
       cityClick(e) {
         // 点击城市
-        console.log(e.currentTarget.dataset.id)
-        console.log(e.currentTarget.dataset.cityname)
+        this.$parent.globalData.cityNode = {'name': e.currentTarget.dataset.cityname, 'id': e.currentTarget.dataset.id}
         wx.navigateBack({
-          cityid: e.currentTarget.dataset.id,
-          cityname: e.currentTarget.dataset.cityname 
+          data: -1
         })
       },
       searchRun(e) {

@@ -323,8 +323,8 @@
     data = {
       img: '/img/test.jpg',
       userInfoButtonShow: true,
-      userInfo: null,
-      cityNode: null,
+      userInfo: {},
+      cityNode: {},
       requestImgUrl: '',
       searchList: [], // 搜索内容列表
       localList: [], // 楼盘列表
@@ -375,16 +375,17 @@
     onLoad(options) {
       // 获取用户信息
       this.onGetUserInfo()
-      console.log(options)
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       // 获取楼盘列表
       this.getLocalList()
-      // 加载城市列表
-      this.getLocation()
     }
-    onShow(options) {
-      console.log(options)
+    onShow() {
+      this.cityNode = this.$parent.globalData.cityNode
+      if (Object.keys(this.cityNode).length == 0) {
+        // 加载城市列表,获取定位，获取所在城市
+        this.getLocation()
+      }
     }
     getLocalList() {
       wx.request({
@@ -412,18 +413,16 @@
       })
     }
     getLocation() {
-      var page = this
       wx.getLocation({
         type: 'wgs84',   //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标 
-        success: function (res) { 
+        success: res => { 
           var longitude = res.longitude
           var latitude = res.latitude
-          page.loadCity(longitude, latitude)
+          this.loadCity(longitude, latitude)
         }
       })
     }
     loadCity(longitude, latitude) {
-      var page = this
       wx.request({
         url: 'https://api.map.baidu.com/geocoder/v2/?ak=FMn3zXubg5BmfZZSsFVP28XjMqdPxmee&location=' + latitude + ',' + longitude + '&output=json',
         data: {},

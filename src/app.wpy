@@ -221,7 +221,8 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null,
+    userInfo: {},
+    cityNode: {},
     requestUrl: 'http://192.168.1.106/api',
     requestImgUrl: 'http://192.168.1.106',
   }

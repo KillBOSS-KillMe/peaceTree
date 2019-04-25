@@ -78,7 +78,7 @@ input{
         <input type="text" placeholder="请填写姓名(必填)" bindinput="getName" />
         <view class="info">
           <view class="{{selGender == 1?'men':''}}" @tap="selGender">先生</view>
-          <view class="{{selGender == 0?'woman':''}}" @tap="selGender">女士</view>
+          <view class="{{selGender == 2?'woman':''}}" @tap="selGender">女士</view>
         </view>
       </view>
     </view>
@@ -123,7 +123,7 @@ input{
     methods = {
       selGender() {
         if (this.selGender) {
-          this.selGender = 0
+          this.selGender = 2
         } else {
           this.selGender = 1
         }
@@ -160,26 +160,24 @@ input{
         })
         return ''
       }
-      return ''
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
+        url: `${this.$parent.globalData.requestUrl}/add_client`,
+        method: 'POST',
         data: {
-          mobile: this.userName,
-          password: this.userPaw
+          uid: this.userInfo.id,
+          name: this.clientName,
+          mobile: this.clientMobile,
+          sex: this.selGender
         },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
-            this.$apply()
+            wx.showModal({
+              title: '',
+              content: '客户录入成功'
+            })
+            wx.navigateBack({
+              data: -1
+            })
           } else {
             wx.showModal({
               title: '',

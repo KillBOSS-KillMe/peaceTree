@@ -69,7 +69,7 @@
 
     data = {
       userInfo: null,
-      cityNode: null,
+      cityNode: [],
       searchList: []
     }
 
@@ -93,7 +93,14 @@
       searchRun(e) {
         // 搜索执行
         // 获取搜索内容
-        console.log(e.detail.value)
+        if (e.detail.value == '') {
+          this.searchList = []
+          return ''
+        }
+        // let cityNode = this.cityNode
+        // console.log(e.detail.value)
+        // let i = 0
+        // for (i in ) {}
       }
     }
 

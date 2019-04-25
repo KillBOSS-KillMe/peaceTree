@@ -11,5 +11,7 @@
 	"appid": "wxd3ec190013a23daa",
 	"projectname": "peacetree",
 	"miniprogramRoot": "dist/",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {}
 }

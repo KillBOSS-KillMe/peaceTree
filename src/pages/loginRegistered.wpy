@@ -1,0 +1,110 @@
+<style lang="less">
+.con{
+  width: 690rpx;
+  padding: 30rpx;
+}
+.con view{
+  margin: 30rpx 0;
+}
+.title{
+  width: 690rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #343434;
+}
+.getData{
+  width: 690rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  background-color: #F7F7F7;
+}
+.submit{
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  background-color: #7BB312;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+}
+.jumpVver{
+  width: 690rpx;
+  height: 60rpx;
+  text-align: center;
+  font-size: 25rpx;
+  color: #979797;
+}
+</style>
+<template>
+  <view>
+    <view class="con">
+      <view class="title">填写手机号</view>
+      <input class="getData" type="number" placeholder="输入手机号" value="" bindinput="getData" />
+      <view class="submit" @tap="submit">下一步</view>
+      <view class="jumpVver" @tap="jumpVver">跳过此步</view>
+    </view>
+    
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class LoginRegistered extends wepy.page {
+    config = {
+      navigationBarTitleText: '注册'
+    }
+    components = {}
+
+    mixins = []
+
+    data = {
+      getMobile: ''
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      jumpVver() {
+        this.$redirect('index')
+      },
+      submit() {
+        this.$navigate('loginVerification')
+        return ''
+        // this.getMobile
+        // 获取验证码
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/client`,
+          method: 'POST',
+          data: {
+            mobile: this.getMobile
+          },
+          success: data => {
+            if (data.data.code == 1) {
+              this.$navigate('loginVerification')
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.data.msg
+              })
+            }
+          }
+        })
+      },
+      getData(e) {
+        // 获取手机号
+        this.getMobile = e.detail.value
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad(options) {
+
+    }
+  }
+</script>

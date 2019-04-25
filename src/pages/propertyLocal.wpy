@@ -18,7 +18,16 @@
 </style>
 <template>
   <view>
-    <addressSearch></addressSearch>
+    <view class="addressSearch">
+      <view class="selAddress" @tap="goSelCity">
+        {{cityNode.name}}
+        <icon class="iconfont icon-jiantou-xia"></icon>
+      </view>
+      <view class="search">
+        <icon class="iconfont icon-sousuo"></icon>
+        <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
+      </view>
+    </view>
     <view class="typeSel">
       <view>
         区域
@@ -118,6 +127,7 @@
         url: `${this.$parent.globalData.requestUrl}/local_floor`,
         method: 'POST',
         data: {
+          uid: this.userInfo.id,
           city_id: this.cityNode.id
         },
         success: data => {

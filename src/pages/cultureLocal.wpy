@@ -3,7 +3,16 @@
 </style>
 <template>
   <view>
-    <addressSearch></addressSearch>
+    <view class="addressSearch">
+      <view class="selAddress" @tap="goSelCity">
+        {{cityNode.name}}
+        <icon class="iconfont icon-jiantou-xia"></icon>
+      </view>
+      <view class="search">
+        <icon class="iconfont icon-sousuo"></icon>
+        <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
+      </view>
+    </view>
     <view class="list">
       <repeat for="{{localList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
@@ -19,7 +28,7 @@
               <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
-            <view class="price">{{item.money}}元/m</view>
+            <view class="price">{{item.money}}元/㎡</view>
           </view>
         </view>
       </repeat>

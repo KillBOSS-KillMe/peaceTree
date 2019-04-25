@@ -272,7 +272,7 @@ for (let i = 0; i < 60; i++) {
       requestImgUrl: '',
       diningRoom: [],
       reportDom: false,
-      time: '',
+      time: '1',
       multiIndex: [0, 9, 16, 10, 17],
       multiArray: [years, months, days, hours, minutes],
       reportUserList: [],

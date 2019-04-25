@@ -193,6 +193,9 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index', // 首页
+      'pages/loginRegistered', // 注册
+      'pages/loginVerification', // 验证
+      
       'pages/localSel', // 楼盘选择
       'pages/reportLocal', // 报备楼盘
       'pages/localInfo', // 项目详情（楼盘详情）
@@ -225,6 +228,8 @@ export default class extends wepy.app {
     cityNode: {},
     requestUrl: 'http://192.168.1.106/api',
     requestImgUrl: 'http://192.168.1.106',
+    // requestUrl: 'https://jiuyou.beaconway.cn/api',
+    // requestImgUrl: 'https://jiuyou.beaconway.cn',
   }
 
   constructor () {

@@ -1,0 +1,78 @@
+<style lang="less">
+.con{
+  width: 690rpx;
+  padding: 30rpx;
+}
+.con view{
+  margin: 30rpx 0;
+}
+.title{
+  width: 690rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #343434;
+}
+.getData{
+  width: 690rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  background-color: #F7F7F7;
+}
+.submit{
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  background-color: #7BB312;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+}
+</style>
+<template>
+  <view>
+    <view class="con">
+      <view class="title">填入验证码</view>
+      <input class="getData" type="number" placeholder="输入验证码" value="" bindinput="getData" />
+      <view class="submit" @tap="submit">确定</view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class LoginVerification extends wepy.page {
+    config = {
+      navigationBarTitleText: '验证'
+    }
+    components = {}
+
+    mixins = []
+
+    data = {
+      code: ''
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      submit() {
+        this.$redirect('index')
+      },
+      getCode(e) {
+        // 获取手机号
+        this.code = e.detail.value
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad(options) {
+
+    }
+  }
+</script>

@@ -163,6 +163,7 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getFoodList()
     }
     getFoodList() {

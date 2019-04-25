@@ -239,12 +239,11 @@
         this.$navigate(`/pages/modifyUserInfo`)
       },
       goCollectionList() {
-        
-        // 进入备案列表
+        // 进入收藏列表
         this.$navigate(`/pages/collectionList`)
       },
       goReportList() {
-        // 进入消息列表
+        // 进入报备列表
         this.$navigate(`/pages/reportList`)
       },
       goMessageList(e) {
@@ -259,7 +258,6 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
-      console.log(this.userInfo)
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }
     

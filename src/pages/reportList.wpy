@@ -176,15 +176,13 @@
       </view>
     </view>
     <view class="seleteType">
-      <view class="action">全全部全部(3)</view>
-      <view>全部(3)</view>
-      <view>全部(3)</view>
-      <view>全部(3)</view>
-      <view>全部(3)</view>
-      <view>全部(3)</view>
-      <view>全全部(3)</view>
-      <view>全部(3)</view>
-      <view>全部(3)</view>
+      <view data-state="" class="{{state==''?'action':''}}" @tap="getState">全部(3)</view>
+      <view data-state="1" class="{{state=='1'?'action':''}}" @tap="getState">已报备</view>
+      <view data-state="2" class="{{state=='2'?'action':''}}" @tap="getState">报备有效</view>
+      <view data-state="3" class="{{state=='3'?'action':''}}" @tap="getState">带看</view>
+      <view data-state="4" class="{{state=='4'?'action':''}}" @tap="getState">大定</view>
+      <view data-state="5" class="{{state=='5'?'action':''}}" @tap="getState">业绩确认</view>
+      <view data-state="6" class="{{state=='6'?'action':''}}" @tap="getState">无效</view>
     </view>
     <view class="listClient" wx:if="{{listShowType=='listClient'}}">
       <view class="item">
@@ -327,7 +325,10 @@
     data = {
       img: '/img/test.jpg',
       userInfo: null,
-      listShowType: 'listClient'
+      state: '',
+      listShowType: 'listClient',
+      userReporList: [],
+      localReporList: []
     }
 
     computed = {
@@ -339,6 +340,19 @@
       //   <view class="name {{thisListShow=='listClient'?'action':''}}" @tap="listSelShow">报备客户</view>
       // <view class="name {{thisListShow=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
         this.listShowType = e.currentTarget.dataset.showtype
+        if (this.listShowType == 'listClient') {
+          this.getUserReporList()
+        } else if (this.listShowType == 'listProperty') {
+          this.getLocalReporList()
+        }
+      },
+      getState(e) {
+        this.state = e.currentTarget.dataset.state
+        if (this.listShowType == 'listClient') {
+          this.getUserReporList()
+        } else if (this.listShowType == 'listProperty') {
+          this.getLocalReporList()
+        }
       }
     }
 
@@ -348,6 +362,40 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getUserReporList()
+    }
+    getUserReporList() {
+      // 用户报备列表
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/client_report`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id,
+          state: this.state
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            var userReporList = data.data.data
+          }
+        }
+      })
+    }
+    getLocalReporList() {
+      // 楼盘报备列表
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/floor_report`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id,
+          state: this.state
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            var localReporList = data.data.data
+          }
+        }
+      })
     }
   }
 </script>

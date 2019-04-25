@@ -65,7 +65,7 @@
         <view class="tiem">
           <view>头像</view>
           <view class="con">
-            <image data-id="" src="{{img}}" />
+            <image data-id="" src="{{requestImgUrl + userInfo.img}}" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
@@ -129,6 +129,7 @@
     data = {
       img: '/img/test.jpg',
       userInfo: new Object(),
+      requestImgUrl: '',
       name: '',
       mobile: '',
       store: '',
@@ -175,6 +176,7 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }
     submit() {
       console.log(this.name)

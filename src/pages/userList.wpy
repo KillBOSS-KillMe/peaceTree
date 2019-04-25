@@ -68,7 +68,7 @@
       <view class="type">A</view>
       <!-- userList -->
       <repeat for="{{userList}}" item="item">
-        <view class="item" data-id="{{item.id}}" @tap="goUserInfo">
+        <view class="item" data-index="{{index}}" data-id="{{item.id}}" @tap="goUserInfo">
           <view>{{item.name}}</view>
           <view>
             {{item.mobile}}
@@ -113,7 +113,8 @@
     methods = {
       goUserInfo(e) {
         // 查看用户信息
-        this.$navigate(`/pages/userInfo?id=${e.currentTarget.dataset.id}`)
+        let node = JSON.stringify(this.userList[e.currentTarget.dataset.index])
+        this.$navigate(`/pages/userInfo?usernode=${node}`)
       },
       goReportLocal() {
         // 进入报备楼盘页

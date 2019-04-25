@@ -1,6 +1,7 @@
 <style lang="less">
   .list{
     width: 750rpx;
+    padding: 0;
   }
   .item{
     width: 690rpx;
@@ -59,48 +60,22 @@
       <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
     </view>
     <view class="list">
-      <view class="item">
-        <image data-id="" src="/img/test.jpg" />
-        <view>
-          <view class="name">
-            <view class="con">远洋合能·枫丹唐悦</view>
-            <view class="label">取消收藏</view>
+      <repeat for="{{collectList}}" item="item">
+        <view class="item">
+          <image data-id="" src="{{requestImgUrl + item.img}}" />
+          <view>
+            <view class="name">
+              <view class="con">{{item.name}}</view>
+              <view class="label">取消收藏</view>
+            </view>
+            <view class="address">
+              <icon class="iconfont icon-sousuo"></icon>
+              {{item.floor_address}}
+            </view>
+            <view class="price">{{item.money}}元/㎡</view>
           </view>
-          <view class="address">
-            <icon class="iconfont icon-sousuo"></icon>
-            浐灞区城东
-          </view>
-          <view class="price">12834元/㎡</view>
         </view>
-      </view>
-      <view class="item">
-        <image data-id="" src="/img/test.jpg" />
-        <view>
-          <view class="name">
-            <view class="con">远洋合能·枫丹唐悦</view>
-            <view class="label">取消收藏</view>
-          </view>
-          <view class="address">
-            <icon class="iconfont icon-sousuo"></icon>
-            浐灞区城东
-          </view>
-          <view class="price">12834元/㎡</view>
-        </view>
-      </view>
-      <view class="item">
-        <image data-id="" src="/img/test.jpg" />
-        <view>
-          <view class="name">
-            <view class="con">远洋合能·枫丹唐悦</view>
-            <view class="label">取消收藏</view>
-          </view>
-          <view class="address">
-            <icon class="iconfont icon-sousuo"></icon>
-            浐灞区城东
-          </view>
-          <view class="price">12834元/㎡</view>
-        </view>
-      </view>
+      </repeat>
     </view>
   </view>
 </template>
@@ -122,7 +97,7 @@
       img: '/img/test.jpg',
       userInfo: null,
       requestImgUrl: '',
-      diningRoom: []
+      collectList: []
     }
 
     computed = {
@@ -175,7 +150,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.diningRoom = data.data.data
+            this.collectList = data.data.data
             this.$apply()
           } else {
             wx.showModal({

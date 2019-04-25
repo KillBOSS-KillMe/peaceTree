@@ -237,11 +237,11 @@ page{
     <view class="userInfo">
       <view>
         <view class="info">
-          <view>二狗子</view>
-          <view class="ms">女士</view>
-          <view class="men">男士</view>
+          <view>{{usernode.name}}</view>
+          <view class="ms" wx:if="{{usernode.sex == '2'}}">女士</view>
+          <view class="men" wx:if="{{usernode.sex == '1'}}">男士</view>
         </view>
-        <view class="phone" data-phone="18888888888" @tap="tal">18888888888</view>
+        <view class="phone" data-phone="18888888888" @tap="tal">{{usernode.mobile}}</view>
       </view>
       <view class="edit" @tap="edit">
         <icon class="iconfont icon-bianji"></icon>
@@ -352,11 +352,11 @@ page{
         <view class="setInfoName">客户修改</view>
         <view class="formSet">
           <label>姓名:</label>
-          <input type="text" placeholder="请输入姓名" value="" bindinput="getName" />
+          <input type="text" placeholder="请输入姓名" value="{{usernode.name}}" bindinput="getName" />
         </view>
         <view class="formSet">
           <label>手机号:</label>
-          <input type="text" placeholder="请输入手机号" value="" bindinput="getMobile" />
+          <input type="text" placeholder="请输入手机号" value="{{usernode.mobile}}" bindinput="getMobile" />
         </view>
         <view class="formSet">
           <label>备注:</label>
@@ -387,6 +387,7 @@ page{
     data = {
       formIsShow: false,
       userInfo: {},
+      usernode: {},
       clinetInfo: {},
       name: '', // 输入的用户名
       mobile: '', // 输入的电话
@@ -434,17 +435,20 @@ page{
     }
 
     onLoad(options) {
+      this.usernode = JSON.parse(options.usernode)
+      this.name = this.usernode.name
+      this.mobile = this.usernode.mobile
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getclientInfo(options)
+      this.getclientInfo()
     }
-    getclientInfo(options) {
+    getclientInfo() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/client`,
         method: 'POST',
         data: {
           uid: this.userInfo.id,
-          clinet_id: options.id
+          clinet_id: this.usernode.id
         },
         success: data => {
           if (data.data.code == 1) {

@@ -161,9 +161,9 @@
 <template>
   <view>
     <view class="userInfo">
-      <image data-id="" src="{{img}}" />
+      <image data-id="" src="{{requestImgUrl + userInfo.img}}" />
       <view class="info">
-        二狗子
+        {{userInfo.name}}
         <view>经纪人</view>
       </view>
       <view class="edit" @tap="modifyUserInfo">
@@ -219,7 +219,7 @@
 
     data = {
       img: '/img/test.jpg',
-      userInfo: null,
+      userInfo: {},
       requestImgUrl: '',
       diningRoom: []
     }
@@ -235,23 +235,22 @@
         this.$redirect(url)
       },
       modifyUserInfo() {
+        // 修改用户信息
         this.$navigate(`/pages/modifyUserInfo`)
       },
       goCollectionList() {
+        
+        // 进入备案列表
         this.$navigate(`/pages/collectionList`)
       },
       goReportList() {
+        // 进入消息列表
         this.$navigate(`/pages/reportList`)
       },
       goMessageList(e) {
-        // // 进入餐厅详情
-        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
-        this.$navigate(`/pages/messageList?id=${e.currentTarget.dataset.id}`)
+        // 进入消息列表
+        this.$navigate(`/pages/messageList`)
       },
-      goReservationList(e) {
-        // 进入预约列表
-        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
-      }
     }
 
     events = {
@@ -260,37 +259,9 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+      console.log(this.userInfo)
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.getFoodList()
     }
-    getFoodList() {
-      wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
-        data: {
-          mobile: this.userName,
-          password: this.userPaw
-        },
-        success: data => {
-          if (data.data.code == 1) {
-            this.diningRoom = data.data.data
-            let i = 0
-            var reg = /\\|\//g
-            for (i in this.diningRoom) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
-            }
-            this.$apply()
-          } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
-          }
-        }
-      })
-    }
+    
   }
 </script>

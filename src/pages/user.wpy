@@ -173,12 +173,12 @@
     </view>
     <view class="userData">
       <view class="dataCon" @tap="goReportList">
-        <view>2</view>
+        <view>{{userInfo.report_count}}</view>
         <view>报备纪录</view>
       </view>
       <view class="userDataBorder"></view>
       <view class="dataCon" @tap="goCollectionList">
-        <view>0</view>
+        <view>{{userInfo.collect_count}}</view>
         <view>我的收藏</view>
       </view>
     </view>
@@ -196,8 +196,8 @@
       </view>
       <image data-id="" src="{{img}}" />
     </view>
-    <view class="message">
-      <view @tap="modifyUserInfo">所属部门</view>
+    <view class="message" @tap="modifyUserInfo">
+      <view>所属部门</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
     <nav @childFn.user="goPage" />

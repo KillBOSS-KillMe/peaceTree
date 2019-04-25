@@ -582,7 +582,7 @@ button{
         method: 'POST',
         data: {
           id: this.id,
-          // uid: this.userInfo.id
+          uid: this.userInfo.id
         },
         success: data => {
           if (data.data.code == 1) {
@@ -624,7 +624,7 @@ button{
         url: `${this.$parent.globalData.requestUrl}/floor_keep`,
         method: 'POST',
         data: {
-          id: this.userInfo.id,
+          uid: this.userInfo.id,
           floor_id:this.localList.id,
           type: typeData
         },

@@ -302,7 +302,6 @@
       </repeat>
       <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
     </view>
-    <button open-type="getUserInfo" id='getUserInfo' wx:if="{{userInfoButtonShow}}" lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
     <nav @childFn.user="goPage" />
   </view>
 </template>
@@ -322,7 +321,7 @@
 
     data = {
       img: '/img/test.jpg',
-      userInfoButtonShow: true,
+      
       userInfo: {},
       cityNode: {},
       requestImgUrl: '',
@@ -373,8 +372,6 @@
     }
 
     onLoad(options) {
-      // 获取用户信息
-      this.onGetUserInfo()
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       // 获取楼盘列表
@@ -394,7 +391,7 @@
         url: `${this.$parent.globalData.requestUrl}/users`,
         method: 'POST',
         data: {
-          uid: 3
+          uid: this.$parent.globalData.userInfoID
         },
         success: data => {
           if (data.data.code == 1) {
@@ -481,81 +478,6 @@
     }
 
 
-     // 获取用户信息
-    onGetUserInfo() {
-      // 查看是否授权
-      wx.getSetting({
-        success: res => {
-          if (res.authSetting['scope.userInfo']) {
-            this.userInfoButtonShow = false
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-            // wx.getUserInfo({
-            //   success: res => {
-            //     this.userInfo = res.userInfo
-            //     this.$parent.globalData.userInfo = this.userInfo
-            //     this.$parent.globalData.userInfo.id = '3'
-            //     console.log(this.userInfo)
-            //     if (this.userInfo) {
-            //       this.authorizationButton = false
-            //       this.avatarUrl = this.userInfo.avatarUrl
-            //       this.nickName = this.userInfo.nickName
-            //       // 数据生效
-            //       this.$apply()
-            //       // 提交用户信息
-            //       return ''
-            //       this.setUserInfo(this.userInfo)
-            //       // 登陆
-            //       // this.userLogin(this.userInfo)
-            //       this.$parent.globalData.userInfo = this.userInfo
-            //       this.$apply()
-            //     }
-            //   }
-            // })
-          } else {
-            // this.clickWeekBangs()
-          }
-        }
-      })
-    }
-    // 提交用户信息
-    setUserInfo(userInfo) {
-      wepy.login({
-        success: res => {
-          if (res.code) {
-            console.log(res.code)
-            this.code = res.code
-            wx.request({
-              url: `${this.$parent.globalData.requestUrl}/api/addOrUpdateUser`,
-              method: 'POST',
-              data: {
-                code: res.code,
-                nick_name: this.userInfo.nickName,
-                profile: this.userInfo.avatarUrl
-              },
-              success: data => {
-                console.log(data)
-                if (data.data.success) {
-                  // 获取用户信息,及openID  并存入全局
-                  this.userInfo = data.data.user
-                  this.openId = this.userInfo.open_id
-                  this.$parent.globalData.userInfo = this.userInfo
-                  this.$parent.globalData.openId = this.openId
-                  // 用户收藏的书籍
-                  this.myStore()
-                  this.$apply()
-                } else {
-                  wx.showModal({
-                    title: '',
-                    content: data.data.errmsg
-                  })
-                }
-              }
-            })
-          } else {
-            console.log('登录失败！' + res.errMsg)
-          }
-        }
-      })
-    }
+
   }
 </script>

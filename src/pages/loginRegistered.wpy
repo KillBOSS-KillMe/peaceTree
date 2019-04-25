@@ -44,7 +44,8 @@
       <view class="submit" @tap="submit">下一步</view>
       <view class="jumpVver" @tap="jumpVver">跳过此步</view>
     </view>
-    
+    <!-- <button open-type="getUserInfo" id='getUserInfo' lang="zh_CN" @getuserinfo="onGetUserInfo"></button> -->
+    <button open-type="getUserInfo" id='getUserInfo' wx:if="{{userInfoButtonShow}}" lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
   </view>
 </template>
 
@@ -59,7 +60,10 @@
     mixins = []
 
     data = {
-      getMobile: ''
+      userInfoID: '',
+      getMobile: '',
+      mobile: '',
+      userInfoButtonShow: true,
     }
 
     computed = {
@@ -71,19 +75,20 @@
         this.$redirect('index')
       },
       submit() {
-        this.$navigate('loginVerification')
-        return ''
+        // this.$navigate('loginVerification')
+        // return ''
         // this.getMobile
         // 获取验证码
         wx.request({
-          url: `${this.$parent.globalData.requestUrl}/client`,
+          url: `${this.$parent.globalData.requestUrl}/login_mobile`,
           method: 'POST',
           data: {
-            mobile: this.getMobile
+            mobile: this.getMobile,
+            uid: this.userInfoID
           },
           success: data => {
             if (data.data.code == 1) {
-              this.$navigate('loginVerification')
+              this.$redirect('index')
             } else {
               wx.showModal({
                 title: '',
@@ -104,7 +109,75 @@
     }
 
     onLoad(options) {
-
+      this.onGetUserInfo()
+    }
+         // 获取用户信息
+    onGetUserInfo() {
+      // 查看是否授权
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            this.userInfoButtonShow = false
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: res => {
+                this.userInfo = res.userInfo
+                this.$parent.globalData.userInfo = this.userInfo
+                if (this.userInfo) {
+                  // 数据生效
+                  this.$apply()
+                  // 提交用户信息
+                  this.setUserInfo(this.userInfo)
+                  this.$parent.globalData.userInfo = this.userInfo
+                  this.$apply()
+                }
+              }
+            })
+          } else {
+            // this.clickWeekBangs()
+          }
+        }
+      })
+    }
+    // 提交用户信息
+    setUserInfo(userInfo) {
+      wepy.login({
+        success: res => {
+          if (res.code) {
+            console.log(res.code)
+            this.code = res.code
+            wx.request({
+              url: `${this.$parent.globalData.requestUrl}/login`,
+              method: 'POST',
+              data: {
+                code: res.code,
+                img: this.userInfo.avatarUrl,
+                nickname: this.userInfo.nickName
+              },
+              success: data => {
+                console.log(data)
+                if (data.data.code == 1) {
+                  data = data.data.data
+                  this.$parent.globalData.userInfoID = data.id
+                  this.userInfoID = data.id
+                  this.mobile = data.mobile
+                  if (this.mobile) {
+                    this.$redirect('index')
+                  }
+                  this.$apply()
+                } else {
+                  wx.showModal({
+                    title: '',
+                    content: data.data.errmsg
+                  })
+                }
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
     }
   }
 </script>

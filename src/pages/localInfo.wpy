@@ -309,23 +309,19 @@ button{
 </style>
 <template>
   <view>
-    <!-- swiperList -->
     <swiper class='banner' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
-      <!-- <repeat for="{{localList}}" item="item"> -->
-        <swiper-item>
-          <image class="banner" src="{{ requestImgUrl + localList.img }}" />
-        </swiper-item>
-      <!-- </repeat> -->
+      <swiper-item>
+        <image class="banner" src="{{ requestImgUrl + localList.img }}" />
+      </swiper-item>
     </swiper>
-    <!-- <image class="banner" src="/img/test.jpg" /> -->
     <view class="price">
       <text>{{localList.money}}元/㎡</text>
-      <view @tap="collection">
-        <!-- 实心 -->
-        <!-- <icon class="iconfont icon-shoucang" @tap="collection"></icon> -->
-        <!-- 空心 -->
-        <icon class="iconfont icon-shoucang1" @tap="collection"></icon>
-        <view>已收藏</view>
+      <view>
+        <!-- 实心  shoucang -->
+        <!-- 空心  shoucang1 -->
+        <icon class="iconfont {{localList.is_collect == 1?'icon-shoucang':'icon-shoucang1'}}" @tap="collection"></icon>
+        <view wx:if="{{localList.is_collect == 1}}">已收藏</view>
+        <view wx:if="{{localList.is_collect == 0}}">收藏</view>
       </view>
     </view>
     <view class="localName">{{localList.name}}</view>
@@ -498,7 +494,13 @@ button{
       },
       collection() {
         // 收藏或取消收藏
-
+        let typeData = 0
+        if (this.localList.is_collect == 0) {
+          typeData = 1
+        } else {
+          typeData = 0
+        }
+        this.collectionRun(typeData)
       },
       mobileShow() {
         // 显示联系方式
@@ -607,7 +609,28 @@ button{
         success: data => {
           if (data.data.code == 1) {
             this.propertyLocalList = data.data.data
-            
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+    collectionRun(typeData) {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/floor_keep`,
+        method: 'POST',
+        data: {
+          id: this.userInfo.id,
+          floor_id:this.localList.id,
+          type: typeData
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.getFoodList()
             this.$apply()
           } else {
             wx.showModal({

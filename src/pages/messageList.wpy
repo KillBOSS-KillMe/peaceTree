@@ -50,10 +50,10 @@
       <repeat for="{{messageList}}" item="item">
         <view class="item">
           <view class="title">
-            <view class="name">报备审核未通过</view>
-            <view class="time">2019年4月9日</view>
+            <view class="name">{{item.title}}</view>
+            <view class="time">{{item.time}}</view>
           </view>
-          <view class="con">报备审核未通过报备审核未通过报备审核未通过报备审核未通过报备审核未通过报备审核未通过报备审核未通过</view>
+          <view class="con">{{item.content}}</view>
         </view>
       </repeat>
     </view>

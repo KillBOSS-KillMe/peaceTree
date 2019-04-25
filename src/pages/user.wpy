@@ -260,6 +260,9 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }
+    onShow() {
+      this.userInfo = this.$parent.globalData.userInfo
+    }
     
   }
 </script>

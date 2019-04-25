@@ -225,6 +225,34 @@
         })
         return ''
       }
+      // 信息提交
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users_edit`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id,
+          name: this.name,
+          mobile: this.mobile,
+          store: this.store,
+          address: this.address,
+          position: this.position,
+          company: this.company
+
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            // var localReporList = data.data.data
+            this.userInfo = data.data.data
+            wx.showModal({
+              title: '',
+              content: '信息修改成功'
+            })
+            wx.navigateBack({
+              data: -1
+            })
+          }
+        }
+      })
     }
   }
 </script>

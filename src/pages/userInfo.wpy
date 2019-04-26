@@ -260,7 +260,7 @@ page{
                 {{item.address}}
               </view>
             </view>
-            <icon class="QRCode iconfont icon-erweima"></icon>
+            <icon class="QRCode iconfont icon-erweima" @tap="showCode"></icon>
           </view>
           <view class="result">
             <view class="status">
@@ -382,6 +382,12 @@ page{
         } else {
           this.reportList[index]['formIsShow'] = true
         }
+      },
+      showCode() {
+        wx.previewImage({
+          current: '', // 当前显示图片的http链接
+          urls: ['https://jiuyou.beaconway.cn/uploads/xiao.jpg'] // 需要预览的图片http链接列表
+        })
       }
     }
 

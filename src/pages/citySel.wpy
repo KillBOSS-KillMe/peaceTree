@@ -29,7 +29,7 @@
     <!-- <search></search> -->
     <view class="search">
       <icon class="iconfont icon-sousuo"></icon>
-      <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
+      <input type="text" placeholder="输入城市名称" bindinput="searchRun" />
     </view>
     <view class="cityList searchList" wx:if="{{searchList.length > 0}}">
       <view class="name">搜索结果</view>
@@ -101,6 +101,7 @@
         // console.log(e.detail.value)
         // let i = 0
         // for (i in ) {}
+        this.getSearchList(e.detail.value)
       }
     }
 
@@ -112,6 +113,22 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getCityList()
+    }
+    getSearchList(search) {
+      // 获取搜索结果
+      // 执行搜索
+      let i = 0
+      let cityNode = this.cityNode
+      let searchList = []
+      let y = 0
+      for (i in cityNode) {
+        for(y in cityNode[i].cityList) {
+          if (cityNode[i].cityList[y].cityName.match(search)) {
+            searchList.push(cityNode[i].cityList[y])
+          }
+        }
+      }
+      this.searchList = searchList
     }
     getCityList() {
       wx.request({

@@ -59,15 +59,19 @@
 </style>
 <template>
   <view>
-    <search></search>
+    <!-- <search></search> -->
+    <view class="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      <input type="text" placeholder="输入客户名称" bindinput="searchRun" />
+    </view>
     <view class="goLocalOrNewUser">
       <view @tap="goReportLocal">报备楼盘</view>
       <view @tap="goNewUser">录入新客</view>
     </view>
     <view class="userList">
-      <view class="type">A</view>
+      <!-- <view class="type">A</view> -->
       <!-- userList -->
-      <repeat for="{{userList}}" item="item">
+      <repeat for="{{searchList}}" item="item">
         <view class="item" data-index="{{index}}" data-id="{{item.id}}" @tap="goUserInfo">
           <view>{{item.name}}</view>
           <view>
@@ -103,7 +107,8 @@
       test: '',
       userInfo: {},
       requestImgUrl: '',
-      userList: []
+      userList: [],
+      searchList: []
     }
 
     computed = {
@@ -129,6 +134,15 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
+      searchRun(e) {
+        if (e.detail.value == '') {
+          this.searchList = this.userList
+          return ''
+        }
+        // 搜索执行
+        // 获取搜索内容
+        this.getSearchList(e.detail.value)
+      }
     }
 
     events = {
@@ -153,6 +167,7 @@
         success: data => {
           if (data.data.code == 1) {
             this.userList = data.data.data
+            this.searchList = this.userList
             this.$apply()
           } else {
             wx.showModal({
@@ -162,6 +177,18 @@
           }
         }
       })
+    }
+    getSearchList(search) {
+      // 执行搜索
+      let i = 0
+      let userList = this.userList
+      let searchList = []
+      for (i in userList) {
+        if (userList[i].name.match(search)) {
+          searchList.push(userList[i])
+        }
+      }
+      this.searchList = searchList
     }
   }
 </script>

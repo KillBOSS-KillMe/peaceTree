@@ -184,7 +184,7 @@
             </view>
             <text>{{item.mobile}}</text>
           </view>
-          <icon class="iconfont icon-guanbi"></icon>
+          <icon class="iconfont icon-guanbi" @tap="goUserSel"></icon>
         </view>
       </repeat>
         

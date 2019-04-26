@@ -358,7 +358,7 @@
       },
       goLocalInfo(e) {
         // 进入楼盘详情
-        this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}`)
+        this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}&share=0`)
       },
       searchRun(e) {
         if (e.detail.value == '') {

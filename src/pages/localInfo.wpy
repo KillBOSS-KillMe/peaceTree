@@ -419,9 +419,10 @@ button{
         <icon class="iconfont icon-dianhua"></icon>
         <text>联系项目</text>
       </view>
-      <view>
+      <view wx:if="{{share == 0}}">
         <button open-type='share'>分享</button>
       </view>
+      <view wx:if="{{share == 1}}" @tap="goHome">返回首页</view>
       <!-- <view>分享楼盘</view> -->
       <view @tap="goReportUser">报备客户</view>
     </view>
@@ -436,7 +437,7 @@ button{
 
 <script>
   import wepy from 'wepy'
-  export default class CultureLocal extends wepy.page {
+  export default class LocalInfo extends wepy.page {
     config = {
       navigationBarTitleText: '项目详情'
     }
@@ -452,6 +453,7 @@ button{
       propertyLocalList: [],
       cityNode: {},
       userInfo: {},
+      share: 1,
       requestImgUrl: '',
       selMobileShow: false,
       localList: []
@@ -462,6 +464,9 @@ button{
     }
 
     methods = {
+      goHome() {
+        this.$redirect('loginRegistered')
+      },
       updataLocal(e) {
         // 根据点击的楼盘切换到当前页的数据
         // e.currentTarget.dataset.id
@@ -560,6 +565,7 @@ button{
 
     onLoad(options) {
       this.id = options.id
+      this.share = options.share
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.cityNode = this.$parent.globalData.cityNode
@@ -568,11 +574,11 @@ button{
       this.getLocalList()
     }
     onShareAppMessage() {
-      let url = `pages/localInfo?id=${this.userInfo.id}`
+      let url = `pages/localInfo?id=${this.localList.id}&share=1`
       return {
-        title: '弹出分享时显示的分享标题',
-        desc: '分享页面的内容',
-        imageUrl: '/img/logo.png',
+        title: this.localList.name,
+        desc: this.localList.floor_address,
+        imageUrl: this.requestImgUrl + this.localList.img,
         path: url
       }
     }

@@ -161,7 +161,7 @@
 <template>
   <view>
     <view class="userInfo">
-      <image data-id="" src="{{requestImgUrl + userInfo.img}}" />
+      <image data-id="" src="{{userInfo.img}}" />
       <view class="info">
         {{userInfo.name}}
         <view>经纪人</view>

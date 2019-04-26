@@ -154,7 +154,7 @@ page{
 }
 .markInfo{
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: space-between;
   flex-direction: column;
   padding-left: 20rpx;
@@ -241,7 +241,7 @@ page{
           <view class="ms" wx:if="{{usernode.sex == '2'}}">女士</view>
           <view class="men" wx:if="{{usernode.sex == '1'}}">男士</view>
         </view>
-        <view class="phone" data-phone="18888888888" @tap="tal">{{usernode.mobile}}</view>
+        <view class="phone" data-phone="{{usernode.mobile}}" @tap="tal">{{usernode.mobile}}</view>
       </view>
       <view class="edit" @tap="edit">
         <icon class="iconfont icon-bianji"></icon>
@@ -250,99 +250,40 @@ page{
     </view>
     <view class="reportNum">已报备的楼盘({{clinetInfo.floor_count}})</view>
     <view class="reportList">
-      <view class="reportItem">
-        <view class="property">
-          <view>
-            <view class="name">福星惠誉美术城</view>
-            <view class="name2">
-              <icon class="iconfont icon-dingweiweizhi"></icon>
-              福星惠誉美术城
+      <repeat for="{{reportList}}" item="item">
+        <view class="reportItem">
+          <view class="property">
+            <view>
+              <view class="name">{{item.floor_name}}</view>
+              <view class="name2">
+                <icon class="iconfont icon-dingweiweizhi"></icon>
+                {{item.address}}
+              </view>
             </view>
+            <icon class="QRCode iconfont icon-erweima"></icon>
           </view>
-          <icon class="QRCode iconfont icon-erweima"></icon>
-        </view>
-        <view class="result">
-          <view class="status">
-            <view class="mark">
-              <!-- <view class="failure"></view> -->
-              <view class="success"></view>
-              <view wx:if="{{1}}"></view>
-              <view wx:if="{{1}}"></view>
+          <view class="result">
+            <view class="status">
+              <view class="mark">
+                <view class="success" wx:if="{{item.state == '1'}}"></view>
+                <view class="failure" wx:if="{{item.state == '2'}}"></view>
+                <view wx:if="{{item.formIsShow}}"></view>
+                <view wx:if="{{item.formIsShow}}"></view>
+              </view>
+              <view class="markInfo">
+                <view class="success" wx:if="{{item.state == '1'}}">报备生效  {{item.access_time}}</view>
+                <view class="failure" wx:if="{{item.state == '2'}}">报备无效  {{item.access_time}}</view>
+                <view wx:if="{{item.formIsShow}}">报备无效  {{item.create_time}}</view>
+              </view>
             </view>
-            <view class="markInfo">
-              <view class="success">报备无效  201/04/08</view>
-              <!-- <view class="failure">报备无效  201/04/08</view> -->
-              <view wx:if="{{1}}">报备无效  201/04/08</view>
+            <view class="expand" data-index="{{index}}" data-show="{{item.formIsShow}}" @tap="infoShow">
+              <icon class="iconfont icon-jiantou-xia"></icon>
+              展开
             </view>
-          </view>
-          <view class="expand">
-            <icon class="iconfont icon-jiantou-xia"></icon>
-            展开
-          </view>
-        </view>
-      </view>
-      <view class="reportItem">
-        <view class="property">
-          <view>
-            <view class="name">福星惠誉美术城</view>
-            <view class="name2">
-              <icon class="iconfont icon-dingweiweizhi"></icon>
-              福星惠誉美术城
-            </view>
-          </view>
-          <icon class="QRCode iconfont icon-erweima"></icon>
-        </view>
-        <view class="result">
-          <view class="status">
-            <view class="mark">
-              <!-- <view class="failure"></view> -->
-              <view class="success"></view>
-              <view></view>
-              <view></view>
-            </view>
-            <view class="markInfo">
-              <view class="success">报备无效  201/04/08</view>
-              <!-- <view class="failure">报备无效  201/04/08</view> -->
-              <view>报备无效  201/04/08</view>
-            </view>
-          </view>
-          <view class="expand">
-            <icon class="iconfont icon-jiantou-xia"></icon>
-            展开
           </view>
         </view>
-      </view>
-      <view class="reportItem">
-        <view class="property">
-          <view>
-            <view class="name">福星惠誉美术城</view>
-            <view class="name2">
-              <icon class="iconfont icon-dingweiweizhi"></icon>
-              福星惠誉美术城
-            </view>
-          </view>
-          <icon class="QRCode iconfont icon-erweima"></icon>
-        </view>
-        <view class="result">
-          <view class="status">
-            <view class="mark">
-              <!-- <view class="failure"></view> -->
-              <view class="success"></view>
-              <view></view>
-              <view></view>
-            </view>
-            <view class="markInfo">
-              <view class="success">报备无效  201/04/08</view>
-              <!-- <view class="failure">报备无效  201/04/08</view> -->
-              <view>报备无效  201/04/08</view>
-            </view>
-          </view>
-          <view class="expand">
-            <icon class="iconfont icon-jiantou-xia"></icon>
-            展开
-          </view>
-        </view>
-      </view>
+      </repeat>
+        
     </view>
     <view class="reportButton">
       <view @tap="reportButton">报备楼盘</view>
@@ -389,6 +330,7 @@ page{
       userInfo: {},
       usernode: {},
       clinetInfo: {},
+      reportList: [],
       name: '', // 输入的用户名
       mobile: '', // 输入的电话
       remarks: '', // 备注信息
@@ -431,6 +373,15 @@ page{
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      infoShow(e) {
+        let index = e.currentTarget.dataset.index
+        let show = e.currentTarget.dataset.show
+        if (show) {
+          this.reportList[index]['formIsShow'] = false
+        } else {
+          this.reportList[index]['formIsShow'] = true
+        }
       }
     }
 
@@ -452,11 +403,19 @@ page{
         method: 'POST',
         data: {
           uid: this.userInfo.id,
-          clinet_id: this.usernode.id
+          client_id: this.usernode.id
         },
         success: data => {
           if (data.data.code == 1) {
-            this.clinetInfo = data.data.data
+            let reportList = data.data.data.floor_report
+            let i = 0
+            for (i in reportList) {
+              reportList[i].access_time = this.$parent.getLocalTime(reportList[i].access_time)
+              reportList[i].create_time = this.$parent.getLocalTime(reportList[i].create_time)
+              reportList[i]['show'] = false
+            }
+            this.reportList = reportList
+            console.log(this.reportList)
             this.$apply()
           } else {
             wx.showModal({
@@ -469,9 +428,6 @@ page{
     }
 
     submint() {
-      console.log(this.name)
-      console.log(this.mobile)
-      console.log(this.remarks)
       if (this.check.isNull(this.name)) {
         wx.showModal({
           title: '',

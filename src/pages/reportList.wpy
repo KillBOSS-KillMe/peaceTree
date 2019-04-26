@@ -208,7 +208,7 @@
               <view class="address">{{item.floor_name}}</view>
               <view class="reservation">预计到访时间：{{item.access_time}}</view>
             </view>
-            <icon class="iconfont icon-erweima"></icon>
+            <icon class="iconfont icon-erweima" @tap="showCode"></icon>
           </view>
           <view class="time">
             <view>
@@ -253,7 +253,7 @@
               </view>
             </view>
             <view class="info">
-              <view class="iconfont icon-erweima"></view>
+              <view class="iconfont icon-erweima" @tap="showCode"></view>
               <view class="status-access" wx:if="{{item.state == '1'}}">已报备</view>
               <view class="status-access" wx:if="{{item.state == '2'}}">报备有效</view>
               <view class="status-access" wx:if="{{item.state == '3'}}">带看</view>
@@ -372,6 +372,12 @@
         // 获取搜索内容
         this.getSearchList(e.detail.value)
       },
+      showCode() {
+        wx.previewImage({
+          current: '', // 当前显示图片的http链接
+          urls: ['https://jiuyou.beaconway.cn/uploads/xiao.jpg'] // 需要预览的图片http链接列表
+        })
+      }
     }
 
     events = {

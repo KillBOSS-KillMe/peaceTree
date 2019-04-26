@@ -69,6 +69,18 @@
   align-items: center;
   justify-content: center;
 }
+.selUserType{
+  width: 640rpx;
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+}
+.selUserType view{
+  width: 580rpx;
+  padding: 30rpx;
+  font-size: 30rpx;
+  color: #343434;
+}
 .setTime{
   width: 640rpx;
   // height: 300rpx;
@@ -76,6 +88,7 @@
   padding: 30rpx;
   border-radius: 20rpx;
 }
+
 .setTimeName{
   font-size: 34rpx;
   font: #343434;
@@ -142,6 +155,13 @@
   background-color: #fff;
   color: #7bb312;
 }
+.selTypeClose{
+  margin: auto;
+  text-align: center;
+  border-radius: 20rpx;
+  color: #fff !important;
+  background-color: #7bb312;
+}
 </style>
 <template>
   <view>
@@ -188,10 +208,17 @@
         </view>
       </repeat>
         
-      <view class="poperItem new" @tap="goUserSel">+</view>
+      <view class="poperItem new" @tap="selTypeShow">+</view>
     </view>
     <view class="reportButton">
       <view @tap="reportButton">报备</view>
+    </view>
+    <view class="mask" wx:if="{{selType}}">
+      <view class="selUserType">
+        <view @tap="goUserSel">选择客户</view>
+        <view @tap="goNewUser">新增客户</view>
+        <view class="selTypeClose" @tap="selTypeShow">关闭</view>
+      </view>
     </view>
     <view class="mask" wx:if="{{reportDom}}">
       <view class="setTime">
@@ -272,6 +299,7 @@ for (let i = 0; i < 60; i++) {
       requestImgUrl: '',
       diningRoom: [],
       reportDom: false,
+      selType: false,
       time: '',
       multiIndex: [0, 9, 16, 10, 17],
       multiArray: [years, months, days, hours, minutes],
@@ -284,12 +312,25 @@ for (let i = 0; i < 60; i++) {
     }
 
     methods = {
+      selTypeShow() {
+        if (this.selType) {
+          this.selType = false
+        } else {
+          this.selType = true
+        }
+      },
+      goNewUser() {
+        // 进入录入客户页
+        this.selType = false
+        this.$navigate(`/pages/setClient`)
+      },
       goLocalSel() {
         // 选择楼盘
         this.$navigate(`/pages/localSel`)
       },
       goUserSel() {
         // 选择用户
+        this.selType = false
         this.$navigate(`/pages/userSel`)
       },
       goLocalMoreInfo(e) {

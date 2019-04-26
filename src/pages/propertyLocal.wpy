@@ -28,7 +28,7 @@
         <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
       </view>
     </view>
-    <view class="typeSel">
+    <!-- <view class="typeSel">
       <view>
         区域
         <icon class="iconfont icon-jiantou-xia"></icon>
@@ -45,10 +45,10 @@
         更多
         <icon class="iconfont icon-jiantou-xia"></icon>
       </view>
-    </view>
+    </view> -->
     <view class="list">
       <!-- localList -->
-      <repeat for="{{localList}}" item="item">
+      <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
           <view class="pad">垫拥</view>
           <image data-id="" src="{{requestImgUrl + item.img}}" />
@@ -66,7 +66,7 @@
           </view>
         </view>
       </repeat>
-      <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
+      <view class="listPrompt">共有{{searchList.length}}个项目，已无更多内容</view>
     </view>
   </view>
   
@@ -92,7 +92,8 @@
       cityNode: {},
       userInfo: {},
       requestImgUrl: '',
-      localList: []
+      localList: [],
+      searchList: []
     }
 
     computed = {
@@ -108,6 +109,15 @@
         // 城市选择
         this.$navigate(`/pages/citySel`)
       },
+      searchRun(e) {
+        if (e.detail.value == '') {
+          this.searchList = this.localList
+          return ''
+        }
+        // 搜索执行
+        // 获取搜索内容
+        this.getSearchList(e.detail.value)
+      }
     }
 
     events = {
@@ -122,6 +132,18 @@
       this.cityNode = this.$parent.globalData.cityNode
       this.getLocalList()
     }
+    getSearchList(search) {
+      // 执行搜索
+      let i = 0
+      let localList = this.localList
+      let searchList = []
+      for (i in localList) {
+        if (localList[i].name.match(search)) {
+          searchList.push(localList[i])
+        }
+      }
+      this.searchList = searchList
+    }
     getLocalList() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/local_floor`,
@@ -133,7 +155,7 @@
         success: data => {
           if (data.data.code == 1) {
             this.localList = data.data.data
-            
+            this.searchList = this.localList
             this.$apply()
           } else {
             wx.showModal({

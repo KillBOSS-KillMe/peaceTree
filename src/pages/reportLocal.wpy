@@ -163,7 +163,7 @@
               <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
-            <view class="price">{{money.money}}元/㎡</view>
+            <view class="price">{{item.money}}元/㎡</view>
           </view>
         </view>
       </repeat>
@@ -184,7 +184,7 @@
             </view>
             <text>{{item.mobile}}</text>
           </view>
-          <icon class="iconfont icon-guanbi" @tap="goUserSel"></icon>
+          <!-- <icon class="iconfont icon-guanbi" @tap="goUserSel"></icon> -->
         </view>
       </repeat>
         
@@ -272,7 +272,7 @@ for (let i = 0; i < 60; i++) {
       requestImgUrl: '',
       diningRoom: [],
       reportDom: false,
-      time: '1',
+      time: '',
       multiIndex: [0, 9, 16, 10, 17],
       multiArray: [years, months, days, hours, minutes],
       reportUserList: [],
@@ -371,6 +371,9 @@ for (let i = 0; i < 60; i++) {
         this.setData(data)
       },
       submit() {
+        if (this.time == '') {
+          this.time = '1'
+        }
         wx.request({
           url: `${this.$parent.globalData.requestUrl}/client_floor_report`,
           method: 'POST',

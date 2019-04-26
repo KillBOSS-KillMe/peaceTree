@@ -144,7 +144,7 @@
       </view>
     </checkbox-group>
     <view class="reportButton">
-      <view @tap="reportButton">确定(1)</view>
+      <view @tap="reportButton">确定</view>
     </view>
   </view>
 </template>

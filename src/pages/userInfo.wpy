@@ -417,8 +417,8 @@ page{
             let reportList = data.data.data.floor_report
             let i = 0
             for (i in reportList) {
-              reportList[i].access_time = this.$parent.getLocalTime(reportList[i].access_time)
-              reportList[i].create_time = this.$parent.getLocalTime(reportList[i].create_time)
+              // reportList[i].access_time = this.$parent.getLocalTime(reportList[i].access_time)
+              // reportList[i].create_time = this.$parent.getLocalTime(reportList[i].create_time)
               reportList[i]['show'] = false
             }
             this.reportList = reportList

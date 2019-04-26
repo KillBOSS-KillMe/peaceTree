@@ -472,6 +472,9 @@ button{
         // e.currentTarget.dataset.id
         this.id = e.currentTarget.dataset.id
         this.getFoodList()
+        wx.pageScrollTo({
+          scrollTop: 0
+        })
       },
       tel(e) {
         // 拨打电话
@@ -498,6 +501,14 @@ button{
         })
       },
       collection() {
+        if (this.userInfo.mobile == '') {
+          wx.showModal({
+            title: '',
+            content: '请先注册'
+          })
+          this.$redirect('loginRegistered')
+          return ''
+        }
         // 收藏或取消收藏
         let typeData = 0
         if (this.localList.is_collect == 0) {
@@ -516,6 +527,14 @@ button{
         }
       },
       goReportUser(e) {
+        if (this.userInfo.mobile == '') {
+          wx.showModal({
+            title: '',
+            content: '请先注册'
+          })
+          this.$redirect('loginRegistered')
+          return ''
+        }
         // 进入报备用户页
         this.$navigate(`/pages/reportLocal?id=${e.currentTarget.dataset.id}`)
       },
@@ -593,8 +612,8 @@ button{
         success: data => {
           if (data.data.code == 1) {
             this.localList = data.data.data
-            this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
-            this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)
+            // this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
+            // this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)
             this.$apply()
           } else {
             wx.showModal({

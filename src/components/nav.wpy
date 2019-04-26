@@ -141,17 +141,34 @@ export default class Nav extends wepy.component {
     },
     // 客户
     goUserList() {
+      if (this.userInfo.mobile == '') {
+        wx.showModal({
+          title: '',
+          content: '请先注册'
+        })
+        this.$redirect('loginRegistered')
+        return ''
+      }
       // 顶部导航状态初始化
       this.$parent.$parent.globalData.navAction = ['noAction', 'action', 'noAction']
       this.$emit('childFn', '/pages/userList')
     },
     // 我的
     goUser() {
+       if (this.userInfo.mobile == '') {
+        wx.showModal({
+          title: '',
+          content: '请先注册'
+        })
+        this.$redirect('loginRegistered')
+        return ''
+      }
       this.$parent.$parent.globalData.navAction = ['noAction', 'noAction', 'action']
       this.$emit('childFn', '/pages/user')
     }
   };
   onLoad() {
+    this.userInfo = this.$parent.$parent.globalData.userInfo
     this.navAction = this.$parent.$parent.globalData.navAction
     this.$apply()
   };

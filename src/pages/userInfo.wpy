@@ -424,6 +424,10 @@ page{
           this.formIsShow = true
         }
       },
+      reportButton() {
+        // 进入报备页
+        this.$navigate(`/pages/reportLocal`)
+      },
       goLocalMoreInfo(e) {
         // 产看楼盘的更多信息
         this.$navigate(`/pages/localMoreInfo?id=${e.currentTarget.dataset.id}`)

@@ -375,8 +375,7 @@ for (let i = 0; i < 60; i++) {
           url: `${this.$parent.globalData.requestUrl}/client_floor_report`,
           method: 'POST',
           data: {
-            // uid: this.userInfo.id
-            uid: 3,
+            uid: this.userInfo.id,
             floor_id: this.reportLocalList[0].id,
             client_id: this.reportUserList[0].id,
             access_time: this.time,
@@ -414,6 +413,8 @@ for (let i = 0; i < 60; i++) {
       this.reportUserList = this.$parent.globalData.reportUserList
       // 选中的楼盘
       this.reportLocalList = this.$parent.globalData.reportLocalList
+      console.log(this.reportUserList )
+      console.log(this.reportLocalList )
     }
   }
 </script>

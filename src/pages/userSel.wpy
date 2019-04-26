@@ -155,8 +155,7 @@
         url: `${this.$parent.globalData.requestUrl}/client_list`,
         method: 'POST',
         data: {
-          // uid: this.userInfo.id
-          uid: 3
+          uid: this.userInfo.id
         },
         success: data => {
           if (data.data.code == 1) {

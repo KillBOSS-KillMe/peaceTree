@@ -175,20 +175,29 @@
       <view data-showtype="listProperty" class="name {{listShowType=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
       <view class="input">
         <icon class="iconfont icon-sousuo"></icon>
-        <input type="text" placeholder="输入名称" value="" />
+        <input type="text" placeholder="输入名称" bindinput="searchRun" />
       </view>
     </view>
-    <view class="seleteType">
-      <view data-state="" class="{{state==''?'action':''}}" @tap="getState">全部(3)</view>
-      <view data-state="1" class="{{state=='1'?'action':''}}" @tap="getState">已报备</view>
-      <view data-state="2" class="{{state=='2'?'action':''}}" @tap="getState">报备有效</view>
-      <view data-state="3" class="{{state=='3'?'action':''}}" @tap="getState">带看</view>
-      <view data-state="4" class="{{state=='4'?'action':''}}" @tap="getState">大定</view>
-      <view data-state="5" class="{{state=='5'?'action':''}}" @tap="getState">业绩确认</view>
-      <view data-state="6" class="{{state=='6'?'action':''}}" @tap="getState">无效</view>
+    <view class="seleteType" wx:if="{{listShowType=='listClient'}}">
+      <view data-state="" class="{{state==''?'action':''}}" @tap="getStateClient">全部({{userReporList.length}})</view>
+      <view data-state="1" class="{{state=='1'?'action':''}}" @tap="getStateClient">已报备</view>
+      <view data-state="2" class="{{state=='2'?'action':''}}" @tap="getStateClient">报备有效</view>
+      <view data-state="3" class="{{state=='3'?'action':''}}" @tap="getStateClient">带看</view>
+      <view data-state="4" class="{{state=='4'?'action':''}}" @tap="getStateClient">大定</view>
+      <view data-state="5" class="{{state=='5'?'action':''}}" @tap="getStateClient">业绩确认</view>
+      <view data-state="6" class="{{state=='6'?'action':''}}" @tap="getStateClient">无效</view>
+    </view>
+    <view class="seleteType" wx:if="{{listShowType=='listProperty'}}">
+      <view data-state="" class="{{state==''?'action':''}}" @tap="getStateProperty">全部({{localReporList.length}})</view>
+      <view data-state="1" class="{{state=='1'?'action':''}}" @tap="getStateProperty">已报备</view>
+      <view data-state="2" class="{{state=='2'?'action':''}}" @tap="getStateProperty">报备有效</view>
+      <view data-state="3" class="{{state=='3'?'action':''}}" @tap="getStateProperty">带看</view>
+      <view data-state="4" class="{{state=='4'?'action':''}}" @tap="getStateProperty">大定</view>
+      <view data-state="5" class="{{state=='5'?'action':''}}" @tap="getStateProperty">业绩确认</view>
+      <view data-state="6" class="{{state=='6'?'action':''}}" @tap="getStateProperty">无效</view>
     </view>
     <view class="listClient" wx:if="{{listShowType=='listClient'}}">
-      <repeat for="{{userReporList}}" item="item">
+      <repeat for="{{userReporListShow}}" item="item">
         <view class="item">
           <view class="info">
             <view class="con">
@@ -217,10 +226,10 @@
         </view>
       </repeat>
       
-      <view class="prompt">共有{{userReporList.length}}条纪录，已无更多内容</view>
+      <view class="prompt">共有{{userReporListShow.length}}条纪录，已无更多内容</view>
     </view>
     <view class="listProperty" wx:if="{{listShowType=='listProperty'}}">
-      <repeat for="{{localReporList}}" item="item">
+      <repeat for="{{localReporListShow}}" item="item">
         <view class="item">
           <view class="propertyInfo">
             <view class="con">
@@ -255,7 +264,7 @@
           </view>
         </view>
       </repeat>
-      <view class="prompt">共有{{localReporList.length}}条纪录，已无更多内容</view>
+      <view class="prompt">共有{{localReporListShow.length}}条纪录，已无更多内容</view>
     </view>
   </view>
 </template>
@@ -278,7 +287,9 @@
       state: '',
       listShowType: 'listClient',
       userReporList: [],
-      localReporList: []
+      userReporListShow: [],
+      localReporList: [],
+      localReporListShow: []
     }
 
     computed = {
@@ -286,6 +297,40 @@
     }
 
     methods = {
+      getStateClient(e) {
+        var state = e.currentTarget.dataset.state
+        this.state = state
+        if (state == '') {
+          this.userReporListShow = this.userReporList
+          return ''
+        }
+        var userReporList = this.userReporList
+        var userReporListShow = []
+        var i = 0
+        for(i in userReporList) {
+          if (userReporList[i].state == state) {
+            userReporListShow.push(userReporList[i])
+          }
+        }
+        this.userReporListShow = userReporListShow
+      },
+      getStateProperty(e) {
+        var state = e.currentTarget.dataset.state
+         this.state = state
+        if (state == '') {
+          this.localReporListShow = this.localReporList
+          return ''
+        }
+        var localReporList = this.localReporList
+        var localReporListShow = []
+        var i = 0
+        for(i in localReporList) {
+          if (localReporList[i].state == state) {
+            localReporListShow.push(localReporList[i])
+          }
+        }
+        this.localReporListShow = localReporListShow
+      },
       tal(e) {
         // 拨打电话
         wx.makePhoneCall({
@@ -313,7 +358,20 @@
         } else if (this.listShowType == 'listProperty') {
           this.getLocalReporList()
         }
-      }
+      },
+      searchRun(e) {
+        if (e.detail.value == '') {
+          if (this.listShowType == 'listClient') {
+            this.userReporListShow = this.userReporList
+          } else {
+            this.localReporListShow = this.localReporList
+          }
+          return ''
+        }
+        // 搜索执行
+        // 获取搜索内容
+        this.getSearchList(e.detail.value)
+      },
     }
 
     events = {
@@ -336,6 +394,7 @@
         success: data => {
           if (data.data.code == 1) {
             this.userReporList = data.data.data
+            this.userReporListShow = this.userReporList
             this.$apply()
           }
         }
@@ -352,10 +411,34 @@
         success: data => {
           if (data.data.code == 1) {
             this.localReporList = data.data.data
+            this.localReporListShow = this.localReporList
             this.$apply()
           }
         }
       })
+    }
+    getSearchList(search) {
+      if (this.listShowType == 'listClient') {
+        let i = 0
+        let userReporList = this.userReporList
+        let userReporListShow = []
+        for (i in userReporList) {
+          if (userReporList[i].name.match(search)) {
+            userReporListShow.push(userReporList[i])
+          }
+        }
+        this.userReporListShow = userReporListShow
+      } else {
+        let i = 0
+        let localReporList = this.localReporList
+        let localReporListShow = []
+        for (i in localReporList) {
+          if (localReporList[i].floor_name.match(search)) {
+            localReporListShow.push(localReporList[i])
+          }
+        }
+        this.localReporListShow = localReporListShow
+      }
     }
   }
 </script>

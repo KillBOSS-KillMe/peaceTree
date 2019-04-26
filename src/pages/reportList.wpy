@@ -108,6 +108,9 @@
   .status-fail{
     color: #fa5454
   }
+  .status-access{
+    color: #7bb312
+  }
   .prompt{
     width: 750rpx;
     height: 95rpx;
@@ -172,7 +175,7 @@
       <view data-showtype="listProperty" class="name {{listShowType=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
       <view class="input">
         <icon class="iconfont icon-sousuo"></icon>
-        <input type="text" value="二狗子" />
+        <input type="text" placeholder="输入名称" value="" />
       </view>
     </view>
     <view class="seleteType">
@@ -185,126 +188,74 @@
       <view data-state="6" class="{{state=='6'?'action':''}}" @tap="getState">无效</view>
     </view>
     <view class="listClient" wx:if="{{listShowType=='listClient'}}">
-      <view class="item">
-        <view class="info">
-          <view class="con">
-            <view>
-              <text class="name">二狗子</text>
-              <text class="reservation">18888888888</text>
+      <repeat for="{{userReporList}}" item="item">
+        <view class="item">
+          <view class="info">
+            <view class="con">
+              <view>
+                <text class="name">{{item.name}}</text>
+                <text class="reservation" data-phone="{{item.mobile}}" @tap="tal">{{item.mobile}}</text>
+              </view>
+              <view class="address">{{item.floor_name}}</view>
+              <view class="reservation">预计到访时间：{{item.access_time}}</view>
             </view>
-            <view class="address">软件新城·A9</view>
-            <view class="reservation">预计到访时间：2019/04/08 11：30</view>
+            <icon class="iconfont icon-erweima"></icon>
           </view>
-          <icon class="iconfont icon-erweima"></icon>
-        </view>
-        <view class="time">
-          <view>
-            <icon class="iconfont icon-shijian"></icon>
-            2019/04/09
-          </view>
-          <view class="status-fail">报备无效</view>
-        </view>
-      </view>
-      <view class="item">
-        <view class="info">
-          <view class="con">
+          <view class="time">
             <view>
-              <text class="name">二狗子</text>
-              <text class="reservation">18888888888</text>
+              <icon class="iconfont icon-shijian"></icon>
+              {{item.create_time}}
             </view>
-            <view class="address">软件新城·A9</view>
-            <view class="reservation">预计到访时间：2019/04/08 11：30</view>
+            <view class="status-access" wx:if="{{item.state == '1'}}">已报备</view>
+            <view class="status-access" wx:if="{{item.state == '2'}}">报备有效</view>
+            <view class="status-access" wx:if="{{item.state == '3'}}">带看</view>
+            <view class="status-access" wx:if="{{item.state == '4'}}">大定</view>
+            <view class="status-access" wx:if="{{item.state == '5'}}">业绩确认</view>
+            <view class="status-fail" wx:if="{{item.state == '6'}}">报备无效</view>
+            
           </view>
-          <icon class="iconfont icon-erweima"></icon>
         </view>
-        <view class="time">
-          <view>
-            <icon class="iconfont icon-shijian"></icon>
-            2019/04/09
-          </view>
-          <view>报备有效</view>
-        </view>
-      </view>
-      <view class="item">
-        <view class="info">
-          <view class="con">
-            <view>
-              <text class="name">二狗子</text>
-              <text class="reservation">18888888888</text>
-            </view>
-            <view class="address">软件新城·A9</view>
-            <view class="reservation">预计到访时间：2019/04/08 11：30</view>
-          </view>
-          <icon class="iconfont icon-erweima"></icon>
-        </view>
-        <view class="time">
-          <view>
-            <icon class="iconfont icon-shijian"></icon>
-            2019/04/09
-          </view>
-          <view>报备有效</view>
-        </view>
-      </view>
-      <view class="prompt">共有三条纪录，已无更多内容</view>
+      </repeat>
+      
+      <view class="prompt">共有{{userReporList.length}}条纪录，已无更多内容</view>
     </view>
     <view class="listProperty" wx:if="{{listShowType=='listProperty'}}">
-      <view class="item">
-        <view class="propertyInfo">
-          <view class="con">
-            <view class="name">二狗子楼盘</view>
-            <view class="address">
-              <icon class="iconfont icon-erweima"></icon>
-              软件新城·A9
+      <repeat for="{{localReporList}}" item="item">
+        <view class="item">
+          <view class="propertyInfo">
+            <view class="con">
+              <view class="name">{{item.floor_name}}</view>
+              <view class="address">
+                <icon class="iconfont icon-erweima"></icon>
+                {{item.floor_address}}
+              </view>
+            </view>
+          </view>
+          <view class="reservation">
+            <view class="userInfo">
+              <view>
+                <text class="name">{{item.name}}</text>
+                <text class="time" data-phone="{{item.mobile}}" @tap="tal">{{item.mobile}}</text>
+              </view>
+              <view class="time">预计到访时间：{{item.access_time}}</view>
+              <view class="time">
+                <icon class="iconfont icon-shijian"></icon>
+                {{item.create_time}}
+              </view>
+            </view>
+            <view class="info">
+              <view class="iconfont icon-erweima"></view>
+              <view class="status-access" wx:if="{{item.state == '1'}}">已报备</view>
+              <view class="status-access" wx:if="{{item.state == '2'}}">报备有效</view>
+              <view class="status-access" wx:if="{{item.state == '3'}}">带看</view>
+              <view class="status-access" wx:if="{{item.state == '4'}}">大定</view>
+              <view class="status-access" wx:if="{{item.state == '5'}}">业绩确认</view>
+              <view class="status-fail" wx:if="{{item.state == '6'}}">报备无效</view>
             </view>
           </view>
         </view>
-        <view class="reservation">
-          <view class="userInfo">
-            <view>
-              <text class="name">二狗子</text>
-              <text class="time">18888888888</text>
-            </view>
-            <view class="time">预计到访时间：2019/04/09 11:30</view>
-            <view class="time">
-              <icon class="iconfont icon-shijian"></icon>
-              2019/04/09
-            </view>
-          </view>
-          <view class="info">
-            <view class="iconfont icon-erweima"></view>
-            <view class="status-fail">报备无效</view>
-          </view>
-        </view>
-      </view>
-      <view class="item">
-        <view class="propertyInfo">
-          <view class="con">
-            <view class="name">二狗子楼盘</view>
-            <view class="address">
-              <icon class="iconfont icon-erweima"></icon>
-              软件新城·A9
-            </view>
-          </view>
-        </view>
-        <view class="reservation">
-          <view class="userInfo">
-            <view>
-              <text class="name">二狗子</text>
-              <text class="time">18888888888</text>
-            </view>
-            <view class="time">预计到访时间：2019/04/09 11:30</view>
-            <view class="time">
-              <icon class="iconfont icon-shijian"></icon>
-              2019/04/09
-            </view>
-          </view>
-          <view class="info">
-            <view class="iconfont icon-erweima"></view>
-            <view class="">报备无效</view>
-          </view>
-        </view>
-      </view>
-      <view class="prompt">共有三条纪录，已无更多内容</view>
+      </repeat>
+      <view class="prompt">共有{{localReporList.length}}条纪录，已无更多内容</view>
     </view>
   </view>
 </template>
@@ -323,7 +274,6 @@
     mixins = []
 
     data = {
-      img: '/img/test.jpg',
       userInfo: null,
       state: '',
       listShowType: 'listClient',
@@ -336,13 +286,23 @@
     }
 
     methods = {
+      tal(e) {
+        // 拨打电话
+        wx.makePhoneCall({
+          phoneNumber: e.currentTarget.dataset.phone
+        })
+      },
       listSelShow(e) {
-      //   <view class="name {{thisListShow=='listClient'?'action':''}}" @tap="listSelShow">报备客户</view>
-      // <view class="name {{thisListShow=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
+      // <view data-showtype="listClient" class="name {{listShowType=='listClient'?'action':''}}" @tap="listSelShow">报备客户</view>
+      // <view data-showtype="listProperty" class="name {{listShowType=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
         this.listShowType = e.currentTarget.dataset.showtype
         if (this.listShowType == 'listClient') {
+          this.listShowType = 'listClient'
+          this.$apply()
           this.getUserReporList()
         } else if (this.listShowType == 'listProperty') {
+          this.listShowType = 'listProperty'
+          this.$apply()
           this.getLocalReporList()
         }
       },
@@ -371,12 +331,12 @@
         url: `${this.$parent.globalData.requestUrl}/client_report`,
         method: 'POST',
         data: {
-          uid: this.userInfo.id,
-          state: this.state
+          uid: this.userInfo.id
         },
         success: data => {
           if (data.data.code == 1) {
-            var userReporList = data.data.data
+            this.userReporList = data.data.data
+            this.$apply()
           }
         }
       })
@@ -387,12 +347,12 @@
         url: `${this.$parent.globalData.requestUrl}/floor_report`,
         method: 'POST',
         data: {
-          uid: this.userInfo.id,
-          state: this.state
+          uid: this.userInfo.id
         },
         success: data => {
           if (data.data.code == 1) {
-            var localReporList = data.data.data
+            this.localReporList = data.data.data
+            this.$apply()
           }
         }
       })

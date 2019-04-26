@@ -237,11 +237,11 @@ page{
     <view class="userInfo">
       <view>
         <view class="info">
-          <view>{{usernode.name}}</view>
-          <view class="ms" wx:if="{{usernode.sex == '2'}}">女士</view>
-          <view class="men" wx:if="{{usernode.sex == '1'}}">男士</view>
+          <view>{{clinetInfo.client.name}}</view>
+          <view class="ms" wx:if="{{clinetInfo.client.sex == '2'}}">女士</view>
+          <view class="men" wx:if="{{clinetInfo.client.sex == '1'}}">男士</view>
         </view>
-        <view class="phone" data-phone="{{usernode.mobile}}" @tap="tal">{{usernode.mobile}}</view>
+        <view class="phone" data-phone="{{clinetInfo.client.mobile}}" @tap="tal">{{clinetInfo.client.mobile}}</view>
       </view>
       <view class="edit" @tap="edit">
         <icon class="iconfont icon-bianji"></icon>
@@ -266,13 +266,13 @@ page{
             <view class="status">
               <view class="mark">
                 <view class="success" wx:if="{{item.state == '1'}}"></view>
-                <view class="failure" wx:if="{{item.state == '2'}}"></view>
+                <view class="failure" wx:if="{{item.state == '0'}}"></view>
                 <view wx:if="{{item.formIsShow}}"></view>
                 <view wx:if="{{item.formIsShow}}"></view>
               </view>
               <view class="markInfo">
                 <view class="success" wx:if="{{item.state == '1'}}">报备生效  {{item.access_time}}</view>
-                <view class="failure" wx:if="{{item.state == '2'}}">报备无效  {{item.access_time}}</view>
+                <view class="failure" wx:if="{{item.state == '0'}}">报备无效  {{item.access_time}}</view>
                 <view wx:if="{{item.formIsShow}}">报备无效  {{item.create_time}}</view>
               </view>
             </view>
@@ -407,6 +407,7 @@ page{
         },
         success: data => {
           if (data.data.code == 1) {
+            this.clinetInfo = data.data.data
             let reportList = data.data.data.floor_report
             let i = 0
             for (i in reportList) {
@@ -442,13 +443,40 @@ page{
         })
         return ''
       }
-      if (this.check.isNull(this.name)) {
-        wx.showModal({
-          title: '',
-          content: '请输入备注'
-        })
-        return ''
-      }
+      // if (this.check.isNull(this.remarks)) {
+      //   wx.showModal({
+      //     title: '',
+      //     content: '请输入备注'
+      //   })
+      //   return ''
+      // }
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/client_edit`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id,
+          name: this.name,
+          mobile: this.mobile,
+          remarks: this.remarks,
+          client_id: this.usernode.id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.formIsShow = false
+            wx.showModal({
+              title: '',
+              content: '信息修改成功'
+            })
+            this.getclientInfo()
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
     }
   }
 </script>

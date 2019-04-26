@@ -120,7 +120,7 @@
     </view>
     <checkbox-group bindchange="selLocal" data-index="{{index}}" data-checks="{{item.checks}}">
       <view class="localList">
-        <repeat for="{{localList}}" item="item">
+        <repeat for="{{searchList}}" item="item">
           <view class="item">
             <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
             <view class="img">
@@ -168,21 +168,26 @@ export default class LocalSel extends wepy.page {
     userInfo: {},
     cityNode: {},
     requestImgUrl: '',
-    localList: []
+    localList: [],
+    searchList: []
   };
 
   computed = {};
 
   methods = {
     searchRun(e) {
+      if (e.detail.value == '') {
+        this.searchList = this.localList
+        return ''
+      }
       // 搜索执行
       // 获取搜索内容
-      console.log(e.detail.value)
+      this.getSearchList(e.detail.value)
     },
     selLocal(e) {
       let i = 0
       let cartIndex = e.detail.value
-      let localList = this.localList
+      let localList = this.searchList
       let selList = []
       // 需要加入去重操作
       for(i in cartIndex) {
@@ -215,6 +220,7 @@ export default class LocalSel extends wepy.page {
       success: data => {
         if (data.data.code == 1) {
           this.localList = data.data.data
+          this.searchList = this.localList
           this.$apply();
         } else {
           wx.showModal({
@@ -224,6 +230,18 @@ export default class LocalSel extends wepy.page {
         }
       }
     });
+  }
+  getSearchList(search) {
+    // 执行搜索
+    let i = 0
+    let localList = this.localList
+    let searchList = []
+    for (i in localList) {
+      if (localList[i].name.match(search)) {
+        searchList.push(localList[i])
+      }
+    }
+    this.searchList = searchList
   }
 }
 </script>

@@ -49,11 +49,15 @@
 </style>
 <template>
   <view>
-    <search></search>
+    <!-- <search></search> -->
+    <view class="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
+    </view>
     <checkbox-group bindchange="selUser" data-index="{{index}}" data-checks="{{item.checks}}">
       <view class="userList">
-        <view class="type">A</view>
-        <repeat for="{{userList}}" item="item">
+        <!-- <view class="type">A</view> -->
+        <repeat for="{{searchList}}" item="item">
           <view class="item" data-id="{{item.id}}" @tap="goUserInfo">
             <view>
               <checkbox data-index="{{1}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
@@ -88,7 +92,8 @@
       test: '',
       userInfo: {},
       requestImgUrl: '',
-      userList: []
+      userList: [],
+      searchList: []
     }
 
     computed = {
@@ -96,6 +101,15 @@
     }
 
     methods = {
+      searchRun(e) {
+        if (e.detail.value == '') {
+          this.searchList = this.userList
+          return ''
+        }
+        // 搜索执行
+        // 获取搜索内容
+        this.getSearchList(e.detail.value)
+      },
       // 底部导航跳转
       goPage (url, evt) {
         // 销毁当前页{跳转}
@@ -160,6 +174,7 @@
         success: data => {
           if (data.data.code == 1) {
             this.userList = data.data.data
+            this.searchList = this.userList
             this.$apply()
           } else {
             wx.showModal({
@@ -169,6 +184,18 @@
           }
         }
       })
+    }
+    getSearchList(search) {
+      // 执行搜索
+      let i = 0
+      let localList = this.userList
+      let searchList = []
+      for (i in localList) {
+        if (localList[i].name.match(search)) {
+          searchList.push(localList[i])
+        }
+      }
+      this.searchList = searchList
     }
   }
 </script>

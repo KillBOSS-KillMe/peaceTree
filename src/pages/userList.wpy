@@ -80,8 +80,6 @@
           </view>
         </view>
       </repeat>
-      
-
     </view>
     <nav @childFn.user="goPage" />
   </view>
@@ -93,7 +91,7 @@
   import nav from '../components/nav' // 底部导航
   export default class UserList extends wepy.page {
     config = {
-      navigationBarTitleText: '录入新客'
+      navigationBarTitleText: '客户列表'
     }
     components = {
       search: search,

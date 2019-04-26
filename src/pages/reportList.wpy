@@ -221,11 +221,9 @@
             <view class="status-access" wx:if="{{item.state == '4'}}">大定</view>
             <view class="status-access" wx:if="{{item.state == '5'}}">业绩确认</view>
             <view class="status-fail" wx:if="{{item.state == '6'}}">报备无效</view>
-            
           </view>
         </view>
       </repeat>
-      
       <view class="prompt">共有{{userReporListShow.length}}条纪录，已无更多内容</view>
     </view>
     <view class="listProperty" wx:if="{{listShowType=='listProperty'}}">

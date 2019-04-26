@@ -60,7 +60,7 @@
       <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
     </view>
     <view class="list">
-      <repeat for="{{collectList}}" item="item">
+      <repeat for="{{collectListShow}}" item="item">
         <view class="item">
           <image data-id="{{item.id}}" src="{{requestImgUrl + item.img}}" />
           <view>
@@ -69,7 +69,7 @@
               <view class="label" data-id="{{item.id}}" @tap="collection">取消收藏</view>
             </view>
             <view class="address">
-              <icon class="iconfont icon-sousuo"></icon>
+              <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
             <view class="price">{{item.money}}元/㎡</view>
@@ -97,7 +97,8 @@
       img: '/img/test.jpg',
       userInfo: null,
       requestImgUrl: '',
-      collectList: []
+      collectList: [],
+      collectListShow: [],
     }
 
     computed = {
@@ -129,6 +130,8 @@
         // 搜索执行
         // 获取搜索内容
         console.log(e.detail.value)
+        this.userReporListShow = this.userReporList
+        this.getSearchList(e.detail.value)
       },
       collection(e) {
         this.collectionRun(e.currentTarget.dataset.id)
@@ -154,6 +157,7 @@
         success: data => {
           if (data.data.code == 1) {
             this.collectList = data.data.data
+            this.collectListShow = this.collectList
             this.$apply()
           } else {
             wx.showModal({
@@ -185,6 +189,17 @@
           }
         }
       })
+    }
+    getSearchList(search) {
+      let i = 0
+      let collectList = this.collectList
+      let collectListShow = []
+      for (i in collectList) {
+        if (collectList[i].name.match(search)) {
+          collectListShow.push(collectList[i])
+        }
+      }
+      this.collectListShow = collectListShow
     }
   }
 </script>

@@ -428,7 +428,8 @@ button{
     </view>
     <view class="mask" wx:if="{{selMobileShow}}">
       <view class="mobile">
-        <view class="selMobile" data-phone="{{localList.mobile}}" @tap="tel">{{localList.contact}}：{{localList.mobile}}</view>
+        <view class="selMobile" data-phone="{{localList.mobile}}" @tap="tel">项目经理{{localList.contact}}：{{localList.mobile}}</view>
+        <view class="selMobile" data-phone="{{localList.resident_mobile}}" @tap="tel">项目驻场{{localList.resident_name}}：{{localList.resident_mobile}}</view>
         <view class="mobileClose" @tap="mobileShow">关闭</view>
       </view>
     </view>

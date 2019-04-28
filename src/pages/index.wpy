@@ -214,6 +214,28 @@
   .item .price{
     margin-top: 45rpx;
   }
+  .priceOrcommission{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .commission{
+    margin-top:45rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #ee5e7b;
+    font-size: 25rpx;
+    font-weight: 600;
+  }
+  .commission view{
+    padding: 0 5rpx;
+    background-color: #ee5e7b;
+    color: #fff;
+    font-size: 25rpx;
+    border-radius: 5rpx;
+  }
 </style>
 <template>
   <view>
@@ -274,7 +296,13 @@
               <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
-            <view class="price">{{item.money}}元/㎡</view>
+            <view class="priceOrcommission">
+              <view class="price">{{item.money}}元/㎡</view>
+              <view class="commission">
+                <view>佣</view>
+                {{item.brokerage}}%
+              </view>
+            </view>
           </view>
         </view>
       </repeat>
@@ -296,7 +324,13 @@
               <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
-            <view class="price">{{item.money}}元/㎡</view>
+            <view class="priceOrcommission">
+              <view class="price">{{item.money}}元/㎡</view>
+              <view class="commission">
+                <view>佣</view>
+                {{item.brokerage}}%
+              </view>
+            </view>
           </view>
         </view>
       </repeat>

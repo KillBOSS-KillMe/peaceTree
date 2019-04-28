@@ -89,9 +89,18 @@ input{
         <view class="info">建议输入全号，若项目可隐号报备，系统自动做隐号处理</view>
       </view>
     </view>
-    <view class="reportButton">
-      <view @tap="newClient">添加到报备</view>
+    <view class="setUserInfo">
+      <checkbox-group bindchange="selCommodity" data-value="{{1}}">
+        <checkbox checked="{{1}}"/>
+        报备楼盘
+      </checkbox-group>
     </view>
+    
+    <view class="reportButton">
+      <view wx:if="{{checksSel.length > 0}}" @tap="newClient">添加到报备</view>
+      <view wx:if="{{checksSel.length == 0}}" @tap="newClient">添加客户</view>
+    </view>
+    
   </view>
 </template>
 
@@ -113,7 +122,8 @@ input{
       userInfo: null,
       selGender: 1,
       clientName: '',
-      clientMobile: ''
+      clientMobile: '',
+      checksSel: ['']
     }
 
     computed = {
@@ -121,6 +131,10 @@ input{
     }
 
     methods = {
+      selCommodity(e) {
+        this.checksSel = e.detail.value
+        console.log(this.checksSel)
+      },
       selGender() {
         if (this.selGender) {
           this.selGender = 2
@@ -171,13 +185,23 @@ input{
         },
         success: data => {
           if (data.data.code == 1) {
-            wx.showModal({
-              title: '',
-              content: '客户录入成功'
-            })
-            wx.navigateBack({
-              data: -1
-            })
+            if (this.checksSel.length > 0) {
+              var selList = []
+              selList.push({'id': data.data.data, 'name': this.clientName, 'mobile': this.clientMobile})
+              // 选中的用户存入全局
+              console.log(selList)
+              this.$parent.globalData.reportUserList = selList
+              this.$navigate(`/pages/reportLocal`)
+            } else {
+              wx.showModal({
+                title: '',
+                content: '客户录入成功'
+              })
+              wx.navigateBack({
+                data: -1
+              })
+            }
+            
           } else {
             wx.showModal({
               title: '',

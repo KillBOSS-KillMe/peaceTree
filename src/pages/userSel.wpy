@@ -130,7 +130,6 @@
         let selList = []
         // 需要加入去重操作
         for(i in cartIndex) {
-          console.log(userList[parseInt(cartIndex[i])])
           selList.push(userList[parseInt(cartIndex[i])])
         }
         // 选中的用户存入全局

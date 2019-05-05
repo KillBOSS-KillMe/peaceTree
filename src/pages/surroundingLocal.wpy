@@ -99,7 +99,7 @@
     <view class="list">
       <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
-          <view class="pad">垫拥</view>
+          <!-- <view class="pad">垫拥</view> -->
           <image data-id="" src="{{requestImgUrl + item.img}}" />
           <view class="con">
             <view class="title">

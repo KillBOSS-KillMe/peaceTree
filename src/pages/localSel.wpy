@@ -124,7 +124,7 @@
           <view class="item">
             <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
             <view class="img">
-              <view class="pad">垫拥</view>
+              <!-- <view class="pad">垫拥</view> -->
               <image data-id="" src="{{requestImgUrl + item.img}}" />
             </view>
             <view class="con">

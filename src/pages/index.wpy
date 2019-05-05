@@ -287,7 +287,7 @@
     <view class="list" wx:if="{{searchList.length > 0}}">
       <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
-          <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view>
+          <!-- <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view> -->
           <image src="{{requestImgUrl + item.img}}" />
           <view class="con">
             <view class="title">
@@ -315,7 +315,7 @@
     <view class="list">
       <repeat for="{{localList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
-          <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view>
+          <!-- <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view> -->
           <image src="{{requestImgUrl + item.img}}" />
           <view class="con">
             <view class="title">

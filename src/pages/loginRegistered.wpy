@@ -116,7 +116,6 @@
 
     onLoad(options) {
       this.userInfo = this.$parent.globalData.userInfo
-      console.log(this.userInfo)
       // this.onGetUserInfo()
     }
     //      // 获取用户信息

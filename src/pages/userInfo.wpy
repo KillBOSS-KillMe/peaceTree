@@ -422,7 +422,6 @@ page{
               reportList[i]['show'] = false
             }
             this.reportList = reportList
-            console.log(this.reportList)
             this.$apply()
           } else {
             wx.showModal({

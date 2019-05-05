@@ -457,8 +457,6 @@ for (let i = 0; i < 60; i++) {
       this.reportUserList = this.$parent.globalData.reportUserList
       // 选中的楼盘
       this.reportLocalList = this.$parent.globalData.reportLocalList
-      console.log(this.reportUserList )
-      console.log(this.reportLocalList )
     }
   }
 </script>

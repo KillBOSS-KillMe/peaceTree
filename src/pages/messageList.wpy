@@ -104,7 +104,6 @@
         success: data => {
           if (data.data.code == 1) {
             this.messageList = data.data.data
-            console.log(this.messageList)
             this.$apply()
           } else {
             wx.showModal({

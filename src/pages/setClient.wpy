@@ -133,7 +133,6 @@ input{
     methods = {
       selCommodity(e) {
         this.checksSel = e.detail.value
-        console.log(this.checksSel)
       },
       selGender() {
         if (this.selGender) {
@@ -189,7 +188,6 @@ input{
               var selList = []
               selList.push({'id': data.data.data, 'name': this.clientName, 'mobile': this.clientMobile})
               // 选中的用户存入全局
-              console.log(selList)
               this.$parent.globalData.reportUserList = selList
               this.$navigate(`/pages/reportLocal`)
             } else {

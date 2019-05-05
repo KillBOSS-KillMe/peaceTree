@@ -129,7 +129,6 @@
       searchRun(e) {
         // 搜索执行
         // 获取搜索内容
-        console.log(e.detail.value)
         this.userReporListShow = this.userReporList
         this.getSearchList(e.detail.value)
       },

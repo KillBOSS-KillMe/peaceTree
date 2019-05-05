@@ -380,7 +380,8 @@
         this.$redirect(url)
       },
       goSelCity() {
-        // 城市选择
+        // 城市选择‘
+        console.log(this.userInfo.mobile !== '')
         if (this.userInfo.mobile !== '') {
           this.$navigate(`/pages/citySel`)
         } else {
@@ -435,8 +436,7 @@
     }
 
     onLoad(options) {
-      this.userInfo = this.$parent.globalData.userInfo
-      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      
       // 获取楼盘列表
       this.getLocalList()
       // 获取用户信息
@@ -444,6 +444,8 @@
       this.onGetUserInfo()
     }
     onShow() {
+      // this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.cityNode = this.$parent.globalData.cityNode
       if (Object.keys(this.cityNode).length == 0) {
         // 加载城市列表,获取定位，获取所在城市
@@ -495,7 +497,6 @@
       wepy.login({
         success: res => {
           if (res.code) {
-            console.log(res.code)
             this.code = res.code
             wx.request({
               url: `${this.$parent.globalData.requestUrl}/login`,
@@ -512,7 +513,9 @@
                   this.$parent.globalData.userInfoID = data.id
                   this.userInfoID = data.id
                   this.mobile = data.mobile
-                  this.$parent.globalData.userInfo = data
+                  this.userInfo = data
+                  this.$parent.globalData.userInfo = this.userInfo
+                  
                   // if (this.mobile) {
                   //   this.$redirect('index')
                   // }

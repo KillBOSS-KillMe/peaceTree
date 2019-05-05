@@ -269,8 +269,23 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }
     onShow() {
-      this.userInfo = this.$parent.globalData.userInfo
+      this.getUserInfo()
     }
-    
+    getUserInfo() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.userInfo = data.data.data
+            this.$parent.globalData.userInfo = this.userInfo
+            this.$apply()
+          }
+        }
+      })
+    }
   }
 </script>

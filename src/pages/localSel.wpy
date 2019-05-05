@@ -194,7 +194,6 @@ export default class LocalSel extends wepy.page {
         selList.push(localList[parseInt(cartIndex[i])])
       }
       // 选中的用户存入全局
-      console.log(selList)
       this.$parent.globalData.reportLocalList = selList
       wx.navigateBack({
         data: -1

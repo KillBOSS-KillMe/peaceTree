@@ -97,10 +97,6 @@
           this.searchList = []
           return ''
         }
-        // let cityNode = this.cityNode
-        // console.log(e.detail.value)
-        // let i = 0
-        // for (i in ) {}
         this.getSearchList(e.detail.value)
       }
     }

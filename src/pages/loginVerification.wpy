@@ -80,6 +80,7 @@
     }
 
     onLoad(options) {
+      this.userInfo = this.$parent.globalData.userInfo
       this.mobile = options.mobile
     }
     setCode() {
@@ -88,10 +89,11 @@
         method: 'POST',
         data: {
           code: this.code,
+          uid: this.userInfo.id,
           mobile: this.mobile
         },
         success: data => {
-          if (data.data.code == 1) {
+          if (data.data.code === '1') {
             wx.showModal({
               title: '',
               content: '绑定成功'

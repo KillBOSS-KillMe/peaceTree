@@ -560,7 +560,6 @@ button{
         // zxzk 装修状况
         let setData = this.localList
         let urldata = `jfsj=${setData.delivery_time}&cqnx=${setData.delivery_time}&wygs=${setData.property}&kfs=${setData.developer}&kfspp=${setData.brand_developer}&jzmj=${setData.construction_area}&rjl=${setData.volume_rate}&lhl=${setData.green_rate}&zhs=${setData.total_houses}&cws=${setData.car_number}&cwb=${setData.car_scale}&jj=${setData.average_price}&dfl=${setData.room_rate}&wyf=${setData.property_costs}&wylx=${setData.property_type}&jzlx=${setData.building_type}&zxzk=${setData.decoration_status}`
-        console.log(`/pages/localMoreInfo?${urldata}`)
         this.$navigate(`/pages/localMoreInfo?${urldata}`)
       },
       goRuleInfo(e) {

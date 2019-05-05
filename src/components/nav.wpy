@@ -141,6 +141,7 @@ export default class Nav extends wepy.component {
     },
     // 客户
     goUserList() {
+      this.userInfo = this.$parent.$parent.globalData.userInfo
       if (this.userInfo.mobile == '') {
         wx.showModal({
           title: '',
@@ -155,6 +156,7 @@ export default class Nav extends wepy.component {
     },
     // 我的
     goUser() {
+      this.userInfo = this.$parent.$parent.globalData.userInfo
        if (this.userInfo.mobile == '') {
         wx.showModal({
           title: '',

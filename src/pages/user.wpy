@@ -19,16 +19,16 @@
     border-radius: 125rpx;
     margin-right: 20rpx;
   }
-  .userInfo .info{
+  .userInfo .info .item{
     width: 425rpx;
-    height: 205rpx;
+    // height: 205rpx;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    font-size: 37rpx;
+    font-size: 30rpx;
     color: #333;
   }
-  .userInfo .info view{
+  .userInfo .info .item view{
     width: 88rpx;
     height: 44rpx;
     line-height: 44rpx;
@@ -163,8 +163,16 @@
     <view class="userInfo">
       <image data-id="" src="{{userInfo.img}}" />
       <view class="info">
-        {{userInfo.name}}
-        <view>经纪人</view>
+        <view class="item">
+          {{userInfo.name}}
+          <view>经纪人</view>
+        </view>
+        <view class="item">
+          {{userInfo.company}}
+        </view>
+        <view class="item">
+          {{userInfo.store}}
+        </view>
       </view>
       <view class="edit" @tap="modifyUserInfo">
         <icon class="iconfont icon-bianji"></icon>

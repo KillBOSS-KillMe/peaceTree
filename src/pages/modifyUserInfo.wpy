@@ -65,47 +65,47 @@
         <view class="tiem">
           <view>头像</view>
           <view class="con">
-            <image data-id="" src="{{requestImgUrl + userInfo.img}}" />
+            <image data-id="" src="{{userInfo.img}}" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem">
           <view>姓名</view>
           <view class="con">
-            <input type="text" placeholder="输入姓名" value="" bindinput="getName"/>
+            <input type="text" placeholder="输入姓名" value="{{userInfo.name}}" bindinput="getName"/>
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem">
           <view>手机号</view>
           <view class="con">
-            <input type="number" placeholder="输入手机号" value="" bindinput="getMobile" />
+            <input type="number" placeholder="输入手机号" value="{{userInfo.mobile}}" bindinput="getMobile" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem interval">
           <view>所属门店</view>
           <view class="con">
-            <input type="text" placeholder="输入门店邀请码" value="" bindinput="getStore" />
+            <input type="text" placeholder="输入门店" value="{{userInfo.store}}" bindinput="getStore" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem">
           <view>工作地址</view>
           <view class="con">
-            <input type="text" placeholder="输入工作地址" value="" bindinput="getAddress" />
+            <input type="text" placeholder="输入工作地址" value="{{userInfo.address}}" bindinput="getAddress" />
           </view>
         </view>
         <view class="tiem">
           <view>我的职位</view>
           <view class="con">
-            <input type="text" placeholder="输入职位" value="" bindinput="getPosition" />
+            <input type="text" placeholder="输入职位" value="{{userInfo.position}}" bindinput="getPosition" />
           </view>
         </view>
         <view class="tiem">
           <view>所属公司</view>
           <view class="con">
-            <input type="text" placeholder="输入公司" value="" bindinput="getCompany" />
+            <input type="text" placeholder="输入公司" value="{{userInfo.company}}" bindinput="getCompany" />
           </view>
         </view>
       </view>
@@ -177,6 +177,23 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.$apply()
+    }
+    getUserInfo() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            this.userInfo = data.data.data
+            this.$parent.globalData.userInfo = this.userInfo
+            this.$apply()
+          }
+        }
+      })
     }
     submit() {
       console.log(this.name)
@@ -244,7 +261,7 @@
         success: data => {
           if (data.data.code == 1) {
             // var localReporList = data.data.data
-            this.userInfo = data.data.data
+            // this.userInfo = data.data.data
             wx.showModal({
               title: '',
               content: '信息修改成功'

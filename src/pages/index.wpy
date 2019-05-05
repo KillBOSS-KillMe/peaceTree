@@ -78,13 +78,16 @@
     justify-content: flex-end;
   }
   .searchCon{
-    width: 440rpx;
+    width: 540rpx;
     height: 80rpx;
     background-color: #f7f7f7;
     border-radius: 80rpx;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .searchCon input{
+    width: 440rpx;
   }
   .searchCon .iconfont{
     color: #d2d2d2;
@@ -248,7 +251,7 @@
         <icon class="iconfont icon-sousuo"></icon>
         <input type="text" placeholder="请输入楼盘名称" bindinput="searchRun"  />
       </view>
-      <icon class="address iconfont icon-dingweisvg-"></icon>
+      <!-- <icon class="address iconfont icon-dingweisvg-"></icon> -->
     </view>
     <swiper class='swiper' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <repeat for="{{swiperList}}" item="item">
@@ -298,7 +301,7 @@
             </view>
             <view class="priceOrcommission">
               <view class="price">{{item.money}}元/㎡</view>
-              <view class="commission">
+              <view class="commission" wx:if="{{userInfo.store != ''}}">
                 <view>佣</view>
                 {{item.brokerage}}%
               </view>
@@ -326,7 +329,7 @@
             </view>
             <view class="priceOrcommission">
               <view class="price">{{item.money}}元/㎡</view>
-              <view class="commission">
+              <view class="commission" wx:if="{{userInfo.store != ''}}">
                 <view>佣</view>
                 {{item.brokerage}}%
               </view>
@@ -336,6 +339,7 @@
       </repeat>
       <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
     </view>
+    <button open-type="getUserInfo" id='getUserInfo' wx:if="{{userInfoButtonShow}}" lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
     <nav @childFn.user="goPage" />
   </view>
 </template>
@@ -361,7 +365,8 @@
       requestImgUrl: '',
       searchList: [], // 搜索内容列表
       localList: [], // 楼盘列表
-      swiperList: [] // 轮播列表
+      swiperList: [], // 轮播列表
+      userInfoButtonShow: true,
     }
 
     computed = {
@@ -376,23 +381,43 @@
       },
       goSelCity() {
         // 城市选择
-        this.$navigate(`/pages/citySel`)
+        if (this.userInfo.mobile !== '') {
+          this.$navigate(`/pages/citySel`)
+        } else {
+          this.showModal()
+        }
       },
       goPropertyLocal() {
         // 本地楼盘
-        this.$navigate(`/pages/propertyLocal`)
+        if (this.userInfo.mobile !== '') {
+          this.$navigate(`/pages/propertyLocal`)
+        } else {
+          this.showModal()
+        }
       },
       goSurroundingLocal() {
         // 周边楼盘
-        this.$navigate(`/pages/surroundingLocal`)
+        if (this.userInfo.mobile !== '') {
+          this.$navigate(`/pages/surroundingLocal`)
+        } else {
+          this.showModal()
+        }
       },
       goCultureLocal() {
         // 文旅地产
-        this.$navigate(`/pages/cultureLocal`)
+        if (this.userInfo.mobile !== '') {
+          this.$navigate(`/pages/cultureLocal`)
+        } else {
+          this.showModal()
+        }
       },
       goLocalInfo(e) {
         // 进入楼盘详情
-        this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}&share=0`)
+        if (this.userInfo.mobile !== '') {
+          this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}&share=0`)
+        } else {
+          this.showModal()
+        }
       },
       searchRun(e) {
         if (e.detail.value == '') {
@@ -416,6 +441,7 @@
       this.getLocalList()
       // 获取用户信息
       this.getUserInfo()
+      this.onGetUserInfo()
     }
     onShow() {
       this.cityNode = this.$parent.globalData.cityNode
@@ -423,6 +449,87 @@
         // 加载城市列表,获取定位，获取所在城市
         this.getLocation()
       }
+    }
+    showModal() {
+      wx.showModal({
+        title: '',
+        content: '尚未注册，是否注册',
+        success: sm => {
+          if (sm.confirm) {
+            this.$redirect('loginRegistered')
+          } else if (sm.cancel) {
+            // 用户点击取消
+          }
+        }
+      })
+    }
+    onGetUserInfo() {
+      // 查看是否授权
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            this.userInfoButtonShow = false
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: res => {
+                this.userInfo = res.userInfo
+                this.$parent.globalData.userInfo = this.userInfo
+                if (this.userInfo) {
+                  // 数据生效
+                  this.$apply()
+                  // 提交用户信息
+                  this.setUserInfo(this.userInfo)
+                  this.$parent.globalData.userInfo = this.userInfo
+                  this.$apply()
+                }
+              }
+            })
+          } else {
+            // this.clickWeekBangs()
+          }
+        }
+      })
+    }
+    // 提交用户信息
+    setUserInfo(userInfo) {
+      wepy.login({
+        success: res => {
+          if (res.code) {
+            console.log(res.code)
+            this.code = res.code
+            wx.request({
+              url: `${this.$parent.globalData.requestUrl}/login`,
+              method: 'POST',
+              data: {
+                code: res.code,
+                img: this.userInfo.avatarUrl,
+                nickname: this.userInfo.nickName
+              },
+              success: data => {
+                console.log(data)
+                if (data.data.code == 1) {
+                  data = data.data.data
+                  this.$parent.globalData.userInfoID = data.id
+                  this.userInfoID = data.id
+                  this.mobile = data.mobile
+                  this.$parent.globalData.userInfo = data
+                  // if (this.mobile) {
+                  //   this.$redirect('index')
+                  // }
+                  this.$apply()
+                } else {
+                  wx.showModal({
+                    title: '',
+                    content: data.data.errmsg
+                  })
+                }
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
     }
     getUserInfo() {
       wx.request({

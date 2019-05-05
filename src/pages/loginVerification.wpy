@@ -33,7 +33,7 @@
   <view>
     <view class="con">
       <view class="title">填入验证码</view>
-      <input class="getData" type="number" placeholder="输入验证码" value="" bindinput="getData" />
+      <input class="getData" type="number" placeholder="输入四位验证码" value="" bindinput="getCode" />
       <view class="submit" @tap="submit">确定</view>
     </view>
   </view>
@@ -50,6 +50,7 @@
     mixins = []
 
     data = {
+      mobile: '',
       code: ''
     }
 
@@ -59,7 +60,14 @@
 
     methods = {
       submit() {
-        this.$redirect('index')
+        if (this.code.length == 4) {
+          this.setCode()
+        } else {
+          wx.showModal({
+            title: '',
+            content: '请输入正确的验证码'
+          })
+        }
       },
       getCode(e) {
         // 获取手机号
@@ -72,7 +80,31 @@
     }
 
     onLoad(options) {
-
+      this.mobile = options.mobile
+    }
+    setCode() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/login_mobile`,
+        method: 'POST',
+        data: {
+          code: this.code,
+          mobile: this.mobile
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            wx.showModal({
+              title: '',
+              content: '绑定成功'
+            })
+            this.$redirect(`/pages/index`)
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
     }
   }
 </script>

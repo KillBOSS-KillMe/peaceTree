@@ -87,26 +87,26 @@
         <view class="tiem interval">
           <view>所属门店</view>
           <view class="con">
-            <input type="text" placeholder="输入门店" name="store" value="{{userInfo.store}}" />
+            <input type="text" placeholder="输入门店" value="{{userInfo.store}}"  bindinput="getStore" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
         </view>
         <view class="tiem">
           <view>工作地址</view>
           <view class="con">
-            <input type="text" placeholder="输入工作地址" name="address" value="{{userInfo.address}}" />
+            <input type="text" placeholder="输入工作地址" value="{{userInfo.address}}" disabled />
           </view>
         </view>
         <view class="tiem">
           <view>我的职位</view>
           <view class="con">
-            <input type="text" placeholder="输入职位" name="position" value="{{userInfo.position}}" />
+            <input type="text" placeholder="输入职位" value="经纪人" disabled />
           </view>
         </view>
         <view class="tiem">
           <view>所属公司</view>
           <view class="con">
-            <input type="text" placeholder="输入公司" name="company" value="{{userInfo.company}}" />
+            <input type="text" placeholder="输入公司" value="{{userInfo.company}}" disabled />
           </view>
         </view>
       </view>
@@ -138,7 +138,8 @@
       store: '',
       address: '',
       position: '',
-      company: ''
+      company: '',
+      storeId: ''
 
     }
 
@@ -157,7 +158,8 @@
       },
       getStore(e) {
         // 获取门店
-        this.store = e.detail.value
+        // this.store = e.detail.value
+        this.getUserStore(e)
       },
       getAddress(e) {
         // 获取工作地址
@@ -182,7 +184,35 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.$apply()
     }
-    
+    getUserStore(e) {
+      if (e.detail.value.length !== 8) {
+        return ''
+      }
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/user_store`,
+        method: 'POST',
+        data: {
+          store_code: e.detail.value,
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            data = data.data.data
+            this.userInfo['store'] = e.detail.value
+            this.userInfo['address'] = data.address
+            // this.userInfo['position'] = '经纪人'
+            this.userInfo['company'] = data.company
+            this.storeId = data.id
+            this.$apply()
+            // var localReporList = data.data.data
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
     formSubmit(e) {
       var valueNode = e.detail.value
       // 信息提交
@@ -193,11 +223,7 @@
           uid: this.userInfo.id,
           name: valueNode.name,
           mobile: valueNode.mobile,
-          store: valueNode.store,
-          address: valueNode.address,
-          position: valueNode.position,
-          company: valueNode.company
-
+          store: this.storeId
         },
         success: data => {
           if (data.data.code == 1) {

@@ -300,10 +300,10 @@
               {{item.floor_address}}
             </view>
             <view class="priceOrcommission">
-              <view class="price">{{item.money}}元/㎡</view>
-              <view class="commission" wx:if="{{userInfo.store != ''}}">
+              <view class="price">{{item.money}}</view>
+              <view class="commission" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
                 <view>佣</view>
-                {{item.brokerage}}%
+                {{item.brokerage}}
               </view>
             </view>
           </view>
@@ -328,10 +328,10 @@
               {{item.floor_address}}
             </view>
             <view class="priceOrcommission">
-              <view class="price">{{item.money}}元/㎡</view>
-              <view class="commission" wx:if="{{userInfo.store != ''}}">
+              <view class="price">{{item.money}}</view>
+              <view class="commission" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
                 <view>佣</view>
-                {{item.brokerage}}%
+                {{item.brokerage}}
               </view>
             </view>
           </view>
@@ -543,6 +543,7 @@
         success: data => {
           if (data.data.code == 1) {
             this.userInfo = this.$parent.null2str(data.data.data)
+            console.log(this.userInfo)
             this.$parent.globalData.userInfo = this.userInfo
             this.$apply()
           } else {

@@ -147,7 +147,15 @@ export default class Nav extends wepy.component {
           title: '',
           content: '请先注册'
         })
-        this.$redirect('loginRegistered')
+        this.$redirect('/page/loginRegistered')
+        return ''
+      }
+      if (this.userInfo.store == '' || this.userInfo.store == undefined || this.userInfo.store == null ) {
+        wx.showModal({
+          title: '',
+          content: '请先绑定公司'
+        })
+        // this.$redirect('loginRegistered')
         return ''
       }
       // 顶部导航状态初始化

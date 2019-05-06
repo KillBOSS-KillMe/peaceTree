@@ -310,9 +310,11 @@ button{
 <template>
   <view>
     <swiper class='banner' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
-      <swiper-item>
-        <image class="banner" src="{{ requestImgUrl + localList.img }}" />
-      </swiper-item>
+      <repeat for="{{localList.img}}" item="item">
+        <swiper-item>
+          <image class="banner" src="{{ requestImgUrl + item }}" />
+        </swiper-item>
+      </repeat>
     </swiper>
     <view class="price">
       <text>{{localList.money}}</text>
@@ -611,7 +613,14 @@ button{
         },
         success: data => {
           if (data.data.code == 1) {
-            this.localList = this.$parent.null2str(data.data.data)
+            let localListData = this.$parent.null2str(data.data.data)
+            let imgList = [localListData.img]
+            let i = 0
+            for (i in localListData.xq_img) {
+              imgList.push(localListData.xq_img[i].img)
+            }
+            localListData['img'] = imgList
+            this.localList = localListData
             // this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
             // this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)
             this.$apply()

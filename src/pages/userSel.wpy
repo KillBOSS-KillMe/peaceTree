@@ -173,7 +173,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.userList = data.data.data
+            this.userList = this.$parent.null2str(data.data.data)
             this.searchList = this.userList
             this.$apply()
           } else {

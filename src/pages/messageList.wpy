@@ -103,7 +103,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.messageList = data.data.data
+            this.messageList = this.$parent.null2str(data.data.data)
             this.$apply()
           } else {
             wx.showModal({

@@ -155,7 +155,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.collectList = data.data.data
+            this.collectList = this.$parent.null2str(data.data.data)
             this.collectListShow = this.collectList
             this.$apply()
           } else {

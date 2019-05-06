@@ -119,7 +119,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.localList = data.data.data
+            this.localList = this.$parent.null2str(data.data.data)
             this.searchList = this.localList
             this.$apply()
           } else {

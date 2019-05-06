@@ -185,8 +185,9 @@ input{
         success: data => {
           if (data.data.code == 1) {
             if (this.checksSel.length > 0) {
+              data = this.$parent.null2str(data.data.data)
               var selList = []
-              selList.push({'id': data.data.data, 'name': this.clientName, 'mobile': this.clientMobile})
+              selList.push({'id': data, 'name': this.clientName, 'mobile': this.clientMobile})
               // 选中的用户存入全局
               this.$parent.globalData.reportUserList = selList
               this.$navigate(`/pages/reportLocal`)

@@ -507,9 +507,8 @@
                 nickname: this.userInfo.nickName
               },
               success: data => {
-                console.log(data)
                 if (data.data.code == 1) {
-                  data = data.data.data
+                  data = this.$parent.null2str(data.data.data)
                   this.$parent.globalData.userInfoID = data.id
                   this.userInfoID = data.id
                   this.mobile = data.mobile
@@ -543,7 +542,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.userInfo = data.data.data
+            this.userInfo = this.$parent.null2str(data.data.data)
             this.$parent.globalData.userInfo = this.userInfo
             this.$apply()
           } else {
@@ -565,7 +564,7 @@
         // },
         success: data => {
           if (data.data.code == 1) {
-            data = data.data.data
+            data = this.$parent.null2str(data.data.data)
             // 获取顶部轮播图
             this.swiperList = data.banner
             // 获取楼盘列表
@@ -613,7 +612,7 @@
         method: 'GET',
         success: data => {
           if (data.data.code == 1) {
-            var cityList = data.data.data
+            var cityList = this.$parent.null2str(data.data.data)
             var i = 0
             for (i in cityList) {
               if (cityName == cityList[i].name) {

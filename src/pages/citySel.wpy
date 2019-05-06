@@ -133,7 +133,7 @@
         data: {},
         success: data => {
           if (data.data.code == 1) {
-            var cityList = data.data.data
+            var cityList = this.$parent.null2str(data.data.data)
             var ACity = {'name': 'A', 'cityList': []}
             var BCity = {'name': 'B', 'cityList': []}
             var CCity = {'name': 'C', 'cityList': []}

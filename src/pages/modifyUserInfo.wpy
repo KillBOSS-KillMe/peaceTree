@@ -196,7 +196,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            data = data.data.data
+            data = this.$parent.null2str(data.data.data)
             this.userInfo['store'] = e.detail.value
             this.userInfo['address'] = data.address
             // this.userInfo['position'] = '经纪人'

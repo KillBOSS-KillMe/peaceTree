@@ -611,7 +611,7 @@ button{
         },
         success: data => {
           if (data.data.code == 1) {
-            this.localList = data.data.data
+            this.localList = this.$parent.null2str(data.data.data)
             // this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
             // this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)
             this.$apply()
@@ -633,7 +633,7 @@ button{
         },
         success: data => {
           if (data.data.code == 1) {
-            this.propertyLocalList = data.data.data
+            this.propertyLocalList = this.$parent.null2str(data.data.data)
             this.$apply()
           } else {
             wx.showModal({

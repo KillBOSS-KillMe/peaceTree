@@ -413,7 +413,7 @@ page{
         },
         success: data => {
           if (data.data.code == 1) {
-            this.clinetInfo = data.data.data
+            this.clinetInfo = this.$parent.null2str(data.data.data)
             let reportList = data.data.data.floor_report
             let i = 0
             for (i in reportList) {

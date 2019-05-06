@@ -397,7 +397,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.userReporList = data.data.data
+            this.userReporList = this.$parent.null2str(data.data.data)
             this.userReporListShow = this.userReporList
             this.$apply()
           }
@@ -414,7 +414,7 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            this.localReporList = data.data.data
+            this.localReporList = this.$parent.null2str(data.data.data)
             this.localReporListShow = this.localReporList
             this.$apply()
           }

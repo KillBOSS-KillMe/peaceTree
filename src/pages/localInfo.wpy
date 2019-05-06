@@ -315,7 +315,7 @@ button{
       </swiper-item>
     </swiper>
     <view class="price">
-      <text>{{localList.money}}元/㎡</text>
+      <text>{{localList.money}}</text>
       <view>
         <!-- 实心  shoucang -->
         <!-- 空心  shoucang1 -->
@@ -377,7 +377,7 @@ button{
         <view class="houseTypeItem" data-id="{{item.id}}" @tap="updataLocal">
           <image class="banner" src="{{requestImgUrl + item.img}}" />
           <view>{{item.name}}</view>
-          <view>{{item.money}}元/㎡</view>
+          <view>{{item.money}}</view>
         </view>
       </repeat>
     </scroll-view>
@@ -410,7 +410,7 @@ button{
         <view class="houseTypeItem" data-id="{{item.id}}" @tap="updataLocal">
           <image class="banner" src="{{requestImgUrl + item.img}}" />
           <view>{{item.name}}</view>
-          <view>{{item.money}}元/㎡</view>
+          <view>{{item.money}}</view>
         </view>
       </repeat>
     </scroll-view>

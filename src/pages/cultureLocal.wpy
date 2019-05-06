@@ -28,7 +28,7 @@
               <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
-            <view class="price">{{item.money}}元/㎡</view>
+            <view class="price">{{item.money}}</view>
           </view>
         </view>
       </repeat>

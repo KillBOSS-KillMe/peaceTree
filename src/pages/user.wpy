@@ -171,7 +171,7 @@
           {{userInfo.company}}
         </view>
         <view class="item">
-          {{userInfo.store}}
+          {{userInfo.store}}({{userInfo.yao}})
         </view>
       </view>
       <view class="edit" @tap="modifyUserInfo">

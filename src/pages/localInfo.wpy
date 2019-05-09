@@ -366,20 +366,22 @@ button{
     <view class="reportData">
       <view class="dataCon" @tap="goReportList">
         <view>报备有效期</view>
-        <view>24小时</view>
+        <view>{{localList.effective}}</view>
       </view>
       <view class="reportDataBorder"></view>
       <view class="dataCon" @tap="goCollectionList">
         <view>带看保护期</view>
-        <view>15天</view>
+        <view>{{localList.guard}}</view>
       </view>
     </view>
+    <view class="localName">户型</view>
     <scroll-view scroll-x="true" class="houseType">
-      <repeat for="{{propertyLocalList}}" item="item">
-        <view class="houseTypeItem" data-id="{{item.id}}" @tap="updataLocal">
-          <image class="banner" src="{{requestImgUrl + item.img}}" />
-          <view>{{item.name}}</view>
-          <view>{{item.money}}</view>
+      <repeat for="{{localList.hx}}" item="item">
+        <view class="houseTypeItem" data-id="{{item.id}}">
+          <image class="banner" src="{{requestImgUrl + item.model_img}}" bindtap='shareQRCodeImg' data-imgurl="{{requestImgUrl + item.model_img}}" />
+          <view>{{item.model_name}}</view>
+          <view>{{item.model_mi}}</view>
+          <view>{{item.model_money}}</view>
         </view>
       </repeat>
     </scroll-view>
@@ -406,7 +408,7 @@ button{
         <view class="featureCon">{{localList.recreation}}</view>
       </view>
     </view>
-    <!-- <view class="localName">远洋合能枫丹唐悦</view> -->
+    <view class="localName">推荐楼盘</view>
     <scroll-view scroll-x="true" class="houseType marginNav">
       <repeat for="{{propertyLocalList}}" item="item">
         <view class="houseTypeItem" data-id="{{item.id}}" @tap="updataLocal">
@@ -469,6 +471,14 @@ button{
     methods = {
       goHome() {
         this.$redirect('loginRegistered')
+      },
+      // 点击图片放大，长按后可操作
+      shareQRCodeImg(e) {
+        let url =  e.currentTarget.dataset.imgurl
+        wx.previewImage({
+          current: [url], // 当前显示图片的http链接   
+          urls: [url] // 需要预览的图片http链接列表   
+        })
       },
       updataLocal(e) {
         // 根据点击的楼盘切换到当前页的数据

@@ -46,6 +46,9 @@
   .item .price{
     font-size: 25rpx;
     color: #cbcbcb;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .item .address,
   .item .address .iconfont{

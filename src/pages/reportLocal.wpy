@@ -155,6 +155,10 @@
   background-color: #fff;
   color: #7bb312;
 }
+.setTime .setData:nth-child(2){
+  margin: 0;
+  border-top-width: 0;
+}
 .selTypeClose{
   margin: auto;
   text-align: center;
@@ -232,6 +236,12 @@
             <view>{{time}}</view>
           </picker>
         </view>
+        <view class="setData">
+          <label>备注</label>
+          <view>
+            <input placeholder='输入报备信息' bindinput="setRemark" />
+          </view>
+        </view>
         <view class="button">
           <view @tap="submit">确认到访时间并报备</view>
           <view @tap="submit">跳过并直接报备</view>
@@ -304,7 +314,8 @@ for (let i = 0; i < 60; i++) {
       multiIndex: [0, 9, 16, 10, 17],
       multiArray: [years, months, days, hours, minutes],
       reportUserList: [],
-      reportLocalList: []
+      reportLocalList: [],
+      remark: ''
     }
 
     computed = {
@@ -318,6 +329,9 @@ for (let i = 0; i < 60; i++) {
         } else {
           this.selType = true
         }
+      },
+      setRemark(e) {
+        this.remark = e.detail.value
       },
       goNewUser() {
         // 进入录入客户页
@@ -423,6 +437,7 @@ for (let i = 0; i < 60; i++) {
             floor_id: this.reportLocalList[0].id,
             client_id: this.reportUserList[0].id,
             access_time: this.time,
+            remark: this.remark
           },
           success: data => {
             if (data.data.code == 1) {

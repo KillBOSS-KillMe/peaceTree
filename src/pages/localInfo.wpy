@@ -306,6 +306,9 @@ button{
   background-color: #f5ffe1;
   color:#7bb312;
 }
+.brokerage{
+  color: #fa5454 !important;
+}
 </style>
 <template>
   <view>
@@ -333,6 +336,13 @@ button{
         更多信息
         <icon class="iconfont icon-jiantou-you"></icon>
       </view>
+    </view>
+    <view class="rule" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
+      <view class="ruleList">
+        <text>佣金</text>
+        <view></view>
+      </view>
+      <view class="description brokerage">{{localList.brokerage}}</view>
     </view>
     <view class="localInfo">
       <view class="localitem">

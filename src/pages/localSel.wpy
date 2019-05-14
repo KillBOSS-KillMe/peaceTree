@@ -8,10 +8,12 @@
   align-items: center;
   justify-content: center;
   border-top: 1rpx solid #979797;
+  background-color: #fff;
 }
 .localList{
   width: 690rpx;
   padding: 0 30rpx;
+  margin-bottom: 200rpx;
 }
 .reportButton view {
   width: 673rpx;
@@ -154,7 +156,7 @@ import wepy from 'wepy';
 import search from '../components/search'; // 底部导航
 export default class LocalSel extends wepy.page {
   config = {
-    navigationBarTitleText: '录入新客'
+    navigationBarTitleText: '选择楼盘'
   };
   components = {
     search: search

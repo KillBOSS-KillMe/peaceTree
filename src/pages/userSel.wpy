@@ -1,7 +1,7 @@
 <style lang="less">
 .userList{
   width: 750rpx;
-  margin-bottom: 150rpx;
+  margin-bottom: 200rpx;
 }
 .userList .type{
   width: 690rpx;
@@ -34,6 +34,7 @@
   align-items: center;
   justify-content: center;
   border-top: 1rpx solid #979797;
+  background-color: #fff;
 }
 .reportButton view{
   width: 673rpx;
@@ -79,7 +80,7 @@
   import search from '../components/search' // 底部导航
   export default class UserSel extends wepy.page {
     config = {
-      navigationBarTitleText: '录入新客'
+      navigationBarTitleText: '选择客户'
     }
     components = {
       search: search

@@ -308,6 +308,10 @@ button{
 }
 .brokerage{
   color: #fa5454 !important;
+  font-size: 40rpx !important;
+}
+.brokerage2{
+  color: #7bb312 !important;
 }
 </style>
 <template>
@@ -371,7 +375,7 @@ button{
           <icon class="iconfont icon-jiantou-you"></icon>
         </view>
       </view>
-      <view class="description">提前报备1小时</view>
+      <view class="description brokerage2">{{localList.reporting_rule}}</view>
     </view>
     <view class="reportData">
       <view class="dataCon" @tap="goReportList">
@@ -581,7 +585,7 @@ button{
         // jzlx 建筑类型
         // zxzk 装修状况
         let setData = this.localList
-        let urldata = `jfsj=${setData.delivery_time}&cqnx=${setData.delivery_time}&wygs=${setData.property}&kfs=${setData.developer}&kfspp=${setData.brand_developer}&jzmj=${setData.construction_area}&rjl=${setData.volume_rate}&lhl=${setData.green_rate}&zhs=${setData.total_houses}&cws=${setData.car_number}&cwb=${setData.car_scale}&jj=${setData.average_price}&dfl=${setData.room_rate}&wyf=${setData.property_costs}&wylx=${setData.property_type}&jzlx=${setData.building_type}&zxzk=${setData.decoration_status}`
+        let urldata = `jfsj=${setData.delivery_time}&cqnx=${setData.years_limit}&wygs=${setData.property}&kfs=${setData.developer}&kfspp=${setData.brand_developer}&jzmj=${setData.construction_area}&rjl=${setData.volume_rate}&lhl=${setData.green_rate}&zhs=${setData.total_houses}&cws=${setData.car_number}&cwb=${setData.car_scale}&jj=${setData.average_price}&dfl=${setData.room_rate}&wyf=${setData.property_costs}&wylx=${setData.property_type}&jzlx=${setData.building_type}&zxzk=${setData.decoration_status}`
         this.$navigate(`/pages/localMoreInfo?${urldata}`)
       },
       goRuleInfo(e) {

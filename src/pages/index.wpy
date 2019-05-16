@@ -462,7 +462,7 @@
         content: '尚未注册，是否注册',
         success: sm => {
           if (sm.confirm) {
-            this.$redirect('loginRegistered')
+            this.$redirect('/page/loginRegistered')
           } else if (sm.cancel) {
             // 用户点击取消
           }

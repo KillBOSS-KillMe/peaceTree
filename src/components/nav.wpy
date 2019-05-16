@@ -145,9 +145,15 @@ export default class Nav extends wepy.component {
       if (this.userInfo.mobile == '') {
         wx.showModal({
           title: '',
-          content: '请先注册'
+          content: '请先注册',
+          success: sm => {
+            if (sm.confirm) {
+              this.$redirect('/page/loginRegistered')
+            } else if (sm.cancel) {
+              // 用户点击取消
+            }
+          }
         })
-        this.$redirect('/page/loginRegistered')
         return ''
       }
       if (this.userInfo.store == '' || this.userInfo.store == undefined || this.userInfo.store == null ) {
@@ -168,9 +174,15 @@ export default class Nav extends wepy.component {
        if (this.userInfo.mobile == '') {
         wx.showModal({
           title: '',
-          content: '请先注册'
+          content: '请先注册',
+          success: sm => {
+            if (sm.confirm) {
+              this.$redirect('/page/loginRegistered')
+            } else if (sm.cancel) {
+              // 用户点击取消
+            }
+          }
         })
-        this.$redirect('loginRegistered')
         return ''
       }
       this.$parent.$parent.globalData.navAction = ['noAction', 'noAction', 'action']

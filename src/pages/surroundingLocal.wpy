@@ -111,7 +111,13 @@
               <icon class="iconfont icon-dingweiweizhi"></icon>
               {{item.floor_address}}
             </view>
-            <view class="price">{{item.money}}元/m</view>
+            <view class="priceOrcommission">
+              <view class="price">{{item.money}}</view>
+              <view class="commission" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
+                <view>佣</view>
+                {{item.brokerage}}
+              </view>
+            </view>
           </view>
         </view>
       </repeat>

@@ -204,6 +204,34 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   transform:translate(-50%, -50%) scale(1);
   -webkit-transform:translate(-50%, -50%) scale(1);
 }
+
+  .priceOrcommission{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .commission{
+    width:180rpx;
+    height:30rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin-top:45rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #ee5e7b;
+    font-size: 25rpx;
+    font-weight: 600;
+  }
+  .commission view{
+    padding: 0 5rpx;
+    background-color: #ee5e7b;
+    color: #fff;
+    font-size: 25rpx;
+    border-radius: 5rpx;
+  }
 </style>
 
 <script>

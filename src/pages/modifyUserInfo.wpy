@@ -233,9 +233,7 @@
               title: '',
               content: '信息修改成功'
             })
-            wx.navigateBack({
-              data: -1
-            })
+            this.$redirect('/page/user')
           }
         }
       })

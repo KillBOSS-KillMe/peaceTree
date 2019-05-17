@@ -148,7 +148,8 @@ export default class Nav extends wepy.component {
           content: '请先注册',
           success: sm => {
             if (sm.confirm) {
-              this.$redirect('/page/loginRegistered')
+              // this.$parent.$redirect('/page/loginRegistered')
+              this.$emit('childFn', '/pages/loginRegistered')
             } else if (sm.cancel) {
               // 用户点击取消
             }
@@ -159,7 +160,15 @@ export default class Nav extends wepy.component {
       if (this.userInfo.store == '' || this.userInfo.store == undefined || this.userInfo.store == null ) {
         wx.showModal({
           title: '',
-          content: '请先绑定公司'
+          content: '请先绑定公司',
+          success: sm => {
+            if (sm.confirm) {
+              // this.$parent.$redirect('/page/loginRegistered')
+              this.$emit('childFn', '/pages/modifyUserInfo')
+            } else if (sm.cancel) {
+              // 用户点击取消
+            }
+          }
         })
         // this.$redirect('loginRegistered')
         return ''
@@ -177,7 +186,8 @@ export default class Nav extends wepy.component {
           content: '请先注册',
           success: sm => {
             if (sm.confirm) {
-              this.$redirect('/page/loginRegistered')
+              // this.$parent.$redirect('/page/loginRegistered')
+              this.$emit('childFn', '/pages/loginRegistered')
             } else if (sm.cancel) {
               // 用户点击取消
             }

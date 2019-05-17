@@ -1,0 +1,84 @@
+<style lang="less">
+  image{
+    width: 400rpx;
+    height: 400rpx;
+    margin: 175rpx;
+  }
+  .max{
+    width: 750rpx;
+    text-align: center;
+    font-size: 25rpx;
+    color: #9f9f9f;
+  }
+  .generate{
+    width: 400rpx;
+    height: 90rpx;
+    background-color: #7bb312;
+    color: #fff;
+    border-radius: 20rpx;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 28rpx;
+    margin: 175rpx;
+  }
+</style>
+<template>
+  <view>
+    <view class="generate" @tap="newQRCode" wx:if="{{userInfo.img == ''}}">点击生成二维码</view>
+    <image wx:if="{{userInfo.img != ''}}" src="{{userInfo.img}}" />
+    <view wx:if="{{userInfo.img != ''}}" class="max">点击二维码可放大,可分享</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class QRCode extends wepy.page {
+    config = {
+      navigationBarTitleText: '二维码'
+    }
+    components = {
+      
+    }
+
+    mixins = []
+
+    data = {
+      userInfo: {},
+      requestImgUrl: ''
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      newQRCode() {
+        // 生成二维码
+        this.generateQRCode()
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+    }
+    generateQRCode() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            
+          }
+        }
+      })
+    }
+  }
+</script>

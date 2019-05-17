@@ -264,6 +264,7 @@ export default class extends wepy.app {
       'pages/collectionList', // 收藏列表
       'pages/reportList', // 报备列表
       'pages/messageList', // 消息列表
+      'pages/QRCode', // 二维码
     ],
     //  permission: {
     //   scope_userLocation: {

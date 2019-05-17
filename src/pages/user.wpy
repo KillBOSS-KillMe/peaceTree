@@ -195,6 +195,10 @@
       <view>我的消息</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
+    <view class="message" @tap="goQRCode">
+      <view>我的二维码</view>
+      <icon class="iconfont icon-cujiantou1"></icon>
+    </view>
     <view class="invite">
       <view class="con">
         <view>邀请同事加入</view>
@@ -258,6 +262,10 @@
         // 进入消息列表
         this.$navigate(`/pages/messageList`)
       },
+      goQRCode() {
+        // 进入收藏列表
+        this.$navigate(`/pages/QRCode`)
+      }
     }
 
     events = {

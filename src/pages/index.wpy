@@ -442,12 +442,8 @@
     }
 
     onLoad(options) {
-      console.log('===============================================================')
-      console.log(options)
-      console.log('===============================================================')
-      if (options.scene) {
-        // let scene=decodeURIComponent(options.scene)
-        this.userIdFather = decodeURIComponent(options.scene)
+      if (options.id) {
+        this.userIdFather = options.id
       }
       // 获取楼盘列表
       this.getLocalList()

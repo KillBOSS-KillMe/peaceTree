@@ -100,7 +100,7 @@
           method: 'POST',
           data: {
             uid: this.userInfo.id,
-            path: 'pages/index'
+            path: `pages/index?id=${this.userInfo.id}`
           },
           success: data => {
             if (data.data.code == 1) {

@@ -24,9 +24,9 @@
 </style>
 <template>
   <view>
-    <view class="generate" @tap="newQRCode" wx:if="{{userInfo.img == ''}}">点击生成二维码</view>
-    <image wx:if="{{userInfo.img != ''}}" src="{{userInfo.img}}" />
-    <view wx:if="{{userInfo.img != ''}}" class="max">点击二维码可放大,可分享</view>
+    <view class="generate" @tap="newQRCode" wx:if="{{userInfo.erweima == ''}}">点击生成二维码</view>
+    <image wx:if="{{userInfo.erweima != ''}}" @tap="shareQRCodeImg" data-image="{{requestImgUrl + '/'+ userInfo.erweima}}" src="{{requestImgUrl + '/'+ userInfo.erweima}}" />
+    <view wx:if="{{userInfo.erweima != ''}}" class="max">点击二维码可放大,长按可分享</view>
   </view>
 </template>
 
@@ -44,7 +44,8 @@
 
     data = {
       userInfo: {},
-      requestImgUrl: ''
+      requestImgUrl: '',
+      QRCode: ''
     }
 
     computed = {
@@ -67,18 +68,57 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }
     generateQRCode() {
-      wx.request({
-        url: `${this.$parent.globalData.requestUrl}/users`,
-        method: 'POST',
-        data: {
-          uid: this.userInfo.id
-        },
-        success: data => {
-          if (data.data.code == 1) {
-            
+      // wx.request({
+      //   url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxd3ec190013a23daa&secret=dee9b260d7badbd92bacd1a4a307c0fc`,
+      //   method: 'POST',
+      //   success: data => {
+      //     console.log(data)
+      //     let access_token = data.data.access_token
+      //     wx.request({
+      //       url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`,
+      //       method: 'POST',
+      //       data: {
+      //         scene: `id=${this.userInfo.id}`,
+      //         page: 'pages/index',
+      //         width: 430,
+      //         auto_color: false,
+      //         line_color: {"r":0,"g":0,"b":0},
+      //         is_hyaline: true
+      //       },
+      //       header:{'content-type':'image/jpeg'},
+      //       success: data => {
+      //         console.log(data)
+      //         this.QRCode = data.data
+      //         console.log(this.QRCode)
+      //         this.$apply()
+      //       }
+      //     })
+      //   }
+      // })
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/getQRCode`,
+          method: 'POST',
+          data: {
+            uid: this.userInfo.id,
+            path: 'pages/index'
+          },
+          success: data => {
+            if (data.data.code == 1) {
+              this.userInfo['erweima'] = data.data.data
+              this.$parent.globalData.userInfo = this.userInfo
+            this.$apply()
+            }
           }
-        }
+        })
+    }
+    shareQRCodeImg(e) {
+      // 点击图片放大
+      let imageUrl = e.target.dataset.image
+      wx.previewImage({
+        current: [imageUrl], // 当前显示图片的http链接   
+        urls: [imageUrl] // 需要预览的图片http链接列表   
       })
     }
+    
   }
 </script>

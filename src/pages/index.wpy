@@ -372,6 +372,7 @@
       localList: [], // 楼盘列表
       swiperList: [], // 轮播列表
       userInfoButtonShow: true,
+      userIdFather: ''
     }
 
     computed = {
@@ -441,7 +442,13 @@
     }
 
     onLoad(options) {
-      
+      console.log('===============================================================')
+      console.log(options)
+      console.log('===============================================================')
+      if (options.scene) {
+        // let scene=decodeURIComponent(options.scene)
+        this.userIdFather = decodeURIComponent(options.scene)
+      }
       // 获取楼盘列表
       this.getLocalList()
       // 获取用户信息
@@ -508,7 +515,8 @@
               data: {
                 code: res.code,
                 img: this.userInfo.avatarUrl,
-                nickname: this.userInfo.nickName
+                nickname: this.userInfo.nickName,
+                tui_id: this.userIdFather
               },
               success: data => {
                 if (data.data.code == 1) {

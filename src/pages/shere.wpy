@@ -1,0 +1,181 @@
+<style lang="less">
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    view{
+      width: 375rpx;
+      height: 80rpx;
+      font-size: 28rpx;
+      color: #343434;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .active{
+      color: #fff;
+      background-color: #7bb312;
+    }
+  }
+  // // .list{
+  // //   display: inline-flex;
+  // //   flex-wrap: wrap;
+  // //   justify-content: space-between;
+  // // }
+  // .item{
+  //   width: 340rpx;
+  //   height: auto;
+  //   font-size: 28rpx;
+  //   color: #343434;
+  //   margin-top: 10rpx;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   view{
+  //     overflow:hidden;
+  //     text-overflow:ellipsis;
+  //     white-space:nowrap;
+  //     text-align: left;
+  //   }
+  //   image{
+  //     width: 140rpx;
+  //     height: 140rpx;
+  //     margin-right: 10rpx;
+  //   }
+  // }
+  .item .con{
+    width: 500rpx;
+  }
+  .item image{
+    width: 152rpx;
+  }
+  .lengthNull{
+    width: 690rpx;
+    margin-top: 200rpx;
+    text-align: center;
+    font-size: 25rpx;
+    color: #ccc;
+  }
+</style>
+<template>
+  <view>
+    <view class="title">
+      <view data-type="1" class="{{type=='1'?'active':''}}" @tap="lietTypeSel">注册用户</view>
+      <view data-type="0" class="{{type=='0'?'active':''}}" @tap="lietTypeSel">普通用户</view>
+    </view>
+    <view class="list" wx:if="{{type == '1'}}">
+      <repeat for="{{userList_1}}" item="item">
+        <view class="item" data-id="{{item.id}}">
+          <image data-id="" src="{{item.img}}" />
+          <view class="con">
+            <view class="title">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="address">个人佣金:{{item.tui_gyong}}</view>
+            <view class="address">报备数量:{{item.tui_num}}</view>
+            <view class="address">总佣金:{{item.tui_zyong}}</view>
+          </view>
+        </view>
+      </repeat>
+      <view class="lengthNull" wx:if="{{userList_1.length == 0}}">暂无注册用户</view>
+    </view>
+    <view class="list" wx:if="{{type == '0'}}">
+      <repeat for="{{userList_0}}" item="item">
+        <view class="item" data-id="{{item.id}}">
+          <image data-id="" src="{{item.img}}" />
+          <view class="con">
+            <view class="title">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="address">个人佣金:{{item.tui_gyong}}</view>
+            <view class="address">报备数量:{{item.tui_num}}</view>
+            <view class="address">总佣金:{{item.tui_zyong}}</view>
+          </view>
+        </view>
+      </repeat>
+      <view class="lengthNull" wx:if="{{userList_0.length == 0}}">暂无普通用户</view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import productItem from '../components/productItem' // 列表内容组件
+  export default class Shere extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的分享'
+    }
+    components = {
+      productItem: productItem
+    }
+
+    mixins = []
+
+    data = {
+      userInfo: {},
+      requestImgUrl: '',
+      type: '1',
+      userList_0: [],
+      userList_1: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      lietTypeSel(e) {
+        this.type = e.currentTarget.dataset.type
+        this.$apply()
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
+      this.getMyShere()
+    }
+    getMyShere() {
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/share_user`,
+          method: 'POST',
+          data: {
+            uid: this.userInfo.id
+          },
+          success: data => {
+            console.log(data)
+            if (data.data.code == '1') {
+              data = data.data.data
+              var userList_0 = []
+              var userList_1 = []
+              var i = 0
+              for (i in data) {
+                if (data[i].store_id === '') {
+                  userList_0.push(data[i])
+                } else {
+                  userList_1.push(data[i])
+                }
+              }
+
+              this.userList_0 = userList_0
+              this.userList_1 = userList_1
+              this.$apply()
+            }
+          }
+        })
+    }
+    shareQRCodeImg(e) {
+      // 点击图片放大
+      let imageUrl = e.target.dataset.image
+      wx.previewImage({
+        current: [imageUrl], // 当前显示图片的http链接   
+        urls: [imageUrl] // 需要预览的图片http链接列表   
+      })
+    }
+    
+  }
+</script>

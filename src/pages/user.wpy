@@ -102,47 +102,6 @@
     font-size: 25rpx;
     color: #9a9a9a;
   }
-  .invite{
-    width: 690rpx;
-    height: 235rpx;
-    padding: 0 30rpx;
-    background-color: #fd654e;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .invite .con{
-    width: 225rpx;
-    height: 235rpx;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction:column
-  }
-  .invite image{
-    width: 355rpx;
-    height: 235rpx;
-  }
-  .invite .con view:nth-child(1){
-    font-size: 35rpx;
-    color: #fff;
-  }
-  .invite .con view:nth-child(2){
-    font-size: 38rpx;
-    color: #eee63e;
-    font-weight: 600;
-  }
-  .invite .con view:nth-child(3){
-    width: 145rpx;
-    height: 43rpx;
-    line-height: 43rpx;
-    text-align: center;
-    font-size: 25rpx;
-    color: #eee63e;
-    border: 2rpx solid #eee63e;
-    border-radius: 43rpx;
-    margin-top: 10rpx;
-  }
   button{
     width:145rpx;
     height:43rpx;
@@ -199,17 +158,8 @@
       <view>我的二维码</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
-    <view class="invite">
-      <view class="con">
-        <view>邀请同事加入</view>
-        <view>一起赚佣金</view>
-        <!-- <view>点击邀请</view> -->
-        <button open-type='share'>点击邀请</button>
-      </view>
-      <image data-id="" src="{{img}}" />
-    </view>
-    <view class="message" @tap="modifyUserInfo">
-      <view>所属部门</view>
+    <view class="message" @tap="myShere">
+      <view>我的分享</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
     <nav @childFn.user="goPage" />
@@ -265,6 +215,10 @@
       goQRCode() {
         // 进入收藏列表
         this.$navigate(`/pages/QRCode`)
+      },
+      myShere() {
+        // 进入收藏列表
+        this.$navigate(`/pages/shere`)
       }
     }
 

@@ -31,6 +31,9 @@
     align-items: center;
     justify-content: flex-start;
     font-size: 35rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .item .title text{
     font-size: 35rpx;

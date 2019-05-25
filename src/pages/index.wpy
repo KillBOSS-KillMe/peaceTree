@@ -184,6 +184,9 @@
     align-items: center;
     justify-content: flex-start;
     font-size: 35rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .item .title text{
     font-size: 35rpx;
@@ -244,6 +247,7 @@
     font-size: 25rpx;
     border-radius: 5rpx;
   }
+  // 融创西双版纳国际度假区
 </style>
 <template>
   <view>

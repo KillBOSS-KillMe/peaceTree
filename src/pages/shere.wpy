@@ -71,7 +71,7 @@
             <view class="title">
               <text>{{item.name}}</text>
             </view>
-            <view class="address">个人佣金:{{item.tui_gyong}}</view>
+            <view class="address">2%佣金:{{item.tui_gyong}}</view>
             <view class="address">成交套数:{{item.tui_num}}</view>
             <view class="address">总佣金:{{item.tui_zyong}}</view>
           </view>
@@ -87,7 +87,7 @@
             <view class="title">
               <text>{{item.name}}</text>
             </view>
-            <view class="address">个人佣金:{{item.tui_gyong}}</view>
+            <view class="address">2%佣金:{{item.tui_gyong}}</view>
             <view class="address">成交套数:{{item.tui_num}}</view>
             <view class="address">总佣金:{{item.tui_zyong}}</view>
           </view>

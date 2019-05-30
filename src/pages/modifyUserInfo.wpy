@@ -112,7 +112,6 @@
       </view>
       <button form-type="submit" class="sub">保存</button>
     </form>
-      <!-- <view class="sub" @tap="submit">保存</view> -->
   </view>
 </template>
 

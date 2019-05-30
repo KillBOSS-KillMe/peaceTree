@@ -349,7 +349,7 @@
       <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
     </view>
     <button open-type="getUserInfo" id='getUserInfo' wx:if="{{userInfoButtonShow}}" lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
-    <nav @childFn.user="goPage" />
+    <nav @childFn.user="goPage" @childFnOrReturn.user="goModifyUserInfo" />
   </view>
 </template>
 
@@ -388,6 +388,9 @@
       goPage (url, evt) {
         // 销毁当前页{跳转}
         this.$redirect(url)
+      },
+      goModifyUserInfo(url, evt) {
+        this.$navigate(url)
       },
       goSelCity() {
         // 城市选择‘

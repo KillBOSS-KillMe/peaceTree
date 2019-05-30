@@ -272,8 +272,11 @@ page{
               </view>
               <view class="markInfo">
                 <view class="success" wx:if="{{item.state == '1'}}">报备生效  {{item.access_time}}</view>
-                <view class="failure" wx:if="{{item.state == '0'}}">报备无效  {{item.access_time}}</view>
-                <view wx:if="{{item.formIsShow}}">报备无效  {{item.create_time}}</view>
+                <view class="failure" wx:if="{{item.state == '6'}}">报备无效  {{item.access_time}}</view>
+                <view class="success" wx:if="{{item.state == '2'}}">报备有效  {{item.create_time}}</view>
+                <view class="success" wx:if="{{item.state == '3'}}">已带看  {{item.create_time}}</view>
+                <view class="success" wx:if="{{item.state == '4'}}">已大定  {{item.create_time}}</view>
+                <view class="success" wx:if="{{item.state == '5'}}">业绩确定  {{item.create_time}}</view>
               </view>
             </view>
             <view class="expand" data-index="{{index}}" data-show="{{item.formIsShow}}" @tap="infoShow">

@@ -164,7 +164,7 @@ export default class Nav extends wepy.component {
           success: sm => {
             if (sm.confirm) {
               // this.$parent.$redirect('/page/loginRegistered')
-              this.$emit('childFn', '/pages/modifyUserInfo')
+              this.$emit('childFnOrReturn', '/pages/modifyUserInfo')
             } else if (sm.cancel) {
               // 用户点击取消
             }

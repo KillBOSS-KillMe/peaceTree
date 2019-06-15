@@ -135,11 +135,12 @@ input{
         this.checksSel = e.detail.value
       },
       selGender() {
-        if (this.selGender) {
+        if (this.selGender == 1) {
           this.selGender = 2
         } else {
           this.selGender = 1
         }
+        this.$apply()
       },
       getName(e) {
         // 获取姓名

@@ -595,9 +595,6 @@
       })
     }
     getLocation() {
-      this.cityNode = {'name': '西安市', 'id': 323}
-      this.$parent.globalData.cityNode ={'name': '西安市', 'id': 323}
-      return ''
       wx.getLocation({
         type: 'wgs84',   //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标 
         desc: '你的位置信息将用于小程序位置接口的效果展示',

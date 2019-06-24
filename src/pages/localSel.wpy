@@ -60,6 +60,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
     font-size: 35rpx;
   }
   .item .title text{
@@ -76,6 +79,11 @@
   .item .price{
     font-size: 25rpx;
     color: #cbcbcb;
+  }
+  .item .address{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .item .address,
   .item .address .iconfont{
@@ -211,38 +219,77 @@ export default class LocalSel extends wepy.page {
     this.cityNode = this.$parent.globalData.cityNode
     this.getLocalList();
   }
+  onReachBottom() {
+    // 下拉触底，先判断是否有请求正在进行中
+    // 获取楼盘列表
+    this.getLocalList()
+  }
   getLocalList() {
     wx.request({
-      url: `${this.$parent.globalData.requestUrl}/local_floor`,
+      url: `${this.$parent.globalData.requestUrl}/floor_list`,
       method: 'POST',
       data: {
-        city_id: this.cityNode.id
+        city_id: this.cityNode.id,
+        sid: this.searchList.length
       },
       success: data => {
         if (data.data.code == 1) {
-          this.localList = this.$parent.null2str(data.data.data)
-          this.searchList = this.localList
-          this.$apply();
+          let localList = this.$parent.null2str(data.data.data)
+          this.searchList = this.searchList.concat(localList)
+          this.$apply()
         } else {
           wx.showModal({
             title: '',
             content: data.data.msg
-          });
+          })
         }
       }
-    });
+    })
+    // wx.request({
+    //   url: `${this.$parent.globalData.requestUrl}/local_floor`,
+    //   method: 'POST',
+    //   data: {
+    //     city_id: this.cityNode.id
+    //   },
+    //   success: data => {
+    //     if (data.data.code == 1) {
+    //       this.localList = this.$parent.null2str(data.data.data)
+    //       this.searchList = this.localList
+    //       this.$apply();
+    //     } else {
+    //       wx.showModal({
+    //         title: '',
+    //         content: data.data.msg
+    //       });
+    //     }
+    //   }
+    // });
   }
   getSearchList(search) {
     // 执行搜索
-    let i = 0
-    let localList = this.localList
-    let searchList = []
-    for (i in localList) {
-      if (localList[i].name.match(search)) {
-        searchList.push(localList[i])
+    // let i = 0
+    // let localList = this.localList
+    // let searchList = []
+    // for (i in localList) {
+    //   if (localList[i].name.match(search)) {
+    //     searchList.push(localList[i])
+    //   }
+    // }
+    // this.searchList = searchList
+    wx.request({
+      url: `${this.$parent.globalData.requestUrl}/search`,
+      data: {
+        city_id: this.cityNode.id,
+        name: search
+      },
+      method: 'POST',
+      success: data => {
+        if (data.data.code == 1) {
+          this.searchList = this.$parent.null2str(data.data.data)
+          this.$apply()
+        }
       }
-    }
-    this.searchList = searchList
+    })
   }
 }
 </script>

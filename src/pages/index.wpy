@@ -455,7 +455,7 @@
       // // 获取楼盘列表
       // this.getLocalList()
       // 获取轮播
-      this.floorList()
+      this.swiperList()
       // 获取用户信息
       this.onGetUserInfo()
     }
@@ -486,7 +486,7 @@
         }
       })
     }
-    floorList() {
+    swiperList() {
       this.swiperList = this.$parent.globalData.swiperList
       if (this.swiperList.length > 0) {
         return false
@@ -681,6 +681,7 @@
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/search`,
         data: {
+          city_id: this.cityNode.id,
           name: search
         },
         method: 'POST',

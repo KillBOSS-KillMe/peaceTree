@@ -669,15 +669,28 @@
     }
     getSearchList(search) {
       // 执行搜索
-      let i = 0
-      let localList = this.localList
-      let searchList = []
-      for (i in localList) {
-        if (localList[i].name.match(search)) {
-          searchList.push(localList[i])
+      // let i = 0
+      // let localList = this.localList
+      // let searchList = []
+      // for (i in localList) {
+      //   if (localList[i].name.match(search)) {
+      //     searchList.push(localList[i])
+      //   }
+      // }
+      // this.searchList = searchList
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/search`,
+        data: {
+          name: search
+        },
+        method: 'POST',
+        success: data => {
+          if (data.data.code == 1) {
+            this.searchList = this.$parent.null2str(data.data.data)
+            this.$apply()
+          }
         }
-      }
-      this.searchList = searchList
+      })
     }
 
 

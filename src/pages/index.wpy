@@ -452,8 +452,10 @@
       if (options.id) {
         this.userIdFather = options.id
       }
-      // 获取楼盘列表
-      this.getLocalList()
+      // // 获取楼盘列表
+      // this.getLocalList()
+      // 获取轮播
+      this.floorList()
       // 获取用户信息
       this.onGetUserInfo()
     }
@@ -466,6 +468,11 @@
         this.getLocation()
       }
     }
+    onReachBottom() {
+      // 下拉触底，先判断是否有请求正在进行中
+      // 获取楼盘列表
+      this.getLocalList()
+    }
     showModal() {
       wx.showModal({
         title: '',
@@ -475,6 +482,50 @@
             this.$redirect('/page/loginRegistered')
           } else if (sm.cancel) {
             // 用户点击取消
+          }
+        }
+      })
+    }
+    floorList() {
+      this.swiperList = this.$parent.globalData.swiperList
+      if (this.swiperList.length > 0) {
+        return false
+      }
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/index`,
+        method: 'POST',
+        success: data => {
+          if (data.data.code == 1) {
+            this.swiperList = this.$parent.null2str(data.data.data)
+            this.$parent.globalData.swiperList = this.swiperList
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+    getLocalList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/floor_list`,
+        method: 'POST',
+        data: {
+          city_id: this.cityNode.id,
+          sid: this.localList.length
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            let localList = this.$parent.null2str(data.data.data)
+            this.localList = this.localList.concat(localList)
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
           }
         }
       })
@@ -569,31 +620,6 @@
         }
       })
     }
-    getLocalList() {
-      wx.request({
-        url: `${this.$parent.globalData.requestUrl}/index`,
-        method: 'GET',
-        // data: {
-        //   mobile: this.userName,
-        //   password: this.userPaw
-        // },
-        success: data => {
-          if (data.data.code == 1) {
-            data = this.$parent.null2str(data.data.data)
-            // 获取顶部轮播图
-            this.swiperList = data.banner
-            // 获取楼盘列表
-            this.localList = data.floor
-            this.$apply()
-          } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
-          }
-        }
-      })
-    }
     getLocation() {
       wx.getLocation({
         type: 'wgs84',   //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标 
@@ -631,6 +657,8 @@
                 this.cityNode = {'name': cityList[i].name, 'id': cityList[i].id}
                 this.$parent.globalData.cityNode ={'name': cityList[i].name, 'id': cityList[i].id}
                 this.$apply()
+                // 获取楼盘列表
+                this.getLocalList()
                 // return cityNode
                 break
               }

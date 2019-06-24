@@ -267,11 +267,11 @@ export default class extends wepy.app {
       'pages/QRCode', // 二维码
       'pages/shere', // 我的分享
     ],
-     permission: {
-      'scope.userLocation': {
-        desc: '你的位置信息将用于小程序位置接口的效果展示'
-      }
-    },
+      permission: {
+        'scope.userLocation': {
+          desc: '你的位置信息将用于小程序位置接口的效果展示'
+        }
+      },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -287,6 +287,7 @@ export default class extends wepy.app {
     // requestImgUrl: 'http://192.168.1.106',
     requestUrl: 'https://jiuyou.beaconway.cn/api',
     requestImgUrl: 'https://jiuyou.beaconway.cn',
+    swiperList: []
   }
 
   constructor () {

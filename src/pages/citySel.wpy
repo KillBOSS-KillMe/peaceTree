@@ -85,7 +85,9 @@
       },
       cityClick(e) {
         // 点击城市
-        this.$parent.globalData.cityNode = {'name': e.currentTarget.dataset.cityname, 'id': e.currentTarget.dataset.id}
+        let cityNode = {'name': e.currentTarget.dataset.cityname, 'id': e.currentTarget.dataset.id}
+        this.$parent.globalData.cityNode = cityNode
+        this.$parent.setStorageCityNode(cityNode)
         wx.navigateBack({
           data: -1
         })

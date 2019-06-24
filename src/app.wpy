@@ -318,6 +318,22 @@ export default class extends wepy.app {
     }
     return data
   }
+  setStorageCityNode(cityList) {
+    wx.setStorage({
+      key: 'cityname',
+      data: cityList.name
+    })
+    wx.setStorage({
+      key: 'cityid',
+      data: cityList.id
+    })
+  }
+  getStorageCityNode() {
+    var cityname = wx.getStorageSync('cityname')
+    var cityid = wx.getStorageSync('cityid')
+    return [cityname, cityid]
+  }
+    
   sleep (s) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

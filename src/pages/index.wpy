@@ -371,6 +371,7 @@
       
       userInfo: {},
       cityNode: {},
+      originalCityNode: {},
       requestImgUrl: '',
       searchList: [], // 搜索内容列表
       localList: [], // 楼盘列表
@@ -452,9 +453,14 @@
       if (options.id) {
         this.userIdFather = options.id
       }
-      this.cityNode = this.$parent.globalData.cityNode
+      // this.cityNode = this.$parent.globalData.cityNode
+      let cityNode = this.$parent.getStorageCityNode()
+      cityNode = {'name': cityNode[0], 'id': cityNode[1]}
+      this.cityNode = cityNode
+      this.$parent.globalData.originalCityNode = cityNode
+      this.$parent.globalData.cityNode = cityNode
       // // 获取楼盘列表
-      // this.getLocalList()
+      this.getLocalList()
       // 获取轮播
       this.getSwiperList()
       // 获取用户信息
@@ -464,12 +470,20 @@
       // this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.cityNode = this.$parent.globalData.cityNode
-      this.localList = []
-      // 获取楼盘列表
-      this.getLocalList()
+      this.originalCityNode = this.$parent.globalData.originalCityNode
       if (Object.keys(this.cityNode).length == 0) {
         // 加载城市列表,获取定位，获取所在城市
-        this.getLocation()
+        if (this.cityNode.id == '') {
+          this.getLocation()
+        }
+      }
+      if (this.originalCityNode != undefined) {
+        if (this.cityNode.id != this.originalCityNode.id) {
+          this.$parent.globalData.originalCityNode = this.cityNode
+          this.localList = []
+          // 获取楼盘列表
+          this.getLocalList()
+        }
       }
     }
     onReachBottom() {
@@ -659,8 +673,10 @@
             for (i in cityList) {
               if (cityName == cityList[i].name) {
                 this.cityNode = {'name': cityList[i].name, 'id': cityList[i].id}
-                this.$parent.globalData.cityNode ={'name': cityList[i].name, 'id': cityList[i].id}
+                this.$parent.globalData.cityNode = this.cityNode
+                this.$parent.globalData.originalCityNode = this.cityNode
                 this.$apply()
+                this.$parent.setStorageCityNode(this.cityNode)
                 // 获取楼盘列表
                 this.getLocalList()
                 // return cityNode

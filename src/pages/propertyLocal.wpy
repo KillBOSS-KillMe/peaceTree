@@ -133,8 +133,8 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      this.cityNode = this.$parent.globalData.cityNode
-      this.getLocalList()
+      // this.cityNode = this.$parent.globalData.cityNode
+      // this.getLocalList()
     }
     onShow() {
       this.cityNode = this.$parent.globalData.cityNode

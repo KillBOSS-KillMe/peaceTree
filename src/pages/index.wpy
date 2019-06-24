@@ -454,7 +454,7 @@
       }
       this.cityNode = this.$parent.globalData.cityNode
       // // 获取楼盘列表
-      this.getLocalList()
+      // this.getLocalList()
       // 获取轮播
       this.getSwiperList()
       // 获取用户信息

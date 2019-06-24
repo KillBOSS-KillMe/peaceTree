@@ -464,6 +464,9 @@
       // this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.cityNode = this.$parent.globalData.cityNode
+      this.localList = []
+      // 获取楼盘列表
+      this.getLocalList()
       if (Object.keys(this.cityNode).length == 0) {
         // 加载城市列表,获取定位，获取所在城市
         this.getLocation()

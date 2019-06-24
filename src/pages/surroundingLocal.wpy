@@ -187,7 +187,10 @@
       this.getLocalList()
     }
     onShow() {
-      
+      this.cityNode = this.$parent.globalData.cityNode
+      this.searchList = []
+      // 获取楼盘列表
+      this.getLocalList()
     }
     onReachBottom() {
       // 下拉触底，先判断是否有请求正在进行中

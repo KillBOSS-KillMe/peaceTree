@@ -227,15 +227,17 @@
     <view class="mask" wx:if="{{reportDom}}">
       <view class="setTime">
         <icon class="iconfont icon-guanbi" @tap="reportButton"></icon>
-        <view class="setTimeName">客户预约到访时间</view>
-        <view class="setTimeName2">选择客户预计到访时间，方便驻场人员提前准备</view>
-        <view class="setData">
+        <view class="setTimeName">客户预约报备</view>
+        <view class="setTimeName2">报备客户预约，方便驻场人员提前准备</view>
+        <!-- <view class="setTimeName">客户预约到访时间</view> -->
+        <!-- <view class="setTimeName2">选择客户预计到访时间，方便驻场人员提前准备</view> -->
+        <!-- <view class="setData">
           <label>预计到访时间</label>
           <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-            <!-- <input disabled value='{{time}}' placeholder='选择时间'/> -->
+            <input disabled value='{{time}}' placeholder='选择时间'/>
             <view>{{time}}</view>
           </picker>
-        </view>
+        </view> -->
         <view class="setData">
           <label>备注</label>
           <view>
@@ -243,7 +245,8 @@
           </view>
         </view>
         <view class="button">
-          <view @tap="submit">确认到访时间并报备</view>
+          <!-- <view @tap="submit">确认到访时间并报备</view> -->
+          <view @tap="submit">确认备注并报备</view>
           <view @tap="submit">跳过并直接报备</view>
         </view>
       </view>
@@ -426,15 +429,15 @@ for (let i = 0; i < 60; i++) {
         this.setData(data)
       },
       submit() {
-        if (this.time == '') {
-          let date = new Date()
-          let year = date.getFullYear()
-          let month = date.getMonth() + 1
-          let day = date.getDate()
-          let hour = date.getHours()
-          let minute = date.getMinutes()
-          this.time = year + '/' + month + '/' + day + ' ' + hour + ':' + minute
-        }
+        // if (this.time == '') {
+        //   let date = new Date()
+        //   let year = date.getFullYear()
+        //   let month = date.getMonth() + 1
+        //   let day = date.getDate()
+        //   let hour = date.getHours()
+        //   let minute = date.getMinutes()
+        //   this.time = year + '/' + month + '/' + day + ' ' + hour + ':' + minute
+        // }
         wx.request({
           url: `${this.$parent.globalData.requestUrl}/client_floor_report`,
           method: 'POST',
@@ -442,7 +445,7 @@ for (let i = 0; i < 60; i++) {
             uid: this.userInfo.id,
             floor_id: this.reportLocalList[0].id,
             client_id: this.reportUserList[0].id,
-            access_time: this.time,
+            // access_time: this.time,x
             remark: this.remark
           },
           success: data => {

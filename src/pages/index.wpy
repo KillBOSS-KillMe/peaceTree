@@ -452,10 +452,11 @@
       if (options.id) {
         this.userIdFather = options.id
       }
+      this.cityNode = this.$parent.globalData.cityNode
       // // 获取楼盘列表
-      // this.getLocalList()
+      this.getLocalList()
       // 获取轮播
-      this.swiperList()
+      this.getSwiperList()
       // 获取用户信息
       this.onGetUserInfo()
     }
@@ -486,7 +487,7 @@
         }
       })
     }
-    swiperList() {
+    getSwiperList() {
       this.swiperList = this.$parent.globalData.swiperList
       if (this.swiperList.length > 0) {
         return false

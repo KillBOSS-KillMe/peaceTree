@@ -99,34 +99,55 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-    }
-    onShow() {
       this.cityNode = this.$parent.globalData.cityNode
       this.getLocalList()
     }
+    onShow() {
+      
+    }
+    onReachBottom() {
+      // 下拉触底，先判断是否有请求正在进行中
+      // 获取楼盘列表
+      this.getLocalList()
+    }
     getSearchList(search) {
-      // 执行搜索
-      let i = 0
-      let localList = this.localList
-      let searchList = []
-      for (i in localList) {
-        if (localList[i].name.match(search)) {
-          searchList.push(localList[i])
+      // // 执行搜索
+      // let i = 0
+      // let localList = this.searchList
+      // let searchList = []
+      // for (i in localList) {
+      //   if (localList[i].name.match(search)) {
+      //     searchList.push(localList[i])
+      //   }
+      // }
+      // this.searchList = searchList
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/search`,
+        data: {
+          city_id: this.cityNode.id,
+          name: search
+        },
+        method: 'POST',
+        success: data => {
+          if (data.data.code == 1) {
+            this.searchList = this.$parent.null2str(data.data.data)
+            this.$apply()
+          }
         }
-      }
-      this.searchList = searchList
+      })
     }
     getLocalList() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/culture_floor`,
         method: 'POST',
         data: {
-          city_id: this.cityNode.id
+          city_id: this.cityNode.id,
+          sid: this.searchList.length
         },
         success: data => {
           if (data.data.code == 1) {
-            this.localList = this.$parent.null2str(data.data.data)
-            this.searchList = this.localList
+            let localList = this.$parent.null2str(data.data.data)
+            this.searchList = this.searchList.concat(localList)
             this.$apply()
           } else {
             wx.showModal({

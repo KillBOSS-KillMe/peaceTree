@@ -48,13 +48,14 @@
     text-align: center;
   }
   .item image{
-    width: 240rpx;
+    width: 200rpx;
     height: 152rpx;
-    border-radius: 20rpx;
+    border-radius: 10rpx;
   }
   .item .con{
     width: 430rpx;
     height: 152rpx;
+    margin-left: 30rpx;
   }
   .item .title{
     display: flex;

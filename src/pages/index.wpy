@@ -217,36 +217,6 @@
     align-items: center;
     justify-content: flex-start;
   }
-  .item .price{
-    margin-top: 45rpx;
-  }
-  .priceOrcommission{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .commission{
-    width:180rpx;
-    height:30rpx;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    margin-top:45rpx;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    color: #ee5e7b;
-    font-size: 25rpx;
-    font-weight: 600;
-  }
-  .commission view{
-    padding: 0 5rpx;
-    background-color: #ee5e7b;
-    color: #fff;
-    font-size: 25rpx;
-    border-radius: 5rpx;
-  }
   // 融创西双版纳国际度假区
 </style>
 <template>
@@ -459,7 +429,7 @@
       this.cityNode = cityNode
       this.$parent.globalData.originalCityNode = cityNode
       this.$parent.globalData.cityNode = cityNode
-      // // 获取楼盘列表
+      // 获取楼盘列表
       this.getLocalList()
       // 获取轮播
       this.getSwiperList()
@@ -471,12 +441,14 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.cityNode = this.$parent.globalData.cityNode
       this.originalCityNode = this.$parent.globalData.originalCityNode
-      if (Object.keys(this.cityNode).length == 0) {
+      console.log(this.cityNode.id == '')
+      console.log(this.cityNode.id == '')
+      // if (Object.keys(this.cityNode).length == 0) {
         // 加载城市列表,获取定位，获取所在城市
         if (this.cityNode.id == '') {
           this.getLocation()
         }
-      }
+      // }
       if (this.originalCityNode != undefined) {
         if (this.cityNode.id != this.originalCityNode.id) {
           this.$parent.globalData.originalCityNode = this.cityNode

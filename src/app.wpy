@@ -93,6 +93,7 @@
 .item .title text {
   font-size:35rpx;
   font-weight:600;
+  color: #333;
 }
 
 .listPrompt{
@@ -159,6 +160,13 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 .item{
   position:relative;
 }
+.item .price {
+  margin-top:30rpx;
+}
+.item .address{
+  margin-top:15rpx;
+}
+
 // 垫付标记
 .pad{
   position:absolute;
@@ -221,7 +229,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
-    margin-top:45rpx;
+    margin-top:30rpx;
     display: flex;
     align-items: center;
     justify-content: flex-start;

@@ -44,7 +44,7 @@
     padding: 5rpx 10rpx;
   }
   .item .address,
-  .item .iconfont,
+  // .item .iconfont,
   .item .price{
     font-size: 25rpx;
     color: #cbcbcb;
@@ -52,14 +52,14 @@
     text-overflow:ellipsis;
     white-space:nowrap;
   }
+  .item .iconfont{
+    font-size: 25rpx;
+  }
   .item .address,
   .item .address .iconfont{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-  }
-  .item .price{
-    margin-top: 45rpx;
   }
   .pad{
     position: absolute;

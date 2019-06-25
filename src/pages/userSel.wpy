@@ -59,7 +59,7 @@
       <view class="userList">
         <!-- <view class="type">A</view> -->
         <repeat for="{{searchList}}" item="item">
-          <view class="item" data-id="{{item.id}}" @tap="goUserInfo">
+          <view class="item" data-id="{{item.id}}">
             <view>
               <checkbox data-index="{{1}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
               {{item.name}}
@@ -127,7 +127,7 @@
       selUser(e) {
         let i = 0
         let cartIndex = e.detail.value
-        let userList = this.userList
+        let userList = this.searchList
         let selList = []
         // 需要加入去重操作
         for(i in cartIndex) {

@@ -39,6 +39,7 @@
   justify-content:center;
 }
 .search input {
+  font-size: 30rpx;
   width:550rpx;
   color:#555;
 }

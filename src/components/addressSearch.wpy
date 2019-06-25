@@ -56,7 +56,6 @@
       <input type="text" placeholder="输入搜索内容" />
     </view>
   </view>
-  
 </view>
 </template>
 <script>

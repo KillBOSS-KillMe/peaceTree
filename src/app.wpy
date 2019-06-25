@@ -90,12 +90,16 @@
   height: auto;
   padding: 0 30rpx;
 }
+.item .title text {
+  font-size:35rpx;
+  font-weight:600;
+}
+
 .listPrompt{
   height: 78rpx;
   line-height: 78rpx;
   font-size: 26rpx;
   color: #e6e6e6;
-  border-bottom: 1rpx solid #e6e6e6;
   text-align: center;
 }
 .mask{

@@ -102,7 +102,7 @@
   .swiper image {
     width: 100%;
     height: 100%;
-    border-radius: 20rpx;
+    border-radius: 10rpx;
   }
   .sort{
     width: 690rpx;
@@ -116,7 +116,7 @@
     width: 205rpx;
     height: 127rpx;
     position: relative;
-    border-radius: 20rpx;
+    border-radius: 10rpx;
     font-size: 30rpx;
     color: #fff;
     display: flex;
@@ -137,7 +137,7 @@
     position: absolute;
     top: 0;
     z-index: -10;
-    border-radius: 20rpx;
+    border-radius: 10rpx;
   }
   .listTitle{
     width: 690rpx;
@@ -145,18 +145,18 @@
     font-size: 40rpx;
     color: #333;
     font-weight: 600;
-    margin-top: 100rpx;
+    margin-top: 30rpx;
   }
   .list{
     width: 690rpx;
     height: auto;
-    padding: 20rpx 30rpx;
+    padding: 0 30rpx;
     margin-bottom: 120rpx;
   }
   .item{
     width: 690rpx;
     height: 152rpx;
-    padding: 20rpx 0;
+    padding: 30rpx 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -167,13 +167,12 @@
     line-height: 78rpx;
     font-size: 26rpx;
     color: #e6e6e6;
-    border-bottom: 1rpx solid #e6e6e6;
     text-align: center;
   }
   .item image{
     width: 200rpx;
     height: 152rpx;
-    border-radius: 20rpx;
+    border-radius: 10rpx;
   }
   .item .con{
     width: 470rpx;
@@ -190,6 +189,7 @@
   }
   .item .title text{
     font-size: 35rpx;
+    font-weight: 600;
   }
   .item .title view{
     font-size: 25rpx;
@@ -318,7 +318,7 @@
           </view>
         </view>
       </repeat>
-      <view class="listPrompt">共有{{searchList.length}}}个项目，已无更多内容</view>
+      <view class="listPrompt">共有{{searchList.length}}个项目，已无更多内容</view>
     </view>
     <view class="listTitle">热推楼盘</view>
     <view class="list">

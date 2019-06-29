@@ -70,7 +70,8 @@
   .listClient .item{
     width: 690rpx;
     padding: 0 30rpx;
-    height: 230rpx;
+    // height: 230rpx;
+    height: 180rpx;
     border: 1rpx solid #f2f2f2;
   }
   .listClient .info{
@@ -206,7 +207,7 @@
                 <text class="reservation" data-phone="{{item.mobile}}" @tap="tal">{{item.mobile}}</text>
               </view>
               <view class="address">{{item.floor_name}}</view>
-              <view class="reservation">预计到访时间：{{item.access_time}}</view>
+              <!-- <view class="reservation">预计到访时间：{{item.access_time}}</view> -->
             </view>
             <icon class="iconfont icon-erweima" @tap="showCode"></icon>
           </view>

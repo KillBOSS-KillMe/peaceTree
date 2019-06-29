@@ -245,7 +245,7 @@
                 <text class="name">{{item.name}}</text>
                 <text class="time" data-phone="{{item.mobile}}" @tap="tal">{{item.mobile}}</text>
               </view>
-              <view class="time">预计到访时间：{{item.access_time}}</view>
+              <!-- <view class="time">预计到访时间：{{item.access_time}}</view> -->
               <view class="time">
                 <icon class="iconfont icon-shijian"></icon>
                 {{item.create_time}}

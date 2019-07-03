@@ -167,7 +167,7 @@ input{
         })
         return ''
       }
-      if (this.check.isPhone(this.clientMobile)) {
+      if (this.clientMobile.length != 11) {
         wx.showModal({
           title: '',
           content: '请输入正确的手机号'

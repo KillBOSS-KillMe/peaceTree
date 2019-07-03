@@ -444,7 +444,7 @@ page{
         })
         return ''
       }
-      if (this.check.isPhone(this.mobile)) {
+      if (this.mobile.length != 11) {
         wx.showModal({
           title: '',
           content: '请输入正确的手机号'

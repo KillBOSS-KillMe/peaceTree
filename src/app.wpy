@@ -244,6 +244,15 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
     font-size: 25rpx;
     border-radius: 5rpx;
   }
+  .listTitle {
+    width:690rpx;
+    padding:20rpx 30rpx;
+    font-size:40rpx;
+    color:#333;
+    font-weight:600;
+    margin-top:30rpx;
+  }
+
 </style>
 
 <script>

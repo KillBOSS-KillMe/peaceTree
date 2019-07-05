@@ -9,27 +9,30 @@
   .sort{
     width: 690rpx;
     padding: 0 30rpx;
+    display:flex;
+    justify-content:flex-start;
+    // justify-content:space-between;
+    flex-direction:row;
+    flex-wrap:wrap;
   }
   .sort .sel{
-    width: 165rpx;
-    height: 87rpx;
+    width: 205rpx;
+    height: 127rpx;
     position: relative;
     border-radius: 20rpx;
     font-size: 30rpx;
     color: #fff;
-    display: inline-block;
-    margin-right: 67.5rpx;
-    margin-top: 50rpx;
+    margin-left: 38rpx;
+    margin-top: 20rpx;
+  }
+  .sort .sel:nth-child(3n + 1){
+    margin-left: 0rpx;
   }
   .sort .sel .con{
     width: 160rpx;
     height: 87rpx;
     padding: 20rpx;
   }
-  // .sort .sel .con view{
-  //   width: 33rpx;
-  //   border-top: 2rpx solid #fff;
-  // }
   .con{
     font-size: 28rpx;
   }
@@ -42,7 +45,7 @@
     position: absolute;
     top: 0;
     z-index: -10;
-    border-radius: 20rpx;
+    border-radius: 10rpx;
   }
 </style>
 <template>
@@ -58,44 +61,44 @@
         <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
       </view>
     </view>
-    <!-- <view class="sort">
+    <view class="sort">
       <view class="sel">
-        <image class='header-bg' src="/img/test.jpg" />
+        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
         <view class="con">
           <text>本地楼盘</text>
           <text>本地楼盘</text>
         </view>
       </view>
       <view class="sel">
-        <image class='header-bg' src="/img/test.jpg" />
+        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
         <view class="con">
           <text>本地楼盘</text>
           <text>本地楼盘</text>
         </view>
       </view>
       <view class="sel">
-        <image class='header-bg' src="/img/test.jpg" />
-        <view class="con">
-          <text class="name">本地楼盘</text>
-          <text>本地楼盘</text>
-        </view>
-      </view>
-      <view class="sel">
-        <image class='header-bg' src="/img/test.jpg" />
+        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
         <view class="con">
           <text class="name">本地楼盘</text>
           <text>本地楼盘</text>
         </view>
       </view>
       <view class="sel">
-        <image class='header-bg' src="/img/test.jpg" />
+        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
         <view class="con">
           <text class="name">本地楼盘</text>
           <text>本地楼盘</text>
         </view>
       </view>
-    </view> -->
-    <!-- <view class="listName">热门楼盘</view> -->
+      <view class="sel">
+        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
+        <view class="con">
+          <text class="name">本地楼盘</text>
+          <text>本地楼盘</text>
+        </view>
+      </view>
+    </view>
+    <view class="listTitle">{{listName}}</view>
     <view class="list">
       <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
@@ -143,13 +146,14 @@
     mixins = []
 
     data = {
-      img: '/img/test.jpg',
+      img: 'https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg',
       test: '',
       cityNode: {},
       userInfo: {},
       requestImgUrl: '',
       localList: [],
-      searchList: []
+      searchList: [],
+      listName: '热门楼盘'
     }
 
     computed = {

@@ -15,65 +15,218 @@
     font-size: 30rpx !important;
     color: #a4a4a4;
   }
+  .typeDom{
+    width: 690rpx;
+    height: auto;
+    padding: 0 30rpx;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    .address, .money, .padSel, .more{
+      width: 690rpx;
+      height: auto;
+    }
+    .address {
+      li{
+        font-size: 25rpx;
+        color: #999;
+        background-color: #eee;
+        padding: 10rpx 15rpx;
+        border-radius: 5rpx;
+        margin-right: 15rpx;
+        margin-bottom: 15rpx;
+        display: inline-flex;
+        align-items:center;
+        justify-content:space-between;
+      }
+      .action{
+        background-color: #7bb312;
+        color: #fff;
+      }
+    }
+    .money {
+      li{
+        font-size: 25rpx;
+        color: #999;
+        padding: 10rpx 15rpx;
+        margin-bottom: 15rpx;
+        display: block;
+      }
+      .action{
+        color: #7bb312;
+      }
+    }
+    .padSel {
+      li{
+        font-size: 25rpx;
+        color: #999;
+        padding: 10rpx 15rpx;
+        margin-bottom: 15rpx;
+        display: block;
+      }
+      .action{
+        color: #7bb312;
+      }
+    }
+    .more {
+      .name{
+        width: 100%;
+        padding: 15rpx 0;
+        font-size: 28rpx;
+        font-weight: 600;
+      }
+      li{
+        font-size: 25rpx;
+        color: #999;
+        background-color: #eee;
+        padding: 10rpx 15rpx;
+        border-radius: 5rpx;
+        margin-right: 15rpx;
+        margin-bottom: 15rpx;
+        display: inline-flex;
+        align-items:center;
+        justify-content:space-between;
+      }
+      .action{
+        background-color: #7bb312;
+        color: #fff;
+      }
+      .button{
+        width: 100%;
+        padding: 20rpx 0;
+        display: flex;
+        align-items:center;
+        justify-content:space-around;
+        view{
+          width: 250rpx;
+          height: 80rpx;
+          border-radius: 10rpx;
+          color: #fff;
+          font-size: 28rpx;
+          display: flex;
+          align-items:center;
+          justify-content:center;
+        }
+        view:nth-child(1){
+          background-color: #f5ffe1;
+          color: #7bb312;
+        }
+        view:nth-child(2){
+          background-color: #7bb312;
+        }
+      }
+    }
+  }
 </style>
 <template>
   <view>
-    <view class="addressSearch">
-      <view class="selAddress" @tap="goSelCity">
-        {{cityNode.name}}
-        <icon class="iconfont icon-jiantou-xia"></icon>
+    <scroll-view scroll-y="true" scroll-top="{{scrollTop}}">
+      <view class="addressSearch">
+        <view class="selAddress" @tap="goSelCity">
+          {{cityNode.name}}
+          <icon class="iconfont icon-jiantou-xia"></icon>
+        </view>
+        <view class="search">
+          <icon class="iconfont icon-sousuo"></icon>
+          <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
+        </view>
       </view>
-      <view class="search">
-        <icon class="iconfont icon-sousuo"></icon>
-        <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
+      <view class="typeSel">
+        <view data-type="address" @tap="selTypeRun">
+          区域
+          <icon class="iconfont icon-jiantou-xia"></icon>
+        </view>
+        <view data-type="money" @tap="selTypeRun">
+          总价
+          <icon class="iconfont icon-jiantou-xia"></icon>
+        </view>
+        <view data-type="padSel" @tap="selTypeRun">
+          垫拥
+          <icon class="iconfont icon-jiantou-xia"></icon>
+        </view>
+        <view data-type="more" @tap="selTypeRun">
+          更多
+          <icon class="iconfont icon-jiantou-xia"></icon>
+        </view>
       </view>
-    </view>
-    <!-- <view class="typeSel">
-      <view>
-        区域
-        <icon class="iconfont icon-jiantou-xia"></icon>
+      <!-- <view class="typeDom"> -->
+      <view class="typeDom"
+       wx:if="{{typeSel.address || typeSel.money || typeSel.padSel || typeSel.more}}">
+        <view class="address" wx:if="{{typeSel.address}}">
+          <ul>
+            <repeat for="{{addressList}}" item="item">
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+            </repeat>
+          </ul>
+        </view>
+        <view class="money" wx:if="{{typeSel.money}}">
+          <ul>
+            <repeat for="{{moneyList}}" item="item">
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+            </repeat>
+          </ul>
+        </view>
+        <view class="padSel" wx:if="{{typeSel.padSel}}">
+          <ul>
+            <repeat for="{{padSel}}" item="item">
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+            </repeat>
+          </ul>
+        </view>
+        <view class="more" wx:if="{{typeSel.more}}">
+          <view class="name">物业类型</view>
+          <ul>
+            <repeat for="{{moreJson.propertyType}}" item="item">
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+            </repeat>
+          </ul>
+          <view class="name">装修情况</view>
+          <ul>
+            <repeat for="{{moreJson.decoration}}" item="item">
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+            </repeat>
+          </ul>
+          <view class="name">开盘情况</view>
+          <ul>
+            <repeat for="{{moreJson.opening}}" item="item">
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+            </repeat>
+          </ul>
+          <view class="button">
+            <view>重置</view>
+            <view>确定</view>
+          </view>
+        </view>
       </view>
-      <view>
-        总价
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-      <view>
-        垫拥
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-      <view>
-        更多
-        <icon class="iconfont icon-jiantou-xia"></icon>
-      </view>
-    </view> -->
-    <view class="list">
-      <!-- localList -->
-      <repeat for="{{searchList}}" item="item">
-        <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
-          <!-- <view class="pad">垫拥</view> -->
-          <image data-id="" src="{{requestImgUrl + item.img}}" />
-          <view class="con">
-            <view class="title">
-              <text>{{item.name}}</text>
-              <view class="heatLocal" wx:if="{{item.state == '2'}}">热推</view>
-              <view class="newLocal" wx:if="{{item.state == '1'}}">新盘</view>
-            </view>
-            <view class="address">
-              <icon class="iconfont icon-dingweiweizhi"></icon>
-              {{item.floor_address}}
-            </view>
-            <view class="priceOrcommission">
-              <view class="price">{{item.money}}</view>
-              <view class="commission" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
-                <view>佣</view>
-                {{item.brokerage}}
+      <view class="list">
+        <!-- localList -->
+        <repeat for="{{searchList}}" item="item">
+          <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
+            <!-- <view class="pad">垫拥</view> -->
+            <image data-id="" src="{{requestImgUrl + item.img}}" />
+            <view class="con">
+              <view class="title">
+                <text>{{item.name}}</text>
+                <view class="heatLocal" wx:if="{{item.state == '2'}}">热推</view>
+                <view class="newLocal" wx:if="{{item.state == '1'}}">新盘</view>
+              </view>
+              <view class="address">
+                <icon class="iconfont icon-dingweiweizhi"></icon>
+                {{item.floor_address}}
+              </view>
+              <view class="priceOrcommission">
+                <view class="price">{{item.money}}</view>
+                <view class="commission" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
+                  <view>佣</view>
+                  {{item.brokerage}}
+                </view>
               </view>
             </view>
           </view>
-        </view>
-      </repeat>
-      <view class="listPrompt">共有{{searchList.length}}个项目，已无更多内容</view>
-    </view>
+        </repeat>
+        <view class="listPrompt">共有{{searchList.length}}个项目，已无更多内容</view>
+      </view>
+    </scroll-view>
   </view>
   
 </template>
@@ -94,12 +247,45 @@
     mixins = []
 
     data = {
+      scrollTop: 0,
       img: '/img/test.jpg',
       cityNode: {},
       userInfo: {},
       requestImgUrl: '',
       localList: [],
-      searchList: []
+      searchList: [],
+      typeSel: {
+        'address': false,
+        'money': false,
+        'padSel': false,
+        'more': false
+      },
+      padSel: [
+        {"name": "不限", "id": "1", "sel": 1},
+        {"name": "有垫佣", "id": "1", "sel": 0}
+        ],
+      moneyList: [],
+      addressList: [],
+      moreJson: {
+        "propertyType": [
+          {"name": "不限", "id": "1", "sel": 1},
+          {"name": "住宅", "id": "2", "sel": 0},
+          {"name": "别墅", "id": "3", "sel": 0},
+          {"name": "写字楼", "id": "4", "sel": 0},
+          {"name": "商铺", "id": "5", "sel": 0},
+          {"name": "酒店式公寓", "id": "6", "sel": 0}
+          ],
+        "decoration":[
+          {"name": "不限", "id": "1", "sel": 1},
+          {"name": "毛坯", "id": "2", "sel": 0},
+          {"name": "精装", "id": "3", "sel": 0}
+          ],
+        "opening": [
+          {"name": "不限", "id": "1", "sel": 1},
+          {"name": "已开盘", "id": "2", "sel": 0},
+          {"name": "未开盘", "id": "1", "sel": 0}
+        ]
+      }
     }
 
     computed = {
@@ -107,6 +293,54 @@
     }
 
     methods = {
+      selAddress(e) {
+        let id = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        if (this.addressList[index].sel) {
+          this.addressList[index].sel = 0
+        } else {
+          this.addressList[index].sel = 1
+        }
+        this.$apply()
+      },
+      // 分类选择
+      selTypeRun(e) {
+        if (wx.pageScrollTo) {
+          wx.pageScrollTo({
+            scrollTop: 0
+          })
+        } else {
+          wx.showModal({
+            title: '',
+            content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+          })
+        }
+        let type = e.currentTarget.dataset.type
+        this.typeSel = {
+          'address': false,
+          'money': false,
+          'padSel': false,
+          'more': false
+        }
+        switch (type) {
+          case 'address':
+            this.typeSel.address = true
+            break;
+          case 'money':
+            this.typeSel.money = true
+            break;
+          case 'padSel':
+            this.typeSel.padSel = true
+            break;
+          case 'more':
+            this.typeSel.more = true
+            break;
+          default:
+            break;
+        }
+        console.log(this.typeSel)
+        this.$apply()
+      },
       goLocalInfo(e) {
         // 进入楼盘详情
         this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}&share=0`)
@@ -135,6 +369,28 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       // this.cityNode = this.$parent.globalData.cityNode
       // this.getLocalList()
+      this.addressList = [
+        {"name": "不限", "id": "1", "sel": 1},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0},
+        {"name": "长安", "id": "1", "sel": 0}
+      ]
+      this.moneyList = [
+        {"name": "不限", "id": "1", "sel": 1},
+        {"name": "80万以下", "id": "1", "sel": 0},
+        {"name": "80~120万", "id": "1", "sel": 0},
+        {"name": "120~200万", "id": "1", "sel": 0},
+        {"name": "200~300万", "id": "1", "sel": 0},
+        {"name": "300~420万", "id": "1", "sel": 0},
+        {"name": "420~600万", "id": "1", "sel": 0},
+        {"name": "600~800万", "id": "1", "sel": 0},
+        {"name": "800万以上", "id": "1", "sel": 0}
+      ]
     }
     onShow() {
       this.cityNode = this.$parent.globalData.cityNode

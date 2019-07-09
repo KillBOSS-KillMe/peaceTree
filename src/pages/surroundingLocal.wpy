@@ -12,11 +12,6 @@
     display:block;
     white-space:nowrap;
     overflow:hidden;
-    // display:flex;
-    // justify-content:flex-start;
-    // justify-content:space-between;
-    // flex-direction:row;
-    // flex-wrap:wrap;
   }
   .sort .sel{
     width: 205rpx;
@@ -26,9 +21,7 @@
     font-size: 30rpx;
     color: #fff;
     display:inline-block;
-
     margin-left: 38rpx;
-    // margin-top: 20rpx;
   }
   // .sort .sel:nth-child(3n + 1){
   //   margin-left: 0rpx;

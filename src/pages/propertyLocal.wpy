@@ -146,12 +146,14 @@
           <span wx:if="{{addressList[0].id!=addressType.id}}">{{addressType.name}}</span>
           <icon class="iconfont icon-jiantou-xia"></icon>
         </view>
-        <view data-type="money" @tap="selTypeRun">
-          总价
+        <view class="{{moneyList[0].id!=moneyType.id?'action':''}}" data-type="money" @tap="selTypeRun">
+          <span wx:if="{{moneyList[0].id==moneyType.id}}">总价</span>
+          <span wx:if="{{moneyList[0].id!=moneyType.id}}">{{moneyType.name}}</span>
           <icon class="iconfont icon-jiantou-xia"></icon>
         </view>
-        <view data-type="padSel" @tap="selTypeRun">
-          垫拥
+        <view class="{{padSel[0].id!=padSelType.id?'action':''}}" data-type="padSel" @tap="selTypeRun">
+          <span wx:if="{{padSel[0].id==padSelType.id}}">垫拥</span>
+          <span wx:if="{{padSel[0].id!=padSelType.id}}">{{padSelType.name}}</span>
           <icon class="iconfont icon-jiantou-xia"></icon>
         </view>
         <view data-type="more" @tap="selTypeRun">
@@ -172,14 +174,14 @@
         <view class="money" wx:if="{{typeSel.money}}">
           <ul>
             <repeat for="{{moneyList}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selMoney">{{item.name}}</li>
             </repeat>
           </ul>
         </view>
         <view class="padSel" wx:if="{{typeSel.padSel}}">
           <ul>
             <repeat for="{{padSel}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selpadSel">{{item.name}}</li>
             </repeat>
           </ul>
         </view>
@@ -187,24 +189,24 @@
           <view class="name">物业类型</view>
           <ul>
             <repeat for="{{moreJson.propertyType}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selPropertyType">{{item.name}}</li>
             </repeat>
           </ul>
           <view class="name">装修情况</view>
           <ul>
             <repeat for="{{moreJson.decoration}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selDecoration">{{item.name}}</li>
             </repeat>
           </ul>
           <view class="name">开盘情况</view>
           <ul>
             <repeat for="{{moreJson.opening}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selOpening">{{item.name}}</li>
             </repeat>
           </ul>
           <view class="button">
-            <view>重置</view>
-            <view>确定</view>
+            <view @tap="moreJsonReset">重置</view>
+            <view @tap="moreJsonSub">确定</view>
           </view>
         </view>
       </view>
@@ -265,6 +267,8 @@
       localList: [],
       searchList: [],
       addressType: {"name": "不限", "id": "0", "sel": 1},
+      moneyType: {"name": "不限", "id": "0", "sel": 1},
+      padSelType: {"name": "不限", "id": "0", "sel": 1},
       typeSel: {
         'address': false,
         'money': false,
@@ -280,21 +284,21 @@
       moreJson: {
         "propertyType": [
           {"name": "不限", "id": "0", "sel": 1},
-          {"name": "住宅", "id": "2", "sel": 0},
-          {"name": "别墅", "id": "3", "sel": 0},
-          {"name": "写字楼", "id": "4", "sel": 0},
-          {"name": "商铺", "id": "5", "sel": 0},
-          {"name": "酒店式公寓", "id": "6", "sel": 0}
+          {"name": "住宅", "id": "1", "sel": 0},
+          {"name": "别墅", "id": "2", "sel": 0},
+          {"name": "写字楼", "id": "3", "sel": 0},
+          {"name": "商铺", "id": "4", "sel": 0},
+          {"name": "酒店式公寓", "id": "5", "sel": 0}
           ],
         "decoration":[
           {"name": "不限", "id": "0", "sel": 1},
-          {"name": "毛坯", "id": "2", "sel": 0},
-          {"name": "精装", "id": "3", "sel": 0}
+          {"name": "毛坯", "id": "1", "sel": 0},
+          {"name": "精装", "id": "2", "sel": 0}
           ],
         "opening": [
           {"name": "不限", "id": "0", "sel": 1},
-          {"name": "已开盘", "id": "2", "sel": 0},
-          {"name": "未开盘", "id": "1", "sel": 0}
+          {"name": "已开盘", "id": "1", "sel": 0},
+          {"name": "未开盘", "id": "2", "sel": 0}
         ]
       }
     }
@@ -304,6 +308,35 @@
     }
 
     methods = {
+      // 删选条件确定按钮
+      moreJsonSub() {
+        
+      },
+      // 重置数据
+      moreJsonReset() {
+        this.moreJson = {
+          "propertyType": [
+            {"name": "不限", "id": "0", "sel": 1},
+            {"name": "住宅", "id": "1", "sel": 0},
+            {"name": "别墅", "id": "2", "sel": 0},
+            {"name": "写字楼", "id": "3", "sel": 0},
+            {"name": "商铺", "id": "4", "sel": 0},
+            {"name": "酒店式公寓", "id": "5", "sel": 0}
+            ],
+          "decoration":[
+            {"name": "不限", "id": "0", "sel": 1},
+            {"name": "毛坯", "id": "1", "sel": 0},
+            {"name": "精装", "id": "2", "sel": 0}
+            ],
+          "opening": [
+            {"name": "不限", "id": "0", "sel": 1},
+            {"name": "已开盘", "id": "1", "sel": 0},
+            {"name": "未开盘", "id": "2", "sel": 0}
+          ]
+        }
+        this.$apply()
+      },
+      // 区域
       selAddress(e) {
         let id = e.currentTarget.dataset.id
         let index = e.currentTarget.dataset.index
@@ -318,6 +351,76 @@
         this.addressList = addressList
         this.$apply()
         this.typeDomHide()
+      },
+      // 总价
+      selMoney(e) {
+        let id = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        let moneyList = this.moneyList
+        let i = 1
+        for (i in moneyList) {
+          moneyList[i].sel = 0
+        }
+        moneyList[index].sel = 1
+        this.moneyType = moneyList[index]
+        console.log(moneyList[index])
+        this.moneyList = moneyList
+        this.$apply()
+        this.typeDomHide()
+      },
+      // 垫拥
+      selpadSel(e) {
+        let id = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        let padSel = this.padSel
+        let i = 1
+        for (i in padSel) {
+          padSel[i].sel = 0
+        }
+        padSel[index].sel = 1
+        this.padSelType = padSel[index]
+        this.padSel = padSel
+        this.$apply()
+        this.typeDomHide()
+      },
+      // 物业类型
+      selPropertyType(e) {
+        let id = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        let data = this.moreJson.propertyType
+        let i = 1
+        for (i in data) {
+          data[i].sel = 0
+        }
+        data[index].sel = 1
+        this.moreJson.propertyType = data
+        this.$apply()
+      },
+      // 装修情况
+      selDecoration(e) {
+        let id = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        let data = this.moreJson.decoration
+        let i = 1
+        for (i in data) {
+          data[i].sel = 0
+        }
+        data[index].sel = 1
+        this.moreJson.decoration = data
+        this.$apply()
+      },
+      // 开盘情况
+      selOpening(e) {
+        let id = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        let data = this.moreJson.opening
+        let i = 1
+        for (i in data) {
+          data[i].sel = 0
+        }
+        data[index].sel = 1
+        this.moreJson.opening = data
+        this.$apply()
       },
       // 分类选择
       selTypeRun(e) {

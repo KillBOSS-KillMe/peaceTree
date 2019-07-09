@@ -146,11 +146,11 @@
           <span wx:if="{{addressList[0].id!=addressType.id}}">{{addressType.name}}</span>
           <icon class="iconfont icon-jiantou-xia"></icon>
         </view>
-        <view class="{{moneyList[0].id!=moneyType.id?'action':''}}" data-type="money" @tap="selTypeRun">
+        <!-- <view class="{{moneyList[0].id!=moneyType.id?'action':''}}" data-type="money" @tap="selTypeRun">
           <span wx:if="{{moneyList[0].id==moneyType.id}}">总价</span>
           <span wx:if="{{moneyList[0].id!=moneyType.id}}">{{moneyType.name}}</span>
           <icon class="iconfont icon-jiantou-xia"></icon>
-        </view>
+        </view> -->
         <view class="{{padSel[0].id!=padSelType.id?'action':''}}" data-type="padSel" @tap="selTypeRun">
           <span wx:if="{{padSel[0].id==padSelType.id}}">垫拥</span>
           <span wx:if="{{padSel[0].id!=padSelType.id}}">{{padSelType.name}}</span>
@@ -277,10 +277,11 @@
       },
       padSel: [
         {"name": "不限", "id": "0", "sel": 1},
-        {"name": "有垫佣", "id": "1", "sel": 0}
+        {"name": "有垫佣", "id": "1", "sel": 0},
+        {"name": "无垫佣", "id": "2", "sel": 0}
         ],
       moneyList: [],
-      addressList: [],
+      addressList: [{"name": "不限", "id": "0", "sel": 1}],
       moreJson: {
         "propertyType": [
           {"name": "不限", "id": "0", "sel": 1},
@@ -300,7 +301,10 @@
           {"name": "已开盘", "id": "1", "sel": 0},
           {"name": "未开盘", "id": "2", "sel": 0}
         ]
-      }
+      },
+      propertyTypeId: '',
+      decorationId: '',
+      openingId: ''
     }
 
     computed = {
@@ -310,7 +314,8 @@
     methods = {
       // 删选条件确定按钮
       moreJsonSub() {
-        
+        this.typeDomHide()
+        this.getLocalScreenList()
       },
       // 重置数据
       moreJsonReset() {
@@ -334,6 +339,9 @@
             {"name": "未开盘", "id": "2", "sel": 0}
           ]
         }
+        this.propertyTypeId = ''
+        this.decorationId = ''
+        this.openingId = ''
         this.$apply()
       },
       // 区域
@@ -351,6 +359,7 @@
         this.addressList = addressList
         this.$apply()
         this.typeDomHide()
+        this.getLocalScreenList()
       },
       // 总价
       selMoney(e) {
@@ -367,6 +376,7 @@
         this.moneyList = moneyList
         this.$apply()
         this.typeDomHide()
+        this.getLocalScreenList()
       },
       // 垫拥
       selpadSel(e) {
@@ -382,6 +392,7 @@
         this.padSel = padSel
         this.$apply()
         this.typeDomHide()
+        this.getLocalScreenList()
       },
       // 物业类型
       selPropertyType(e) {
@@ -393,6 +404,7 @@
           data[i].sel = 0
         }
         data[index].sel = 1
+        this.propertyTypeId = data[index].name
         this.moreJson.propertyType = data
         this.$apply()
       },
@@ -406,6 +418,7 @@
           data[i].sel = 0
         }
         data[index].sel = 1
+        this.decorationId = data[index].name
         this.moreJson.decoration = data
         this.$apply()
       },
@@ -419,6 +432,7 @@
           data[i].sel = 0
         }
         data[index].sel = 1
+        this.openingId = data[index].id
         this.moreJson.opening = data
         this.$apply()
       },
@@ -488,28 +502,17 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       // this.cityNode = this.$parent.globalData.cityNode
       // this.getLocalList()
-      this.addressList = [
-        {"name": "不限", "id": "0", "sel": 1},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "2", "sel": 0},
-        {"name": "长安", "id": "3", "sel": 0},
-        {"name": "长安", "id": "4", "sel": 0},
-        {"name": "长安", "id": "5", "sel": 0},
-        {"name": "长安", "id": "6", "sel": 0},
-        {"name": "长安", "id": "7", "sel": 0},
-        {"name": "长安", "id": "8", "sel": 0}
-      ]
-      this.moneyList = [
-        {"name": "不限", "id": "0", "sel": 1},
-        {"name": "80万以下", "id": "1", "sel": 0},
-        {"name": "80~120万", "id": "2", "sel": 0},
-        {"name": "120~200万", "id": "3", "sel": 0},
-        {"name": "200~300万", "id": "4", "sel": 0},
-        {"name": "300~420万", "id": "5", "sel": 0},
-        {"name": "420~600万", "id": "6", "sel": 0},
-        {"name": "600~800万", "id": "7", "sel": 0},
-        {"name": "800万以上", "id": "8", "sel": 0}
-      ]
+      // this.moneyList = [
+      //   {"name": "不限", "id": "0", "sel": 1},
+      //   {"name": "80万以下", "id": "1", "sel": 0},
+      //   {"name": "80~120万", "id": "2", "sel": 0},
+      //   {"name": "120~200万", "id": "3", "sel": 0},
+      //   {"name": "200~300万", "id": "4", "sel": 0},
+      //   {"name": "300~420万", "id": "5", "sel": 0},
+      //   {"name": "420~600万", "id": "6", "sel": 0},
+      //   {"name": "600~800万", "id": "7", "sel": 0},
+      //   {"name": "800万以上", "id": "8", "sel": 0}
+      // ]
     }
     onShow() {
       this.cityNode = this.$parent.globalData.cityNode
@@ -569,7 +572,39 @@
         },
         success: data => {
           if (data.data.code == 1) {
+            let area = this.$parent.null2str(data.data.area)
             let localList = this.$parent.null2str(data.data.data)
+            this.searchList = this.searchList.concat(localList)
+            let i = 0
+            for (i in area) {
+              this.addressList.push({'name': area[i].name, 'id': area[i].id, 'sel': 0})
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+    getLocalScreenList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/local_screen`,
+        method: 'POST',
+        data: {
+          area_id: this.addressType.id,
+          mattress: this.padSelType.name,
+          property_type: this.propertyTypeId,
+          decoration_status: this.decorationId,
+          opening_time: this.openingId,
+          city_id: this.cityNode.id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            let localList = this.$parent.null2str(data.data.data)
+            this.searchList = []
             this.searchList = this.searchList.concat(localList)
             this.$apply()
           } else {

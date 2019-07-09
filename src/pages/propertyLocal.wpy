@@ -355,7 +355,6 @@
         }
         addressList[index].sel = 1
         this.addressType = addressList[index]
-        console.log(addressList[index])
         this.addressList = addressList
         this.$apply()
         this.typeDomHide()
@@ -372,7 +371,6 @@
         }
         moneyList[index].sel = 1
         this.moneyType = moneyList[index]
-        console.log(moneyList[index])
         this.moneyList = moneyList
         this.$apply()
         this.typeDomHide()
@@ -471,7 +469,6 @@
           default:
             break;
         }
-        console.log(this.typeSel)
         this.$apply()
       },
       goLocalInfo(e) {

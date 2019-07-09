@@ -12,8 +12,11 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    font-size: 30rpx !important;
+    font-size: 30rpx;
     color: #a4a4a4;
+  }
+  .typeSel icon{
+    font-size: 20rpx !important;
   }
   .typeDom{
     width: 690rpx;
@@ -261,14 +264,14 @@
         'more': false
       },
       padSel: [
-        {"name": "不限", "id": "1", "sel": 1},
+        {"name": "不限", "id": "0", "sel": 1},
         {"name": "有垫佣", "id": "1", "sel": 0}
         ],
       moneyList: [],
       addressList: [],
       moreJson: {
         "propertyType": [
-          {"name": "不限", "id": "1", "sel": 1},
+          {"name": "不限", "id": "0", "sel": 1},
           {"name": "住宅", "id": "2", "sel": 0},
           {"name": "别墅", "id": "3", "sel": 0},
           {"name": "写字楼", "id": "4", "sel": 0},
@@ -276,12 +279,12 @@
           {"name": "酒店式公寓", "id": "6", "sel": 0}
           ],
         "decoration":[
-          {"name": "不限", "id": "1", "sel": 1},
+          {"name": "不限", "id": "0", "sel": 1},
           {"name": "毛坯", "id": "2", "sel": 0},
           {"name": "精装", "id": "3", "sel": 0}
           ],
         "opening": [
-          {"name": "不限", "id": "1", "sel": 1},
+          {"name": "不限", "id": "0", "sel": 1},
           {"name": "已开盘", "id": "2", "sel": 0},
           {"name": "未开盘", "id": "1", "sel": 0}
         ]

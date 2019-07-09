@@ -17,7 +17,8 @@
   justify-content:flex-start;
 }
 .selAddress icon{
-  width: 30rpx;
+  width: 20rpx;
+  color: #a4a4a4;
 }
 .search {
   display:flex;

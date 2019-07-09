@@ -303,8 +303,8 @@ export default class extends wepy.app {
   globalData = {
     userInfo: {},
     cityNode: {},
-    // requestUrl: 'http://192.168.1.106/api',
-    // requestImgUrl: 'http://192.168.1.106',
+    // requestUrl: 'http://192.168.1.177/api',
+    // requestImgUrl: 'http://192.168.1.177',
     requestUrl: 'https://jiuyou.beaconway.cn/api',
     requestImgUrl: 'https://jiuyou.beaconway.cn',
     swiperList: []

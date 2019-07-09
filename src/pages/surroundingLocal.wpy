@@ -9,11 +9,14 @@
   .sort{
     width: 690rpx;
     padding: 0 30rpx;
-    display:flex;
-    justify-content:flex-start;
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    // display:flex;
+    // justify-content:flex-start;
     // justify-content:space-between;
-    flex-direction:row;
-    flex-wrap:wrap;
+    // flex-direction:row;
+    // flex-wrap:wrap;
   }
   .sort .sel{
     width: 205rpx;
@@ -22,12 +25,14 @@
     border-radius: 20rpx;
     font-size: 30rpx;
     color: #fff;
+    display:inline-block;
+
     margin-left: 38rpx;
-    margin-top: 20rpx;
+    // margin-top: 20rpx;
   }
-  .sort .sel:nth-child(3n + 1){
-    margin-left: 0rpx;
-  }
+  // .sort .sel:nth-child(3n + 1){
+  //   margin-left: 0rpx;
+  // }
   .sort .sel .con{
     width: 160rpx;
     height: 87rpx;
@@ -61,9 +66,9 @@
         <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
       </view>
     </view>
-    <view class="sort">
+    <scroll-view class="sort" scroll-x="true">
       <repeat for="{{addressList}}" item="item">
-        <view class="sel" data-id="{{item.id}}" data-name="{{item.name}}" @tap="selAddress">
+        <view class="sel" data-id="{{item.id}}" data-name="{{item.name}}" wx:if="{{item.count > 0}}" @tap="selAddress">
           <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/5.png" />
           <view class="con">
             <view class="name">{{item.name}}</view>
@@ -71,7 +76,7 @@
           </view>
         </view>
       </repeat>
-    </view>
+    </scroll-view>
     <view class="listTitle">{{listName}}</view>
     <view class="list">
       <repeat for="{{searchList}}" item="item">

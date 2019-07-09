@@ -62,41 +62,15 @@
       </view>
     </view>
     <view class="sort">
-      <view class="sel">
-        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
-        <view class="con">
-          <text>本地楼盘</text>
-          <text>本地楼盘</text>
+      <repeat for="{{addressList}}" item="item">
+        <view class="sel" data-id="{{item.id}}" data-name="{{item.name}}" @tap="selAddress">
+          <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/5.png" />
+          <view class="con">
+            <view class="name">{{item.name}}</view>
+            <view>楼盘数量：{{item.count}}</view>
+          </view>
         </view>
-      </view>
-      <view class="sel">
-        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
-        <view class="con">
-          <text>本地楼盘</text>
-          <text>本地楼盘</text>
-        </view>
-      </view>
-      <view class="sel">
-        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
-        <view class="con">
-          <text class="name">本地楼盘</text>
-          <text>本地楼盘</text>
-        </view>
-      </view>
-      <view class="sel">
-        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
-        <view class="con">
-          <text class="name">本地楼盘</text>
-          <text>本地楼盘</text>
-        </view>
-      </view>
-      <view class="sel">
-        <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg" />
-        <view class="con">
-          <text class="name">本地楼盘</text>
-          <text>本地楼盘</text>
-        </view>
-      </view>
+      </repeat>
     </view>
     <view class="listTitle">{{listName}}</view>
     <view class="list">
@@ -146,13 +120,14 @@
     mixins = []
 
     data = {
-      img: 'https://jiuyou.beaconway.cn/uploads/20190704/66e5a66127f178ad3edf65fdd78a79de.jpg',
+      img: 'https://jiuyou.beaconway.cn/uploads/5.png',
       test: '',
       cityNode: {},
       userInfo: {},
       requestImgUrl: '',
       localList: [],
       searchList: [],
+      addressList:[],
       listName: '热门楼盘'
     }
 
@@ -161,6 +136,11 @@
     }
 
     methods = {
+      selAddress(e) {
+        let id = e.currentTarget.dataset.id
+        let name = e.currentTarget.dataset.name
+        this.getLocalScreenList(id, name)
+      },
       goLocalInfo(e) {
         // 进入楼盘详情
         this.$navigate(`/pages/localInfo?id=${e.currentTarget.dataset.id}&share=0`)
@@ -227,6 +207,29 @@
         }
       })
     }
+    getLocalScreenList(id, name) {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/around_screen`,
+        method: 'POST',
+        data: {
+          area_id: id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            let localList = this.$parent.null2str(data.data.data)
+            this.searchList = []
+            this.listName = name
+            this.searchList = this.searchList.concat(localList)
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
     getLocalList() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/around_floor`,
@@ -237,7 +240,9 @@
         },
         success: data => {
           if (data.data.code == 1) {
-            let localList = this.$parent.null2str(data.data.data)
+            data = this.$parent.null2str(data.data)
+            let localList = data.data
+            this.addressList = data.city
             this.searchList = this.searchList.concat(localList)
             this.$apply()
           } else {

@@ -6,6 +6,12 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
+    .action{
+      color: #7bb312;
+      icon{
+        color: #7bb312;
+      }
+    }
   }
   .typeSel view,
   .typeSel icon{
@@ -135,8 +141,9 @@
         </view>
       </view>
       <view class="typeSel">
-        <view data-type="address" @tap="selTypeRun">
-          区域
+        <view class="{{addressList[0].id!=addressType.id?'action':''}}" data-type="address" @tap="selTypeRun">
+          <span wx:if="{{addressList[0].id==addressType.id}}">区域</span>
+          <span wx:if="{{addressList[0].id!=addressType.id}}">{{addressType.name}}</span>
           <icon class="iconfont icon-jiantou-xia"></icon>
         </view>
         <view data-type="money" @tap="selTypeRun">
@@ -158,21 +165,21 @@
         <view class="address" wx:if="{{typeSel.address}}">
           <ul>
             <repeat for="{{addressList}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
             </repeat>
           </ul>
         </view>
         <view class="money" wx:if="{{typeSel.money}}">
           <ul>
             <repeat for="{{moneyList}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
             </repeat>
           </ul>
         </view>
         <view class="padSel" wx:if="{{typeSel.padSel}}">
           <ul>
             <repeat for="{{padSel}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
             </repeat>
           </ul>
         </view>
@@ -180,19 +187,19 @@
           <view class="name">物业类型</view>
           <ul>
             <repeat for="{{moreJson.propertyType}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
             </repeat>
           </ul>
           <view class="name">装修情况</view>
           <ul>
             <repeat for="{{moreJson.decoration}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
             </repeat>
           </ul>
           <view class="name">开盘情况</view>
           <ul>
             <repeat for="{{moreJson.opening}}" item="item">
-              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.name}}" @tap="selAddress">{{item.name}}</li>
+              <li class="{{item.sel==1?'action':''}}" data-index="{{index}}" data-id="{{item.id}}" @tap="selAddress">{{item.name}}</li>
             </repeat>
           </ul>
           <view class="button">
@@ -257,6 +264,7 @@
       requestImgUrl: '',
       localList: [],
       searchList: [],
+      addressType: {"name": "不限", "id": "0", "sel": 1},
       typeSel: {
         'address': false,
         'money': false,
@@ -299,12 +307,17 @@
       selAddress(e) {
         let id = e.currentTarget.dataset.id
         let index = e.currentTarget.dataset.index
-        if (this.addressList[index].sel) {
-          this.addressList[index].sel = 0
-        } else {
-          this.addressList[index].sel = 1
+        let addressList = this.addressList
+        let i = 1
+        for (i in addressList) {
+          addressList[i].sel = 0
         }
+        addressList[index].sel = 1
+        this.addressType = addressList[index]
+        console.log(addressList[index])
+        this.addressList = addressList
         this.$apply()
+        this.typeDomHide()
       },
       // 分类选择
       selTypeRun(e) {
@@ -373,26 +386,26 @@
       // this.cityNode = this.$parent.globalData.cityNode
       // this.getLocalList()
       this.addressList = [
-        {"name": "不限", "id": "1", "sel": 1},
+        {"name": "不限", "id": "0", "sel": 1},
         {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0},
-        {"name": "长安", "id": "1", "sel": 0}
+        {"name": "长安", "id": "2", "sel": 0},
+        {"name": "长安", "id": "3", "sel": 0},
+        {"name": "长安", "id": "4", "sel": 0},
+        {"name": "长安", "id": "5", "sel": 0},
+        {"name": "长安", "id": "6", "sel": 0},
+        {"name": "长安", "id": "7", "sel": 0},
+        {"name": "长安", "id": "8", "sel": 0}
       ]
       this.moneyList = [
-        {"name": "不限", "id": "1", "sel": 1},
+        {"name": "不限", "id": "0", "sel": 1},
         {"name": "80万以下", "id": "1", "sel": 0},
-        {"name": "80~120万", "id": "1", "sel": 0},
-        {"name": "120~200万", "id": "1", "sel": 0},
-        {"name": "200~300万", "id": "1", "sel": 0},
-        {"name": "300~420万", "id": "1", "sel": 0},
-        {"name": "420~600万", "id": "1", "sel": 0},
-        {"name": "600~800万", "id": "1", "sel": 0},
-        {"name": "800万以上", "id": "1", "sel": 0}
+        {"name": "80~120万", "id": "2", "sel": 0},
+        {"name": "120~200万", "id": "3", "sel": 0},
+        {"name": "200~300万", "id": "4", "sel": 0},
+        {"name": "300~420万", "id": "5", "sel": 0},
+        {"name": "420~600万", "id": "6", "sel": 0},
+        {"name": "600~800万", "id": "7", "sel": 0},
+        {"name": "800万以上", "id": "8", "sel": 0}
       ]
     }
     onShow() {
@@ -400,6 +413,16 @@
       this.searchList = []
       // 获取楼盘列表
       this.getLocalList()
+    }
+    typeDomHide() {
+      // 隐藏分类选择Dom
+      this.typeSel = {
+        'address': false,
+        'money': false,
+        'padSel': false,
+        'more': false
+      }
+      this.$apply()
     }
     onReachBottom() {
       // 下拉触底，先判断是否有请求正在进行中

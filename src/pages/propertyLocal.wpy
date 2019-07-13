@@ -573,6 +573,8 @@
             let localList = this.$parent.null2str(data.data.data)
             this.searchList = this.searchList.concat(localList)
             let i = 0
+            this.addressList = []
+            this.$apply()
             for (i in area) {
               this.addressList.push({'name': area[i].name, 'id': area[i].id, 'sel': 0})
             }

@@ -563,7 +563,11 @@
         url: `${this.$parent.globalData.requestUrl}/local_floor`,
         method: 'POST',
         data: {
-          uid: this.userInfo.id,
+          area_id: this.addressType.id,
+          mattress: this.padSelType.name,
+          property_type: this.propertyTypeId,
+          decoration_status: this.decorationId,
+          opening_time: this.openingId,
           city_id: this.cityNode.id,
           sid: this.searchList.length
         },

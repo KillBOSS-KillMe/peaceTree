@@ -266,7 +266,7 @@
       requestImgUrl: '',
       localList: [],
       searchList: [],
-      addressType: {"name": "不限", "id": "0", "sel": 1},
+      addressType: {"name": "区域", "id": "0", "sel": 1},
       moneyType: {"name": "不限", "id": "0", "sel": 1},
       padSelType: {"name": "不限", "id": "0", "sel": 1},
       typeSel: {

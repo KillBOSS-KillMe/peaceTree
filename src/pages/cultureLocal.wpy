@@ -3,7 +3,7 @@
 </style>
 <template>
   <view>
-    <view class="addressSearch">
+    <!-- <view class="addressSearch">
       <view class="selAddress" @tap="goSelCity">
         {{cityNode.name}}
         <icon class="iconfont icon-jiantou-xia"></icon>
@@ -12,7 +12,7 @@
         <icon class="iconfont icon-sousuo"></icon>
         <input type="text" placeholder="输入搜索内容" bindinput="searchRun"  />
       </view>
-    </view>
+    </view> -->
     <view class="list">
       <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">

@@ -217,10 +217,21 @@
     align-items: center;
     justify-content: flex-start;
   }
+  #adimg{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+  }
   // 融创西双版纳国际度假区
 </style>
 <template>
   <view>
+    <image id="adimg" wx:if="{{adShow}}" src="{{ requestImgUrl + adImg }}" />
     <view class="search">
       <view class="selAddress" @tap="goSelCity">
         {{cityNode.name}}
@@ -338,7 +349,8 @@
 
     data = {
       img: '/img/test.jpg',
-      
+      adImg: '',
+      adShow: true,
       userInfo: {},
       cityNode: {},
       originalCityNode: {},
@@ -430,6 +442,8 @@
       this.$parent.globalData.originalCityNode = cityNode
       this.$parent.globalData.cityNode = cityNode
       // 获取楼盘列表
+      this.getAdImg()
+      // 获取楼盘列表
       this.getLocalList()
       // 获取轮播
       this.getSwiperList()
@@ -457,6 +471,29 @@
           this.getLocalList()
         }
       }
+    }
+    getAdImg() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/ad`,
+        method: 'POST',
+        success: data => {
+          data = this.$parent.null2str(data.data)
+          this.adImg = data.img
+          this.$apply()
+          // setTimeout(e => {
+          //   this.adtime = 2
+          //   this.$apply()
+          // }, 1000)
+          // setTimeout(e => {
+          //   this.adtime = 1
+          //   this.$apply()
+          // }, 2000)
+          setTimeout(e => {
+            this.adShow = false
+            this.$apply()
+          }, 3000)
+        }
+      })
     }
     onReachBottom() {
       // 下拉触底，先判断是否有请求正在进行中

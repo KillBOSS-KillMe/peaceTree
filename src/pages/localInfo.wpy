@@ -623,7 +623,7 @@ button{
       return {
         title: this.localList.name,
         desc: this.localList.floor_address,
-        imageUrl: this.requestImgUrl + this.localList.img,
+        imageUrl: this.requestImgUrl + this.localList.img[0],
         path: url
       }
     }

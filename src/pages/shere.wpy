@@ -56,6 +56,10 @@
     font-size: 25rpx;
     color: #ccc;
   }
+  .item .address {
+    margin-top: 5rpx;
+  }
+
 </style>
 <template>
   <view>
@@ -71,7 +75,7 @@
             <view class="title">
               <text>{{item.name}}</text>
             </view>
-            <view class="address">2%佣金:{{item.tui_gyong}}</view>
+            <view class="address">10%佣金:{{item.tui_gyong}}</view>
             <view class="address">成交套数:{{item.tui_num}}</view>
             <view class="address">总佣金:{{item.tui_zyong}}</view>
           </view>
@@ -87,7 +91,7 @@
             <view class="title">
               <text>{{item.name}}</text>
             </view>
-            <view class="address">2%佣金:{{item.tui_gyong}}</view>
+            <view class="address">10%佣金:{{item.tui_gyong}}</view>
             <view class="address">成交套数:{{item.tui_num}}</view>
             <view class="address">总佣金:{{item.tui_zyong}}</view>
           </view>

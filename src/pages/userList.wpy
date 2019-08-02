@@ -116,7 +116,7 @@
     methods = {
       goUserInfo(e) {
         // 查看用户信息
-        let node = JSON.stringify(this.userList[e.currentTarget.dataset.index])
+        let node = JSON.stringify(this.searchList[e.currentTarget.dataset.index])
         this.$navigate(`/pages/userInfo?usernode=${node}`)
       },
       goReportLocal() {

@@ -226,6 +226,10 @@ page{
   color: #343434;
   line-height: 50rpx;
 }
+.featureItem view:nth-child(2) text{
+  font-size: 30rpx;
+  color: #343434;
+}
 .nav{
   position: fixed;
   bottom: 0;
@@ -319,7 +323,7 @@ button{
     <swiper class='banner' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <repeat for="{{localList.img}}" item="item">
         <swiper-item>
-          <image class="banner" src="{{ requestImgUrl + item }}" />
+          <image class="banner" src="{{ requestImgUrl + item }}" bindtap='shareQRCodeImg' data-imgurl="{{requestImgUrl + item}}" />
         </swiper-item>
       </repeat>
     </swiper>
@@ -346,22 +350,31 @@ button{
         <text>佣金</text>
         <view></view>
       </view>
-      <view class="description brokerage">{{localList.brokerage}}</view>
+      <view class="description brokerage">
+        <text selectable="true">{{localList.brokerage}}</text>
+      </view>
     </view>
     <view class="localInfo">
       <view class="localitem">
         <view>开盘时间</view>
-        <view>{{localList.opening_time}}</view>
+        <view>
+          <text selectable="true">{{localList.opening_time}}</text>
+        </view>
         <view></view>
       </view>
       <view class="localitem">
         <view>合作周期</view>
-        <view>{{localList.cooperate_time}}</view>
+        <view>
+          <text selectable="true">{{localList.cooperate_time}}</text>
+        </view>
         <view></view>
       </view>
-      <view class="localitem" @tap="showAddress">
+      <view class="localitem">
+      <!-- <view class="localitem" @tap="showAddress"> -->
         <view>楼盘地址</view>
-        <view>{{localList.floor_address}}</view>
+        <view>
+          <text selectable="true">{{localList.floor_address}}</text>
+        </view>
         <view>
           <icon class="iconfont icon-jiantou-you"></icon>
         </view>
@@ -375,17 +388,23 @@ button{
           <icon class="iconfont icon-jiantou-you"></icon>
         </view>
       </view>
-      <view class="description brokerage2">{{localList.reporting_rule}}</view>
+      <view class="description brokerage2">
+        <text selectable="true">{{localList.reporting_rule}}</text>
+      </view>
     </view>
     <view class="reportData">
       <view class="dataCon" @tap="goReportList">
         <view>报备有效期</view>
-        <view>{{localList.effective}}</view>
+        <view>
+          <text selectable="true">{{localList.effective}}</text>
+        </view>
       </view>
       <view class="reportDataBorder"></view>
       <view class="dataCon" @tap="goCollectionList">
         <view>带看保护期</view>
-        <view>{{localList.guard}}</view>
+        <view>
+          <text selectable="true">{{localList.guard}}</text>
+        </view>
       </view>
     </view>
     <view class="localName">户型</view>
@@ -403,23 +422,33 @@ button{
     <view class="feature">
       <view class="featureItem">
         <view class="featureName">交通配套</view>
-        <view class="featureCon">{{localList.traffic}}</view>
+        <view class="featureCon">
+          <text selectable="true">{{localList.traffic}}</text>
+        </view>
       </view>
       <view class="featureItem">
         <view class="featureName">教育资源</view>
-        <view class="featureCon">{{localList.education}}</view>
+        <view class="featureCon">
+          <text selectable="true">{{localList.education}}</text>
+        </view>
       </view>
       <view class="featureItem">
         <view class="featureName">医疗健康</view>
-        <view class="featureCon">{{localList.medical}}</view>
+        <view class="featureCon">
+          <text selectable="true">{{localList.medical}}</text>
+        </view>
       </view>
       <view class="featureItem">
         <view class="featureName">商场购物</view>
-        <view class="featureCon">{{localList.shopping}}</view>
+        <view class="featureCon">
+          <text selectable="true">{{localList.shopping}}</text>
+        </view>
       </view>
       <view class="featureItem">
         <view class="featureName">生活娱乐</view>
-        <view class="featureCon">{{localList.recreation}}</view>
+        <view class="featureCon">
+          <text selectable="true">{{localList.recreation}}</text>
+        </view>
       </view>
     </view>
     <view class="localName">推荐楼盘</view>

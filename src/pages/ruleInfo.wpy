@@ -38,23 +38,39 @@ page{
     <view class="ruleInfoList">
       <view class="item">
         <view>报备规则</view>
-        <view>{{showNode.bbgz}}</view>
-        <view>{{showNode.bbgzcon}}</view>
+        <view>
+          <text selectable="true">{{showNode.bbgz}}</text>
+        </view>
+        <view>
+          <text selectable="true">{{showNode.bbgzcon}}</text>
+        </view>
       </view>
       <view class="item">
         <view>带看规则</view>
-        <view>{{showNode.dkgz}}</view>
-        <view>{{showNode.dkgzcon}}</view>
+        <view>
+          <text selectable="true">{{showNode.dkgz}}</text>
+        </view>
+        <view>
+          <text selectable="true">{{showNode.dkgzcon}}</text>
+        </view>
       </view>
       <view class="item">
         <view>结佣规则</view>
-        <view>{{showNode.jygz}}</view>
-        <view>{{showNode.jygzcon}}</view>
+        <view>
+          <text selectable="true">{{showNode.jygz}}</text>
+        </view>
+        <view>
+          <text selectable="true">{{showNode.jygzcon}}</text>
+        </view>
       </view>
       <view class="item">
         <view>售盘知道</view>
-        <view>{{showNode.spzd}}</view>
-        <view>{{showNode.spzdcon}}</view>
+        <view>
+          <text selectable="true">{{showNode.spzd}}</text>
+        </view>
+        <view>
+          <text selectable="true">{{showNode.spzdcon}}</text>
+        </view>
       </view>
     </view>
   </view>

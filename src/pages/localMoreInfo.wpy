@@ -48,71 +48,105 @@ page{
     <view class="localMoreInfo">
       <view class="item">
         <label>交房时间</label>
-        <view>{{showNode.jfsj}}</view>
+        <view>
+          <text selectable="true">{{showNode.jfsj}}</text>
+        </view>
       </view>
       <view class="item">
         <label>产权年限</label>
-        <view>{{showNode.cqnx}}</view>
+        <view>
+          <text selectable="true">{{showNode.cqnx}}</text>
+        </view>
       </view>
       <view class="item">
         <label>物业公司</label>
-        <view>{{showNode.wygs}}</view>
+        <view>
+          <text selectable="true">{{showNode.wygs}}</text>
+        </view>
       </view>
       <view class="item module">
         <label>开发商</label>
-        <view>{{showNode.kfs}}</view>
+        <view>
+          <text selectable="true">{{showNode.kfs}}</text>
+        </view>
       </view>
       <view class="item">
         <label>开发商品牌</label>
-        <view>{{showNode.kfspp}}</view>
+        <view>
+          <text selectable="true">{{showNode.kfspp}}</text>
+        </view>
       </view>
       <view class="item module">
         <label>建筑面积</label>
-        <view>{{showNode.jzmj}}</view>
+        <view>
+          <text selectable="true">{{showNode.jzmj}}</text>
+        </view>
       </view>
       <view class="item">
         <label>容积率</label>
-        <view>{{showNode.rjl}}</view>
+        <view>
+          <text selectable="true">{{showNode.rjl}}</text>
+        </view>
       </view>
       <view class="item">
         <label>绿化率</label>
-        <view>{{showNode.lhl}}</view>
+        <view>
+          <text selectable="true">{{showNode.lhl}}</text>
+        </view>
       </view>
       <view class="item module">
         <label>总户数</label>
-        <view>{{showNode.zhs}}</view>
+        <view>
+          <text selectable="true">{{showNode.zhs}}</text>
+        </view>
       </view>
       <view class="item">
         <label>车位数</label>
-        <view>{{showNode.cws}}</view>
+        <view>
+          <text selectable="true">{{showNode.cws}}</text>
+        </view>
       </view>
       <view class="item">
         <label>车位比</label>
-        <view>{{showNode.cwb}}</view>
+        <view>
+          <text selectable="true">{{showNode.cwb}}</text>
+        </view>
       </view>
       <view class="item module">
         <label>均价</label>
-        <view>{{showNode.jj}}</view>
+        <view>
+          <text selectable="true">{{showNode.jj}}</text>
+        </view>
       </view>
       <view class="item">
         <label>得房率</label>
-        <view>{{showNode.dfl}}</view>
+        <view>
+          <text selectable="true">{{showNode.dfl}}</text>
+        </view>
       </view>
       <view class="item">
         <label>物业费</label>
-        <view>{{showNode.wyf}}</view>
+        <view>
+          <text selectable="true">{{showNode.wyf}}</text>
+        </view>
       </view>
       <view class="item">
         <label>物业类型</label>
-        <view>{{showNode.wylx}}</view>
+        <view>
+          <text selectable="true">{{showNode.wylx}}</text>
+        </view>
       </view>
       <view class="item">
         <label>建筑类型</label>
-        <view>{{showNode.jzlx}}</view>
+        <view>
+          <text selectable="true">{{showNode.jzlx}}</text>
+        </view>
       </view>
       <view class="item">
         <label>装修状况</label>
-        <view>{{showNode.zxzk}}</view>
+        <view>
+          <text selectable="true">{{showNode.zxzk}}</text>
+        </view>
       </view>
     </view>
   </view>

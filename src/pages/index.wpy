@@ -227,12 +227,23 @@
     bottom: 0;
     z-index: 50;
   }
-  // 融创西双版纳国际度假区
+  .pageName{
+    width: 690rpx;
+    height: auto;
+    padding: 50rpx 30rpx;
+    font-size: 30rpx;
+    color: #333;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
 </style>
 <template>
   <view>
-    <image id="adimg" wx:if="{{adShow}}" src="{{ requestImgUrl + adImg }}" />
-    <view class="search">
+    <view class="pageName">平安树</view>
+    <image id="adimg" wx:if="{{adImg != ''}}" src="{{ requestImgUrl + adImg }}" />
+    <view class="search" wx:if="{{adImg == ''}}">
       <view class="selAddress" @tap="goSelCity">
         {{cityNode.name}}
         <icon class="iconfont icon-jiantou-xia"></icon>
@@ -243,14 +254,14 @@
       </view>
       <!-- <icon class="address iconfont icon-dingweisvg-"></icon> -->
     </view>
-    <swiper class='swiper' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
+    <swiper wx:if="{{adImg == ''}}" class='swiper' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <repeat for="{{swiperList}}" item="item">
         <swiper-item>
-          <image src="{{ requestImgUrl + item.img }}" />
+          <image src="{{ requestImgUrl + item.img }}" bindtap='shareQRCodeImg' data-imgurl="{{requestImgUrl + item.img}}" />
         </swiper-item>
       </repeat>
     </swiper>
-    <view class="sort">
+    <view wx:if="{{adImg == ''}}" class="sort">
       <view class="sel" @tap="goPropertyLocal">
         <image class='header-bg' src="https://jiuyou.beaconway.cn/uploads/5.png" />
         <view class="con">
@@ -301,8 +312,8 @@
       </repeat>
       <view class="listPrompt">共有{{searchList.length}}个项目，已无更多内容</view>
     </view>
-    <view class="listTitle">热推楼盘</view>
-    <view class="list">
+    <view wx:if="{{adImg == ''}}" class="listTitle">热推楼盘</view>
+    <view wx:if="{{adImg == ''}}" class="list">
       <repeat for="{{localList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
           <!-- <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view> -->
@@ -339,7 +350,8 @@
   import nav from '../components/nav' // 底部导航
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '平安树'
+      navigationBarTitleText: '平安树',
+      navigationStyle: 'custom'
     }
     components = {
       nav: nav
@@ -359,7 +371,9 @@
       localList: [], // 楼盘列表
       swiperList: [], // 轮播列表
       userInfoButtonShow: true,
-      userIdFather: ''
+      userIdFather: '',
+      adImg: '',
+      headHeight: 65
     }
 
     computed = {
@@ -371,6 +385,14 @@
       goPage (url, evt) {
         // 销毁当前页{跳转}
         this.$redirect(url)
+      },
+      // 点击图片放大，长按后可操作
+      shareQRCodeImg(e) {
+        let url =  e.currentTarget.dataset.imgurl
+        wx.previewImage({
+          current: [url], // 当前显示图片的http链接   
+          urls: [url] // 需要预览的图片http链接列表   
+        })
       },
       goModifyUserInfo(url, evt) {
         this.$navigate(url)
@@ -435,14 +457,21 @@
       if (options.id) {
         this.userIdFather = options.id
       }
+      // custom
+      this.headHeight = wx.getSystemInfoSync()['statusBarHeight']
+      this.$apply()
+      // this.config.navigationStyle = 'default'
       // this.cityNode = this.$parent.globalData.cityNode
       let cityNode = this.$parent.getStorageCityNode()
       cityNode = {'name': cityNode[0], 'id': cityNode[1]}
       this.cityNode = cityNode
       this.$parent.globalData.originalCityNode = cityNode
       this.$parent.globalData.cityNode = cityNode
-      // 获取楼盘列表
-      this.getAdImg()
+      this.userInfo = this.$parent.globalData.userInfo
+      // 获取小程序封面
+      if (Object.keys(this.userInfo).length == 0) {
+        this.getAdImg()
+      }
       // 获取楼盘列表
       this.getLocalList()
       // 获取轮播
@@ -480,18 +509,10 @@
           data = this.$parent.null2str(data.data)
           this.adImg = data.img
           this.$apply()
-          // setTimeout(e => {
-          //   this.adtime = 2
-          //   this.$apply()
-          // }, 1000)
-          // setTimeout(e => {
-          //   this.adtime = 1
-          //   this.$apply()
-          // }, 2000)
           setTimeout(e => {
-            this.adShow = false
+            this.adImg = ''
             this.$apply()
-          }, 3000)
+          }, 5000)
         }
       })
     }

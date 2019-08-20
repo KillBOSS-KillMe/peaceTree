@@ -371,6 +371,7 @@ page{
       },
       reportButton() {
         // 进入报备页
+        this.$parent.globalData.reportUserList = [this.clinetInfo.client]
         this.$navigate(`/pages/reportLocal`)
       },
       goLocalMoreInfo(e) {

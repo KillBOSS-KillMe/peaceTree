@@ -541,20 +541,20 @@ button{
       showAddress() {
         // 显示楼盘地址导航，地图
         
-        wx.getLocation({
-          type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-          success: function(res) {
-            var latitude = res.latitude
-            var longitude = res.longitude
-            wx.openLocation({
-              latitude: 33.42,
-              longitude: 107.40,
-              name: '艾泽拉斯',
-              address: '艾泽拉斯艾泽拉斯艾泽拉斯',
-              scale: 28
-            })
-          }
-        })
+        // wx.getLocation({
+        //   type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+        //   success: function(res) {
+        //     var latitude = res.latitude
+        //     var longitude = res.longitude
+        //     wx.openLocation({
+        //       latitude: 33.42,
+        //       longitude: 107.40,
+        //       name: '艾泽拉斯',
+        //       address: '艾泽拉斯艾泽拉斯艾泽拉斯',
+        //       scale: 28
+        //     })
+        //   }
+        // })
       },
       collection() {
         if (this.userInfo.mobile == '') {
@@ -591,6 +591,17 @@ button{
           this.$redirect('loginRegistered')
           return ''
         }
+        let localList = this.localList
+        let localNode = {
+          brokerage: localList.brokerage,
+          floor_address: localList.floor_address,
+          id: localList.id,
+          img: localList.img[0],
+          money: localList.money,
+          name: localList.name,
+          state: localList.state,
+        }
+        this.$parent.globalData.reportLocalList = [localNode]
         // 进入报备用户页
         this.$navigate(`/pages/reportLocal?id=${e.currentTarget.dataset.id}`)
       },

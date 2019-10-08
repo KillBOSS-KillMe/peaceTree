@@ -317,6 +317,47 @@ button{
 .brokerage2{
   color: #7bb312 !important;
 }
+
+.dynamic {
+  width: 690rpx;
+  height: 150rpx;
+  padding: 0 30rpx;
+  padding-bottom: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #fff;
+  .item {
+    width: 400rpx;
+    height: 90rpx;
+    padding: 30rpx;
+    background-color: #f7f7f7;
+    border-radius: 10rpx;
+    margin-right: 30rpx;
+    display: inline-block;
+  }
+  .dynamicName{
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #343434;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin-bottom: 40rpx;
+  }
+  .dynamicCon{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .dynamicTime{
+    font-size: 20rpx;
+    color: #cbcbcb;
+  }
+  .dynamicInfo{
+    font-size: 20rpx;
+    color: #fa5454;
+  }
+}
 </style>
 <template>
   <view>
@@ -354,6 +395,24 @@ button{
         <text selectable="true">{{localList.brokerage}}</text>
       </view>
     </view>
+    <view class="localName">
+      <text>楼盘动态</text>
+      <view @tap="godynamicList">
+        查看全部
+        <icon class="iconfont icon-jiantou-you"></icon>
+      </view>
+    </view>
+    <scroll-view scroll-x="true" class="dynamic">
+      <repeat for="{{localList.notice}}" item="item">
+        <view class="item" data-id="{{item.id}}" @tap="godynamicList">
+          <view class="dynamicName">{{item.title}}</view>
+          <view class="dynamicCon">
+            <view class="dynamicTime">{{item.createTime}}</view>
+            <view class="dynamicInfo">查看详情</view>
+          </view>
+        </view>
+      </repeat>
+    </scroll-view>
     <view class="localInfo">
       <view class="localitem">
         <view>开盘时间</view>
@@ -641,6 +700,11 @@ button{
         let setData = this.localList
         let urldata = `bbgz=${setData.reporting_rule}&bbgzcon=${setData.reporting_rule_count}&dkgz=${setData.look_rule}&dkgzcon=${setData.look_rule_count}&jygz=${setData.set_up_rule}&jygzcon=${setData.set_up_rule_count}&spzd=${setData.sale_know}&spzdcon=${setData.sale_know_count}`
         this.$navigate(`/pages/ruleInfo?${urldata}`)
+      },
+      // 进入公告
+      godynamicList() {
+        let list = JSON.stringify(this.localList.notice)
+        this.$navigate(`/pages/dynamic?data=${list}`)
       }
     }
 
@@ -685,6 +749,9 @@ button{
             }
             localListData['img'] = imgList
             this.localList = localListData
+            for (let y = 0; y < this.localList.notice.length; y++) {
+              this.localList['notice'][y]['createTime'] = this.$parent.transformTime(this.localList.notice[y].createTime)
+            }
             // this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
             // this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)
             this.$apply()

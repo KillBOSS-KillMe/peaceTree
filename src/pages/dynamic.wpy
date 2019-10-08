@@ -1,0 +1,118 @@
+<style lang="less">
+  page{
+    background-color: #f7f7f7;
+  }
+  .item{
+    width: 630rpx;
+    height: auto;
+    padding: 20rpx 30rpx;
+    margin: 30rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+  }
+  .nameh1{
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #343434;
+    text{
+      color: #cbcbcb;
+      font-weight: 500;
+    }
+  }
+  .nameh2{
+    padding: 40rpx 0;
+    font-size: 38rpx;
+    color: #343434;
+    font-weight: 600;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .con{
+    font-size: 32rpx;
+    color: #cbcbcb;
+    padding: 20rpx 0;
+  }
+  .conHide{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .conShow{
+    height: auto;
+  }
+  .shouCon{
+    font-size: 32rpx;
+    color: #ee5e7b;
+    view{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+</style>
+<template>
+  <view>
+    <repeat for="{{list}}" item="item">
+      <view class="item">
+        <view class="nameh1">
+          {{item.title}}<text> | {{item.createTime}}</text>
+        </view>
+        <view class="nameh2">【{{item.name}}】在售房源</view>
+        <view class="con {{item.str == 0?'conHide':'conShow'}}">{{item.content}}</view>
+        <view class="shouCon">
+          <view @tap="dynamicShow" wx:if="{{item.str == 0}}" data-index="{{index}}">查看全部</view>
+          <view @tap="dynamicShow" wx:if="{{item.str == 1}}" data-index="{{index}}">收起</view>
+        </view>
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Dynamic extends wepy.page {
+    config = {
+      navigationBarTitleText: '楼盘动态'
+    }
+    components = {
+    }
+
+    mixins = []
+
+    data = {
+      list: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      dynamicShow(e) {
+        let thisNode = this.list[e.currentTarget.dataset.index]
+        if (thisNode.str == 0) {
+          thisNode['str'] = 1
+        } else {
+          thisNode['str'] = 0
+        }
+        this.$apply()
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad(options) {
+      console.log(options)
+      let data = JSON.parse(options.data)
+      for (let i = 0; i < data.length; i++) {
+        data[i]['str'] = 0
+      }
+      this.list = data
+    }
+    onShow() {
+    }
+  }
+</script>

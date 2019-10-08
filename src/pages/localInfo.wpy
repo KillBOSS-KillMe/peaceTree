@@ -317,7 +317,22 @@ button{
 .brokerage2{
   color: #7bb312 !important;
 }
-
+.dynamicListName{
+  width: 670rpx;
+  padding: 40rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  view, .ruleList icon{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 27rpx !important;
+    color: #979797;
+  }
+  
+}
 .dynamic {
   width: 690rpx;
   height: 150rpx;
@@ -395,14 +410,14 @@ button{
         <text selectable="true">{{localList.brokerage}}</text>
       </view>
     </view>
-    <view class="localName">
+    <view class="localName" wx:if="{{localList.notice.length > 0}}">
       <text>楼盘动态</text>
       <view @tap="godynamicList">
         查看全部
         <icon class="iconfont icon-jiantou-you"></icon>
       </view>
     </view>
-    <scroll-view scroll-x="true" class="dynamic">
+    <scroll-view scroll-x="true" class="dynamic" wx:if="{{localList.notice.length > 0}}">
       <repeat for="{{localList.notice}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="godynamicList">
           <view class="dynamicName">{{item.title}}</view>

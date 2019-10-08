@@ -105,7 +105,6 @@
     }
 
     onLoad(options) {
-      console.log(options)
       let data = JSON.parse(options.data)
       for (let i = 0; i < data.length; i++) {
         data[i]['str'] = 0

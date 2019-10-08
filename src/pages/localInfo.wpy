@@ -319,12 +319,16 @@ button{
 }
 .dynamicListName{
   width: 670rpx;
-  padding: 40rpx;
+  padding: 20rpx 30rpx;
   margin-top: 20rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  view, .ruleList icon{
+  background-color: #fff;
+  text{
+    font-weight: 600;
+  }
+  view, .iconfont{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -410,7 +414,7 @@ button{
         <text selectable="true">{{localList.brokerage}}</text>
       </view>
     </view>
-    <view class="localName" wx:if="{{localList.notice.length > 0}}">
+    <view class="dynamicListName" wx:if="{{localList.notice.length > 0}}">
       <text>楼盘动态</text>
       <view @tap="godynamicList">
         查看全部
@@ -420,7 +424,7 @@ button{
     <scroll-view scroll-x="true" class="dynamic" wx:if="{{localList.notice.length > 0}}">
       <repeat for="{{localList.notice}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="godynamicList">
-          <view class="dynamicName">{{item.title}}</view>
+          <view class="dynamicName">【{{item.name}}】在售房源</view>
           <view class="dynamicCon">
             <view class="dynamicTime">{{item.createTime}}</view>
             <view class="dynamicInfo">查看详情</view>
@@ -765,7 +769,7 @@ button{
             localListData['img'] = imgList
             this.localList = localListData
             for (let y = 0; y < this.localList.notice.length; y++) {
-              this.localList['notice'][y]['createTime'] = this.$parent.transformTime(this.localList.notice[y].createTime)
+              this.localList['notice'][y]['createTime'] = this.$parent.transformTime(this.localList.notice[y].createTime*1000)
             }
             // this.localList.cooperate_time = this.$parent.getLocalTime(this.localList.cooperate_time)
             // this.localList.opening_time = this.$parent.getLocalTime(this.localList.opening_time)

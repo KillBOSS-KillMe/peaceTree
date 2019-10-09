@@ -393,7 +393,6 @@ button{
     display: inline-block;
     margin-right: 20rpx;
     background: linear-gradient(to right, #f4e3af, #d4ae77);
-    // background: linear-gradient(to right, #FF9900, #FFCC66, #FFCC66, #FFFFCC);
   }
   .brokerageName{
     font-size: 25rpx;

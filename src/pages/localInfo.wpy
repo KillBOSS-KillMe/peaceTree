@@ -377,6 +377,39 @@ button{
     color: #fa5454;
   }
 }
+.brokerage_list{
+  width: 690rpx;
+  height: 130rpx;
+  padding: 30rpx 0;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #fff;
+  .brokerageItem{
+    width: 230rpx;
+    height: 90rpx;
+    padding: 20rpx;
+    border-radius: 10rpx;
+    color: #a4854e;
+    display: inline-block;
+    margin-right: 20rpx;
+    background: linear-gradient(to right, #f4e3af, #d4ae77);
+    // background: linear-gradient(to right, #FF9900, #FFCC66, #FFCC66, #FFFFCC);
+  }
+  .brokerageName{
+    font-size: 25rpx;
+    padding-bottom: 30rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .brokerageNum{
+    font-size: 32rpx;
+    font-weight: 600;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}
 </style>
 <template>
   <view>
@@ -408,11 +441,23 @@ button{
     <view class="rule" wx:if="{{userInfo.store != '' && userInfo.store != undefined && userInfo.store != null }}">
       <view class="ruleList">
         <text>佣金</text>
-        <view></view>
+        <view wx:if="{{localList.brokerage_list.length == 0}}"></view>
+        <view @tap="brokerageList" wx:if="{{localList.brokerage_list.length > 0}}">
+          查看全部
+          <icon class="iconfont icon-jiantou-you"></icon>
+        </view>
       </view>
-      <view class="description brokerage">
+      <view class="description brokerage" wx:if="{{localList.brokerage_list.length == 0}}">
         <text selectable="true">{{localList.brokerage}}</text>
       </view>
+      <scroll-view scroll-x="true" class="brokerage_list" wx:if="{{localList.brokerage_list.length > 0}}">
+        <repeat for="{{localList.brokerage_list}}" item="item">
+          <view class="brokerageItem" data-id="{{item.id}}" @tap="brokerageList">
+            <view class="brokerageName">{{item.title}}</view>
+            <view class="brokerageNum">{{item.ratio}}%</view>
+          </view>
+        </repeat>
+      </scroll-view>
     </view>
     <view class="dynamicListName" wx:if="{{localList.notice.length > 0}}">
       <text>楼盘动态</text>
@@ -724,6 +769,10 @@ button{
       godynamicList() {
         let list = JSON.stringify(this.localList.notice)
         this.$navigate(`/pages/dynamic?data=${list}`)
+      },
+      brokerageList() {
+        let list = JSON.stringify(this.localList.brokerage_list)
+        this.$navigate(`/pages/brokerageList?data=${list}`)
       }
     }
 

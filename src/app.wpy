@@ -270,6 +270,8 @@ export default class extends wepy.app {
       'pages/reportLocal', // 报备楼盘
       'pages/localInfo', // 项目详情（楼盘详情）
       'pages/dynamic', // 楼盘动态
+      'pages/brokerageList', // 佣金列表
+      
       
       'pages/localMoreInfo', // 楼盘更多信息
       'pages/cultureLocal', // 文旅地产

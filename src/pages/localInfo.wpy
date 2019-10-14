@@ -453,7 +453,7 @@ button{
         <repeat for="{{localList.brokerage_list}}" item="item">
           <view class="brokerageItem" data-id="{{item.id}}" @tap="brokerageList">
             <view class="brokerageName">{{item.title}}</view>
-            <view class="brokerageNum">{{item.ratio}}%</view>
+            <!-- <view class="brokerageNum">{{item.ratio}}%</view> -->
           </view>
         </repeat>
       </scroll-view>

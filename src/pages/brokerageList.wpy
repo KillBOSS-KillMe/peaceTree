@@ -17,6 +17,11 @@
     text-overflow:ellipsis;
     white-space:nowrap;
     margin-bottom: 20rpx;
+    text{
+      font-weight: 500 !important;
+      color: #999 !important;
+      font-size: 25rpx !important;
+    }
   }
   .num{
     font-size: 25rpx;
@@ -35,8 +40,12 @@
   <view>
     <repeat for="{{list}}" item="item">
       <view class="item">
-        <view class="title">{{item.title}}</view>
-        <view class="num">{{item.ratio}}%</view>
+        <view class="title">
+          {{item.title}}
+          <text> | {{item.createTime}}</text>
+        </view>
+        <!-- <view class="num">{{item.ratio}}%</view> -->
+        <view class="num">  </view>
         <view class="con">{{item.content}}</view>
       </view>
     </repeat>
@@ -70,7 +79,11 @@
     }
 
     onLoad(options) {
-      this.list = JSON.parse(options.data)
+      let list = JSON.parse(options.data)
+      for (let i = 0; i < list.length; i++) {
+        list[i]['createTime'] = this.$parent.transformTime(list[i].createTime * 1000)
+      }
+      this.list = list
       this.$apply()
     }
   }

@@ -438,6 +438,12 @@ for (let i = 0; i < 60; i++) {
         //   let minute = date.getMinutes()
         //   this.time = year + '/' + month + '/' + day + ' ' + hour + ':' + minute
         // }
+        wx.showToast({
+        title: "楼盘报备中...",
+        icon: 'loading',
+        mask: false,
+        duration: 1000000000
+      });
         wx.request({
           url: `${this.$parent.globalData.requestUrl}/client_floor_report`,
           method: 'POST',
@@ -449,6 +455,7 @@ for (let i = 0; i < 60; i++) {
             remark: this.remark
           },
           success: data => {
+            wx.hideToast()
             if (data.data.code == 1) {
               wx.showModal({
                 title: '',

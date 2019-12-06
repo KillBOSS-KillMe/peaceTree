@@ -85,6 +85,28 @@
 .icon-kehu:before { content: "\e606"; } // 导航-首页
 .icon-shijian:before { content: "\e655"; } // 时间
 
+
+.embrace{
+  overflow:hidden;
+  position: relative;
+  width: 200rpx;
+  height: 152rpx;
+  border-radius: 10rpx;
+}
+.embrace view{
+  position: absolute;
+  top: -3rpx;
+  left: -78rpx;
+  transform: rotateZ(-45deg);
+  background-color: #018c6b;
+  color: #fff;
+  font-size: 15rpx;
+  width: 200rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .list{
   width: 690rpx;
   height: auto;

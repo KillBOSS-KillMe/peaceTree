@@ -136,7 +136,11 @@
             <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
             <view class="img">
               <!-- <view class="pad">垫拥</view> -->
-              <image data-id="" src="{{requestImgUrl + item.img}}" />
+              <view class="embrace">
+                <view wx:if="{{item.mattressdetails != ''}}">{{item.mattressdetails}}</view> 
+                <image src="{{requestImgUrl + item.img}}" />
+              </view>
+              <!-- <image data-id="" src="{{requestImgUrl + item.img}}" /> -->
             </view>
             <view class="con">
               <view class="title">

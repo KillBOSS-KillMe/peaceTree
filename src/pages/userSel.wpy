@@ -53,7 +53,7 @@
     <!-- <search></search> -->
     <view class="search">
       <icon class="iconfont icon-sousuo"></icon>
-      <input type="text" placeholder="输入搜索内容" bindinput="searchRun" />
+      <input type="text" placeholder="输入客户电话" bindinput="searchRun" />
     </view>
     <checkbox-group bindchange="selUser" data-index="{{index}}" data-checks="{{item.checks}}">
       <view class="userList">
@@ -192,7 +192,7 @@
       let localList = this.userList
       let searchList = []
       for (i in localList) {
-        if (localList[i].name.match(search)) {
+        if (localList[i].mobile.match(search)) {
           searchList.push(localList[i])
         }
       }

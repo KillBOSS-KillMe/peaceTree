@@ -176,7 +176,7 @@
       <view data-showtype="listProperty" class="name {{listShowType=='listProperty'?'action':''}}" @tap="listSelShow">报备楼盘</view>
       <view class="input">
         <icon class="iconfont icon-sousuo"></icon>
-        <input type="text" placeholder="输入名称" bindinput="searchRun" />
+        <input type="text" placeholder="输入电话" bindinput="searchRun" />
       </view>
     </view>
     <view class="seleteType" wx:if="{{listShowType=='listClient'}}">
@@ -423,12 +423,15 @@
       })
     }
     getSearchList(search) {
+      console.log(this.listShowType)
+      
       if (this.listShowType == 'listClient') {
         let i = 0
         let userReporList = this.userReporList
+        console.log(userReporList)
         let userReporListShow = []
         for (i in userReporList) {
-          if (userReporList[i].name.match(search)) {
+          if (userReporList[i].mobile.match(search)) {
             userReporListShow.push(userReporList[i])
           }
         }
@@ -436,9 +439,10 @@
       } else {
         let i = 0
         let localReporList = this.localReporList
+        console.log(localReporList)
         let localReporListShow = []
         for (i in localReporList) {
-          if (localReporList[i].floor_name.match(search)) {
+          if (localReporList[i].mobile.match(search)) {
             localReporListShow.push(localReporList[i])
           }
         }

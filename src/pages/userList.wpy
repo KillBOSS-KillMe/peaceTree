@@ -62,7 +62,7 @@
     <!-- <search></search> -->
     <view class="search">
       <icon class="iconfont icon-sousuo"></icon>
-      <input type="text" placeholder="输入客户名称" bindinput="searchRun" />
+      <input type="text" placeholder="输入客户电话" bindinput="searchRun" />
     </view>
     <view class="goLocalOrNewUser">
       <view @tap="goReportLocal">报备楼盘</view>
@@ -179,9 +179,10 @@
       // 执行搜索
       let i = 0
       let userList = this.userList
+      // console.log(userList)
       let searchList = []
       for (i in userList) {
-        if (userList[i].name.match(search)) {
+        if (userList[i].mobile.match(search)) {
           searchList.push(userList[i])
         }
       }

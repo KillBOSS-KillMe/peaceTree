@@ -296,7 +296,10 @@
       <repeat for="{{searchList}}" item="item">
         <view class="item" data-id="{{item.id}}" @tap="goLocalInfo">
           <!-- <view class="pad" wx:if="{{item.pad == '1'}}">垫拥</view> -->
-          <image src="{{requestImgUrl + item.img}}" />
+          <view class="embrace">
+            <view wx:if="{{item.mattressdetails != ''}}">{{item.mattressdetails}}</view> 
+            <image src="{{requestImgUrl + item.img}}" />
+          </view>
           <view class="con">
             <view class="title">
               <text>{{item.name}}</text>

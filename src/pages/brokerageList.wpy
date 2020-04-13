@@ -19,7 +19,7 @@
     margin-bottom: 20rpx;
     text{
       font-weight: 500 !important;
-      color: #999 !important;
+      color: #333333 !important;
       font-size: 25rpx !important;
     }
   }
@@ -33,7 +33,7 @@
   }
   .con{
     font-size: 25rpx;
-    color: #cbcbcb;
+    color: #333333;
   }
 </style>
 <template>

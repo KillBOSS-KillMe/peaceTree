@@ -13,13 +13,14 @@
   }
   .title .name {
     font-size: 30rpx;
+    font-weight: 600;
     height: 95rpx;
     line-height: 95rpx;
     color: #343434;
   }
   .title .action{
-    color: #7bb312 !important;
-    border-bottom: 1rpx solid #7bb312;
+    color: #018c6b !important;
+    border-bottom: 1rpx solid #018c6b;
   }
   .input{
     width: 290rpx;
@@ -49,15 +50,15 @@
     background-color: #fff;
   }
   .seleteType .action{
-    color: #7bb312 !important;
+    color: #018c6b !important;
     border: 1rpx solid #f1ffd8;
     background-color: #f1ffd8;
   }
   .seleteType view{
     padding: 10rpx 20rpx;
     font-size: 24rpx;
-    color: #979797;
-    border: 1rpx solid #979797;
+    color: #333333;
+    border: 1rpx solid #333333;
     border-radius: 10rpx;
     display: inline-block;
     margin: 10rpx;
@@ -78,7 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #9f9f9f;
+    color: #333333;
   }
   .listClient .item .name{
     color: #333;
@@ -87,7 +88,7 @@
   }
   .listClient .item .reservation{
     font-size: 24rpx;
-    color: #9f9f9f;
+    color: #333333;
   }
   .listClient .item .address{
     font-size: 30rpx;
@@ -100,7 +101,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #9f9f9f;
+    color: #333333;
     font-size: 25rpx;
   }
   .listClient .time .iconfont{
@@ -110,7 +111,7 @@
     color: #fa5454
   }
   .status-access{
-    color: #7bb312
+    color: #018c6b
   }
   .prompt{
     width: 750rpx;
@@ -144,7 +145,7 @@
   .listProperty .address,
   .listProperty .address icon{
     font-size: 25rpx !important;
-    color: #cbcbcb;
+    color: #333333;
   }
   .listProperty .reservation{
     display: flex;
@@ -154,18 +155,22 @@
   }
   .userInfo view{
     padding: 10rpx 0;
+    .name {
+      font-weight: 600;
+      font-size: 30rpx;
+    }
   }
   .listProperty .time,
   .listProperty .time icon{
     font-size: 23rpx !important;
-    color: #979797;
+    color: #333333;
   }
   .listProperty .info{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    color: #979797;
+    color: #333333;
     font-size: 28rpx;
   }
 </style>

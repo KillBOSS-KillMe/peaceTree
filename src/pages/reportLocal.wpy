@@ -8,7 +8,7 @@
 }
 .listName .listNameInfo{
   font-size: 20rpx;
-  color: #979797;
+  color: #333333;
   font-weight: 400;
 }
 .poperItem{
@@ -28,15 +28,15 @@
 }
 .poperItem icon{
   font-size: 30rpx !important;
-  color: #979797;
+  color: #333333;
 }
 .poperItem text{
   font-size: 25rpx;
-  color: #979797;
+  color: #333333;
 }
 .new{
   font-size: 50rpx;
-  color: #979797;
+  color: #333333;
   align-items: center;
   justify-content: center !important;
 }
@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1rpx solid #979797;
+  border-top: 1rpx solid #333333;
 }
 .reportButton view{
   width: 673rpx;
@@ -59,7 +59,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #7bb312;
+  background-color: #018c6b;
   border-radius: 20rpx;
   font-size: 30rpx;
   color: #fff;
@@ -96,7 +96,7 @@
 }
 .setTimeName2{
   font-size: 22rpx;
-  color: #979797;
+  color: #333333;
   text-align: center;
   height: 40rpx;
   line-height: 40rpx;
@@ -120,15 +120,15 @@
   width: 374rpx;
   height: 55rpx;
   line-height: 55rpx;
-  border: 1rpx solid #979797;
-  color: #979797;
+  border: 1rpx solid #333333;
+  color: #333333;
   font-size: 30rpx;
   text-align: center;
 }
 .setTime .iconfont{
   float: right;
   font-size: 30rpx !important;
-  color: #979797;
+  color: #333333;
 }
 .setTime .button{
   display: flex;
@@ -145,15 +145,15 @@
   align-items: center;
   justify-content: center;
   margin: 20rpx 0;
-  border: 1rpx solid #7bb312;
+  border: 1rpx solid #018c6b;
 }
 .setTime .button view:nth-child(1){
-  background-color: #7bb312;
+  background-color: #018c6b;
   color: #fff;
 }
 .setTime .button view:nth-child(2){
   background-color: #fff;
-  color: #7bb312;
+  color: #018c6b;
 }
 .setTime .setData:nth-child(2){
   margin: 0;
@@ -164,7 +164,7 @@
   text-align: center;
   border-radius: 20rpx;
   color: #fff !important;
-  background-color: #7bb312;
+  background-color: #018c6b;
 }
 </style>
 <template>
@@ -176,7 +176,7 @@
       <repeat for="{{reportLocalList}}" item="item">
         <view class="item">
           <!-- <view class="pad">垫拥</view> -->
-          <image data-id="" src="{{requestImgUrl + item.img}}" />
+          <image data-id="" src="{{item.img}}" />
           <view class="con">
             <view class="title">
               <text>{{item.name}}</text>

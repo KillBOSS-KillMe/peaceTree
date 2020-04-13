@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1rpx solid #979797;
+  border-top: 1rpx solid #333333;
 }
 .reportButton view{
   width: 673rpx;
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #7bb312;
+  background-color: #018c6b;
   border-radius: 20rpx;
   font-size: 30rpx;
   color: #fff;
@@ -34,7 +34,7 @@
 }
 .info{
   font-size: 25rpx;
-  color: #979797;
+  color: #333333;
   padding-top: 20rpx;
   display: flex;
   justify-content: flex-start;

@@ -9,7 +9,7 @@
   line-height: 30rpx;
   padding: 30rpx;
   background-color: #f8f8f8;
-  color: #979797;
+  color: #333333;
   font-size: 25rpx;
 }
 .userList .item{
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1rpx solid #979797;
+  border-top: 1rpx solid #333333;
   background-color: #fff;
 }
 .reportButton view{
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #7bb312;
+  background-color: #018c6b;
   border-radius: 20rpx;
   font-size: 30rpx;
   color: #fff;

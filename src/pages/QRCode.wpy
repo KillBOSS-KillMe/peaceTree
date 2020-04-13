@@ -8,12 +8,12 @@
     width: 750rpx;
     text-align: center;
     font-size: 25rpx;
-    color: #9f9f9f;
+    color: #333333;
   }
   .generate{
     width: 400rpx;
     height: 90rpx;
-    background-color: #7bb312;
+    background-color: #018c6b;
     color: #fff;
     border-radius: 20rpx;
     text-align: center;

@@ -25,11 +25,11 @@ page{
   font-weight: 600;
 }
 .item view:nth-child(2){
-  color: #7bb312;
+  color: #333333;
 }
 .item view:nth-child(3){
-  color: #979797;
-  border-top: 1rpx solid #979797;
+  color: #333333;
+  border-top: 1rpx solid #333333;
   line-height: 50rpx;
 }
 </style>

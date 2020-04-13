@@ -7,6 +7,7 @@
       width: 375rpx;
       height: 80rpx;
       font-size: 28rpx;
+      font-weight: 600;
       color: #343434;
       display: flex;
       align-items: center;
@@ -14,7 +15,7 @@
     }
     .active{
       color: #fff;
-      background-color: #7bb312;
+      background-color: #018c6b;
     }
   }
   // // .list{

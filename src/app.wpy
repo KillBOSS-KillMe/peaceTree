@@ -43,6 +43,10 @@
 // text-overflow:ellipsis;
 // white-space:nowrap;
 <style lang="less">
+page {
+  // background-color: #018c6b;
+}
+
 @font-face {
   font-family: 'iconfont';  /* project id 1136432 */
   src: url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.eot');
@@ -213,7 +217,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 }
 // 新建楼盘
 .newLocal{
-  color: #7BB312;
+  color: #018c6b;
   border-color: #DFF3B9;
   background-color: #F5FFE1;
 }
@@ -225,7 +229,7 @@ checkbox .wx-checkbox-input{
 }
 checkbox .wx-checkbox-input.wx-checkbox-input-checked{
   border: none;
-  background: #7bb312;
+  background: #018c6b;
 }
 checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   border-radius: 50%;/* 圆角 */

@@ -18,7 +18,7 @@
 }
 .selAddress icon{
   width: 20rpx;
-  color: #a4a4a4;
+  color: #333333;
 }
 .search {
   display:flex;
@@ -34,7 +34,7 @@
 .search icon {
   width: 70rpx;
   font-size:40rpx !important;
-  color:#a4a4a4;
+  color:#333333;
   display:flex;
   align-items:center;
   justify-content:center;

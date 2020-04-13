@@ -47,7 +47,7 @@
   // .item .iconfont,
   .item .price{
     font-size: 25rpx;
-    color: #cbcbcb;
+    color: #333333;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -85,7 +85,7 @@
   // 新建
   .new{
     background-color: #f5ffe1;
-    color: #7bb312;
+    color: #018c6b;
     border-color: #dff3b9;
   }
 </style>

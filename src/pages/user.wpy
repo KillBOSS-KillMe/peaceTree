@@ -41,7 +41,7 @@
   }
   .userInfo .edit{
     height: 205rpx;
-    color: #979797;
+    color: #333333;
     font-size: 24rpx;
     display: flex;
     align-items: center;
@@ -81,7 +81,7 @@
   }
   .dataCon view:nth-child(2){
     font-size: 25rpx;
-    color: #979797;
+    color: #333333;
   }
   .message{
     width: 690rpx;

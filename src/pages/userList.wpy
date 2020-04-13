@@ -18,10 +18,10 @@
 }
 .goLocalOrNewUser view:nth-child(1){
   background-color: #f5ffe1;
-  color: #7bb312;
+  color: #018c6b;
 }
 .goLocalOrNewUser view:nth-child(2){
-  background-color: #7bb312;
+  background-color: #018c6b;
   color: #fff;
 }
 .userList{
@@ -34,7 +34,7 @@
   line-height: 30rpx;
   padding: 30rpx;
   background-color: #f8f8f8;
-  color: #979797;
+  color: #333333;
   font-size: 25rpx;
 }
 .userList .item{
@@ -49,7 +49,7 @@
 }
 .userList .item view:nth-child(2){
   font-size: 25rpx;
-  color: #979797;
+  color: #333333;
 }
 .userList .item icon{
   font-size: 40rpx !important;

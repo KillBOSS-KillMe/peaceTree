@@ -7,9 +7,9 @@
     align-items:center;
     justify-content:space-between;
     .action{
-      color: #7bb312;
+      color: #018c6b;
       icon{
-        color: #7bb312;
+        color: #018c6b;
       }
     }
   }
@@ -19,7 +19,7 @@
     align-items:center;
     justify-content:space-between;
     font-size: 30rpx;
-    color: #a4a4a4;
+    color: #333333;
   }
   .typeSel icon{
     font-size: 20rpx !important;
@@ -38,7 +38,7 @@
     .address {
       li{
         font-size: 25rpx;
-        color: #999;
+        color: #333333;
         background-color: #eee;
         padding: 10rpx 15rpx;
         border-radius: 5rpx;
@@ -49,32 +49,32 @@
         justify-content:space-between;
       }
       .action{
-        background-color: #7bb312;
+        background-color: #018c6b;
         color: #fff;
       }
     }
     .money {
       li{
         font-size: 25rpx;
-        color: #999;
+        color: #333333;
         padding: 10rpx 15rpx;
         margin-bottom: 15rpx;
         display: block;
       }
       .action{
-        color: #7bb312;
+        color: #018c6b;
       }
     }
     .padSel {
       li{
         font-size: 25rpx;
-        color: #999;
+        color: #333333;
         padding: 10rpx 15rpx;
         margin-bottom: 15rpx;
         display: block;
       }
       .action{
-        color: #7bb312;
+        color: #018c6b;
       }
     }
     .more {
@@ -86,7 +86,7 @@
       }
       li{
         font-size: 25rpx;
-        color: #999;
+        color: #333333;
         background-color: #eee;
         padding: 10rpx 15rpx;
         border-radius: 5rpx;
@@ -97,7 +97,7 @@
         justify-content:space-between;
       }
       .action{
-        background-color: #7bb312;
+        background-color: #018c6b;
         color: #fff;
       }
       .button{
@@ -118,10 +118,10 @@
         }
         view:nth-child(1){
           background-color: #f5ffe1;
-          color: #7bb312;
+          color: #018c6b;
         }
         view:nth-child(2){
-          background-color: #7bb312;
+          background-color: #018c6b;
         }
       }
     }

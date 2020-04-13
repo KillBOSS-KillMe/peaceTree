@@ -15,7 +15,7 @@
     font-weight: 600;
     color: #343434;
     text{
-      color: #cbcbcb;
+      color: #333333;
       font-weight: 500;
     }
   }
@@ -30,7 +30,7 @@
   }
   .con{
     font-size: 32rpx;
-    color: #cbcbcb;
+    color: #333333;
     padding: 20rpx 0;
   }
   .conHide{

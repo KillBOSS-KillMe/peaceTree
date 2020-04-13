@@ -25,7 +25,7 @@ page{
 }
 .price text{
   font-size: 40rpx;
-  color: #7bb312;
+  color: #018c6b;
   font-weight: 600;
 }
 .price view{
@@ -55,7 +55,7 @@ page{
 }
 .label view:nth-child(1){
   font-size: 20rpx;
-  color: #9e9e9e;
+  color: #333333;
   background-color: #f2f2f2;
   padding: 10rpx 20rpx;
 }
@@ -85,7 +85,7 @@ page{
 .localInfo .localitem view:nth-child(1){
   width: 160rpx;
   font-size: 27rpx;
-  color: #979797;
+  color: #333333;
 }
 .localInfo .localitem view:nth-child(2){
   width: 480rpx;
@@ -101,7 +101,7 @@ page{
 .localInfo .localitem icon{
   width: 30rpx !important;
   font-size: 27rpx;
-  color: #979797;
+  color: #333333;
 }
 .rule{
   width: 670rpx;
@@ -124,7 +124,7 @@ page{
   align-items: center;
   justify-content: space-between;
   font-size: 27rpx !important;
-  color: #979797;
+  color: #333333;
 }
 .rule .description{
   font-size: 28rpx;
@@ -162,7 +162,7 @@ page{
 }
 .dataCon view:nth-child(1){
   font-size: 25rpx;
-  color: #979797;
+  color: #333333;
 }
 .houseType{
   width: 670rpx;
@@ -193,14 +193,14 @@ page{
 }
 .houseTypeItem view:nth-child(3){
   font-size: 20rpx;
-  color: #979797;
+  color: #333333;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 .houseTypeItem view:nth-child(4){
   font-size: 25rpx;
-  color: #7bb312;
+  color: #018c6b;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -267,10 +267,10 @@ page{
 }
 .nav view:nth-child(2){
   background-color: #f5ffe1;
-  color: #7bb312;
+  color: #018c6b;
 }
 .nav view:nth-child(3){
-  background-color: #7bb312;
+  background-color: #018c6b;
   color: #fff;
 }
 .marginNav{
@@ -297,7 +297,7 @@ page{
   width: 200rpx;
   height: 80rpx;
   border-radius: 20rpx;
-  background-color: #7bb312;
+  background-color: #018c6b;
   margin: 20rpx auto;
   color: #fff;
   font-size: 30rpx;
@@ -309,14 +309,14 @@ button{
   width: 100%;
   height: 100%;
   background-color: #f5ffe1;
-  color:#7bb312;
+  color:#018c6b;
 }
 .brokerage{
   color: #fa5454 !important;
   font-size: 40rpx !important;
 }
 .brokerage2{
-  color: #7bb312 !important;
+  color: #333333 !important;
 }
 .dynamicListName{
   width: 670rpx;
@@ -334,7 +334,7 @@ button{
     align-items: center;
     justify-content: space-between;
     font-size: 27rpx !important;
-    color: #979797;
+    color: #333333;
   }
   
 }
@@ -371,7 +371,7 @@ button{
   }
   .dynamicTime{
     font-size: 20rpx;
-    color: #cbcbcb;
+    color: #333333;
   }
   .dynamicInfo{
     font-size: 20rpx;
@@ -534,7 +534,7 @@ button{
     <scroll-view scroll-x="true" class="houseType">
       <repeat for="{{localList.hx}}" item="item">
         <view class="houseTypeItem" data-id="{{item.id}}">
-          <image class="banner" src="{{requestImgUrl + item.model_img}}" bindtap='shareQRCodeImg' data-imgurl="{{requestImgUrl + item.model_img}}" />
+          <image class="banner" src="{{requestImgUrl + item.model_img}}" bindtap='shareQRCodeImg2' data-imgurl="{{requestImgUrl + item.model_img}}" />
           <view>{{item.model_name}}</view>
           <view>{{item.model_mi}}</view>
           <view>{{item.model_money}}</view>
@@ -640,11 +640,18 @@ button{
       },
       // 点击图片放大，长按后可操作
       shareQRCodeImg(e) {
-        console.log( this.localList.img)
         let url =  e.currentTarget.dataset.imgurl
         wx.previewImage({
           current: [url], // 当前显示图片的http链接   
           urls: this.localList.img // 需要预览的图片http链接列表   
+        })
+      },
+      // 点击图片放大，长按后可操作
+      shareQRCodeImg2(e) {
+        let url =  e.currentTarget.dataset.imgurl
+        wx.previewImage({
+          current: [url], // 当前显示图片的http链接   
+          urls: [url] // 需要预览的图片http链接列表   
         })
       },
       updataLocal(e) {

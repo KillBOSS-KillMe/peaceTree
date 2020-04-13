@@ -64,7 +64,7 @@
   }
   .search .selAddress .iconfont{
     font-size: 30rpx;
-    color: #999;
+    color: #333333;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +72,7 @@
   .search .address{
     width: 100rpx;
     text-align: right;
-    color: #7bb312;
+    color: #018c6b;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -201,12 +201,12 @@
   .item .iconfont,
   .item .price{
     font-size: 25rpx;
-    color: #cbcbcb;
+    color: #333333;
   }
   .item .address,
   .item .price{
     font-size: 25rpx;
-    color: #cbcbcb;
+    color: #333333;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;

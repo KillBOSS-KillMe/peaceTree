@@ -73,7 +73,6 @@ export default class Merchant extends wepy.page {
         wx.hideLoading();
         if (data.data.code == 1) {
           data = this.$parent.null2str(data.data.data);
-          // this.merchantList = data.data
           this.merchantList = this.merchantList.concat(data.data);
           this.currentPage = data.currentPage;
           this.lastPage = data.lastPage;

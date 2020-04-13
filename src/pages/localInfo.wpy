@@ -218,7 +218,7 @@ page{
 .featureItem view:nth-child(1){
   width: 170rpx;
   font-size: 30rpx;
-  color: #979797;
+  color: #343434;
 }
 .featureItem view:nth-child(2){
   width: 500rpx;
@@ -228,6 +228,7 @@ page{
 }
 .featureItem view:nth-child(2) text{
   font-size: 30rpx;
+  font-weight: 600;
   color: #343434;
 }
 .nav{
@@ -415,7 +416,7 @@ button{
     <swiper class='banner' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <repeat for="{{localList.img}}" item="item">
         <swiper-item>
-          <image class="banner" src="{{ requestImgUrl + item }}" bindtap='shareQRCodeImg' data-imgurl="{{requestImgUrl + item}}" />
+          <image class="banner" src="{{ item }}" bindtap='shareQRCodeImg' data-imgurl="{{item}}" />
         </swiper-item>
       </repeat>
     </swiper>
@@ -639,10 +640,11 @@ button{
       },
       // 点击图片放大，长按后可操作
       shareQRCodeImg(e) {
+        console.log( this.localList.img)
         let url =  e.currentTarget.dataset.imgurl
         wx.previewImage({
           current: [url], // 当前显示图片的http链接   
-          urls: [url] // 需要预览的图片http链接列表   
+          urls: this.localList.img // 需要预览的图片http链接列表   
         })
       },
       updataLocal(e) {
@@ -809,10 +811,11 @@ button{
         success: data => {
           if (data.data.code == 1) {
             let localListData = this.$parent.null2str(data.data.data)
-            let imgList = [localListData.img]
-            let i = 0
-            for (i in localListData.xq_img) {
-              imgList.push(localListData.xq_img[i].img)
+            let requestImgUrl = this.$parent.globalData.requestImgUrl
+            let imgList = [requestImgUrl + localListData.img]
+            for (let i = 0; i < localListData.xq_img.length; i++) {
+              let url = requestImgUrl + localListData.xq_img[i].img
+              imgList.push(url)
             }
             localListData['img'] = imgList
             this.localList = localListData

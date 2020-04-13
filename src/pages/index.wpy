@@ -264,7 +264,7 @@
     <swiper wx:if="{{adImg == ''}}" class='swiper' indicator-dots="true" autoplay='true' interval='5000' duration='2000'>
       <repeat for="{{swiperList}}" item="item">
         <swiper-item>
-          <image src="{{ requestImgUrl + item.img }}" bindtap='shareQRCodeImg' data-imgurl="{{requestImgUrl + item.img}}" />
+          <image src="{{ item }}" bindtap='shareQRCodeImg' data-imgurl="{{item}}" />
         </swiper-item>
       </repeat>
     </swiper>
@@ -405,15 +405,14 @@
         let url =  e.currentTarget.dataset.imgurl
         wx.previewImage({
           current: [url], // 当前显示图片的http链接   
-          urls: [url] // 需要预览的图片http链接列表   
+          urls: this.swiperList // 需要预览的图片http链接列表   
         })
       },
       goModifyUserInfo(url, evt) {
         this.$navigate(url)
       },
       goSelCity() {
-        // 城市选择‘
-        console.log(this.userInfo.mobile !== '')
+        // 城市选择
         if (this.userInfo.mobile !== '') {
           this.$navigate(`/pages/citySel`)
         } else {
@@ -519,8 +518,8 @@
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.cityNode = this.$parent.globalData.cityNode
       this.originalCityNode = this.$parent.globalData.originalCityNode
-      console.log(this.cityNode.id == '')
-      console.log(this.cityNode.id == '')
+      // console.log(this.cityNode.id == '')
+      // console.log(this.cityNode.id == '')
       // if (Object.keys(this.cityNode).length == 0) {
         // 加载城市列表,获取定位，获取所在城市
         if (this.cityNode.id == '') {
@@ -579,8 +578,16 @@
         method: 'POST',
         success: data => {
           if (data.data.code == 1) {
-            this.swiperList = this.$parent.null2str(data.data.data)
-            this.$parent.globalData.swiperList = this.swiperList
+            data = this.$parent.null2str(data.data.data)
+            let swiperList = []
+            for (let i = 0; i < data.length; i++) {
+              // swiperList[i].img = this.requestImgUrl + data[i].img
+              swiperList.push(this.requestImgUrl + data[i].img)
+            }
+            this.swiperList = swiperList
+            this.$parent.globalData.swiperList = swiperList
+            // this.swiperList = this.$parent.null2str(data.data.data)
+            // this.$parent.globalData.swiperList = this.swiperList
             this.$apply()
           } else {
             wx.showModal({

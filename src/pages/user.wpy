@@ -162,6 +162,10 @@
       <view>我的分享</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
+    <view class="message" @tap="goMerchant">
+      <view>合作企业</view>
+      <icon class="iconfont icon-cujiantou1"></icon>
+    </view>
     <logo/>
     <nav @childFn.user="goPage" />
   </view>
@@ -222,6 +226,10 @@
       myShere() {
         // 进入收藏列表
         this.$navigate(`/pages/shere`)
+      },
+      goMerchant() {
+        // 进入合作商家
+        this.$navigate(`/pages/merchant`)
       }
     }
 

@@ -1,0 +1,97 @@
+<style lang="less">
+.merchantList {
+  width: 750rpx;
+  margin-bottom: 150rpx;
+  .item {
+    width: 690rpx;
+    height: 90rpx;
+    padding: 30rpx;
+    .title {
+      font-size: 30rpx;
+      color: #343434;
+      font-weight: 600;
+    }
+    .con {
+      font-size: 25rpx;
+      color: #333333;
+    }
+  }
+}
+</style>
+<template>
+  <view class="merchantList">
+    <repeat for="{{merchantList}}" item="item">
+      <view class="item">
+        <view class="title">{{item.company}}</view>
+        <view class="con">{{item.address}}</view>
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Merchant extends wepy.page {
+  config = {
+    navigationBarTitleText: '合作商家'
+  };
+  components = {};
+
+  mixins = [];
+
+  data = {
+    currentPage: 0,
+    lastPage: 0,
+    merchantList: []
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {
+    this.userInfo = this.$parent.globalData.userInfo;
+    this.requestImgUrl = this.$parent.globalData.requestImgUrl;
+    this.getMerchantList();
+  }
+  onShow() {}
+  getMerchantList() {
+    this.currentPage += 1;
+    this.$apply();
+    wx.showLoading({
+      title: '加载中'
+    });
+    wx.request({
+      url: `${this.$parent.globalData.requestUrl}/getStoreList`,
+      method: 'GET',
+      data: {
+        page: this.currentPage
+      },
+      success: data => {
+        wx.hideLoading();
+        if (data.data.code == 1) {
+          data = this.$parent.null2str(data.data.data);
+          // this.merchantList = data.data
+          this.merchantList = this.merchantList.concat(data.data);
+          this.currentPage = data.currentPage;
+          this.lastPage = data.lastPage;
+          this.total = data.total;
+          this.$apply();
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          });
+        }
+      }
+    });
+  }
+  onReachBottom() {
+    if (this.lastPage > this.currentPage) {
+      this.getMerchantList();
+    }
+  }
+}
+</script>

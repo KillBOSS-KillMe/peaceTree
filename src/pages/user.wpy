@@ -162,6 +162,7 @@
       <view>我的分享</view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
+    <logo/>
     <nav @childFn.user="goPage" />
   </view>
 </template>
@@ -169,12 +170,14 @@
 <script>
   import wepy from 'wepy'
   import nav from '../components/nav' // 底部导航
+  import logo from '../components/logo' // logo
   export default class User extends wepy.page {
     config = {
       navigationBarTitleText: '个人中心'
     }
     components = {
-      nav: nav
+      nav: nav,
+      logo: logo
     }
 
     mixins = []

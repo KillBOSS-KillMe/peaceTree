@@ -1,0 +1,33 @@
+<style lang="less">
+.logoMe {
+  position: fixed;
+  bottom: 120rpx;
+  width: 100rpx;
+  height: 50rpx;
+  margin: 10rpx 325rpx;
+  z-index: 30;
+}
+
+</style>
+<template>
+<view>
+  <image class="logoMe" src="{{ imgUrl }}" />
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+// 校验封装
+// import check from '../mixins/check'
+export default class logo extends wepy.component {
+  // mixins = [check]
+  data = {
+    imgUrl: "../img/logo.png"
+  };
+  props = {};
+  methods = {
+
+  };
+  onLoad() {
+  };
+}
+</script>

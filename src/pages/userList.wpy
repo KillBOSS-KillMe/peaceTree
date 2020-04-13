@@ -81,6 +81,7 @@
         </view>
       </repeat>
     </view>
+    <logo/>
     <nav @childFn.user="goPage" />
   </view>
 </template>
@@ -89,13 +90,15 @@
   import wepy from 'wepy'
   import search from '../components/search' // 底部导航
   import nav from '../components/nav' // 底部导航
+  import logo from '../components/logo' // logo
   export default class UserList extends wepy.page {
     config = {
       navigationBarTitleText: '客户列表'
     }
     components = {
       search: search,
-      nav: nav
+      nav: nav,
+      logo: logo
     }
 
     mixins = []

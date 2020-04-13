@@ -354,6 +354,7 @@
       <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
     </view>
     <button open-type="getUserInfo" id='getUserInfo' wx:if="{{userInfoButtonShow}}" lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
+    <logo/>
     <nav @childFn.user="goPage" @childFnOrReturn.user="goModifyUserInfo" />
   </view>
 </template>
@@ -361,13 +362,15 @@
 <script>
   import wepy from 'wepy'
   import nav from '../components/nav' // 底部导航
+  import logo from '../components/logo' // logo
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '平安树',
       navigationStyle: 'custom'
     }
     components = {
-      nav: nav
+      nav: nav,
+      logo: logo
     }
 
     mixins = []

@@ -17,7 +17,7 @@
   border-radius: 20rpx;
 }
 .goLocalOrNewUser view:nth-child(1){
-  background-color: #f5ffe1;
+  background-color: #7fd1be;
   color: #018c6b;
 }
 .goLocalOrNewUser view:nth-child(2){

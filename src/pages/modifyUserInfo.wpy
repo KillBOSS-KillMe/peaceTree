@@ -52,7 +52,7 @@
     line-height: 94rpx;
     text-align: center;
     border-radius: 20rpx;
-    background-color: #018c6b;
+    background-color: #7fd1be;
     color: #fff;
     font-size: 33rpx;
     margin: auto;
@@ -65,7 +65,7 @@
       <view class="list">
         <view class="tiem">
           <view>头像</view>
-          <view class="con">
+          <view class="con" @tap="upImgList">
             <image data-id="" src="{{userInfo.img}}" />
             <icon class="iconfont icon-cujiantou1"></icon>
           </view>
@@ -180,6 +180,7 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+      this.storeId = this.userInfo.store_id
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.$apply()
     }
@@ -220,6 +221,7 @@
         method: 'POST',
         data: {
           uid: this.userInfo.id,
+          img: this.userInfo.img,
           name: valueNode.name,
           mobile: valueNode.mobile,
           store: this.storeId
@@ -228,12 +230,65 @@
           if (data.data.code == 1) {
             // var localReporList = data.data.data
             // this.userInfo = data.data.data
+            this.$parent.globalData.userInfo = data.data.data
             wx.showModal({
               title: '',
-              content: '信息修改成功'
+              content: '信息修改成功',
+              success:() => {
+                wx.navigateBack({//返回
+                  delta: 1
+                })
+              }
             })
-            this.$redirect('/page/user')
+
+            // this.$redirect('/page/user')
           }
+        }
+      })
+    }
+    // 上传图片
+    upImgList() {
+      let count = 1
+      wx.chooseImage({
+        count: count,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: res => {
+          wx.showToast({
+            title: '图片上传中',
+            icon: 'loading'
+          });
+          Promise.all(res.tempFiles.map(item => {
+            return new Promise((resolve, reject) => {
+              // console.log(item)
+              if (item.size > 5000000) {
+              // if (item.size > 500) {
+                wx.showToast({
+                  title: '上传图片不能大于5兆',
+                  icon: 'none',
+                  duration: 2000
+                });
+              } else {
+                wx.uploadFile({
+                  url: `${this.$parent.globalData.requestUrl}/upload`,
+                  filePath: item.path,
+                  name: 'img',
+                  header: {
+                    Authorization: this.$parent.globalData.token
+                  },
+                  success: res => {
+                    resolve({
+                      path: JSON.parse(res.data).data
+                    })
+                  }
+                })
+              }
+            })
+          })).then(e => {
+            wx.hideToast()
+            this.userInfo.img = e[0].path
+            this.$apply()
+          }).catch(err => console.log(err))
         }
       })
     }

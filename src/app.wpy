@@ -219,7 +219,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 .newLocal{
   color: #018c6b;
   border-color: #DFF3B9;
-  background-color: #F5FFE1;
+  background-color: #7fd1be;
 }
 // 多选框样式
 checkbox .wx-checkbox-input{

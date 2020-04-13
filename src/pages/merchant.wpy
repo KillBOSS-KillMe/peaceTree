@@ -20,9 +20,9 @@
 </style>
 <template>
   <view class="merchantList">
-    <repeat for="{{merchantList}}" item="item">
+    <repeat for="{{merchantList}}" item="item" key="index" index="index">
       <view class="item">
-        <view class="title">{{item.company}}</view>
+        <view class="title">{{(index + 1) + '  ' + item.company}}</view>
         <view class="con">{{item.address}}</view>
       </view>
     </repeat>

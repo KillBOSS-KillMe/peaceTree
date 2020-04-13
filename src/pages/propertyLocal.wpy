@@ -117,7 +117,7 @@
           justify-content:center;
         }
         view:nth-child(1){
-          background-color: #f5ffe1;
+          background-color: #7fd1be;
           color: #018c6b;
         }
         view:nth-child(2){

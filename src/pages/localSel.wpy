@@ -117,7 +117,7 @@
   }
   // 新建
   .new{
-    background-color: #f5ffe1;
+    background-color: #7fd1be;
     color: #018c6b;
     border-color: #dff3b9;
   }

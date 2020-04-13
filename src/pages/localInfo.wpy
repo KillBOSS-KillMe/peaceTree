@@ -266,7 +266,7 @@ page{
   color: #343434;
 }
 .nav view:nth-child(2){
-  background-color: #f5ffe1;
+  background-color: #7fd1be;
   color: #018c6b;
 }
 .nav view:nth-child(3){
@@ -308,7 +308,7 @@ page{
 button{
   width: 100%;
   height: 100%;
-  background-color: #f5ffe1;
+  background-color: #7fd1be;
   color:#018c6b;
 }
 .brokerage{

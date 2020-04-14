@@ -23,7 +23,7 @@
 .userList .item view{
   font-size: 30rpx;
   color: #343434;
-  font-weight: 600;
+  font-weight: 800;
 }
 .reportButton{
   width: 750rpx;

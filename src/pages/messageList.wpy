@@ -22,7 +22,7 @@
   }
   .name{
     font-size: 35rpx;
-    font-weight: 600;
+    font-weight: 800;
     color: #343434;
   }
   .time{

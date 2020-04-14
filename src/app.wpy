@@ -46,7 +46,11 @@
 page {
   // background-color: #018c6b;
 }
-
+.indexLogoMe {
+  width: 100rpx;
+  height: 50rpx;
+  margin: 10rpx 325rpx;
+}
 @font-face {
   font-family: 'iconfont';  /* project id 1136432 */
   src: url('//at.alicdn.com/t/font_1136432_y2f0n40vngg.eot');
@@ -119,7 +123,7 @@ page {
 }
 .item .title text {
   font-size:35rpx;
-  font-weight:600;
+  font-weight:800;
   color: #333;
 }
 
@@ -262,7 +266,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
     justify-content: flex-start;
     color: #ee5e7b;
     font-size: 25rpx;
-    font-weight: 600;
+    font-weight: 800;
   }
   .commission view{
     padding: 0 5rpx;
@@ -276,7 +280,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
     padding:20rpx 30rpx;
     font-size:40rpx;
     color:#333;
-    font-weight:600;
+    font-weight:800;
     margin-top:30rpx;
   }
 

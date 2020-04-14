@@ -26,7 +26,7 @@ page{
 .price text{
   font-size: 40rpx;
   color: #018c6b;
-  font-weight: 600;
+  font-weight: 800;
 }
 .price view{
   display: flex;
@@ -44,7 +44,7 @@ page{
   padding: 0 40rpx;
   font-size: 38rpx;
   color: #343434;
-  font-weight: 600;
+  font-weight: 800;
 }
 .label{
   display: flex;
@@ -62,7 +62,7 @@ page{
 .label view:nth-child(2),
 .label icon{
   font-size: 30rpx !important;
-  font-weight: 600;
+  font-weight: 800;
   color: #343434;
   display: flex;
   align-items: center;
@@ -116,7 +116,7 @@ page{
 .ruleList text{
   font-size: 35rpx;
   color: #343434;
-  font-weight: 600;
+  font-weight: 800;
 }
 .ruleList view,
 .ruleList icon{
@@ -129,7 +129,7 @@ page{
 .rule .description{
   font-size: 28rpx;
   color: #343434;
-  font-weight: 600;
+  font-weight: 800;
   margin-top: 15rpx;
   padding: 44rpx 0;
 }
@@ -158,7 +158,7 @@ page{
 .dataCon view:nth-child(2){
   font-size: 35rpx;
   color: #333;
-  font-weight: 600;
+  font-weight: 800;
 }
 .dataCon view:nth-child(1){
   font-size: 25rpx;
@@ -228,7 +228,7 @@ page{
 }
 .featureItem view:nth-child(2) text{
   font-size: 30rpx;
-  font-weight: 600;
+  font-weight: 800;
   color: #343434;
 }
 .nav{
@@ -327,7 +327,7 @@ button{
   justify-content: space-between;
   background-color: #fff;
   text{
-    font-weight: 600;
+    font-weight: 800;
   }
   view, .iconfont{
     display: flex;
@@ -357,7 +357,7 @@ button{
   }
   .dynamicName{
     font-size: 28rpx;
-    font-weight: 600;
+    font-weight: 800;
     color: #343434;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -404,7 +404,7 @@ button{
   }
   .brokerageNum{
     font-size: 32rpx;
-    font-weight: 600;
+    font-weight: 800;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;

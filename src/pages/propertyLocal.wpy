@@ -82,7 +82,7 @@
         width: 100%;
         padding: 15rpx 0;
         font-size: 28rpx;
-        font-weight: 600;
+        font-weight: 800;
       }
       li{
         font-size: 25rpx;

@@ -98,7 +98,7 @@ page{
 }
 .reportItem .name{
   font-size: 30rpx;
-  font-weight: 600;
+  font-weight: 800;
   color: #343434;
 }
 .reportItem .name2,
@@ -202,7 +202,7 @@ page{
 .formSet label{
   width: 150rpx;
   font-size: 30rpx;
-  font-weight: 600;
+  font-weight: 800;
   color: #343434;
 }
 .formSet input{
@@ -220,7 +220,7 @@ page{
   width: 330rpx;
   height: 87rpx;
   font-size: 35rpx;
-  font-weight: 600;
+  font-weight: 800;
   color: #343434;
   display: flex;
   align-items: center;

@@ -12,7 +12,7 @@
   }
   .nameh1{
     font-size: 28rpx;
-    font-weight: 600;
+    font-weight: 800;
     color: #343434;
     text{
       color: #333333;
@@ -23,7 +23,7 @@
     padding: 40rpx 0;
     font-size: 38rpx;
     color: #343434;
-    font-weight: 600;
+    font-weight: 800;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;

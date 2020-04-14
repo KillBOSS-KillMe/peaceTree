@@ -36,7 +36,7 @@ page{
 .item view{
   width: 490rpx;
   color: #343434;
-  font-size: 600;
+  font-size: 800;
 }
 .module{
   margin-top: 20rpx;

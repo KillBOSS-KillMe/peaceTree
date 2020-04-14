@@ -13,7 +13,7 @@
   }
   .title .name {
     font-size: 30rpx;
-    font-weight: 600;
+    font-weight: 800;
     height: 95rpx;
     line-height: 95rpx;
     color: #343434;
@@ -84,7 +84,7 @@
   .listClient .item .name{
     color: #333;
     font-size: 30rpx;
-    font-weight: 600;
+    font-weight: 800;
   }
   .listClient .item .reservation{
     font-size: 24rpx;
@@ -139,7 +139,7 @@
   }
   .propertyName{
     font-size: 33rpx;
-    font-weight: 600;
+    font-weight: 800;
     color: #343434;
   }
   .listProperty .address,
@@ -156,7 +156,7 @@
   .userInfo view{
     padding: 10rpx 0;
     .name {
-      font-weight: 600;
+      font-weight: 800;
       font-size: 30rpx;
     }
   }

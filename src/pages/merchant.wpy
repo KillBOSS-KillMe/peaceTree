@@ -4,12 +4,12 @@
   margin-bottom: 150rpx;
   .item {
     width: 690rpx;
-    height: 90rpx;
+    height: auto;
     padding: 30rpx;
     .title {
       font-size: 30rpx;
       color: #343434;
-      font-weight: 600;
+      font-weight: 800;
     }
     .con {
       font-size: 25rpx;
@@ -23,7 +23,7 @@
     <repeat for="{{merchantList}}" item="item" key="index" index="index">
       <view class="item">
         <view class="title">{{(index + 1) + '  ' + item.company}}</view>
-        <view class="con">{{item.address}}</view>
+        <!-- <view class="con">{{item.address}}</view> -->
       </view>
     </repeat>
   </view>

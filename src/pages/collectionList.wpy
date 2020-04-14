@@ -27,7 +27,7 @@
   .name .con{
     font-size: 34rpx;
     color: #222;
-    font-weight: 600;
+    font-weight: 800;
     width: 330rpx;
     overflow:hidden;
     text-overflow:ellipsis;

@@ -11,7 +11,7 @@
   }
   .title{
     font-size: 32rpx;
-    font-weight: 600;
+    font-weight: 800;
     color: #343434;
     overflow:hidden;
     text-overflow:ellipsis;

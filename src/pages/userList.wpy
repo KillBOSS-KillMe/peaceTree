@@ -45,7 +45,7 @@
 .userList .item view:nth-child(1){
   font-size: 30rpx;
   color: #343434;
-  font-weight: 600;
+  font-weight: 800;
 }
 .userList .item view:nth-child(2){
   font-size: 25rpx;
@@ -80,8 +80,10 @@
           </view>
         </view>
       </repeat>
+      <logo />
+      <!-- <image class="indexLogoMe" src="../img/logo.png" /> -->
     </view>
-    <logo/>
+    
     <nav @childFn.user="goPage" />
   </view>
 </template>

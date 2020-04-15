@@ -150,6 +150,7 @@
   .list{
     width: 690rpx;
     height: auto;
+    min-height: calc(100vh - 730rpx);
     padding: 0 30rpx;
     margin-bottom: 120rpx;
   }
@@ -163,11 +164,13 @@
     border-bottom: 1rpx solid #e6e6e6;
   }
   .listPrompt{
-    min-height: 200rpx;
     line-height: 78rpx;
     font-size: 26rpx;
     color: #e6e6e6;
     text-align: center;
+  }
+  .masMinHeight {
+    min-height: calc(100vh - 730rpx);
   }
   .item image{
     width: 200rpx;
@@ -351,7 +354,7 @@
           </view>
         </view>
       </repeat>
-      <view class="listPrompt">共有{{localList.length}}个项目，已无更多内容</view>
+      <view class="listPrompt {{localList.length > 0 ? '' : 'masMinHeight'}}">共有{{localList.length}}个项目，已无更多内容</view>
       <!-- <image class="indexLogoMe" src="../img/logo.png" /> -->
       <logo />
     </view>
@@ -603,6 +606,9 @@
       })
     }
     getLocalList() {
+      wx.showLoading({
+        title: '加载中'
+      });
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/floor_list`,
         method: 'POST',
@@ -611,6 +617,7 @@
           sid: this.localList.length
         },
         success: data => {
+          wx.hideLoading();
           if (data.data.code == 1) {
             let localList = this.$parent.null2str(data.data.data)
             this.localList = this.localList.concat(localList)

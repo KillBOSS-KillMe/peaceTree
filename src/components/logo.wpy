@@ -7,6 +7,7 @@
   justify-content: center;
   flex-direction: column;
   padding: 50rpx 0;
+  margin-bottom: 120rpx;
   image {
     width: 150rpx;
     height: 70rpx;

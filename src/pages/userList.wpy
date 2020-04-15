@@ -26,6 +26,7 @@
 }
 .userList{
   width: 750rpx;
+  min-height: calc(100vh - 150rpx);
   margin-bottom: 150rpx;
 }
 .userList .type{
@@ -56,6 +57,12 @@
   color: #7d9bff;
   margin-left: 20rpx;
 }
+.listPrompt{
+    line-height: 78rpx;
+    font-size: 26rpx;
+    color: #e6e6e6;
+    text-align: center;
+  }
 </style>
 <template>
   <view>
@@ -80,10 +87,9 @@
           </view>
         </view>
       </repeat>
-      <logo />
-      <!-- <image class="indexLogoMe" src="../img/logo.png" /> -->
+      <view class="listPrompt">共有{{searchList.length}}个用户，已无更多用户</view>
     </view>
-    
+    <logo />
     <nav @childFn.user="goPage" />
   </view>
 </template>

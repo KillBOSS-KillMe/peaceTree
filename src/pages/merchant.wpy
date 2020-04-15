@@ -54,6 +54,7 @@ export default class Merchant extends wepy.page {
   onLoad() {
     this.userInfo = this.$parent.globalData.userInfo;
     this.requestImgUrl = this.$parent.globalData.requestImgUrl;
+    this.cityNode = this.$parent.globalData.cityNode;
     this.getMerchantList();
   }
   onShow() {}
@@ -67,7 +68,8 @@ export default class Merchant extends wepy.page {
       url: `${this.$parent.globalData.requestUrl}/getStoreList`,
       method: 'GET',
       data: {
-        page: this.currentPage
+        page: this.currentPage,
+        city_id: this.cityNode.id
       },
       success: data => {
         wx.hideLoading();

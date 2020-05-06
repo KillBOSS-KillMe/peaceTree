@@ -94,6 +94,18 @@
     margin: 20rpx 0;
     font-size: 30rpx;
     color: #333;
+    view {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .point {
+        margin-left: 10rpx;
+        width: 20rpx;
+        height: 20rpx;
+        border-radius: 20rpx;
+        background-color: red;
+      }
+    }
   }
   .message .iconfont{
     display: flex;
@@ -151,7 +163,10 @@
     </view>
     <!-- Message -->
     <view class="message" @tap="goMessageList">
-      <view>我的消息</view>
+      <view>
+        <text>我的消323息</text>
+        <view class="point" wx-if="{{redPoint == 1}}"></view>
+      </view>
       <icon class="iconfont icon-cujiantou1"></icon>
     </view>
     <view class="message" @tap="goQRCode">
@@ -190,7 +205,8 @@
       img: '/img/test.jpg',
       userInfo: {},
       requestImgUrl: '',
-      diningRoom: []
+      diningRoom: [],
+      redPoint: 0
     }
 
     computed = {
@@ -243,6 +259,25 @@
     }
     onShow() {
       this.getUserInfo()
+      this.getRedPoint()
+    }
+    getRedPoint() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/redPoint`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == '1') {
+            console.log(data.data.data)
+            this.redPoint = data.data.data
+            console.log(this.redPoint)
+            this.$apply()
+          }
+        }
+      })
     }
     getUserInfo() {
       wx.request({

@@ -164,7 +164,7 @@
     <!-- Message -->
     <view class="message" @tap="goMessageList">
       <view>
-        <text>我的消323息</text>
+        <text>我的消息</text>
         <view class="point" wx-if="{{redPoint == 1}}"></view>
       </view>
       <icon class="iconfont icon-cujiantou1"></icon>
@@ -269,11 +269,8 @@
           uid: this.userInfo.id
         },
         success: data => {
-          console.log(data)
           if (data.data.code == '1') {
-            console.log(data.data.data)
             this.redPoint = data.data.data
-            console.log(this.redPoint)
             this.$apply()
           }
         }
